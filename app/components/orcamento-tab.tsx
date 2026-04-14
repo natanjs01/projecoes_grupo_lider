@@ -3,7 +3,7 @@
 import React, { useState, useMemo } from 'react';
 import { ChevronDown, ChevronRight, Search } from 'lucide-react';
 import financialData from '../lib/financial-data.json';
-import { formatBRL, formatPct, cn } from '../lib/format';
+import { formatBRL, formatPct } from '../lib/format';
 
 const { orcamento } = financialData ?? {};
 
@@ -24,15 +24,25 @@ export default function OrcamentoTab() {
     ) ?? [];
   }, [items, search]);
 
+  const visibleItems = useMemo(() => {
+    const hasValue = (n: any) => Math.abs(Number(n) || 0) > 0.01;
+    return (filteredItems ?? []).filter((item: any) =>
+      hasValue(item?.realizado) ||
+      hasValue(item?.orcado) ||
+      hasValue(item?.variacao) ||
+      hasValue(item?.pct)
+    );
+  }, [filteredItems]);
+
   const groupedItems = useMemo(() => {
     const groups: Record<string, any[]> = {};
-    (filteredItems ?? []).forEach((item: any) => {
+    (visibleItems ?? []).forEach((item: any) => {
       const cat = item?.category || 'OUTROS';
       if (!groups[cat]) groups[cat] = [];
       groups[cat].push(item);
     });
     return groups;
-  }, [filteredItems]);
+  }, [visibleItems]);
 
   const toggleCategory = (cat: string) => {
     setExpandedCategories((prev: any) => ({ ...(prev ?? {}), [cat]: !(prev ?? {})[cat] }));
@@ -106,9 +116,8 @@ export default function OrcamentoTab() {
                       <td className="bg-muted/30" colSpan={3}></td>
                     </tr>
                     {isExpanded && (catItems ?? []).map((item: any, idx: number) => {
-                      const isNonZero = Math.abs(item?.realizado ?? 0) > 0.01 || Math.abs(item?.orcado ?? 0) > 0.01;
                       return (
-                        <tr key={`${cat}-${idx}`} className={cn(!isNonZero && 'opacity-40')}>
+                        <tr key={`${cat}-${idx}`}>
                           <td></td>
                           <td className="text-muted-foreground text-[10px] truncate max-w-[120px]">{item?.dfs ?? ''}</td>
                           <td className="font-mono text-[10px] text-muted-foreground">{item?.code ?? ''}</td>

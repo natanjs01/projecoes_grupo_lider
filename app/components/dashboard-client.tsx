@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
-import { BarChart3, FileSpreadsheet, TrendingUp, DollarSign, Target, LineChart, Download } from 'lucide-react';
+import { BarChart3, FileSpreadsheet, TrendingUp, DollarSign, Target, LineChart } from 'lucide-react';
 import OrcamentoTab from './orcamento-tab';
 import PremissasTab from './premissas-tab';
 import DreTab from './dre-tab';
@@ -66,22 +66,6 @@ export default function DashboardClient() {
                   {scenario === 'otimista' ? 'Cenário Otimista' : 'Cenário Pessimista'}
                 </span>
               )}
-              <button
-                onClick={() => {
-                  const data = JSON.stringify({ activeTab, scenario, timestamp: new Date().toISOString() });
-                  const blob = new Blob([data], { type: 'application/json' });
-                  const url = URL.createObjectURL(blob);
-                  const a = document.createElement('a');
-                  a.href = url;
-                  a.download = `glider-export-${activeTab}.json`;
-                  a.click();
-                  URL.revokeObjectURL(url);
-                }}
-                className="flex items-center gap-1.5 px-3 py-1.5 bg-red-600 hover:bg-red-700 text-white text-xs rounded transition-colors"
-              >
-                <Download className="w-3 h-3" />
-                Exportar
-              </button>
             </div>
           </div>
 
