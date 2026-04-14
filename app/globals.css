@@ -1,0 +1,68 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 5%;
+    --foreground: 0 0% 95%;
+    --card: 0 0% 8%;
+    --card-foreground: 0 0% 95%;
+    --popover: 0 0% 8%;
+    --popover-foreground: 0 0% 95%;
+    --primary: 0 72% 51%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 0 0% 15%;
+    --secondary-foreground: 0 0% 95%;
+    --muted: 0 0% 12%;
+    --muted-foreground: 0 0% 60%;
+    --accent: 0 72% 40%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 62% 30%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 0 0% 18%;
+    --input: 0 0% 18%;
+    --ring: 0 72% 51%;
+    --radius: 0.5rem;
+    --chart-1: 0 72% 51%;
+    --chart-2: 0 72% 65%;
+    --chart-3: 0 0% 60%;
+    --chart-4: 0 0% 40%;
+    --chart-5: 0 72% 35%;
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.4);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.5);
+    --duration-fast: 150ms;
+    --duration-normal: 250ms;
+    --duration-slow: 400ms;
+  }
+}
+
+@layer base {
+  * { @apply border-border; }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+[data-hydration-error] { display: none !important; }
+
+/* Custom scrollbar */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: hsl(0 0% 8%); }
+::-webkit-scrollbar-thumb { background: hsl(0 0% 25%); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: hsl(0 0% 35%); }
+
+/* Financial table styles */
+.fin-table { @apply w-full text-sm; }
+.fin-table th { @apply px-3 py-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground border-b border-border sticky top-0 bg-card z-10 text-center; }
+.fin-table th:first-child, .fin-table th:nth-child(2) { @apply text-left; }
+.fin-table td { @apply px-3 py-1.5 border-b border-border/50 font-mono text-xs text-center; }
+.fin-table td:first-child, .fin-table td:nth-child(2) { @apply text-left font-sans; }
+.fin-table tr:hover td { @apply bg-muted/30; }
+.fin-table .header-row td { @apply font-bold text-sm bg-muted/50 py-2; }
+.fin-table .subtotal-row td { @apply font-semibold border-t border-border; }
+
+.tab-active { @apply border-b-2 border-red-600 text-red-500 font-semibold; }
+.tab-inactive { @apply text-muted-foreground hover:text-foreground transition-colors; }
