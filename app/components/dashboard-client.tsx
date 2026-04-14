@@ -25,6 +25,7 @@ type TabId = typeof TABS[number]['id'];
 export default function DashboardClient() {
   const [activeTab, setActiveTab] = useState<TabId>('orcamento');
   const [scenario, setScenario] = useState<'realista' | 'otimista' | 'pessimista'>('realista');
+  const logoSrc = `${process.env.NEXT_PUBLIC_BASE_PATH ?? ''}/grupolider.png`;
 
   const renderTab = () => {
     switch (activeTab) {
@@ -46,7 +47,7 @@ export default function DashboardClient() {
           <div className="flex items-center justify-between h-28">
             <div className="flex items-center gap-3">
               <Image
-                src="/grupolider.png"
+                src={logoSrc}
                 alt="Logo Grupo Lider"
                 width={96}
                 height={96}
