@@ -1,7 +1,8 @@
 'use client';
 
+import React from 'react';
 import { useMemo, useState } from 'react';
-import { TrendingUp, Activity, DollarSign, Percent, BarChart3, Wallet, Clock, Target, Info } from 'lucide-react';
+import { TrendingUp, Activity, DollarSign, Percent, BarChart3, Wallet, Clock, Target, Info, ChevronDown, ChevronRight } from 'lucide-react';
 import financialData from '../lib/financial-data.json';
 import { formatPct, formatBRL, formatCompact } from '../lib/format';
 
@@ -46,6 +47,13 @@ function Tooltip({ text }: { text: string }) {
 }
 
 export default function KpisTab({ scenario }: Props) {
+  const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({
+    Margens: true,
+    'Valores Absolutos (R$)': true,
+    'Ciclos Financeiros': true,
+    Crescimento: true,
+  });
+
   const kpis = useMemo(() => {
     const m = (yr: number) => getMultiplier(scenario, yr);
 
@@ -192,6 +200,10 @@ export default function KpisTab({ scenario }: Props) {
     return formatCompact(val);
   };
 
+  const toggleSection = (section: string) => {
+    setExpandedSections((prev) => ({ ...prev, [section]: !prev[section] }));
+  };
+
   return (
     <div>
       <h2 className="font-display text-xl font-bold tracking-tight mb-1">KPIs Financeiros</h2>
@@ -233,29 +245,37 @@ export default function KpisTab({ scenario }: Props) {
               </tr>
             </thead>
             <tbody>
-              {tableRows.map((section) => (
-                <>
-                  <tr key={`hdr-${section.section}`} className="header-row">
-                    <td colSpan={6} className="font-bold">{section.section}</td>
-                  </tr>
-                  {section.rows.map((row) => (
-                    <tr key={row.key}>
-                      <td className="text-xs">
-                        {row.label}
-                        <Tooltip text={row.tooltip} />
+              {tableRows.map((section) => {
+                const isExpanded = expandedSections[section.section] ?? true;
+                return (
+                  <React.Fragment key={section.section}>
+                    <tr className="cursor-pointer" onClick={() => toggleSection(section.section)}>
+                      <td colSpan={6} className="font-bold bg-muted/30 !py-2.5">
+                        <div className="flex items-center gap-2">
+                          {isExpanded ? <ChevronDown className="w-3.5 h-3.5 text-red-500" /> : <ChevronRight className="w-3.5 h-3.5" />}
+                          <span>{section.section}</span>
+                        </div>
                       </td>
-                      {[0, 1, 2, 3, 4].map((i: number) => {
-                        const val = (kpis?.[i] as any)?.[row.key] ?? 0;
-                        return (
-                          <td key={i} className={`text-right font-mono ${val < 0 ? 'text-red-400' : ''}`}>
-                            {formatValue(val, row.format, i, row.key)}
-                          </td>
-                        );
-                      })}
                     </tr>
-                  ))}
-                </>
-              ))}
+                    {isExpanded && section.rows.map((row) => (
+                      <tr key={row.key}>
+                        <td className="text-xs">
+                          {row.label}
+                          <Tooltip text={row.tooltip} />
+                        </td>
+                        {[0, 1, 2, 3, 4].map((i: number) => {
+                          const val = (kpis?.[i] as any)?.[row.key] ?? 0;
+                          return (
+                            <td key={i} className={`text-right font-mono ${val < 0 ? 'text-red-400' : ''}`}>
+                              {formatValue(val, row.format, i, row.key)}
+                            </td>
+                          );
+                        })}
+                      </tr>
+                    ))}
+                  </React.Fragment>
+                );
+              })}
             </tbody>
           </table>
         </div>

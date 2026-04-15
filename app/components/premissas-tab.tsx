@@ -101,10 +101,12 @@ export default function PremissasTab({ scenario, setScenario }: Props) {
           <div key={sIdx} className="bg-card rounded-lg border border-border mb-4 overflow-hidden" style={{ boxShadow: 'var(--shadow-md)' }}>
             <button
               onClick={() => toggleSection(section?.title ?? '')}
-              className="w-full flex items-center justify-between px-4 py-3 hover:bg-muted/30 transition-colors"
+              className="w-full flex items-center px-4 py-3 hover:bg-muted/30 transition-colors"
             >
-              <span className="font-display font-semibold text-sm">{section?.title ?? ''}</span>
-              {isExpanded ? <ChevronDown className="w-4 h-4 text-red-500" /> : <ChevronRight className="w-4 h-4" />}
+              <span className="flex items-center gap-2">
+                {isExpanded ? <ChevronDown className="w-3.5 h-3.5 text-red-500" /> : <ChevronRight className="w-3.5 h-3.5" />}
+                <span className="font-display font-semibold text-sm">{section?.title ?? ''}</span>
+              </span>
             </button>
             {isExpanded && (
               <div className="overflow-x-auto">

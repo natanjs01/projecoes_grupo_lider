@@ -93,7 +93,7 @@ export default function GraficosTab({ scenario }: Props) {
         </div>
 
         <div className="bg-card rounded-lg border border-border p-4" style={{ boxShadow: 'var(--shadow-md)' }}>
-          <h3 className="font-display font-semibold text-sm mb-3">EBITDA e Lucro L\u00edquido (R$ MM)</h3>
+          <h3 className="font-display font-semibold text-sm mb-3">EBITDA e Lucro Líquido (R$ MM)</h3>
           <div className="h-[300px]">
             <RechartsWrapper
               type="bar"
@@ -119,7 +119,7 @@ export default function GraficosTab({ scenario }: Props) {
         </div>
 
         <div className="bg-card rounded-lg border border-border p-4" style={{ boxShadow: 'var(--shadow-md)' }}>
-          <h3 className="font-display font-semibold text-sm mb-3">Evolu\u00e7\u00e3o das Margens (%)</h3>
+          <h3 className="font-display font-semibold text-sm mb-3">Evolução das Margens (%)</h3>
           <div className="h-[300px]">
             <RechartsWrapper
               type="line"

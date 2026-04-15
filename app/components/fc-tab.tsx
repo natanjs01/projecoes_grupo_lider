@@ -29,7 +29,7 @@ export default function FcTab({ scenario }: Props) {
       <div className="flex items-center justify-between mb-4">
         <div>
           <h2 className="font-display text-xl font-bold tracking-tight">Fluxo de Caixa</h2>
-          <p className="text-xs text-muted-foreground mt-0.5">FC_E - Projeção de 5 anos com NPV e análise de investimentos</p>
+          <p className="text-xs text-muted-foreground mt-0.5">Projeção de 5 anos com NPV e análise de investimentos</p>
         </div>
         <button
           onClick={() => setShowMonths(!showMonths)}
