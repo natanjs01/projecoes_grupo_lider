@@ -107,7 +107,8 @@ export default function DreTab({ scenario }: Props) {
             <tbody>
               {(rows ?? []).map((row: any, idx: number) => {
                 const isHeader = row?.isHeader ?? false;
-                const isMargin = (row?.name ?? '').includes('Margem') || (row?.name ?? '').includes('Taxa');
+                const normalizedName = (row?.name ?? '').trim().toLowerCase();
+                const isMargin = normalizedName.startsWith('margem') || normalizedName === 'taxa';
                 const months: number[] = row?.months ?? [];
                 return (
                   <tr key={idx} className={cn(

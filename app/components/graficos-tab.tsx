@@ -75,8 +75,8 @@ export default function GraficosTab({ scenario }: Props) {
 
   return (
     <div>
-      <h2 className="font-display text-xl font-bold tracking-tight mb-1">Gr\u00e1ficos</h2>
-      <p className="text-xs text-muted-foreground mb-4">Visualiza\u00e7\u00e3o das proje\u00e7\u00f5es financeiras</p>
+      <h2 className="font-display text-xl font-bold tracking-tight mb-1">Gráficos</h2>
+      <p className="text-xs text-muted-foreground mb-4">Visualização das projeções financeiras</p>
 
       <div className="grid grid-cols-2 gap-4">
         <div className="bg-card rounded-lg border border-border p-4" style={{ boxShadow: 'var(--shadow-md)' }}>

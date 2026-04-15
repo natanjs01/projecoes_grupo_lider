@@ -48,7 +48,7 @@ export default function FcTab({ scenario }: Props) {
             <div>
               <p className="text-xs text-muted-foreground">VPL 10 anos (NPV)</p>
               <p className="font-mono text-2xl font-bold text-red-400">
-                R$ {formatBRL((rows?.find?.((r: any) => (r?.label ?? '').includes('VPL'))?.ano1 ?? 0) / 1000, 0)}K
+                R$ {formatBRL(rows?.find?.((r: any) => (r?.label ?? '').includes('VPL'))?.ano1 ?? 0, 0)}
               </p>
             </div>
             <div>
@@ -92,7 +92,7 @@ export default function FcTab({ scenario }: Props) {
                     <td className={cn('text-xs', (isHighlight || isSubtotal) && 'font-bold')}>{row?.label ?? ''}</td>
                     {showMonths && (row?.months ?? []).map((m: number, mIdx: number) => (
                       <td key={mIdx} className={`text-right ${m < 0 ? 'text-red-400' : ''}`}>
-                        {isRate ? formatPct(m) : formatBRL(m * getMultiplier(scenario, 1) / 1000, 0)}
+                        {isRate ? formatPct(m) : formatBRL(m * getMultiplier(scenario, 1), 0)}
                       </td>
                     ))}
                     {[1,2,3,4,5].map((yr: number) => {
@@ -100,7 +100,7 @@ export default function FcTab({ scenario }: Props) {
                       const adjusted = isRate || isVPL ? val : val * getMultiplier(scenario, yr);
                       return (
                         <td key={yr} className={cn('text-right', adjusted < 0 && 'text-red-400', (isHighlight || isSubtotal) && 'font-semibold')}>
-                          {isRate ? formatPct(adjusted) : formatBRL(adjusted / 1000, 0) + (Math.abs(adjusted) > 1 ? 'K' : '')}
+                          {isRate ? formatPct(adjusted) : formatBRL(adjusted, 0)}
                         </td>
                       );
                     })}

@@ -104,7 +104,10 @@ export default function OrcamentoTab() {
             <tbody>
               {Object.entries(groupedItems ?? {}).map(([cat, catItems]: [string, any]) => {
                 const isExpanded = (expandedCategories ?? {})[cat] ?? false;
-                const catTotal = (catItems ?? []).reduce((sum: number, item: any) => sum + (item?.realizado ?? 0), 0);
+                const catRealizadoTotal = (catItems ?? []).reduce((sum: number, item: any) => sum + (item?.realizado ?? 0), 0);
+                const catOrcadoTotal = (catItems ?? []).reduce((sum: number, item: any) => sum + (item?.orcado ?? 0), 0);
+                const catVariacaoTotal = (catItems ?? []).reduce((sum: number, item: any) => sum + (item?.variacao ?? 0), 0);
+                const catPctTotal = catOrcadoTotal !== 0 ? catVariacaoTotal / Math.abs(catOrcadoTotal) : 0;
                 return (
                   <React.Fragment key={`group-${cat}`}>
                     <tr className="cursor-pointer" onClick={() => toggleCategory(cat)}>
@@ -112,8 +115,10 @@ export default function OrcamentoTab() {
                         {isExpanded ? <ChevronDown className="w-3.5 h-3.5 text-red-500" /> : <ChevronRight className="w-3.5 h-3.5" />}
                       </td>
                       <td colSpan={3} className="font-bold text-sm !py-2.5 bg-muted/30">{cat}</td>
-                      <td className="text-right font-bold text-sm !py-2.5 bg-muted/30">{formatBRL(catTotal)}</td>
-                      <td className="bg-muted/30" colSpan={3}></td>
+                      <td className={`text-right font-bold text-sm !py-2.5 bg-muted/30 ${catRealizadoTotal < 0 ? 'text-red-400' : ''}`}>{formatBRL(catRealizadoTotal, 2)}</td>
+                      <td className="text-right font-bold text-sm !py-2.5 bg-muted/30 text-muted-foreground">{formatBRL(catOrcadoTotal, 2)}</td>
+                      <td className={`text-right font-bold text-sm !py-2.5 bg-muted/30 ${catVariacaoTotal >= 0 ? 'text-emerald-400' : 'text-red-400'}`}>{formatBRL(catVariacaoTotal, 2)}</td>
+                      <td className={`text-right font-bold text-sm !py-2.5 bg-muted/30 ${catPctTotal >= 0 ? 'text-emerald-400' : 'text-red-400'}`}>{formatPct(catPctTotal)}</td>
                     </tr>
                     {isExpanded && (catItems ?? []).map((item: any, idx: number) => {
                       return (
