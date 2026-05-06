@@ -7,12 +7,22 @@ import { formatBRL, formatPct } from '../lib/format';
 
 const { orcamento } = financialData ?? {};
 
+type MesKey = 'janeiro' | 'fevereiro' | 'marco';
+
+const MESES: { key: MesKey; label: string }[] = [
+  { key: 'janeiro',   label: 'Jan/2026' },
+  { key: 'fevereiro', label: 'Fev/2026' },
+  { key: 'marco',     label: 'Mar/2026' },
+];
+
 export default function OrcamentoTab() {
   const [search, setSearch] = useState('');
-  const [expandedCategories, setExpandedCategories] = useState<Record<string, boolean>>({ 'RECEITAS': true, 'DESPESAS E CUSTOS': true });
+  const [mes, setMes] = useState<MesKey>('janeiro');
+  const [expandedCategories, setExpandedCategories] = useState<Record<string, boolean>>({});
+  const [tableOpen, setTableOpen] = useState(true);
 
-  const summary = orcamento?.summary ?? [];
-  const items = orcamento?.items ?? [];
+  const summary = (orcamento?.summary as any)?.[mes] ?? [];
+  const items   = (orcamento?.items as any)?.[mes] ?? [];
 
   const filteredItems = useMemo(() => {
     if (!search?.trim()) return items;
@@ -48,22 +58,37 @@ export default function OrcamentoTab() {
     setExpandedCategories((prev: any) => ({ ...(prev ?? {}), [cat]: !(prev ?? {})[cat] }));
   };
 
+  const mesLabel = MESES.find(m => m.key === mes)?.label ?? '';
+
   return (
     <div>
       <div className="flex items-center justify-between mb-4">
         <div>
-          <h2 className="font-display text-xl font-bold tracking-tight">Orçamento vs Realizado</h2>
-          <p className="text-xs text-muted-foreground mt-0.5">Janeiro 2026 - Comparativo de receitas e despesas</p>
+          <h2 className="font-display text-xl font-bold tracking-tight">Realizado vs Orçado</h2>
+          <p className="text-xs text-muted-foreground mt-0.5">{mesLabel} - Comparativo de receitas e despesas</p>
         </div>
-        <div className="relative">
-          <Search className="w-3.5 h-3.5 absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
-          <input
-            type="text"
-            value={search}
-            onChange={(e: any) => setSearch(e?.target?.value ?? '')}
-            placeholder="Buscar conta..."
-            className="pl-9 pr-3 py-1.5 text-xs bg-muted border border-border rounded w-56 focus:outline-none focus:ring-1 focus:ring-red-600"
-          />
+        <div className="flex items-center gap-3">
+          <div className="flex rounded overflow-hidden border border-border text-xs">
+            {MESES.map(m => (
+              <button
+                key={m.key}
+                onClick={() => setMes(m.key)}
+                className={`px-3 py-1.5 transition-colors ${mes === m.key ? 'bg-red-700 text-white font-semibold' : 'bg-muted text-muted-foreground hover:bg-muted/80'}`}
+              >
+                {m.label}
+              </button>
+            ))}
+          </div>
+          <div className="relative">
+            <Search className="w-3.5 h-3.5 absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
+            <input
+              type="text"
+              value={search}
+              onChange={(e: any) => setSearch(e?.target?.value ?? '')}
+              placeholder="Buscar conta..."
+              className="pl-9 pr-3 py-1.5 text-xs bg-muted border border-border rounded w-56 focus:outline-none focus:ring-1 focus:ring-red-600"
+            />
+          </div>
         </div>
       </div>
 
@@ -87,7 +112,14 @@ export default function OrcamentoTab() {
 
       {/* Detail Table */}
       <div className="bg-card rounded-lg border border-border overflow-hidden" style={{ boxShadow: 'var(--shadow-md)' }}>
-        <div className="overflow-x-auto max-h-[65vh] overflow-y-auto">
+        <button
+          onClick={() => setTableOpen(o => !o)}
+          className="w-full flex items-center justify-between px-4 py-3 border-b border-border hover:bg-muted/20 transition-colors"
+        >
+          <span className="text-sm font-semibold">Detalhamento por conta</span>
+          {tableOpen ? <ChevronDown className="w-4 h-4 text-red-500" /> : <ChevronRight className="w-4 h-4 text-muted-foreground" />}
+        </button>
+        {tableOpen && <div className="overflow-x-auto max-h-[65vh] overflow-y-auto">
           <table className="fin-table">
             <thead>
               <tr>
@@ -139,7 +171,7 @@ export default function OrcamentoTab() {
               })}
             </tbody>
           </table>
-        </div>
+        </div>}
       </div>
     </div>
   );

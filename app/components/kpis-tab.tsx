@@ -47,11 +47,12 @@ function Tooltip({ text }: { text: string }) {
 }
 
 export default function KpisTab({ scenario }: Props) {
+  const [tableOpen, setTableOpen] = useState(true);
   const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({
-    Margens: true,
-    'Valores Absolutos (R$)': true,
-    'Ciclos Financeiros': true,
-    Crescimento: true,
+    Margens: false,
+    'Valores Absolutos (R$)': false,
+    'Ciclos Financeiros': false,
+    Crescimento: false,
   });
 
   const kpis = useMemo(() => {
@@ -229,10 +230,14 @@ export default function KpisTab({ scenario }: Props) {
 
       {/* Detailed Table */}
       <div className="bg-card rounded-lg border border-border overflow-hidden" style={{ boxShadow: 'var(--shadow-md)' }}>
-        <div className="px-4 py-3 border-b border-border">
-          <h3 className="font-display font-semibold text-sm">Evolução Anual de KPIs</h3>
-        </div>
-        <div className="overflow-x-auto">
+        <button
+          onClick={() => setTableOpen(o => !o)}
+          className="w-full flex items-center justify-between px-4 py-3 border-b border-border hover:bg-muted/20 transition-colors"
+        >
+          <span className="text-sm font-semibold">Evolução Anual de KPIs</span>
+          {tableOpen ? <ChevronDown className="w-4 h-4 text-red-500" /> : <ChevronRight className="w-4 h-4 text-muted-foreground" />}
+        </button>
+        {tableOpen && <div className="overflow-x-auto">
           <table className="fin-table">
             <thead>
               <tr>
@@ -246,7 +251,7 @@ export default function KpisTab({ scenario }: Props) {
             </thead>
             <tbody>
               {tableRows.map((section) => {
-                const isExpanded = expandedSections[section.section] ?? true;
+                const isExpanded = expandedSections[section.section] ?? false;
                 return (
                   <React.Fragment key={section.section}>
                     <tr className="cursor-pointer" onClick={() => toggleSection(section.section)}>
@@ -278,7 +283,7 @@ export default function KpisTab({ scenario }: Props) {
               })}
             </tbody>
           </table>
-        </div>
+        </div>}
       </div>
     </div>
   );

@@ -4,18 +4,24 @@ import { useState } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { BarChart3, FileSpreadsheet, TrendingUp, DollarSign, Target, LineChart } from 'lucide-react';
-import OrcamentoTab from './orcamento-tab';
+import OrcamentoTab from './realizadovsorcado';
 import PremissasTab from './premissas-tab';
 import DreTab from './dre-tab';
 import FcTab from './fc-tab';
 import KpisTab from './kpis-tab';
 import GraficosTab from './graficos-tab';
+import ResumoDreTab from './resumodre-tab';
+import DfcTab from './dfc-tab';
+import BpTab from './bp-tab';
 
 const TABS = [
-  { id: 'orcamento', label: 'Orçamento', icon: FileSpreadsheet },
+  { id: 'orcamento', label: 'Realizado vs Orçado', icon: FileSpreadsheet },
   { id: 'premissas', label: 'Premissas', icon: Target },
+  { id: 'resumodre', label: 'Resumo DRE', icon: TrendingUp },
   { id: 'dre', label: 'DRE', icon: TrendingUp },
   { id: 'fc', label: 'Fluxo de Caixa', icon: DollarSign },
+  { id: 'dfc', label: 'DFC', icon: DollarSign },
+  { id: 'bp', label: 'BP', icon: BarChart3 },
   { id: 'kpis', label: 'KPIs', icon: BarChart3 },
   { id: 'graficos', label: 'Gráficos', icon: LineChart },
 ] as const;
@@ -33,8 +39,11 @@ export default function DashboardClient() {
       case 'premissas': return <PremissasTab scenario={scenario} setScenario={setScenario} />;
       case 'dre': return <DreTab scenario={scenario} />;
       case 'fc': return <FcTab scenario={scenario} />;
+      case 'dfc': return <DfcTab />;
+      case 'bp': return <BpTab />;
       case 'kpis': return <KpisTab scenario={scenario} />;
       case 'graficos': return <GraficosTab scenario={scenario} />;
+      case 'resumodre': return <ResumoDreTab />;
       default: return null;
     }
   };
