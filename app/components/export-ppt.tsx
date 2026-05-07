@@ -2,6 +2,7 @@
 
 import { Presentation } from 'lucide-react';
 import financialData from '../lib/financial-data.json';
+import logoSrc from '../../public/grupolider.png';
 
 // ── Paleta ────────────────────────────────────────────────────────────────────
 const C = {
@@ -57,7 +58,11 @@ export async function generatePPT(): Promise<void> {
   // Carrega logo em base64 para uso nos slides
   let logoBase64 = '';
   try {
-    const resp = await fetch('/grupolider.png');
+    // logoSrc.src é a URL resolvida pelo Next.js (funciona em dev e produção)
+    const logoUrl = typeof logoSrc === 'string' ? logoSrc : (logoSrc as any).src;
+    const base = typeof window !== 'undefined' ? window.location.origin : '';
+    const url = logoUrl.startsWith('http') ? logoUrl : base + logoUrl;
+    const resp = await fetch(url);
     const buf = await resp.arrayBuffer();
     const bytes = new Uint8Array(buf);
     let bin = '';
