@@ -294,17 +294,27 @@ export async function generatePPT(): Promise<void> {
       const pct = ((item.val / item.total) * 100).toFixed(1) + '%';
       const valStr = Math.round(item.val).toLocaleString('pt-BR');
       sl.addShape('rect', { x, y: iy, w, h, fill: { color: item.color }, line: { color: 'FFFFFF', pt: 1.5 } });
-      if (h > 0.55) {
-        // Abreviação no topo esquerdo
-        sl.addText(item.abbr, { x: x + 0.1, y: iy + 0.08, w: w - 0.15, h: 0.28,
+      if (h > 0.85) {
+        // Célula grande: abbr no topo + valor (h>0.9) + pct no rodapé — sem sobreposição
+        sl.addText(item.abbr, { x: x + 0.1, y: iy + 0.07, w: w - 0.15, h: 0.26,
           fontSize: 9, bold: true, color: C.white, fontFace: 'Arial', valign: 'top' });
         if (h > 0.9) {
-          // Valor em R$ Mi
-          sl.addText(`R$ ${valStr} Mi`, { x: x + 0.1, y: iy + 0.36, w: w - 0.15, h: 0.28,
+          sl.addText(`R$ ${valStr} Mi`, { x: x + 0.1, y: iy + 0.34, w: w - 0.15, h: 0.26,
             fontSize: 7.5, color: C.white, fontFace: 'Arial', valign: 'top' });
         }
-        // Percentual na borda inferior direita
-        sl.addText(pct, { x, y: iy + h - 0.33, w: w - 0.1, h: 0.3,
+        sl.addText(pct, { x, y: iy + h - 0.30, w: w - 0.1, h: 0.28,
+          fontSize: 9.5, bold: true, color: C.white, fontFace: 'Arial', align: 'right', valign: 'bottom' });
+      } else if (h > 0.28) {
+        // Célula pequena (ex: PNC): abbr + R$ no topo, % no rodapé direito (mesmo padrão das grandes)
+        sl.addText(
+          [
+            { text: item.abbr,         options: { fontSize: 7,   bold: true,  breakLine: true } },
+            { text: `R$ ${valStr} Mi`, options: { fontSize: 6.5, bold: false } },
+          ],
+          { x: x + 0.08, y: iy + 0.03, w: w - 0.16, h: 0.28,
+            color: C.white, fontFace: 'Arial', valign: 'top', wrap: true },
+        );
+        sl.addText(pct, { x, y: iy + h - 0.26, w: w - 0.1, h: 0.24,
           fontSize: 9.5, bold: true, color: C.white, fontFace: 'Arial', align: 'right', valign: 'bottom' });
       }
       iy += h + (i < items.length - 1 ? ITEM_GAP : 0);
