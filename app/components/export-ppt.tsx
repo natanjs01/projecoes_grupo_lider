@@ -680,7 +680,9 @@ export async function generatePPT(): Promise<void> {
   const cLucPct   = YRS.map(yr => +((getDRE('lucroLiquido', yr) / getDRE('faturamentoLiquido', yr)) * 100).toFixed(1));
 
   // ── Opções modernas compartilhadas ──────────────────────────────────────
-  const shadow = { type: 'outer' as const, blur: 8, offset: 3, angle: 45, color: 'AAAAAA', opacity: 0.25 };
+  // IMPORTANTE: pptxgenjs muta o objeto shadow in-place na conversão para EMU.
+  // Usar sempre uma cópia nova por chamada para evitar multiplicação de valores.
+  const mkShadow = () => ({ type: 'outer' as const, blur: 8, offset: 3, angle: 45, color: 'AAAAAA', opacity: 0.25 });
 
   const barOpts = (title: string, colors: string[]) => ({
     barDir: 'col' as const,
@@ -719,8 +721,8 @@ export async function generatePPT(): Promise<void> {
   addHdr(sg1, 'GRÁFICOS  –  Resultado Financeiro', 'Gráficos 1/2');
 
   // Cards de fundo para cada gráfico
-  sg1.addShape('rect', { x: 0.25, y: 1.0, w: 6.15, h: 6.35, fill: { color: C.white }, line: { color: 'E2E8F0', pt: 1 }, shadow });
-  sg1.addShape('rect', { x: 6.93, y: 1.0, w: 6.15, h: 6.35, fill: { color: C.white }, line: { color: 'E2E8F0', pt: 1 }, shadow });
+  sg1.addShape('rect', { x: 0.25, y: 1.0, w: 6.15, h: 6.35, fill: { color: C.white }, line: { color: 'E2E8F0', pt: 1 }, shadow: mkShadow() });
+  sg1.addShape('rect', { x: 6.93, y: 1.0, w: 6.15, h: 6.35, fill: { color: C.white }, line: { color: 'E2E8F0', pt: 1 }, shadow: mkShadow() });
 
   (sg1 as any).addChart('bar', [
     { name: 'Fat. Bruto',   labels: anoLabels, values: cFatBruto },
@@ -737,8 +739,8 @@ export async function generatePPT(): Promise<void> {
   sg2.background = { fill: 'F1F5F9' };
   addHdr(sg2, 'GRÁFICOS  –  Caixa e Margens', 'Gráficos 2/2');
 
-  sg2.addShape('rect', { x: 0.25, y: 1.0, w: 6.15, h: 6.35, fill: { color: C.white }, line: { color: 'E2E8F0', pt: 1 }, shadow });
-  sg2.addShape('rect', { x: 6.93, y: 1.0, w: 6.15, h: 6.35, fill: { color: C.white }, line: { color: 'E2E8F0', pt: 1 }, shadow });
+  sg2.addShape('rect', { x: 0.25, y: 1.0, w: 6.15, h: 6.35, fill: { color: C.white }, line: { color: 'E2E8F0', pt: 1 }, shadow: mkShadow() });
+  sg2.addShape('rect', { x: 6.93, y: 1.0, w: 6.15, h: 6.35, fill: { color: C.white }, line: { color: 'E2E8F0', pt: 1 }, shadow: mkShadow() });
 
   (sg2 as any).addChart('line', [
     { name: 'Caixa Operacional', labels: anoLabels, values: cCaixaOp  },
