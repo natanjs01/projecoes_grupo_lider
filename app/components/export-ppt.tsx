@@ -679,50 +679,96 @@ export async function generatePPT(): Promise<void> {
   const cEbPct    = YRS.map(yr => +((getDRE('ebtida', yr) / getDRE('faturamentoLiquido', yr)) * 100).toFixed(1));
   const cLucPct   = YRS.map(yr => +((getDRE('lucroLiquido', yr) / getDRE('faturamentoLiquido', yr)) * 100).toFixed(1));
 
-  const chOpts = (title: string, type: 'bar' | 'line', colors: string[], yMax?: number) => ({
-    barDir: 'col', barGrouping: 'clustered',
-    lineDataSymbol: 'circle', lineDataSymbolSize: 5,
+  // ── Opções modernas compartilhadas ──────────────────────────────────────
+  const shadow = { type: 'outer', blur: 8, offset: 3, angle: 45, color: 'AAAAAA', opacity: 0.25 };
+
+  const barOpts = (title: string, colors: string[]) => ({
+    barDir: 'col',
+    barGrouping: 'clustered',
+    barGapWidthPct: 60,
     chartColors: colors,
-    showLegend: true, legendPos: 'b' as const, legendFontSize: 9,
-    showValue: true, dataLabelFontSize: 8, dataLabelColor: '374151',
-    valAxisLabelFontSize: 8, catAxisLabelFontSize: 9,
-    title, showTitle: true, titleFontSize: 11, titleBold: true, titleColor: C.darkBlue,
-    ...(type === 'line' ? { showValue: false } : {}),
-    ...(yMax ? { valAxisMaxVal: yMax } : {}),
+    chartColorsOpacity: 95,
+    // Bordas
+    border: { pt: 0, color: 'FFFFFF' },
+    plotAreaBorder: { pt: 0, color: 'FFFFFF' },
+    plotAreaFill: { color: 'F8FAFC' },
+    chartAreaFill: { color: 'FFFFFF' },
+    shadow,
+    // Gridlines sutis
+    valGridLine: { style: 'solid', color: 'E2E8F0', pt: 0.5 },
+    catGridLine: { style: 'none' },
+    valAxisLineShow: false,
+    catAxisLineShow: false,
+    // Labels / legenda
+    showLegend: true, legendPos: 'b' as const, legendFontSize: 9, legendFontFace: 'Arial',
+    showValue: true, dataLabelFontSize: 9, dataLabelFontBold: true, dataLabelColor: '1E3A5F', dataLabelFontFace: 'Arial',
+    valAxisLabelFontSize: 8, valAxisLabelColor: '64748B', valAxisLabelFontFace: 'Arial',
+    catAxisLabelFontSize: 9, catAxisLabelColor: '374151', catAxisLabelFontFace: 'Arial',
+    // Título
+    title, showTitle: true, titleFontSize: 12, titleBold: true, titleColor: C.darkBlue, titleFontFace: 'Arial',
+  });
+
+  const lineOpts = (title: string, colors: string[]) => ({
+    lineDataSymbol: 'circle',
+    lineDataSymbolSize: 7,
+    lineDataSymbolLineColor: 'FFFFFF',
+    lineDataSymbolLineSize: 1.5,
+    lineSmooth: true,
+    lineSize: 2.5,
+    chartColors: colors,
+    border: { pt: 0, color: 'FFFFFF' },
+    plotAreaBorder: { pt: 0, color: 'FFFFFF' },
+    plotAreaFill: { color: 'F8FAFC' },
+    chartAreaFill: { color: 'FFFFFF' },
+    shadow,
+    valGridLine: { style: 'solid', color: 'E2E8F0', pt: 0.5 },
+    catGridLine: { style: 'none' },
+    valAxisLineShow: false,
+    catAxisLineShow: false,
+    showLegend: true, legendPos: 'b' as const, legendFontSize: 9, legendFontFace: 'Arial',
+    showValue: false,
+    valAxisLabelFontSize: 8, valAxisLabelColor: '64748B', valAxisLabelFontFace: 'Arial',
+    catAxisLabelFontSize: 9, catAxisLabelColor: '374151', catAxisLabelFontFace: 'Arial',
+    title, showTitle: true, titleFontSize: 12, titleBold: true, titleColor: C.darkBlue, titleFontFace: 'Arial',
   });
 
   // ── SLIDE Gráficos 1/2 ───────────────────────────────────────────────────
   const sg1 = prs.addSlide();
-  sg1.background = { fill: C.white };
+  sg1.background = { fill: 'F1F5F9' };
   addHdr(sg1, 'GRÁFICOS  –  Resultado Financeiro', 'Gráficos 1/2');
-  sg1.addShape('rect', { x: 6.65, y: 1.0, w: 0.02, h: 6.3, fill: { color: 'E5E7EB' }, line: { color: 'E5E7EB' } });
+
+  // Cards de fundo para cada gráfico
+  sg1.addShape('rect', { x: 0.25, y: 1.0, w: 6.15, h: 6.35, fill: { color: C.white }, line: { color: 'E2E8F0', pt: 1 }, shadow });
+  sg1.addShape('rect', { x: 6.93, y: 1.0, w: 6.15, h: 6.35, fill: { color: C.white }, line: { color: 'E2E8F0', pt: 1 }, shadow });
 
   (sg1 as any).addChart('bar', [
     { name: 'Fat. Bruto',   labels: anoLabels, values: cFatBruto },
     { name: 'Fat. Líquido', labels: anoLabels, values: cFatLiq   },
-  ], { x: 0.3, y: 1.05, w: 6.1, h: 6.0, ...chOpts('Receitas (R$ MM)', 'bar', ['1E3A5F', '2563EB']) });
+  ], { x: 0.3, y: 1.05, w: 6.1, h: 6.2, ...barOpts('Receitas (R$ MM)', ['1E3A5F', '38BDF8']) });
 
   (sg1 as any).addChart('bar', [
     { name: 'EBTIDA',        labels: anoLabels, values: cEbtida   },
     { name: 'Lucro Líquido', labels: anoLabels, values: cLucroLiq },
-  ], { x: 6.9, y: 1.05, w: 6.1, h: 6.0, ...chOpts('EBTIDA e Lucro Líquido (R$ MM)', 'bar', ['2563EB', 'DC2626']) });
+  ], { x: 6.93, y: 1.05, w: 6.1, h: 6.2, ...barOpts('EBTIDA e Lucro Líquido (R$ MM)', ['6366F1', '34D399']) });
 
   // ── SLIDE Gráficos 2/2 ───────────────────────────────────────────────────
   const sg2 = prs.addSlide();
-  sg2.background = { fill: C.white };
+  sg2.background = { fill: 'F1F5F9' };
   addHdr(sg2, 'GRÁFICOS  –  Caixa e Margens', 'Gráficos 2/2');
-  sg2.addShape('rect', { x: 6.65, y: 1.0, w: 0.02, h: 6.3, fill: { color: 'E5E7EB' }, line: { color: 'E5E7EB' } });
+
+  sg2.addShape('rect', { x: 0.25, y: 1.0, w: 6.15, h: 6.35, fill: { color: C.white }, line: { color: 'E2E8F0', pt: 1 }, shadow });
+  sg2.addShape('rect', { x: 6.93, y: 1.0, w: 6.15, h: 6.35, fill: { color: C.white }, line: { color: 'E2E8F0', pt: 1 }, shadow });
 
   (sg2 as any).addChart('line', [
     { name: 'Caixa Operacional', labels: anoLabels, values: cCaixaOp  },
     { name: 'Caixa Livre',       labels: anoLabels, values: cCaixaLiv },
-  ], { x: 0.3, y: 1.05, w: 6.1, h: 6.0, ...chOpts('Fluxo de Caixa (R$ MM)', 'line', ['2563EB', '1E3A5F']) });
+  ], { x: 0.3, y: 1.05, w: 6.1, h: 6.2, ...lineOpts('Fluxo de Caixa (R$ MM)', ['2563EB', '34D399']) });
 
   (sg2 as any).addChart('line', [
     { name: 'M. Contribuição', labels: anoLabels, values: cMCPct  },
     { name: 'M. EBTIDA',       labels: anoLabels, values: cEbPct  },
     { name: 'M. Líquida',      labels: anoLabels, values: cLucPct },
-  ], { x: 6.9, y: 1.05, w: 6.1, h: 6.0, ...chOpts('Evolução das Margens (%)', 'line', ['1E3A5F', '2563EB', 'DC2626']) });
+  ], { x: 6.93, y: 1.05, w: 6.1, h: 6.2, ...lineOpts('Evolução das Margens (%)', ['6366F1', '38BDF8', 'F59E0B']) });
 
   // ── SLIDE 10 – Fluxo de Caixa ─────────────────────────────────────────────
   const s4 = prs.addSlide();
