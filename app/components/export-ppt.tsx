@@ -625,18 +625,20 @@ export async function generatePPT(): Promise<void> {
 
   // Saldos base (VLR 25) — usado como ponto de partida para o Ano 1
   const cr25  = parseFloat(String(cr.vlr25  ?? 0)) || 0;
-  const cpd25 = parseFloat(String(cpd.vlr25 ?? 0)) || 0;
-  const est25 = parseFloat(String(est.vlr25 ?? 0)) || 0;
-
-  // NCG pelo saldo (para uso interno nos cálculos de variação)
-  const ncgSaldo = (yr: number) => (est[`ano${yr}`] ?? 0) + (cr[`ano${yr}`] ?? 0) + (cpd[`ano${yr}`] ?? 0);
-  const ncgBase  = est25 + cr25 + cpd25;
+  // cpd25 = soma(R99:R108) - soma(C115:C118) — fórmula da planilha, VLR25 de contas a pagar
+  const ffSec: any[] = premSecs.find((s: any) => s.title === 'Fluxo Financeiro')?.rows ?? [];
+  const sumR99R108  = [28,29,30,31,32,33,34,35,36,37].reduce((s, i) => s + (ffSec[i]?.ano1 ?? 0), 0);
+  const sumC115C118 = [43,44,45,46].reduce((s, i) => s + (parseFloat(String(ffSec[i]?.col3 ?? 0)) || 0), 0);
+  const cpd25Var1   = sumR99R108 - sumC115C118; // variação direta do Ano 1 (~9.996.141)
+  const cpd25 = 0;
+  // est25: soma dos col3 das 4 linhas "Saldo final" de estoques
+  const est25 = [5, 11, 17, 23].reduce((s, i) => s + (parseFloat(String(estoqSec[i]?.col3 ?? 0)) || 0), 0);
 
   // Variação: Ano N − Ano N-1 (Ano 1 − VLR25)
   const crVar  = (yr: number) => (cr[`ano${yr}`]  ?? 0) - (yr === 1 ? cr25  : (cr[`ano${yr - 1}`]  ?? 0));
-  const cpdVar = (yr: number) => (cpd[`ano${yr}`] ?? 0) - (yr === 1 ? cpd25 : (cpd[`ano${yr - 1}`] ?? 0));
+  const cpdVar = (yr: number) => yr === 1 ? cpd25Var1 * -1 : ((cpd[`ano${yr}`] ?? 0) - (cpd[`ano${yr - 1}`] ?? 0)) * -1;
   const estVar = (yr: number) => (est[`ano${yr}`] ?? 0) - (yr === 1 ? est25 : (est[`ano${yr - 1}`] ?? 0));
-  const ncgVar = (yr: number) => ncgSaldo(yr) - (yr === 1 ? ncgBase : ncgSaldo(yr - 1));
+  const ncgVar = (yr: number) => crVar(yr) + estVar(yr) + cpdVar(yr);
 
   const wrkHdr = [
     { text: 'Variação Capital de Giro (R$)', options: { bold: true, color: C.white, fill: { color: C.midBlue }, fontSize: 11 } },
