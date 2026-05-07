@@ -680,56 +680,37 @@ export async function generatePPT(): Promise<void> {
   const cLucPct   = YRS.map(yr => +((getDRE('lucroLiquido', yr) / getDRE('faturamentoLiquido', yr)) * 100).toFixed(1));
 
   // ── Opções modernas compartilhadas ──────────────────────────────────────
-  const shadow = { type: 'outer', blur: 8, offset: 3, angle: 45, color: 'AAAAAA', opacity: 0.25 };
+  const shadow = { type: 'outer' as const, blur: 8, offset: 3, angle: 45, color: 'AAAAAA', opacity: 0.25 };
 
   const barOpts = (title: string, colors: string[]) => ({
-    barDir: 'col',
-    barGrouping: 'clustered',
+    barDir: 'col' as const,
+    barGrouping: 'clustered' as const,
     barGapWidthPct: 60,
     chartColors: colors,
-    chartColorsOpacity: 95,
-    // Bordas
-    border: { pt: 0, color: 'FFFFFF' },
-    plotAreaBorder: { pt: 0, color: 'FFFFFF' },
-    plotAreaFill: { color: 'F8FAFC' },
-    chartAreaFill: { color: 'FFFFFF' },
-    shadow,
-    // Gridlines sutis
-    valGridLine: { style: 'solid', color: 'E2E8F0', pt: 0.5 },
-    catGridLine: { style: 'none' },
-    valAxisLineShow: false,
-    catAxisLineShow: false,
-    // Labels / legenda
-    showLegend: true, legendPos: 'b' as const, legendFontSize: 9, legendFontFace: 'Arial',
-    showValue: true, dataLabelFontSize: 9, dataLabelFontBold: true, dataLabelColor: '1E3A5F', dataLabelFontFace: 'Arial',
-    valAxisLabelFontSize: 8, valAxisLabelColor: '64748B', valAxisLabelFontFace: 'Arial',
-    catAxisLabelFontSize: 9, catAxisLabelColor: '374151', catAxisLabelFontFace: 'Arial',
-    // Título
-    title, showTitle: true, titleFontSize: 12, titleBold: true, titleColor: C.darkBlue, titleFontFace: 'Arial',
+    plotAreaBkgndColor: 'F8FAFC',
+    chartAreaBkgndColor: 'FFFFFF',
+    valGridLine: { style: 'solid' as const, color: 'E2E8F0', pt: 0.5 },
+    catGridLine: { style: 'none' as const },
+    showLegend: true, legendPos: 'b' as const, legendFontSize: 9,
+    showValue: true, dataLabelFontSize: 9, dataLabelColor: '1E3A5F',
+    valAxisLabelFontSize: 8, catAxisLabelFontSize: 9,
+    title, showTitle: true, titleFontSize: 12, titleBold: true, titleColor: C.darkBlue,
   });
 
   const lineOpts = (title: string, colors: string[]) => ({
-    lineDataSymbol: 'circle',
+    lineDataSymbol: 'circle' as const,
     lineDataSymbolSize: 7,
-    lineDataSymbolLineColor: 'FFFFFF',
-    lineDataSymbolLineSize: 1.5,
     lineSmooth: true,
     lineSize: 2.5,
     chartColors: colors,
-    border: { pt: 0, color: 'FFFFFF' },
-    plotAreaBorder: { pt: 0, color: 'FFFFFF' },
-    plotAreaFill: { color: 'F8FAFC' },
-    chartAreaFill: { color: 'FFFFFF' },
-    shadow,
-    valGridLine: { style: 'solid', color: 'E2E8F0', pt: 0.5 },
-    catGridLine: { style: 'none' },
-    valAxisLineShow: false,
-    catAxisLineShow: false,
-    showLegend: true, legendPos: 'b' as const, legendFontSize: 9, legendFontFace: 'Arial',
+    plotAreaBkgndColor: 'F8FAFC',
+    chartAreaBkgndColor: 'FFFFFF',
+    valGridLine: { style: 'solid' as const, color: 'E2E8F0', pt: 0.5 },
+    catGridLine: { style: 'none' as const },
+    showLegend: true, legendPos: 'b' as const, legendFontSize: 9,
     showValue: false,
-    valAxisLabelFontSize: 8, valAxisLabelColor: '64748B', valAxisLabelFontFace: 'Arial',
-    catAxisLabelFontSize: 9, catAxisLabelColor: '374151', catAxisLabelFontFace: 'Arial',
-    title, showTitle: true, titleFontSize: 12, titleBold: true, titleColor: C.darkBlue, titleFontFace: 'Arial',
+    valAxisLabelFontSize: 8, catAxisLabelFontSize: 9,
+    title, showTitle: true, titleFontSize: 12, titleBold: true, titleColor: C.darkBlue,
   });
 
   // ── SLIDE Gráficos 1/2 ───────────────────────────────────────────────────
