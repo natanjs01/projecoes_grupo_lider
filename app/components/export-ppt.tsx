@@ -661,6 +661,69 @@ export async function generatePPT(): Promise<void> {
     colW: [4.0, 1.78, 1.78, 1.78, 1.78, 1.78],
   });
 
+  // ── SLIDES GRÁFICOS ───────────────────────────────────────────────────────
+  const anoLabels = ['Ano 1', 'Ano 2', 'Ano 3', 'Ano 4', 'Ano 5'];
+
+  // Dados DRE — valores já em R$ MM (resumoDRE)
+  const cFatBruto  = YRS.map(yr => Math.round(getDRE('faturamentoBruto', yr)));
+  const cFatLiq    = YRS.map(yr => Math.round(getDRE('faturamentoLiquido', yr)));
+  const cEbtida    = YRS.map(yr => Math.round(getDRE('ebtida', yr)));
+  const cLucroLiq  = YRS.map(yr => Math.round(getDRE('lucroLiquido', yr)));
+
+  // Dados FC — raw R$, dividir por 1e6
+  const cCaixaOp  = YRS.map(yr => Math.round(getFC('Caixa Operacional', yr) / 1e6));
+  const cCaixaLiv = YRS.map(yr => Math.round(getFC('Caixa livre', yr) / 1e6));
+
+  // Margens %
+  const cMCPct    = YRS.map(yr => +((getDRE('margemContribuicao', yr) / getDRE('faturamentoLiquido', yr)) * 100).toFixed(1));
+  const cEbPct    = YRS.map(yr => +((getDRE('ebtida', yr) / getDRE('faturamentoLiquido', yr)) * 100).toFixed(1));
+  const cLucPct   = YRS.map(yr => +((getDRE('lucroLiquido', yr) / getDRE('faturamentoLiquido', yr)) * 100).toFixed(1));
+
+  const chOpts = (title: string, type: 'bar' | 'line', colors: string[], yMax?: number) => ({
+    barDir: 'col', barGrouping: 'clustered',
+    lineDataSymbol: 'circle', lineDataSymbolSize: 5,
+    chartColors: colors,
+    showLegend: true, legendPos: 'b' as const, legendFontSize: 9,
+    showValue: true, dataLabelFontSize: 8, dataLabelColor: '374151',
+    valAxisLabelFontSize: 8, catAxisLabelFontSize: 9,
+    title, showTitle: true, titleFontSize: 11, titleBold: true, titleColor: C.darkBlue,
+    ...(type === 'line' ? { showValue: false } : {}),
+    ...(yMax ? { valAxisMaxVal: yMax } : {}),
+  });
+
+  // ── SLIDE Gráficos 1/2 ───────────────────────────────────────────────────
+  const sg1 = prs.addSlide();
+  sg1.background = { fill: C.white };
+  addHdr(sg1, 'GRÁFICOS  –  Resultado Financeiro', 'Gráficos 1/2');
+  sg1.addShape('rect', { x: 6.65, y: 1.0, w: 0.02, h: 6.3, fill: { color: 'E5E7EB' }, line: { color: 'E5E7EB' } });
+
+  (sg1 as any).addChart('bar', [
+    { name: 'Fat. Bruto',   labels: anoLabels, values: cFatBruto },
+    { name: 'Fat. Líquido', labels: anoLabels, values: cFatLiq   },
+  ], { x: 0.3, y: 1.05, w: 6.1, h: 6.0, ...chOpts('Receitas (R$ MM)', 'bar', ['1E3A5F', '2563EB']) });
+
+  (sg1 as any).addChart('bar', [
+    { name: 'EBTIDA',        labels: anoLabels, values: cEbtida   },
+    { name: 'Lucro Líquido', labels: anoLabels, values: cLucroLiq },
+  ], { x: 6.9, y: 1.05, w: 6.1, h: 6.0, ...chOpts('EBTIDA e Lucro Líquido (R$ MM)', 'bar', ['2563EB', 'DC2626']) });
+
+  // ── SLIDE Gráficos 2/2 ───────────────────────────────────────────────────
+  const sg2 = prs.addSlide();
+  sg2.background = { fill: C.white };
+  addHdr(sg2, 'GRÁFICOS  –  Caixa e Margens', 'Gráficos 2/2');
+  sg2.addShape('rect', { x: 6.65, y: 1.0, w: 0.02, h: 6.3, fill: { color: 'E5E7EB' }, line: { color: 'E5E7EB' } });
+
+  (sg2 as any).addChart('line', [
+    { name: 'Caixa Operacional', labels: anoLabels, values: cCaixaOp  },
+    { name: 'Caixa Livre',       labels: anoLabels, values: cCaixaLiv },
+  ], { x: 0.3, y: 1.05, w: 6.1, h: 6.0, ...chOpts('Fluxo de Caixa (R$ MM)', 'line', ['2563EB', '1E3A5F']) });
+
+  (sg2 as any).addChart('line', [
+    { name: 'M. Contribuição', labels: anoLabels, values: cMCPct  },
+    { name: 'M. EBTIDA',       labels: anoLabels, values: cEbPct  },
+    { name: 'M. Líquida',      labels: anoLabels, values: cLucPct },
+  ], { x: 6.9, y: 1.05, w: 6.1, h: 6.0, ...chOpts('Evolução das Margens (%)', 'line', ['1E3A5F', '2563EB', 'DC2626']) });
+
   // ── SLIDE 10 – Fluxo de Caixa ─────────────────────────────────────────────
   const s4 = prs.addSlide();
   s4.background = { fill: C.white };
