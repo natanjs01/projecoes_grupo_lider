@@ -236,8 +236,8 @@ export async function generatePPT(): Promise<void> {
   const totP25 = bpV.pc25 + bpV.pnc25 + bpV.pl25;
 
   // ── Treemap manual com shapes ─────────────────────────────────────────────
-  // Canvas: inicia logo abaixo do header, ocupa quase todo o slide
-  const TM_X = 0.1, TM_Y = 1.05, TM_W = 13.13, TM_H = 6.15;
+  // Canvas: inicia logo abaixo do header, ocupa a maior parte do slide
+  const TM_X = 0.1, TM_Y = 1.05, TM_W = 13.13, TM_H = 4.50;
   const YR_GAP = 0.07;   // gap entre BP2024 e BP2025
   const COL_GAP = 0.04;  // gap entre coluna Ativo e Passivo dentro de cada ano
   const ITEM_GAP = 0.04; // gap entre retângulos na mesma coluna
@@ -250,9 +250,9 @@ export async function generatePPT(): Promise<void> {
   const x24 = TM_X;
   const x25 = TM_X + w24 + YR_GAP;
 
-  // Paleta BP 2024 (laranja) e BP 2025 (azul)
-  const OR1 = 'FB923C', OR2 = 'EA580C', OR3 = 'C2410C'; // ativo-claro, passivo-médio, PNC-escuro
-  const OR4 = 'D97706'; // PL 2024
+  // Paleta BP 2024 (teal pastel) e BP 2025 (azul)
+  const OR1 = '2DD4BF', OR2 = '0D9488', OR3 = '0F766E'; // ativo-claro, passivo-médio, PNC-escuro
+  const OR4 = '14B8A6'; // PL 2024
   const BL1 = '60A5FA', BL2 = '2563EB', BL3 = '1D4ED8'; // ativo-claro, passivo-médio, PNC-escuro
   const BL4 = '0EA5E9'; // PL 2025
 
@@ -332,6 +332,46 @@ export async function generatePPT(): Promise<void> {
    [xA25, wCol25, 'ATIVO'], [xP25, wCol25, 'PASSIVO + PL']].forEach(([x, w, t]) => {
     sbpa.addText(t as string, { x: x as number, y: cY - 0.01, w: w as number, h: 0.22,
       fontSize: 7, color: '94A3B8', italic: true, fontFace: 'Arial', align: 'center' });
+  });
+
+  // ── Análise comparativa 2025 vs 2024 ─────────────────────────────────────
+  const anY  = TM_Y + TM_H + 0.12;
+  const anH  = 1.50;
+  const anCw = (TM_W - 0.2) / 3; // 3 cards iguais
+  const pSign = (v: number) => (v >= 0 ? '+' : '') + v.toFixed(1) + '%';
+  const varAt  = (totA25 / totA24 - 1) * 100;
+  const varAC  = (bpV.ac25 / bpV.ac24 - 1) * 100;
+  const varAnc = (bpV.anc25 / bpV.anc24 - 1) * 100;
+  const varPc  = (bpV.pc25 / bpV.pc24 - 1) * 100;
+  const varPnc = (bpV.pnc25 / bpV.pnc24 - 1) * 100;
+  const varPl  = (bpV.pl25 / bpV.pl24 - 1) * 100;
+
+  const anCards = [
+    {
+      title: `Crescimento do Ativo  ${pSign(varAt)}`,
+      color: '0D9488', bg: 'F0FDFA',
+      body: `O ativo total cresceu ${pSign(varAt)} (R$${fmtMi(totA24)} → R$${fmtMi(totA25)} Mi). O ANC avançou ${pSign(varAnc)}, sinalizando investimentos em capacidade produtiva ou imobilizado. O AC cresceu ${pSign(varAC)}, mantendo a liquidez operacional.`,
+    },
+    {
+      title: `Alavancagem  PC ${pSign(varPc)}  ·  PNC ${pSign(varPnc)}`,
+      color: 'D97706', bg: 'FFFBEB',
+      body: `PC e PNC cresceram acima do ativo, elevando a dependência de capital de terceiros. O PL avançou apenas ${pSign(varPl)}, indicando que a expansão foi financiada majoritariamente por dívida de curto e longo prazo.`,
+    },
+    {
+      title: `Composição do Passivo  PL ${pSign(varPl)}`,
+      color: '2563EB', bg: 'EFF6FF',
+      body: `A participação do PL recuou de ${(bpV.pl24 / totP24 * 100).toFixed(1)}% para ${(bpV.pl25 / totP25 * 100).toFixed(1)}%. O PC subiu de ${(bpV.pc24 / totP24 * 100).toFixed(1)}% para ${(bpV.pc25 / totP25 * 100).toFixed(1)}%. Recomenda-se monitorar a liquidez corrente e o custo médio da dívida.`,
+    },
+  ];
+
+  anCards.forEach((card, i) => {
+    const cx = TM_X + i * (anCw + 0.1);
+    sbpa.addShape('rect', { x: cx, y: anY, w: anCw, h: anH,
+      fill: { color: card.bg }, line: { color: card.color, pt: 1.5 } });
+    sbpa.addText(card.title, { x: cx + 0.12, y: anY + 0.10, w: anCw - 0.22, h: 0.34,
+      fontSize: 8, bold: true, color: card.color, fontFace: 'Arial', wrap: true });
+    sbpa.addText(card.body,  { x: cx + 0.12, y: anY + 0.46, w: anCw - 0.22, h: anH - 0.56,
+      fontSize: 7.5, color: '374151', fontFace: 'Arial', wrap: true, valign: 'top' });
   });
 
   // ── SLIDE 3 – Premissas: Taxas e Cenários ─────────────────────────────────
