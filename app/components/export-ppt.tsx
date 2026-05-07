@@ -350,17 +350,26 @@ export async function generatePPT(): Promise<void> {
     { text: 'Imobilizado', options: { bold: true, color: C.white, fill: { color: C.midBlue }, fontSize: 11 } },
     ...YRS.map(n => ({ text: `Ano ${n}`, options: { bold: true, color: C.white, fill: { color: C.midBlue }, align: 'right', fontSize: 11 } })),
   ];
+  // Saldo Final calculado (ano2 está zerado no JSON — dado incompleto na fonte)
+  const imoSaldoFinal = (yr: number) => {
+    const raw = getImo('Imobilizado líquido - Saldo final', yr);
+    if (raw !== 0) return raw;
+    return getImo('Imobilizado líquido - Saldo inicial', yr)
+      + getImo('Adições -Custos (1 lj 50MM + dep.)', yr)
+      + getImo('Adições -Depreciação', yr);
+  };
+
   const imoDef = [
-    { label: 'Saldo Inicial (Imobilizado Líquido)',      key: 'Imobilizado líquido - Saldo inicial',      bold: true },
-    { label: 'Adições de Custos (expansão + infraest.)', key: 'Adições -Custos (1 lj 50MM + dep.)',       bold: false },
-    { label: 'Depreciação do Período',                   key: 'Adições -Depreciação',                     bold: false },
-    { label: 'Saldo Final (Imobilizado Líquido)',         key: 'Imobilizado líquido - Saldo final',        bold: true },
+    { label: 'Saldo Inicial (Imobilizado Líquido)',      vals: YRS.map(yr => getImo('Imobilizado líquido - Saldo inicial', yr)),      bold: true  },
+    { label: 'Adições de Custos (expansão + infraest.)', vals: YRS.map(yr => getImo('Adições -Custos (1 lj 50MM + dep.)', yr)),        bold: false },
+    { label: 'Depreciação do Período',                   vals: YRS.map(yr => getImo('Adições -Depreciação', yr)),                      bold: false },
+    { label: 'Saldo Final (Imobilizado Líquido)',         vals: YRS.map(yr => imoSaldoFinal(yr)),                                       bold: true  },
   ];
   const imoTRows = imoDef.map((r, i) => {
     const bg = r.bold ? C.lightBlue : i % 2 === 0 ? C.white : C.lightGray;
     return [
       { text: r.label, options: { bold: r.bold, fontSize: 10, color: r.bold ? C.darkBlue : C.gray, fill: { color: bg } } },
-      ...YRS.map(yr => { const v = getImo(r.key, yr); return { text: fmtBig(v), options: { align: 'right', fontSize: 10, bold: r.bold, color: v < 0 ? C.negative : C.midBlue, fill: { color: bg } } }; }),
+      ...r.vals.map((v: number) => ({ text: fmtBig(v), options: { align: 'right', fontSize: 10, bold: r.bold, color: v < 0 ? C.negative : C.midBlue, fill: { color: bg } } })),
     ];
   });
   sp3.addTable([imoHdr2, ...imoTRows], {
@@ -374,7 +383,7 @@ export async function generatePPT(): Promise<void> {
   const custoAcum = YRS.reduce((a, yr) => a + getImo('Adições -Custos (1 lj 50MM + dep.)', yr), 0);
   const depAcum   = YRS.reduce((a, yr) => a + Math.abs(getImo('Adições -Depreciação', yr)), 0);
   const imoInit   = getImo('Imobilizado líquido - Saldo inicial', 1);
-  const imoFinal  = getImo('Imobilizado líquido - Saldo final', 5);
+  const imoFinal  = imoSaldoFinal(5);
   sp3.addText(
     `O plano prevê investimentos totais de aproximadamente ${fmtBig(custoAcum)} em 5 anos, incluindo a abertura de nova unidade (~R$ 50MM). ` +
     `A depreciação acumulada no período é de ${fmtBig(depAcum)}. ` +
