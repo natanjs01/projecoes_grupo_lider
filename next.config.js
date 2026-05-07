@@ -14,6 +14,33 @@ const nextConfig = {
     ignoreBuildErrors: false,
   },
   images: { unoptimized: true },
+  webpack: (config, { isServer, webpack }) => {
+    if (!isServer) {
+      // Remove alias que não funciona com exports field
+      // Reescreve "node:fs" -> "fs" para que o fallback funcione
+      config.plugins.push(
+        new webpack.NormalModuleReplacementPlugin(/^node:/, (resource) => {
+          resource.request = resource.request.replace(/^node:/, '');
+        })
+      );
+      config.resolve.fallback = {
+        ...config.resolve.fallback,
+        fs: false,
+        path: false,
+        stream: false,
+        crypto: false,
+        os: false,
+        zlib: false,
+        http: false,
+        https: false,
+        net: false,
+        tls: false,
+        child_process: false,
+        buffer: false,
+      };
+    }
+    return config;
+  },
 };
 
 module.exports = nextConfig;

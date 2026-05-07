@@ -13,6 +13,7 @@ import GraficosTab from './graficos-tab';
 import ResumoDreTab from './resumodre-tab';
 import DfcTab from './dfc-tab';
 import BpTab from './bp-tab';
+import ExportPPTButton from './export-ppt';
 
 const TABS = [
   { id: 'orcamento', label: 'Realizado vs Orçado', icon: FileSpreadsheet },
@@ -75,6 +76,7 @@ export default function DashboardClient() {
                   {scenario === 'otimista' ? 'Cenário Otimista' : 'Cenário Pessimista'}
                 </span>
               )}
+              <ExportPPTButton />
             </div>
           </div>
 
