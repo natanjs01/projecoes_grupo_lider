@@ -207,10 +207,10 @@ export async function generatePPT(): Promise<void> {
     fontSize: 7.5, color: '9CA3AF', italic: true, fontFace: 'Arial',
   });
 
-  // ── SLIDE BP Avaliação – Composição do Balanço Patrimonial ─────────────────
+  // ── SLIDE BP Avaliação – Mapa de Árvore ─────────────────────────────────────
   const sbpa = prs.addSlide();
-  sbpa.background = { fill: C.white };
-  addHdr(sbpa, 'AVALIAÇÃO BP  –  Composição do Balanço', 'BP Avaliação');
+  sbpa.background = { fill: 'F8FAFC' };
+  addHdr(sbpa, 'AVALIAÇÃO BP  –  Mapa de Árvore', 'BP Avaliação');
 
   // Extrai linhas de totais do BP
   const bpGetTotal = (arr: any[], keyword: string, exclude?: string) =>
@@ -230,59 +230,109 @@ export async function generatePPT(): Promise<void> {
     pl25:  bpPlRow?.valor    ?? 0, pl24:  bpPlRow?.anterior  ?? 0,
   };
 
-  const bpPct = (val: number, tot: number) => tot > 0 ? +((val / tot) * 100).toFixed(1) : 0;
-  const totA24 = bpV.ac24  + bpV.anc24;
-  const totA25 = bpV.ac25  + bpV.anc25;
-  const totP24 = bpV.pc24  + bpV.pnc24 + bpV.pl24;
-  const totP25 = bpV.pc25  + bpV.pnc25 + bpV.pl25;
+  const totA24 = bpV.ac24 + bpV.anc24;
+  const totA25 = bpV.ac25 + bpV.anc25;
+  const totP24 = bpV.pc24 + bpV.pnc24 + bpV.pl24;
+  const totP25 = bpV.pc25 + bpV.pnc25 + bpV.pl25;
 
-  // Dados para os gráficos – percentuais pré-calculados (0-100)
-  const bpAtivoData = [
-    { name: 'AC – Ativo Circ.',      labels: ['BP 2024', 'BP 2025'], values: [bpPct(bpV.ac24, totA24),  bpPct(bpV.ac25, totA25)]  },
-    { name: 'ANC – Ativo Não-Circ.', labels: ['BP 2024', 'BP 2025'], values: [bpPct(bpV.anc24, totA24), bpPct(bpV.anc25, totA25)] },
-  ];
-  const bpPassivoData = [
-    { name: 'PC – Passivo Circ.',      labels: ['BP 2024', 'BP 2025'], values: [bpPct(bpV.pc24, totP24),  bpPct(bpV.pc25, totP25)]  },
-    { name: 'PNC – Passivo Não-Circ.', labels: ['BP 2024', 'BP 2025'], values: [bpPct(bpV.pnc24, totP24), bpPct(bpV.pnc25, totP25)] },
-    { name: 'PL – Patrimônio Líq.',    labels: ['BP 2024', 'BP 2025'], values: [bpPct(bpV.pl24, totP24),  bpPct(bpV.pl25, totP25)]  },
-  ];
+  // ── Treemap manual com shapes ─────────────────────────────────────────────
+  // Canvas: inicia logo abaixo do header, ocupa quase todo o slide
+  const TM_X = 0.1, TM_Y = 1.05, TM_W = 13.13, TM_H = 6.15;
+  const YR_GAP = 0.07;   // gap entre BP2024 e BP2025
+  const COL_GAP = 0.04;  // gap entre coluna Ativo e Passivo dentro de cada ano
+  const ITEM_GAP = 0.04; // gap entre retângulos na mesma coluna
+  const HDR_H = 0.33;    // altura da barra de título do ano
 
-  const bpBarOpts = (title: string, colors: string[]) => ({
-    barDir: 'col' as const,
-    barGrouping: 'stacked' as const,
-    barGapWidthPct: 40,
-    chartColors: colors,
-    valAxisMaxVal: 100,
-    valGridLine: { style: 'none' as const },
-    catGridLine: { style: 'none' as const },
-    showLegend: true, legendPos: 'b' as const, legendFontSize: 8.5,
-    showValue: true, dataLabelFontSize: 9, dataLabelColor: 'FFFFFF',
-    dataLabelPosition: 'ctr' as const,
-    valAxisLabelFontSize: 8, catAxisLabelFontSize: 10,
-    title, showTitle: true, titleFontSize: 11, titleBold: true, titleColor: C.darkBlue,
+  // Larguras proporcionais ao total do ativo (BP é equilibrado: ativo = passivo)
+  const totAll = totA24 + totA25;
+  const w24 = (totA24 / totAll) * (TM_W - YR_GAP);
+  const w25 = (totA25 / totAll) * (TM_W - YR_GAP);
+  const x24 = TM_X;
+  const x25 = TM_X + w24 + YR_GAP;
+
+  // Paleta BP 2024 (laranja) e BP 2025 (azul)
+  const OR1 = 'FB923C', OR2 = 'EA580C', OR3 = 'C2410C'; // ativo-claro, passivo-médio, PNC-escuro
+  const OR4 = 'D97706'; // PL 2024
+  const BL1 = '60A5FA', BL2 = '2563EB', BL3 = '1D4ED8'; // ativo-claro, passivo-médio, PNC-escuro
+  const BL4 = '0EA5E9'; // PL 2025
+
+  // ── Banners de ano ───────────────────────────────────────────────────────
+  sbpa.addShape('rect', { x: x24, y: TM_Y, w: w24, h: HDR_H, fill: { color: OR2 }, line: { color: OR2 } });
+  sbpa.addText(`BP 2024  ·  Total R$ ${fmtMi(totA24)} Mi`, {
+    x: x24 + 0.15, y: TM_Y, w: w24, h: HDR_H,
+    fontSize: 10, bold: true, color: C.white, fontFace: 'Arial', valign: 'middle',
+  });
+  sbpa.addShape('rect', { x: x25, y: TM_Y, w: w25, h: HDR_H, fill: { color: BL2 }, line: { color: BL2 } });
+  sbpa.addText(`BP 2025  ·  Total R$ ${fmtMi(totA25)} Mi`, {
+    x: x25 + 0.15, y: TM_Y, w: w25, h: HDR_H,
+    fontSize: 10, bold: true, color: C.white, fontFace: 'Arial', valign: 'middle',
   });
 
-  (sbpa as any).addChart('bar', bpAtivoData, {
-    x: 0.4, y: 1.05, w: 5.8, h: 5.5,
-    ...bpBarOpts('Composição do Ativo (%)', ['1E3A5F', '38BDF8']),
-  });
-  (sbpa as any).addChart('bar', bpPassivoData, {
-    x: 7.0, y: 1.05, w: 5.8, h: 5.5,
-    ...bpBarOpts('Composição do Passivo + PL (%)', ['EA580C', 'D97706', '16A34A']),
-  });
+  // Área de conteúdo começa abaixo do banner
+  const cY = TM_Y + HDR_H + ITEM_GAP;
+  const cH = TM_H - HDR_H - ITEM_GAP;
 
-  // Separador vertical central
-  sbpa.addShape('rect', { x: 6.6, y: 1.0, w: 0.02, h: 5.65, fill: { color: 'E5E7EB' }, line: { color: 'E5E7EB' } });
+  // Colunas: metade ativo | metade passivo (iguais pois BP é equilibrado)
+  const wCol24 = (w24 - COL_GAP) / 2;
+  const wCol25 = (w25 - COL_GAP) / 2;
+  const xA24 = x24;             const xP24 = x24 + wCol24 + COL_GAP;
+  const xA25 = x25;             const xP25 = x25 + wCol25 + COL_GAP;
 
-  // Totais em rodapé de cada gráfico
-  sbpa.addText(
-    `Total Ativo  |  2025: R$ ${fmtMi(totA25)} Mi  ·  2024: R$ ${fmtMi(totA24)} Mi`,
-    { x: 0.4, y: 6.75, w: 5.8, h: 0.3, fontSize: 8, color: '9CA3AF', italic: true, fontFace: 'Arial', align: 'center' },
-  );
-  sbpa.addText(
-    `Total Passivo+PL  |  2025: R$ ${fmtMi(totP25)} Mi  ·  2024: R$ ${fmtMi(totP24)} Mi`,
-    { x: 7.0, y: 6.75, w: 5.8, h: 0.3, fontSize: 8, color: '9CA3AF', italic: true, fontFace: 'Arial', align: 'center' },
-  );
+  // Helper: desenha coluna de retângulos empilhados proporcionais
+  type TmItem = { abbr: string; val: number; total: number; color: string };
+  const tmCol = (sl: any, x: number, w: number, items: TmItem[]) => {
+    const usableH = cH - (items.length - 1) * ITEM_GAP;
+    let iy = cY;
+    items.forEach((item, i) => {
+      const h = (item.val / item.total) * usableH;
+      const pct = ((item.val / item.total) * 100).toFixed(1) + '%';
+      const valStr = Math.round(item.val).toLocaleString('pt-BR');
+      sl.addShape('rect', { x, y: iy, w, h, fill: { color: item.color }, line: { color: 'FFFFFF', pt: 1.5 } });
+      if (h > 0.55) {
+        // Abreviação no topo esquerdo
+        sl.addText(item.abbr, { x: x + 0.1, y: iy + 0.08, w: w - 0.15, h: 0.28,
+          fontSize: 9, bold: true, color: C.white, fontFace: 'Arial', valign: 'top' });
+        if (h > 0.9) {
+          // Valor em R$ Mi
+          sl.addText(`R$ ${valStr} Mi`, { x: x + 0.1, y: iy + 0.36, w: w - 0.15, h: 0.28,
+            fontSize: 7.5, color: C.white, fontFace: 'Arial', valign: 'top' });
+        }
+        // Percentual na borda inferior direita
+        sl.addText(pct, { x, y: iy + h - 0.33, w: w - 0.1, h: 0.3,
+          fontSize: 9.5, bold: true, color: C.white, fontFace: 'Arial', align: 'right', valign: 'bottom' });
+      }
+      iy += h + (i < items.length - 1 ? ITEM_GAP : 0);
+    });
+  };
+
+  // BP 2024
+  tmCol(sbpa, xA24, wCol24, [
+    { abbr: 'AC – Ativo Circulante',      val: bpV.ac24,  total: totA24, color: OR1 },
+    { abbr: 'ANC – Ativo Não Circulante', val: bpV.anc24, total: totA24, color: OR2 },
+  ]);
+  tmCol(sbpa, xP24, wCol24, [
+    { abbr: 'PC – Passivo Circulante',      val: bpV.pc24,  total: totP24, color: OR2 },
+    { abbr: 'PNC – Passivo Não Circulante', val: bpV.pnc24, total: totP24, color: OR3 },
+    { abbr: 'PL – Patrimônio Líquido',      val: bpV.pl24,  total: totP24, color: OR4 },
+  ]);
+
+  // BP 2025
+  tmCol(sbpa, xA25, wCol25, [
+    { abbr: 'AC – Ativo Circulante',      val: bpV.ac25,  total: totA25, color: BL1 },
+    { abbr: 'ANC – Ativo Não Circulante', val: bpV.anc25, total: totA25, color: BL2 },
+  ]);
+  tmCol(sbpa, xP25, wCol25, [
+    { abbr: 'PC – Passivo Circulante',      val: bpV.pc25,  total: totP25, color: BL2 },
+    { abbr: 'PNC – Passivo Não Circulante', val: bpV.pnc25, total: totP25, color: BL3 },
+    { abbr: 'PL – Patrimônio Líquido',      val: bpV.pl25,  total: totP25, color: BL4 },
+  ]);
+
+  // Mini-etiquetas ATIVO / PASSIVO+PL centralizadas no topo de cada coluna
+  [[xA24, wCol24, 'ATIVO'], [xP24, wCol24, 'PASSIVO + PL'],
+   [xA25, wCol25, 'ATIVO'], [xP25, wCol25, 'PASSIVO + PL']].forEach(([x, w, t]) => {
+    sbpa.addText(t as string, { x: x as number, y: cY - 0.01, w: w as number, h: 0.22,
+      fontSize: 7, color: '94A3B8', italic: true, fontFace: 'Arial', align: 'center' });
+  });
 
   // ── SLIDE 3 – Premissas: Taxas e Cenários ─────────────────────────────────
   const sp1 = prs.addSlide();
