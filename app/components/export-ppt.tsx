@@ -207,6 +207,83 @@ export async function generatePPT(): Promise<void> {
     fontSize: 7.5, color: '9CA3AF', italic: true, fontFace: 'Arial',
   });
 
+  // ── SLIDE BP Avaliação – Composição do Balanço Patrimonial ─────────────────
+  const sbpa = prs.addSlide();
+  sbpa.background = { fill: C.white };
+  addHdr(sbpa, 'AVALIAÇÃO BP  –  Composição do Balanço', 'BP Avaliação');
+
+  // Extrai linhas de totais do BP
+  const bpGetTotal = (arr: any[], keyword: string, exclude?: string) =>
+    arr.find((r: any) => r.total && r.label.includes(keyword) && (!exclude || !r.label.includes(exclude)));
+
+  const bpAcRow  = bpGetTotal(bpAtivo,   'CIRCULANTE', 'NÃO');
+  const bpAncRow = bpGetTotal(bpAtivo,   'NÃO');
+  const bpPcRow  = bpGetTotal(bpPassivo, 'CIRCULANTE', 'NÃO');
+  const bpPncRow = bpGetTotal(bpPassivo, 'NÃO CIRCULANTE');
+  const bpPlRow  = bpGetTotal(bpPassivo, 'PATRIMÔNIO');
+
+  const bpV = {
+    ac25:  bpAcRow?.valor    ?? 0, ac24:  bpAcRow?.anterior  ?? 0,
+    anc25: bpAncRow?.valor   ?? 0, anc24: bpAncRow?.anterior ?? 0,
+    pc25:  bpPcRow?.valor    ?? 0, pc24:  bpPcRow?.anterior  ?? 0,
+    pnc25: bpPncRow?.valor   ?? 0, pnc24: bpPncRow?.anterior ?? 0,
+    pl25:  bpPlRow?.valor    ?? 0, pl24:  bpPlRow?.anterior  ?? 0,
+  };
+
+  const bpPct = (val: number, tot: number) => tot > 0 ? +((val / tot) * 100).toFixed(1) : 0;
+  const totA24 = bpV.ac24  + bpV.anc24;
+  const totA25 = bpV.ac25  + bpV.anc25;
+  const totP24 = bpV.pc24  + bpV.pnc24 + bpV.pl24;
+  const totP25 = bpV.pc25  + bpV.pnc25 + bpV.pl25;
+
+  // Dados para os gráficos – percentuais pré-calculados (0-100)
+  const bpAtivoData = [
+    { name: 'AC – Ativo Circ.',      labels: ['BP 2024', 'BP 2025'], values: [bpPct(bpV.ac24, totA24),  bpPct(bpV.ac25, totA25)]  },
+    { name: 'ANC – Ativo Não-Circ.', labels: ['BP 2024', 'BP 2025'], values: [bpPct(bpV.anc24, totA24), bpPct(bpV.anc25, totA25)] },
+  ];
+  const bpPassivoData = [
+    { name: 'PC – Passivo Circ.',      labels: ['BP 2024', 'BP 2025'], values: [bpPct(bpV.pc24, totP24),  bpPct(bpV.pc25, totP25)]  },
+    { name: 'PNC – Passivo Não-Circ.', labels: ['BP 2024', 'BP 2025'], values: [bpPct(bpV.pnc24, totP24), bpPct(bpV.pnc25, totP25)] },
+    { name: 'PL – Patrimônio Líq.',    labels: ['BP 2024', 'BP 2025'], values: [bpPct(bpV.pl24, totP24),  bpPct(bpV.pl25, totP25)]  },
+  ];
+
+  const bpBarOpts = (title: string, colors: string[]) => ({
+    barDir: 'col' as const,
+    barGrouping: 'stacked' as const,
+    barGapWidthPct: 40,
+    chartColors: colors,
+    valAxisMaxVal: 100,
+    valGridLine: { style: 'none' as const },
+    catGridLine: { style: 'none' as const },
+    showLegend: true, legendPos: 'b' as const, legendFontSize: 8.5,
+    showValue: true, dataLabelFontSize: 9, dataLabelColor: 'FFFFFF',
+    dataLabelPosition: 'ctr' as const,
+    valAxisLabelFontSize: 8, catAxisLabelFontSize: 10,
+    title, showTitle: true, titleFontSize: 11, titleBold: true, titleColor: C.darkBlue,
+  });
+
+  (sbpa as any).addChart('bar', bpAtivoData, {
+    x: 0.4, y: 1.05, w: 5.8, h: 5.5,
+    ...bpBarOpts('Composição do Ativo (%)', ['1E3A5F', '38BDF8']),
+  });
+  (sbpa as any).addChart('bar', bpPassivoData, {
+    x: 7.0, y: 1.05, w: 5.8, h: 5.5,
+    ...bpBarOpts('Composição do Passivo + PL (%)', ['EA580C', 'D97706', '16A34A']),
+  });
+
+  // Separador vertical central
+  sbpa.addShape('rect', { x: 6.6, y: 1.0, w: 0.02, h: 5.65, fill: { color: 'E5E7EB' }, line: { color: 'E5E7EB' } });
+
+  // Totais em rodapé de cada gráfico
+  sbpa.addText(
+    `Total Ativo  |  2025: R$ ${fmtMi(totA25)} Mi  ·  2024: R$ ${fmtMi(totA24)} Mi`,
+    { x: 0.4, y: 6.75, w: 5.8, h: 0.3, fontSize: 8, color: '9CA3AF', italic: true, fontFace: 'Arial', align: 'center' },
+  );
+  sbpa.addText(
+    `Total Passivo+PL  |  2025: R$ ${fmtMi(totP25)} Mi  ·  2024: R$ ${fmtMi(totP24)} Mi`,
+    { x: 7.0, y: 6.75, w: 5.8, h: 0.3, fontSize: 8, color: '9CA3AF', italic: true, fontFace: 'Arial', align: 'center' },
+  );
+
   // ── SLIDE 3 – Premissas: Taxas e Cenários ─────────────────────────────────
   const sp1 = prs.addSlide();
   sp1.background = { fill: C.white };
