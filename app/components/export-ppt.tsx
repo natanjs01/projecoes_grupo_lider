@@ -25,12 +25,17 @@ function fmtMi(v: number): string {
   return v < 0 ? `(${s})` : s;
 }
 function fmtPct(v: number): string {
-  return (v * 100).toLocaleString('pt-BR', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + '%';
+  const s = (Math.abs(v) * 100).toLocaleString('pt-BR', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + '%';
+  return v < 0 ? `(${s})` : s;
 }
 function fmtBig(v: number): string {
-  if (Math.abs(v) >= 1e9) return (v / 1e9).toLocaleString('pt-BR', { maximumFractionDigits: 1 }) + 'B';
-  if (Math.abs(v) >= 1e6) return (v / 1e6).toLocaleString('pt-BR', { maximumFractionDigits: 1 }) + 'M';
-  return v.toLocaleString('pt-BR', { maximumFractionDigits: 0 });
+  const abs = Math.abs(v);
+  const s = abs >= 1e9
+    ? (abs / 1e9).toLocaleString('pt-BR', { maximumFractionDigits: 1 }) + 'B'
+    : abs >= 1e6
+      ? (abs / 1e6).toLocaleString('pt-BR', { maximumFractionDigits: 1 }) + 'M'
+      : abs.toLocaleString('pt-BR', { maximumFractionDigits: 0 });
+  return v < 0 ? `(${s})` : s;
 }
 
 // ── Tipos locais ─────────────────────────────────────────────────────────────
@@ -138,7 +143,8 @@ export async function generatePPT(): Promise<void> {
   };
   const fmtBpP = (v: number): string => {
     if (v === 0) return '–';
-    return (v * 100).toFixed(1) + '%';
+    const s = (Math.abs(v) * 100).toFixed(1) + '%';
+    return v < 0 ? `(${s})` : s;
   };
 
   const buildBpSide = (arr: any[]): any[][] =>
