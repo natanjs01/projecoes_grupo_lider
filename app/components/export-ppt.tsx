@@ -671,12 +671,14 @@ export async function generatePPT(): Promise<void> {
     x: 0.4, y: 4.35, w: 12.5, h: 0.38, fontSize: 12, bold: true, color: C.darkBlue, fontFace: 'Arial',
   });
   const varNcgTotal = YRS.reduce((acc, yr) => acc + getFC('NCG', yr), 0);
+  const ncgAno1 = getFC('NCG', 1);
   sp5.addText(
-    `A tabela apresenta a variação anual da NCG (Necessidade de Capital de Giro), calculada como a diferença entre o saldo de ` +
+    `A tabela apresenta a variação anual da NCG (Necessidade de Capital de Giro), calculada como a diferença entre ` +
     `Contas a Receber + Estoques − Contas a Pagar de cada ano em relação ao ano anterior (base: VLR 2025). ` +
-    `A variação acumulada ao longo dos 5 anos projetados é de ${fmtBig(varNcgTotal)}, refletindo a maior demanda por recursos ` +
-    `decorrente do crescimento das operações. O controle do prazo médio de recebimento e da política de compras são ` +
-    `as principais alavancas para reduzir o consumo de caixa gerado pela expansão da NCG.`,
+    `No Ano 1, a NCG consome ${fmtBig(ncgAno1)} de caixa, pressionada principalmente pela expansão dos estoques. ` +
+    `A partir do Ano 2, a NCG passa a liberar caixa à medida que os estoques se estabilizam e a inadimplência é controlada, ` +
+    `resultando em uma liberação acumulada líquida de ${fmtBig(Math.abs(varNcgTotal))} ao longo dos 5 anos projetados. ` +
+    `O controle do prazo médio de recebimento e a gestão eficiente dos estoques são as principais alavancas para manter esse resultado positivo.`,
     { x: 0.4, y: 4.78, w: 12.5, h: 2.1, fontSize: 10.5, color: C.gray, fontFace: 'Arial', wrap: true }
   );
 
