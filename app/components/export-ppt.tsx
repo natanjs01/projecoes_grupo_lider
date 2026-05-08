@@ -672,13 +672,14 @@ export async function generatePPT(): Promise<void> {
   });
   const varNcgTotal = YRS.reduce((acc, yr) => acc + getFC('NCG', yr), 0);
   const ncgAno1 = getFC('NCG', 1);
+  const ncgLiberado = YRS.filter(yr => yr > 1).reduce((s, yr) => s + getFC('NCG', yr), 0);
   sp5.addText(
-    `A tabela apresenta a variação anual da NCG (Necessidade de Capital de Giro), calculada como a diferença entre ` +
-    `Contas a Receber + Estoques − Contas a Pagar de cada ano em relação ao ano anterior (base: VLR 2025). ` +
-    `No Ano 1, a NCG consome ${fmtBig(ncgAno1)} de caixa, pressionada principalmente pela expansão dos estoques. ` +
-    `A partir do Ano 2, a NCG passa a liberar caixa à medida que os estoques se estabilizam e a inadimplência é controlada, ` +
-    `resultando em uma liberação acumulada líquida de ${fmtBig(Math.abs(varNcgTotal))} ao longo dos 5 anos projetados. ` +
-    `O controle do prazo médio de recebimento e a gestão eficiente dos estoques são as principais alavancas para manter esse resultado positivo.`,
+    `A tabela apresenta a variação anual da NCG (Necessidade de Capital de Giro) de cada ano em relação ao ano anterior (base: VLR 2025). ` +
+    `Valores positivos indicam consumo de caixa; valores negativos indicam liberação de caixa. ` +
+    `No Ano 1, a NCG consome ${fmtBig(ncgAno1)}, impactada pelo crescimento das contas a receber que supera a redução dos estoques. ` +
+    `Do Ano 2 ao Ano 5, a NCG libera ${fmtBig(Math.abs(ncgLiberado))} de caixa no acumulado, à medida que os estoques se ajustam ` +
+    `e o ciclo operacional se estabiliza. O controle rigoroso do prazo médio de recebimento e a gestão eficiente dos estoques ` +
+    `são as principais alavancas para preservar a geração de caixa operacional ao longo do período projetado.`,
     { x: 0.4, y: 4.78, w: 12.5, h: 2.1, fontSize: 10.5, color: C.gray, fontFace: 'Arial', wrap: true }
   );
 
