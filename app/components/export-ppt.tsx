@@ -645,10 +645,10 @@ export async function generatePPT(): Promise<void> {
     ...YRS.map(n => ({ text: `Ano ${n}`, options: { bold: true, color: C.white, fill: { color: C.midBlue }, align: 'right', fontSize: 11 } })),
   ];
   const wrkDef = [
-    { label: 'Contas a Receber',                    vals: YRS.map(yr => crVar(yr)),  bold: false },
-    { label: 'Estoques',                             vals: YRS.map(yr => estVar(yr)), bold: false },
-    { label: 'Contas a Pagar',                       vals: YRS.map(yr => cpdVar(yr)), bold: false },
-    { label: 'Variação da NCG (Capital de Giro)',    vals: YRS.map(yr => ncgVar(yr)), bold: true  },
+    { label: 'Contas a Receber',                    vals: YRS.map(yr => crVar(yr)),          bold: false },
+    { label: 'Estoques',                             vals: YRS.map(yr => estVar(yr)),         bold: false },
+    { label: 'Contas a Pagar',                       vals: YRS.map(yr => cpdVar(yr)),         bold: false },
+    { label: 'Variação da NCG (Capital de Giro)',    vals: YRS.map(yr => getFC('NCG', yr)),   bold: true  },
   ];
   const wrkTRows = wrkDef.map((r, i) => {
     const bg = r.bold ? C.lightBlue : i % 2 === 0 ? C.white : C.lightGray;
@@ -670,7 +670,7 @@ export async function generatePPT(): Promise<void> {
   sp5.addText('Análise do Ciclo de Capital de Giro', {
     x: 0.4, y: 4.35, w: 12.5, h: 0.38, fontSize: 12, bold: true, color: C.darkBlue, fontFace: 'Arial',
   });
-  const varNcgTotal = YRS.reduce((acc, yr) => acc + ncgVar(yr), 0);
+  const varNcgTotal = YRS.reduce((acc, yr) => acc + getFC('NCG', yr), 0);
   sp5.addText(
     `A tabela apresenta a variação anual da NCG (Necessidade de Capital de Giro), calculada como a diferença entre o saldo de ` +
     `Contas a Receber + Estoques − Contas a Pagar de cada ano em relação ao ano anterior (base: VLR 2025). ` +
@@ -966,10 +966,10 @@ export async function generatePPT(): Promise<void> {
   s4.addText(vplStr,           { x: 5.6, y: 1.0, w: 2.8, h: 0.45, fontSize: 13, bold: true, color: C.midBlue,  align: 'center', valign: 'middle' });
 
   // ── Tabela Fluxo de Caixa ─────────────────────────────────────────────────
-  type FcRowDef = { label: string; indent?: boolean; bold?: boolean; style?: 'total' | 'highlight' | 'final' };
+  type FcRowDef = { label: string; indent?: boolean; bold?: boolean; style?: 'total' | 'highlight' | 'final'; getValue?: (yr: number) => number };
   const fcDef: FcRowDef[] = [
     { label: 'EBITIDA Ajustado' },
-    { label: 'NCG',                                 indent: true },
+    { label: 'NCG',                                 indent: true, getValue: (yr) => -ncgVar(yr) },
     { label: 'Caixa Operacional',                   bold: true, style: 'total' },
     { label: 'Aquisição de Imobilizado',            indent: true },
     { label: 'Fluxo de caixa de investimentos',     bold: true, style: 'highlight' },
@@ -1003,7 +1003,7 @@ export async function generatePPT(): Promise<void> {
     return [
       { text: labelText, options: { bold: !!row.bold, fontSize: 10, color: row.style === 'final' ? C.white : C.gray, fill: { color: bg } } },
       ...[1,2,3,4,5].map(yr => {
-        const v = getFC(row.label, yr);
+        const v = row.getValue ? row.getValue(yr) : getFC(row.label, yr);
         return {
           text: v === 0 ? '–' : fmtBig(v),
           options: {
