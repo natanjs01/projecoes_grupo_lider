@@ -645,9 +645,9 @@ export async function generatePPT(): Promise<void> {
     ...YRS.map(n => ({ text: `Ano ${n}`, options: { bold: true, color: C.white, fill: { color: C.midBlue }, align: 'right', fontSize: 11 } })),
   ];
   const wrkDef = [
-    { label: 'Contas a Receber',                    vals: YRS.map(yr => crVar(yr)),          bold: false },
-    { label: 'Estoques',                             vals: YRS.map(yr => estVar(yr)),         bold: false },
-    { label: 'Contas a Pagar',                       vals: YRS.map(yr => cpdVar(yr)),         bold: false },
+    { label: 'Contas a Receber',                    vals: YRS.map(yr => -crVar(yr)),         bold: false },
+    { label: 'Estoques',                             vals: YRS.map(yr => -estVar(yr)),        bold: false },
+    { label: 'Contas a Pagar',                       vals: YRS.map(yr => -cpdVar(yr)),        bold: false },
     { label: 'Variação da NCG (Capital de Giro)',    vals: YRS.map(yr => getFC('NCG', yr)),   bold: true  },
   ];
   const wrkTRows = wrkDef.map((r, i) => {
