@@ -791,7 +791,9 @@ export async function generatePPT(): Promise<void> {
       margemLiq:      rl !== 0 ? ll  / rl : 0,
       rl, lb, eba, ll, co, cl, cp, dso, dpo, dio,
       ccc: dso + dio - dpo,
-      crescReceita: yr > 1 ? (getDreVal(rLiq, yr) / getDreVal(rLiq, yr - 1) - 1) : 0,
+      crescReceita: yr === 1
+        ? (rLiq?.vlr25 ? getDreVal(rLiq, 1) / rLiq.vlr25 - 1 : 0)
+        : (getDreVal(rLiq, yr) / getDreVal(rLiq, yr - 1) - 1),
     };
   });
 
@@ -837,7 +839,7 @@ export async function generatePPT(): Promise<void> {
     kRow('Ciclo de Convers\u00e3o de Caixa',      kpiCalc.map(k => `${Math.round(k.ccc)} dias`), C.lightGray),
     // ── Crescimento
     kSecHdr('Crescimento'),
-    kRow('Crescimento Receita', kpiCalc.map((k, i) => i === 0 ? '\u2013' : fmtPct(k.crescReceita)), C.white),
+    kRow('Crescimento Receita', kpiCalc.map(k => fmtPct(k.crescReceita)), C.white),
   ];
 
   s3.addTable(kpiTableRows, {
