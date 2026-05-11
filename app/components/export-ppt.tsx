@@ -1024,6 +1024,98 @@ export async function generatePPT(): Promise<void> {
     colW: [3.5, 1.8, 1.8, 1.8, 1.8, 1.8],
   });
 
+  // ── SLIDE 12 – Realizado vs Orçado ───────────────────────────────────────
+  const orcData = (financialData as any).orcamento?.summary ?? {};
+  const orcMeses = [
+    { key: 'janeiro',   label: 'Janeiro/2026' },
+    { key: 'fevereiro', label: 'Fevereiro/2026' },
+    { key: 'marco',     label: 'Março/2026' },
+  ];
+  const orcLinhas = ['RECEITAS', 'DESPESAS E CUSTOS', 'LUCRO LÍQUIDO'];
+  const orcLinhaColor: Record<string, string> = {
+    'RECEITAS': C.lightGray,
+    'DESPESAS E CUSTOS': C.lightBlue,
+    'LUCRO LÍQUIDO': 'EFF6FF',
+  };
+
+  const sOrc = prs.addSlide();
+  sOrc.background = { fill: C.white };
+
+  // Header azul escuro
+  sOrc.addShape('rect', { x: 0, y: 0, w: 13.33, h: 1.1, fill: { color: C.darkBlue }, line: { color: C.darkBlue } });
+  sOrc.addText('REALIZADO VS ORÇADO  –  Jan–Mar/2026', {
+    x: 0.4, y: 0.08, w: 10.5, h: 0.55,
+    fontSize: 20, bold: true, color: C.white, fontFace: 'Arial',
+  });
+  sOrc.addText('Comparativo mensal de Receitas, Despesas e Lucro Líquido  |  R$', {
+    x: 0.4, y: 0.62, w: 10, h: 0.35,
+    fontSize: 11, color: 'BFDBFE', fontFace: 'Arial', italic: true,
+  });
+  addLogo(sOrc, 11.5, 0.12, 1.5, 0.75);
+
+  // Cabeçalho da tabela
+  const orcHeaderFill = { type: 'solid', color: C.darkBlue };
+  const orcHeaderOpts = { fill: orcHeaderFill, color: C.white, bold: true, fontSize: 9, fontFace: 'Arial', align: 'center', valign: 'middle', border: { pt: 0.5, color: 'D1D5DB' } };
+  const orcCellOpts   = { fontSize: 9, fontFace: 'Arial', align: 'center', valign: 'middle', border: { pt: 0.5, color: 'D1D5DB' } };
+
+  const orcTableRows: object[][] = [
+    [
+      { text: '',                options: { ...orcHeaderOpts, align: 'left' } },
+      { text: 'Janeiro/2026',    options: { ...orcHeaderOpts, colspan: 3 } },
+      { text: 'Fevereiro/2026',  options: { ...orcHeaderOpts, colspan: 3 } },
+      { text: 'Março/2026',      options: { ...orcHeaderOpts, colspan: 3 } },
+    ],
+    [
+      { text: 'Indicador',  options: { ...orcHeaderOpts, align: 'left' } },
+      { text: 'Realizado',  options: orcHeaderOpts },
+      { text: 'Orçado',     options: orcHeaderOpts },
+      { text: 'Var%',       options: orcHeaderOpts },
+      { text: 'Realizado',  options: orcHeaderOpts },
+      { text: 'Orçado',     options: orcHeaderOpts },
+      { text: 'Var%',       options: orcHeaderOpts },
+      { text: 'Realizado',  options: orcHeaderOpts },
+      { text: 'Orçado',     options: orcHeaderOpts },
+      { text: 'Var%',       options: orcHeaderOpts },
+    ],
+  ];
+
+  for (const linhaNome of orcLinhas) {
+    const bgColor = orcLinhaColor[linhaNome];
+    const rowFill = { type: 'solid', color: bgColor };
+    const isLucro = linhaNome === 'LUCRO LÍQUIDO';
+    const cells: object[] = [
+      { text: linhaNome, options: { ...orcCellOpts, fill: rowFill, align: 'left', bold: isLucro, color: C.gray } },
+    ];
+    for (const mes of orcMeses) {
+      const item = (orcData[mes.key] as any[])?.find((r: any) => r.label === linhaNome) ?? {};
+      const real = item.realizado ?? 0;
+      const orc  = item.orcado    ?? 0;
+      const pct  = item.pct       ?? 0;
+      const pctStr = (((Math.abs(pct) * 100)).toLocaleString('pt-BR', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + '%');
+      const pctFmt = pct < 0 ? `(${pctStr})` : pctStr;
+      const pctColor = pct < 0 ? C.negative : C.positive;
+      cells.push(
+        { text: fmtBig(real), options: { ...orcCellOpts, fill: rowFill, bold: isLucro, color: C.gray } },
+        { text: fmtBig(orc),  options: { ...orcCellOpts, fill: rowFill, bold: isLucro, color: C.gray } },
+        { text: pctFmt,       options: { ...orcCellOpts, fill: rowFill, bold: isLucro, color: pctColor } },
+      );
+    }
+    orcTableRows.push(cells);
+  }
+
+  sOrc.addTable(orcTableRows, {
+    x: 0.3, y: 1.2, w: 12.73, h: 2.4,
+    colW: [2.4, 1.15, 1.15, 0.83, 1.15, 1.15, 0.83, 1.15, 1.15, 0.83],
+    rowH: [0.45, 0.35, 0.52, 0.52, 0.56],
+    border: { pt: 0.5, color: 'D1D5DB' },
+  });
+
+  // Nota de rodapé
+  sOrc.addText('* Valores mensais em R$ (não consolidados). Variação = Realizado – Orçado. Negativo indica resultado abaixo do orçado.', {
+    x: 0.3, y: 3.85, w: 12.7, h: 0.4,
+    fontSize: 8, color: '6B7280', fontFace: 'Arial', italic: true,
+  });
+
   // ── SLIDE 11 – Encerramento ────────────────────────────────────────────────
   const s5 = prs.addSlide();
   s5.background = { fill: C.darkBlue };
