@@ -512,7 +512,7 @@ export async function generatePPT(): Promise<void> {
   });
   sp2.addText(
     'Premissa adotada para o orçamento do estoque foi de manutenção de giro em 45 dias para todas as categorias, ' +
-    'usamos o CMV projetado do mês anterior e multiplicamos por 1,5 no mês seguinte.\n\n' +
+    'usamos o CMV projetado do mês anterior e multiplicamos por 1,3 no mês seguinte.\n\n' +
     'As premissas de estoque para a projeção dos demais exercícios é uma variável e está baseada na taxa de crescimento ' +
     'da receita que possui 03 cenários (Otimista; Realista; Pessimista).',
     {
