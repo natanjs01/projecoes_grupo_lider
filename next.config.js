@@ -8,7 +8,6 @@ const nextConfig = {
   assetPrefix: isGithubActions ? `/${repoName}/` : '',
   env: {
     NEXT_PUBLIC_BASE_PATH: isGithubActions ? `/${repoName}` : '',
-    NEXT_PUBLIC_SITE_URL: isGithubActions ? 'https://natanjs01.github.io' : '',
   },
   trailingSlash: true,
   eslint: {
