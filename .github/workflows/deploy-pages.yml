@@ -31,8 +31,6 @@ jobs:
         run: npm ci
 
       - name: Build static export
-        env:
-          NEXT_PUBLIC_BASE_PATH: /projecoes_grupo_lider
         run: npm run build
 
       - name: Add .nojekyll

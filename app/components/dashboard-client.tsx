@@ -32,7 +32,7 @@ type TabId = typeof TABS[number]['id'];
 export default function DashboardClient() {
   const [activeTab, setActiveTab] = useState<TabId>('orcamento');
   const [scenario, setScenario] = useState<'realista' | 'otimista' | 'pessimista'>('realista');
-  const logoSrc = `${process.env.NEXT_PUBLIC_BASE_PATH ?? ''}/grupolider.png`;
+  const logoSrc = "/grupolider.png";
 
   const renderTab = () => {
     switch (activeTab) {
