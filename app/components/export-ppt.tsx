@@ -836,7 +836,7 @@ export async function generatePPT(): Promise<void> {
     kRow('Ciclo de Convers\u00e3o de Caixa',      kpiCalc.map(k => `${Math.round(k.ccc)} dias`), C.lightGray),
     // ── Crescimento
     kSecHdr('Crescimento'),
-    kRow('Crescimento Receita', kpiCalc.map(k => fmtPct(k.crescReceita)), C.white),
+    kRow('Crescimento Receita', kpiCalc.map(k => { const v = k.crescReceita; const s = Math.round(Math.abs(v) * 100) + '%'; return v < 0 ? `(${s})` : s; }), C.white),
   ];
 
   s3.addTable(kpiTableRows, {
