@@ -6,6 +6,9 @@ const nextConfig = {
   output: 'export',
   basePath: isGithubActions ? `/${repoName}` : '',
   assetPrefix: isGithubActions ? `/${repoName}/` : '',
+  env: {
+    NEXT_PUBLIC_BASE_PATH: isGithubActions ? `/${repoName}` : '',
+  },
   trailingSlash: true,
   eslint: {
     ignoreDuringBuilds: true,

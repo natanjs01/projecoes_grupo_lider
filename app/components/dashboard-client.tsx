@@ -32,7 +32,7 @@ type TabId = typeof TABS[number]['id'];
 export default function DashboardClient() {
   const [activeTab, setActiveTab] = useState<TabId>('orcamento');
   const [scenario, setScenario] = useState<'realista' | 'otimista' | 'pessimista'>('realista');
-  const logoSrc = "/grupolider.png";
+  const logoSrc = `${process.env.NEXT_PUBLIC_BASE_PATH ?? ''}/grupolider.png`;
 
   const renderTab = () => {
     switch (activeTab) {
@@ -56,13 +56,13 @@ export default function DashboardClient() {
         <div className="max-w-[1400px] mx-auto px-4">
           <div className="flex items-center justify-between h-28">
             <div className="flex items-center gap-3">
-              <Image
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
                 src={logoSrc}
                 alt="Logo Grupo Lider"
                 width={96}
                 height={96}
                 className="w-24 h-24 rounded object-contain"
-                priority
               />
               <div>
                 <h1 className="font-display font-bold text-[1.3125rem] tracking-tight">Projeções Financeiras 2026</h1>
