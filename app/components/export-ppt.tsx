@@ -734,9 +734,9 @@ export async function generatePPT(): Promise<void> {
   s2.addText(
     'O Resumo DRE, Orçado para o Exercício de 2026, é a projeção do resultado a partir das premissas alinhadas com a ' +
     'Administração do Grupo Líder, somado às projeções de redução de despesas elaboradas pela empresa TMSI, que estima uma ' +
-    'redução de 73MM na folha, 53MM em materiais de uso e consumo e 6MM em despesas diversas; para os demais exercícios as ' +
-    'projeções são variáveis que leva em consideração o percentual de cada despesa sobre a receita líquida de 2026, replicando ' +
-    'esse percentual sobre as receitas líquidas projetadas.',
+    'redução de 73MM na folha, 53MM em materiais de uso e consumo, 72MM em contas de consumo (água, luz e telefone) e 6MM ' +
+    'em despesas diversas; para os demais exercícios as projeções são variáveis que leva em consideração o percentual de ' +
+    'cada despesa sobre a receita líquida de 2026, replicando esse percentual sobre as receitas líquidas projetadas.',
     { x: 0.4, y: 6.28, w: 12.5, h: 1.1, fontSize: 10.5, color: C.gray, fontFace: 'Arial', wrap: true }
   );
 
