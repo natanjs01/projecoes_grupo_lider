@@ -674,12 +674,14 @@ export async function generatePPT(): Promise<void> {
   const ncgAno1 = getFC('NCG', 1);
   const ncgLiberado = YRS.filter(yr => yr > 1).reduce((s, yr) => s + getFC('NCG', yr), 0);
   sp5.addText(
-    `A tabela apresenta a variação anual da NCG (Necessidade de Capital de Giro) de cada ano em relação ao ano anterior (base: VLR 2025). ` +
-    `Valores positivos indicam consumo de caixa; valores negativos indicam liberação de caixa. ` +
-    `No Ano 1, a NCG consome ${fmtBig(ncgAno1)}, impactada pelo crescimento das contas a receber que supera a redução dos estoques. ` +
-    `Do Ano 2 ao Ano 5, a NCG libera ${fmtBig(Math.abs(ncgLiberado))} de caixa no acumulado, à medida que os estoques se ajustam ` +
-    `e o ciclo operacional se estabiliza. O controle rigoroso do prazo médio de recebimento e a gestão eficiente dos estoques ` +
-    `são as principais alavancas para preservar a geração de caixa operacional ao longo do período projetado.`,
+    `A tabela apresenta a variação anual da NCG (Necessidade de Capital de Giro) de cada ano em relação ao exercício anterior (base: VLR 2025). ` +
+    `Valores positivos indicam consumo de caixa (pressão sobre o fluxo); valores negativos indicam liberação de caixa (folga operacional). ` +
+    `No Ano 1, a NCG consome ${fmtBig(ncgAno1)}, reflexo do crescimento das contas a receber — impulsionado pela expansão da receita — ` +
+    `combinado com a variação dos estoques e o saldo inicial das contas a pagar. ` +
+    `Do Ano 2 ao Ano 5, a NCG acumula uma liberação de ${fmtBig(Math.abs(ncgLiberado))}, à medida que o prazo médio de recebimento (PMR) ` +
+    `e o prazo médio de estocagem (PME) se estabilizam e o prazo médio de pagamento (PMP) gera contrapartida favorável. ` +
+    `As principais alavancas para preservar a geração de caixa operacional são: redução do PMR via política de crédito disciplinada, ` +
+    `gestão de estoques orientada à demanda e negociação de PMP adequado com fornecedores.`,
     { x: 0.4, y: 4.78, w: 12.5, h: 2.1, fontSize: 10.5, color: C.gray, fontFace: 'Arial', wrap: true }
   );
 
