@@ -85,6 +85,7 @@ export async function generatePPT(): Promise<void> {
 
   // Helpers compartilhados entre slides
   const YRS = [1, 2, 3, 4, 5];
+  const YR_LABELS = ['2026', '2027', '2028', '2029', '2030'];
   const fcRows: any[] = fc?.rows ?? [];
   const getFC = (label: string, yr: number) =>
     fcRows.find((r: any) => r.label === label)?.[`ano${yr}`] ?? 0;
@@ -414,7 +415,7 @@ export async function generatePPT(): Promise<void> {
 
   const impHdr = [
     { text: 'Cenário', options: { bold: true, color: C.white, fill: { color: C.midBlue }, fontSize: 10 } },
-    ...YRS.map(n => ({ text: `Ano ${n}`, options: { bold: true, color: C.white, fill: { color: C.midBlue }, align: 'center', fontSize: 10 } })),
+    ...YRS.map((n, i) => ({ text: YR_LABELS[i], options: { bold: true, color: C.white, fill: { color: C.midBlue }, align: 'center', fontSize: 10 } })),
     { text: 'Acumulado 5 anos', options: { bold: true, color: C.white, fill: { color: C.midBlue }, align: 'center', fontSize: 10 } },
   ];
   const impRows = scens.map((sc, i) => {
@@ -442,7 +443,7 @@ export async function generatePPT(): Promise<void> {
   const estoqSec: any[] = premSecs.find((s: any) => s.title === 'Projeção estoques')?.rows ?? [];
   const estoqHdr = [
     { text: 'Componente', options: { bold: true, color: C.white, fill: { color: C.midBlue }, fontSize: 9.5 } },
-    ...YRS.map(n => ({ text: `Ano ${n}`, options: { bold: true, color: C.white, fill: { color: C.midBlue }, align: 'right', fontSize: 9.5 } })),
+    ...YRS.map((n, i) => ({ text: YR_LABELS[i], options: { bold: true, color: C.white, fill: { color: C.midBlue }, align: 'right', fontSize: 9.5 } })),
   ];
   const estoqTRows: any[] = [];
   ['A', 'B', 'C', 'D'].forEach((t, ti) => {
@@ -531,7 +532,7 @@ export async function generatePPT(): Promise<void> {
 
   const imoHdr2 = [
     { text: 'Imobilizado', options: { bold: true, color: C.white, fill: { color: C.midBlue }, fontSize: 11 } },
-    ...YRS.map(n => ({ text: `Ano ${n}`, options: { bold: true, color: C.white, fill: { color: C.midBlue }, align: 'right', fontSize: 11 } })),
+    ...YRS.map((n, i) => ({ text: YR_LABELS[i], options: { bold: true, color: C.white, fill: { color: C.midBlue }, align: 'right', fontSize: 11 } })),
   ];
   // Saldo Final calculado (ano2 está zerado no JSON — dado incompleto na fonte)
   const imoSaldoFinal = (yr: number) => {
@@ -585,7 +586,7 @@ export async function generatePPT(): Promise<void> {
 
   const empHdr2 = [
     { text: 'Empréstimos', options: { bold: true, color: C.white, fill: { color: C.midBlue }, fontSize: 10 } },
-    ...YRS.map(n => ({ text: `Ano ${n}`, options: { bold: true, color: C.white, fill: { color: C.midBlue }, align: 'right', fontSize: 10 } })),
+    ...YRS.map((n, i) => ({ text: YR_LABELS[i], options: { bold: true, color: C.white, fill: { color: C.midBlue }, align: 'right', fontSize: 10 } })),
   ];
   const empDef = [
     { label: 'Saldo Inicial',                key: 'Empréstimo líquido - Saldo inicial',    bold: true },
@@ -642,7 +643,7 @@ export async function generatePPT(): Promise<void> {
 
   const wrkHdr = [
     { text: 'Variação Capital de Giro (R$)', options: { bold: true, color: C.white, fill: { color: C.midBlue }, fontSize: 11 } },
-    ...YRS.map(n => ({ text: `Ano ${n}`, options: { bold: true, color: C.white, fill: { color: C.midBlue }, align: 'right', fontSize: 11 } })),
+    ...YRS.map((n, i) => ({ text: YR_LABELS[i], options: { bold: true, color: C.white, fill: { color: C.midBlue }, align: 'right', fontSize: 11 } })),
   ];
   const wrkDef = [
     { label: '( + ) Contas a Receber',              vals: YRS.map(yr => crVar(yr)),           bold: false },
@@ -810,7 +811,7 @@ export async function generatePPT(): Promise<void> {
     // cabeçalho da tabela
     [
       { text: 'INDICADOR', options: { bold: true, color: 'BFDBFE', fill: { color: '0F2040' }, fontSize: 9 } },
-      ...YRS.map(n => ({ text: `ANO ${n}`, options: { bold: true, color: 'BFDBFE', fill: { color: '0F2040' }, align: 'right', fontSize: 9 } })),
+      ...YRS.map((n, i) => ({ text: YR_LABELS[i], options: { bold: true, color: 'BFDBFE', fill: { color: '0F2040' }, align: 'right', fontSize: 9 } })),
     ],
     // ── Margens
     kSecHdr('Margens'),
@@ -847,7 +848,7 @@ export async function generatePPT(): Promise<void> {
   });
 
   // ── SLIDES GRÁFICOS ───────────────────────────────────────────────────────
-  const anoLabels = ['Ano 1', 'Ano 2', 'Ano 3', 'Ano 4', 'Ano 5'];
+  const anoLabels = ['2026', '2027', '2028', '2029', '2030'];
 
   // Dados DRE — valores já em R$ MM (resumoDRE)
   const cFatBruto  = YRS.map(yr => Math.round(getDRE('faturamentoBruto', yr)));
@@ -991,7 +992,7 @@ export async function generatePPT(): Promise<void> {
 
   const fcHeaderRow = [
     { text: 'Fluxo Financeiro', options: { bold: true, color: C.white, fill: { color: C.midBlue }, fontSize: 11 } },
-    ...['Ano 1','Ano 2','Ano 3','Ano 4','Ano 5'].map(a => ({
+    ...['2026','2027','2028','2029','2030'].map(a => ({
       text: a,
       options: { bold: true, color: C.white, fill: { color: C.midBlue }, align: 'right' as const, fontSize: 11 },
     })),
