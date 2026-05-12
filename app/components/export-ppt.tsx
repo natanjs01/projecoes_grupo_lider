@@ -426,7 +426,6 @@ export async function generatePPT(): Promise<void> {
   // ── Análise comparativa 2025 vs 2024 ─────────────────────────────────────
   const anY  = TM_Y + TM_H + 0.12;
   const anH  = 1.50;
-  const anCw = (TM_W - 0.2) / 3; // 3 cards iguais
   const pSign = (v: number) => (v >= 0 ? '+' : '') + v.toFixed(1) + '%';
   const varAt  = (totA25 / totA24 - 1) * 100;
   const varAC  = (bpV.ac25 / bpV.ac24 - 1) * 100;
@@ -435,32 +434,23 @@ export async function generatePPT(): Promise<void> {
   const varPnc = (bpV.pnc25 / bpV.pnc24 - 1) * 100;
   const varPl  = (bpV.pl25 / bpV.pl24 - 1) * 100;
 
-  const anCards = [
-    {
-      title: `Crescimento do Ativo  ${pSign(varAt)}`,
-      color: '0D9488', bg: 'F0FDFA',
-      body: `O ativo total cresceu ${pSign(varAt)} (R$${fmtMi(totA24)} → R$${fmtMi(totA25)} Mi). O ANC avançou ${pSign(varAnc)}, sinalizando investimentos em capacidade produtiva ou imobilizado. O AC cresceu ${pSign(varAC)}, mantendo a liquidez operacional.`,
-    },
-    {
-      title: `Alavancagem  PC ${pSign(varPc)}  ·  PNC ${pSign(varPnc)}`,
-      color: 'D97706', bg: 'FFFBEB',
-      body: `PC e PNC cresceram acima do ativo, elevando a dependência de capital de terceiros. O PL avançou apenas ${pSign(varPl)}, indicando que a expansão foi financiada majoritariamente por dívida de curto e longo prazo.`,
-    },
-    {
-      title: `Composição do Passivo  PL ${pSign(varPl)}`,
-      color: '2563EB', bg: 'EFF6FF',
-      body: `A participação do PL recuou de ${(bpV.pl24 / totP24 * 100).toFixed(1)}% para ${(bpV.pl25 / totP25 * 100).toFixed(1)}%. O PC subiu de ${(bpV.pc24 / totP24 * 100).toFixed(1)}% para ${(bpV.pc25 / totP25 * 100).toFixed(1)}%. Recomenda-se monitorar a liquidez corrente e o custo médio da dívida.`,
-    },
-  ];
-
-  anCards.forEach((card, i) => {
-    const cx = TM_X + i * (anCw + 0.1);
-    sbpa.addShape('rect', { x: cx, y: anY, w: anCw, h: anH,
-      fill: { color: card.bg }, line: { color: card.color, pt: 1.5 } });
-    sbpa.addText(card.title, { x: cx + 0.12, y: anY + 0.10, w: anCw - 0.22, h: 0.34,
-      fontSize: 8, bold: true, color: card.color, fontFace: 'Arial', wrap: true });
-    sbpa.addText(card.body,  { x: cx + 0.12, y: anY + 0.46, w: anCw - 0.22, h: anH - 0.56,
-      fontSize: 7.5, color: '374151', fontFace: 'Arial', wrap: true, valign: 'top' });
+  sbpa.addShape('rect', { x: TM_X, y: anY, w: TM_W, h: 0.3, fill: { color: C.darkBlue }, line: { color: C.darkBlue } });
+  sbpa.addText('ANÁLISE', {
+    x: TM_X + 0.12, y: anY + 0.02, w: TM_W - 0.2, h: 0.26,
+    fontSize: 8.5, bold: true, color: C.white, fontFace: 'Arial', valign: 'middle',
+  });
+  sbpa.addShape('rect', { x: TM_X, y: anY + 0.3, w: TM_W, h: anH, fill: { color: 'EFF6FF' }, line: { color: 'BFDBFE', pt: 0.5 } });
+  sbpa.addText(`▸  Crescimento do Ativo ${pSign(varAt)}: O ativo total cresceu ${pSign(varAt)} (R$${fmtMi(totA24)} → R$${fmtMi(totA25)} Mi). O ANC avançou ${pSign(varAnc)}, sinalizando investimentos em capacidade produtiva ou imobilizado. O AC cresceu ${pSign(varAC)}, mantendo a liquidez operacional.`, {
+    x: TM_X + 0.18, y: anY + 0.36, w: TM_W - 0.35, h: 0.42,
+    fontSize: 8.5, color: C.gray, fontFace: 'Arial', valign: 'top', wrap: true, lineSpacingMultiple: 1.2,
+  });
+  sbpa.addText(`▸  Alavancagem  PC ${pSign(varPc)} · PNC ${pSign(varPnc)}: PC e PNC cresceram acima do ativo, elevando a dependência de capital de terceiros. O PL avançou apenas ${pSign(varPl)}, indicando que a expansão foi financiada majoritariamente por dívida de curto e longo prazo.`, {
+    x: TM_X + 0.18, y: anY + 0.84, w: TM_W - 0.35, h: 0.42,
+    fontSize: 8.5, color: C.gray, fontFace: 'Arial', valign: 'top', wrap: true, lineSpacingMultiple: 1.2,
+  });
+  sbpa.addText(`▸  Composição do Passivo  PL ${pSign(varPl)}: A participação do PL recuou de ${(bpV.pl24 / totP24 * 100).toFixed(1)}% para ${(bpV.pl25 / totP25 * 100).toFixed(1)}%. O PC subiu de ${(bpV.pc24 / totP24 * 100).toFixed(1)}% para ${(bpV.pc25 / totP25 * 100).toFixed(1)}%. Recomenda-se monitorar a liquidez corrente e o custo médio da dívida.`, {
+    x: TM_X + 0.18, y: anY + 1.32, w: TM_W - 0.35, h: 0.42,
+    fontSize: 8.5, color: C.gray, fontFace: 'Arial', valign: 'top', wrap: true, lineSpacingMultiple: 1.2,
   });
 
   // ── SLIDE 3 – Premissas: Taxas e Cenários ─────────────────────────────────
@@ -579,20 +569,20 @@ export async function generatePPT(): Promise<void> {
     colW: [1.9, 1.15],
   });
 
-  sp2.addShape('rect', { x: 0.3, y: 5.6, w: 9.0, h: 0.04, fill: { color: 'E5E7EB' }, line: { color: 'E5E7EB' } });
-  sp2.addText('Análise das Premissas de Estoque', {
-    x: 0.3, y: 5.7, w: 9.0, h: 0.35, fontSize: 11, bold: true, color: C.darkBlue, fontFace: 'Arial',
+  sp2.addShape('rect', { x: 0.3, y: 5.6, w: 9.4, h: 0.3, fill: { color: C.darkBlue }, line: { color: C.darkBlue } });
+  sp2.addText('ANÁLISE', {
+    x: 0.42, y: 5.62, w: 9.2, h: 0.26,
+    fontSize: 8.5, bold: true, color: C.white, fontFace: 'Arial', valign: 'middle',
   });
-  sp2.addText(
-    'Premissa adotada para o orçamento do estoque foi de manutenção de giro em 45 dias para todas as categorias, ' +
-    'usamos o CMV projetado do mês anterior e multiplicamos por 1,3 no mês seguinte.\n\n' +
-    'As premissas de estoque para a projeção dos demais exercícios é uma variável e está baseada na taxa de crescimento ' +
-    'da receita que possui 03 cenários (Otimista; Realista; Pessimista).',
-    {
-      x: 0.3, y: 6.1, w: 9.0, h: 1.25,
-      fontSize: 10, color: C.gray, fontFace: 'Arial', wrap: true,
-    }
-  );
+  sp2.addShape('rect', { x: 0.3, y: 5.9, w: 9.4, h: 1.5, fill: { color: 'EFF6FF' }, line: { color: 'BFDBFE', pt: 0.5 } });
+  sp2.addText('▸  Premissa adotada para o orçamento do estoque foi de manutenção de giro em 45 dias para todas as categorias; usamos o CMV projetado do mês anterior e multiplicamos por 1,3 no mês seguinte.', {
+    x: 0.48, y: 5.96, w: 9.1, h: 0.66,
+    fontSize: 9, color: C.gray, fontFace: 'Arial', valign: 'top', wrap: true, lineSpacingMultiple: 1.2,
+  });
+  sp2.addText('▸  As premissas de estoque para a projeção dos demais exercícios é uma variável baseada na taxa de crescimento da receita, que possui 03 cenários (Otimista; Realista; Pessimista).', {
+    x: 0.48, y: 6.68, w: 9.1, h: 0.66,
+    fontSize: 9, color: C.gray, fontFace: 'Arial', valign: 'top', wrap: true, lineSpacingMultiple: 1.2,
+  });
 
   // ── SLIDE 5 – Projeção de Imobilizado ─────────────────────────────────────
   const sp3 = prs.addSlide();
@@ -634,18 +624,22 @@ export async function generatePPT(): Promise<void> {
     colW: [3.5, 1.8, 1.8, 1.8, 1.8, 1.8],
   });
 
-  sp3.addShape('rect', { x: 0.4, y: 4.15, w: 12.5, h: 0.04, fill: { color: 'E5E7EB' }, line: { color: 'E5E7EB' } });
-  sp3.addText('Análise', { x: 0.4, y: 4.3, w: 4.0, h: 0.38, fontSize: 12, bold: true, color: C.darkBlue, fontFace: 'Arial' });
   const custoAcum = YRS.reduce((a, yr) => a + getImo('Adições -Custos (1 lj 50MM + dep.)', yr), 0);
   const depAcum   = YRS.reduce((a, yr) => a + Math.abs(getImo('Adições -Depreciação', yr)), 0);
   const imoInit   = getImo('Imobilizado líquido - Saldo inicial', 1);
   const imoFinal  = imoSaldoFinal(5);
+  sp3.addShape('rect', { x: 0.4, y: 4.15, w: 12.5, h: 0.3, fill: { color: C.darkBlue }, line: { color: C.darkBlue } });
+  sp3.addText('ANÁLISE', {
+    x: 0.52, y: 4.17, w: 12.3, h: 0.26,
+    fontSize: 8.5, bold: true, color: C.white, fontFace: 'Arial', valign: 'middle',
+  });
+  sp3.addShape('rect', { x: 0.4, y: 4.45, w: 12.5, h: 2.6, fill: { color: 'EFF6FF' }, line: { color: 'BFDBFE', pt: 0.5 } });
   sp3.addText(
-    `O plano prevê investimentos totais de aproximadamente ${fmtBig(custoAcum)} em 5 anos, incluindo a abertura de nova unidade (~R$ 50MM). ` +
+    `▸  O plano prevê investimentos totais de aproximadamente ${fmtBig(custoAcum)} em 5 anos, incluindo a abertura de nova unidade (~R$ 50MM). ` +
     `A depreciação acumulada no período é de ${fmtBig(depAcum)}. ` +
     `O imobilizado líquido evolui de ${fmtBig(imoInit)} (Ano 1) para ${fmtBig(imoFinal)} (Ano 5), ` +
     `refletindo os novos ativos já deduzidos da depreciação acumulada.`,
-    { x: 0.4, y: 4.72, w: 12.5, h: 1.8, fontSize: 10.5, color: C.gray, fontFace: 'Arial', wrap: true }
+    { x: 0.58, y: 4.51, w: 12.2, h: 1.2, fontSize: 9, color: C.gray, fontFace: 'Arial', wrap: true, valign: 'top', lineSpacingMultiple: 1.2 }
   );
 
   // ── SLIDE 6 – Projeção de Empréstimos ─────────────────────────────────────
@@ -739,17 +733,19 @@ export async function generatePPT(): Promise<void> {
     colW: [4.0, 1.7, 1.7, 1.7, 1.7, 1.7],
   });
 
-  sp5.addShape('rect', { x: 0.4, y: 4.2, w: 12.5, h: 0.04, fill: { color: 'E5E7EB' }, line: { color: 'E5E7EB' } });
-  sp5.addText('Análise do Ciclo de Capital de Giro', {
-    x: 0.4, y: 4.35, w: 12.5, h: 0.38, fontSize: 12, bold: true, color: C.darkBlue, fontFace: 'Arial',
-  });
   const varNcgTotal = YRS.reduce((acc, yr) => acc + getFC('NCG', yr), 0);
   const ncgAno1 = getFC('NCG', 1);
   const ncgLiberado = YRS.filter(yr => yr > 1).reduce((s, yr) => s + getFC('NCG', yr), 0);
+  sp5.addShape('rect', { x: 0.4, y: 4.2, w: 12.5, h: 0.3, fill: { color: C.darkBlue }, line: { color: C.darkBlue } });
+  sp5.addText('ANÁLISE', {
+    x: 0.52, y: 4.22, w: 12.3, h: 0.26,
+    fontSize: 8.5, bold: true, color: C.white, fontFace: 'Arial', valign: 'middle',
+  });
+  sp5.addShape('rect', { x: 0.4, y: 4.5, w: 12.5, h: 2.7, fill: { color: 'EFF6FF' }, line: { color: 'BFDBFE', pt: 0.5 } });
   sp5.addText(
-    `A tabela apresenta a variação anual da NCG (Necessidade de Capital de Giro) de cada ano em relação ao exercício anterior (base: VLR 2025). ` +
-    `Valores positivos indicam consumo de caixa (pressão sobre o fluxo); valores negativos indicam liberação de caixa (folga operacional). `,
-    { x: 0.4, y: 4.78, w: 12.5, h: 2.1, fontSize: 10.5, color: C.gray, fontFace: 'Arial', wrap: true }
+    `▸  A tabela apresenta a variação anual da NCG (Necessidade de Capital de Giro) de cada ano em relação ao exercício anterior (base: VLR 2025). ` +
+    `Valores positivos indicam consumo de caixa (pressão sobre o fluxo); valores negativos indicam liberação de caixa (folga operacional).`,
+    { x: 0.58, y: 4.56, w: 12.2, h: 1.2, fontSize: 9, color: C.gray, fontFace: 'Arial', wrap: true, valign: 'top', lineSpacingMultiple: 1.2 }
   );
 
   // ── SLIDE 8 – Resumo DRE ───────────────────────────────────────────────────
@@ -802,15 +798,19 @@ export async function generatePPT(): Promise<void> {
     colW: [3.5, ...anos.map(() => (12.9 - 3.5) / anos.length)],
   });
 
-  s2.addShape('rect', { x: 0.4, y: 5.72, w: 12.5, h: 0.04, fill: { color: 'E5E7EB' }, line: { color: 'E5E7EB' } });
-  s2.addText('Análise', { x: 0.4, y: 5.87, w: 4.0, h: 0.38, fontSize: 12, bold: true, color: C.darkBlue, fontFace: 'Arial' });
+  s2.addShape('rect', { x: 0.4, y: 5.72, w: 12.5, h: 0.3, fill: { color: C.darkBlue }, line: { color: C.darkBlue } });
+  s2.addText('ANÁLISE', {
+    x: 0.52, y: 5.74, w: 12.3, h: 0.26,
+    fontSize: 8.5, bold: true, color: C.white, fontFace: 'Arial', valign: 'middle',
+  });
+  s2.addShape('rect', { x: 0.4, y: 6.02, w: 12.5, h: 1.4, fill: { color: 'EFF6FF' }, line: { color: 'BFDBFE', pt: 0.5 } });
   s2.addText(
-    'O Resumo DRE, Orçado para o Exercício de 2026, é a projeção do resultado a partir das premissas alinhadas com a ' +
+    '▸  O Resumo DRE, Orçado para o Exercício de 2026, é a projeção do resultado a partir das premissas alinhadas com a ' +
     'Administração do Grupo Líder, somado às projeções de redução de despesas elaboradas pela empresa TMSI, que estima uma ' +
     'redução de 73MM na folha, 53MM em materiais de uso e consumo, 72MM em contas de consumo (água, luz e telefone) e 6MM ' +
     'em despesas diversas; para os demais exercícios as projeções são variáveis que leva em consideração o percentual de ' +
     'cada despesa sobre a receita líquida de 2026, replicando esse percentual sobre as receitas líquidas projetadas.',
-    { x: 0.4, y: 6.28, w: 12.5, h: 1.1, fontSize: 10.5, color: C.gray, fontFace: 'Arial', wrap: true }
+    { x: 0.58, y: 6.08, w: 12.2, h: 1.24, fontSize: 9, color: C.gray, fontFace: 'Arial', wrap: true, valign: 'top', lineSpacingMultiple: 1.2 }
   );
 
   // ── SLIDE 9 – KPIs (completo) ─────────────────────────────────────────────
