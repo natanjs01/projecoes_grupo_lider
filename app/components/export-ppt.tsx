@@ -826,8 +826,7 @@ export async function generatePPT(): Promise<void> {
     kRow('Lucro L\u00edquido',    kpiCalc.map(k => fmtBig(k.ll)),  C.lightGray),
     kRow('Caixa Operacional',      kpiCalc.map(k => fmtBig(k.co)),  C.white),
     kRow('Caixa Livre',            kpiCalc.map(k => fmtBig(k.cl)),  C.lightGray),
-    kRow('CAPEX',                  kpiCalc.map(k => fmtBig(k.cp)),  C.white,
-      v => v.startsWith('(') ? C.negative : C.gray),
+    kRow('CAPEX',                  kpiCalc.map(k => fmtBig(k.cp)),  C.white),
     // ── Ciclos Financeiros
     kSecHdr('Ciclos Financeiros'),
     kRow('DSO (Prazo M\u00e9dio de Recebimento)', kpiCalc.map(k => `${Math.round(k.dso)} dias`), C.white),
@@ -959,12 +958,12 @@ export async function generatePPT(): Promise<void> {
   // Box TAXA
   s4.addShape('rect', { x: 0.4, y: 1.0, w: 2.8, h: 0.45, fill: { color: C.lightBlue }, line: { color: 'BFDBFE' } });
   s4.addText('TAXA  ', { x: 0.4, y: 1.0, w: 1.2, h: 0.45, fontSize: 10, bold: true, color: C.darkBlue, align: 'right', valign: 'middle' });
-  s4.addText(taxaStr,   { x: 1.6, y: 1.0, w: 1.6, h: 0.45, fontSize: 13, bold: true, color: C.midBlue,  align: 'center', valign: 'middle' });
+  s4.addText(taxaStr,   { x: 1.6, y: 1.0, w: 1.6, h: 0.45, fontSize: 13, bold: true, color: '000000',  align: 'center', valign: 'middle' });
 
   // Box VPL 10 anos
   s4.addShape('rect', { x: 3.4, y: 1.0, w: 5.0, h: 0.45, fill: { color: C.lightBlue }, line: { color: 'BFDBFE' } });
   s4.addText('VPL 10 anos  ', { x: 3.4, y: 1.0, w: 2.2, h: 0.45, fontSize: 10, bold: true, color: C.darkBlue, align: 'right', valign: 'middle' });
-  s4.addText(vplStr,           { x: 5.6, y: 1.0, w: 2.8, h: 0.45, fontSize: 13, bold: true, color: C.midBlue,  align: 'center', valign: 'middle' });
+  s4.addText(vplStr,           { x: 5.6, y: 1.0, w: 2.8, h: 0.45, fontSize: 13, bold: true, color: '000000',  align: 'center', valign: 'middle' });
 
   // ── Tabela Fluxo de Caixa ─────────────────────────────────────────────────
   type FcRowDef = { label: string; indent?: boolean; bold?: boolean; style?: 'total' | 'highlight' | 'final'; getValue?: (yr: number) => number };
