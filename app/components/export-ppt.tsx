@@ -1024,6 +1024,96 @@ export async function generatePPT(): Promise<void> {
     colW: [3.5, 1.8, 1.8, 1.8, 1.8, 1.8],
   });
 
+  // ── SLIDE 11 – DFC 1TRI 2026 ─────────────────────────────────────────────
+  const dfc1tri = (financialData as any).dfc1tri ?? {};
+  const dfcAno: number = dfc1tri.ano ?? 2026;
+  const dfcSections: any[] = dfc1tri.sections ?? [];
+
+  const sDfc = prs.addSlide();
+  sDfc.background = { fill: C.white };
+
+  // Header
+  sDfc.addShape('rect', { x: 0, y: 0, w: 13.33, h: 1.0, fill: { color: C.darkBlue }, line: { color: C.darkBlue } });
+  sDfc.addText(`DFC – DEMONSTRAÇÃO DO FLUXO DE CAIXA  |  1º Trimestre ${dfcAno}`, {
+    x: 0.4, y: 0.07, w: 10.5, h: 0.52,
+    fontSize: 17, bold: true, color: C.white, fontFace: 'Arial',
+  });
+  sDfc.addText('Em milhões de R$', {
+    x: 0.4, y: 0.6, w: 6, h: 0.32,
+    fontSize: 10, color: 'BFDBFE', fontFace: 'Arial', italic: true,
+  });
+  addLogo(sDfc, 11.5, 0.1, 1.55, 0.75);
+
+  // Helper: formata valor em milhões com 2 casas
+  const fmtDfc = (v: number): string => {
+    if (v === 0) return '–';
+    const abs = Math.abs(v) / 1000;
+    const s = abs.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    return v < 0 ? `(${s})` : s;
+  };
+
+  // Cores por seção
+  const dfcSecColors: Record<string, string> = {
+    'FLUXO DE CAIXA DAS ATIVIDADES OPERACIONAIS': '1E3A5F',
+    'FLUXO DE CAIXA DE INVESTIMENTOS':            '1E4976',
+    'FLUXO DE CAIXA DE FINANCIAMENTOS':           '1E5C8A',
+    'RESULTADO':                                   '155E75',
+  };
+  const dfcSecRowBg: Record<string, string> = {
+    'FLUXO DE CAIXA DAS ATIVIDADES OPERACIONAIS': 'EFF6FF',
+    'FLUXO DE CAIXA DE INVESTIMENTOS':            'F0F9FF',
+    'FLUXO DE CAIXA DE FINANCIAMENTOS':           'F0FDFF',
+    'RESULTADO':                                   'ECFEFF',
+  };
+  const dfcBoldBg: Record<string, string> = {
+    'FLUXO DE CAIXA DAS ATIVIDADES OPERACIONAIS': 'BFDBFE',
+    'FLUXO DE CAIXA DE INVESTIMENTOS':            'BAE6FD',
+    'FLUXO DE CAIXA DE FINANCIAMENTOS':           'A5F3FC',
+    'RESULTADO':                                   '1E3A5F',
+  };
+
+  // Monta todas as linhas da tabela
+  const dfcAllRows: object[][] = [];
+  const dfcColW = [7.5, 5.0];
+
+  for (const sec of dfcSections) {
+    const secColor   = dfcSecColors[sec.title]  ?? C.darkBlue;
+    const rowBg      = dfcSecRowBg[sec.title]   ?? C.lightGray;
+    const boldBg     = dfcBoldBg[sec.title]     ?? C.lightBlue;
+    const isResultado = sec.title === 'RESULTADO';
+
+    // Linha título da seção
+    dfcAllRows.push([
+      { text: sec.title, options: { bold: true, fontSize: 9.5, color: C.white, fill: { type: 'solid', color: secColor }, fontFace: 'Arial', colspan: 2, align: 'left', valign: 'middle' } },
+      { text: '',        options: { fill: { type: 'solid', color: secColor } } },
+    ]);
+
+    for (const row of sec.rows ?? []) {
+      const isBold = !!row.bold;
+      const bg   = isBold ? boldBg : rowBg;
+      const textColor = isBold
+        ? (isResultado && boldBg === '1E3A5F' ? C.white : C.darkBlue)
+        : C.gray;
+      const valColor  = isBold
+        ? (isResultado && boldBg === '1E3A5F' ? C.white : (row.valor < 0 ? C.negative : C.positive))
+        : (row.valor < 0 ? C.negative : C.gray);
+      const label = isBold ? row.label : `    ${row.label}`;
+      dfcAllRows.push([
+        { text: label,            options: { bold: isBold, fontSize: 9, color: textColor, fill: { type: 'solid', color: bg }, fontFace: 'Arial', align: 'left',  valign: 'middle' } },
+        { text: fmtDfc(row.valor), options: { bold: isBold, fontSize: 9, color: valColor,  fill: { type: 'solid', color: bg }, fontFace: 'Arial', align: 'right', valign: 'middle' } },
+      ]);
+    }
+  }
+
+  const totalRows = dfcAllRows.length;
+  const tableH = Math.min(6.2, totalRows * 0.27);
+  sDfc.addTable(dfcAllRows, {
+    x: 0.4, y: 1.1, w: 12.5, h: tableH,
+    colW: dfcColW,
+    rowH: tableH / totalRows,
+    border: { pt: 0.3, color: 'E2E8F0' },
+  });
+
   // ── SLIDE 12 – Realizado vs Orçado ───────────────────────────────────────
   const orcData = (financialData as any).orcamento?.summary ?? {};
   const orcMeses = [
