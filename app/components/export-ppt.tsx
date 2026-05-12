@@ -901,43 +901,60 @@ export async function generatePPT(): Promise<void> {
     title, showTitle: true, titleFontSize: 12, titleBold: true, titleColor: C.darkBlue,
   });
 
-  // ── SLIDE Gráficos 1/2 ───────────────────────────────────────────────────
+  // ── SLIDE GRÁFICOS – 4 gráficos em 2×2 ──────────────────────────────────
   const sg1 = prs.addSlide();
   sg1.background = { fill: 'F1F5F9' };
-  addHdr(sg1, 'GRÁFICOS  –  Resultado Financeiro', 'Gráficos 1/2');
+  addHdr(sg1, 'GRÁFICOS  –  Resultados Financeiros', 'Gráficos');
 
-  // Cards de fundo para cada gráfico
-  sg1.addShape('rect', { x: 0.25, y: 1.0, w: 6.15, h: 6.35, fill: { color: C.white }, line: { color: 'E2E8F0', pt: 1 }, shadow: mkShadow() });
-  sg1.addShape('rect', { x: 6.93, y: 1.0, w: 6.15, h: 6.35, fill: { color: C.white }, line: { color: 'E2E8F0', pt: 1 }, shadow: mkShadow() });
+  // Layout: 2 colunas × 2 linhas
+  const gcw     = 6.35;   // largura do card
+  const gx1     = 0.2;    // coluna esquerda
+  const gx2     = 6.78;   // coluna direita
+  const gy1     = 0.98;   // linha 1 y
+  const gy2     = 4.02;   // linha 2 y
+  const gth     = 0.32;   // altura do título-card
+  const gch     = 2.62;   // altura do gráfico
+  const gcardH  = gth + gch;
 
+  // Helper: card-título azul escuro acima de cada gráfico
+  const addChartTitle = (sl: any, x: number, y: number, w: number, title: string) => {
+    sl.addShape('rect', { x, y, w, h: gth, fill: { color: C.darkBlue }, line: { color: C.darkBlue } });
+    sl.addText(title, { x: x + 0.1, y, w: w - 0.2, h: gth, fontSize: 10, bold: true, color: C.white, fontFace: 'Arial', align: 'center', valign: 'middle' });
+  };
+
+  // White cards com sombra (cobre título + gráfico)
+  sg1.addShape('rect', { x: gx1, y: gy1, w: gcw, h: gcardH, fill: { color: C.white }, line: { color: 'E2E8F0', pt: 1 }, shadow: mkShadow() });
+  sg1.addShape('rect', { x: gx2, y: gy1, w: gcw, h: gcardH, fill: { color: C.white }, line: { color: 'E2E8F0', pt: 1 }, shadow: mkShadow() });
+  sg1.addShape('rect', { x: gx1, y: gy2, w: gcw, h: gcardH, fill: { color: C.white }, line: { color: 'E2E8F0', pt: 1 }, shadow: mkShadow() });
+  sg1.addShape('rect', { x: gx2, y: gy2, w: gcw, h: gcardH, fill: { color: C.white }, line: { color: 'E2E8F0', pt: 1 }, shadow: mkShadow() });
+
+  // Títulos como cards (sobre os rects brancos)
+  addChartTitle(sg1, gx1, gy1, gcw, 'Receitas (R$ MM)');
+  addChartTitle(sg1, gx2, gy1, gcw, 'EBTIDA e Lucro Líquido (R$ MM)');
+  addChartTitle(sg1, gx1, gy2, gcw, 'Fluxo de Caixa (R$ MM)');
+  addChartTitle(sg1, gx2, gy2, gcw, 'Evolução das Margens (%)');
+
+  // Gráficos sem título interno (showTitle: false sobrescreve o barOpts/lineOpts)
   (sg1 as any).addChart('bar', [
     { name: 'Fat. Bruto',   labels: anoLabels, values: cFatBruto },
     { name: 'Fat. Líquido', labels: anoLabels, values: cFatLiq   },
-  ], { x: 0.3, y: 1.05, w: 6.1, h: 6.2, ...barOpts('Receitas (R$ MM)', ['1E3A5F', '38BDF8']) });
+  ], { x: gx1, y: gy1 + gth, w: gcw, h: gch, ...barOpts('', ['1E3A5F', '38BDF8']), showTitle: false });
 
   (sg1 as any).addChart('bar', [
     { name: 'EBTIDA',        labels: anoLabels, values: cEbtida   },
     { name: 'Lucro Líquido', labels: anoLabels, values: cLucroLiq },
-  ], { x: 6.93, y: 1.05, w: 6.1, h: 6.2, ...barOpts('EBTIDA e Lucro Líquido (R$ MM)', ['6366F1', '34D399']) });
+  ], { x: gx2, y: gy1 + gth, w: gcw, h: gch, ...barOpts('', ['6366F1', '34D399']), showTitle: false });
 
-  // ── SLIDE Gráficos 2/2 ───────────────────────────────────────────────────
-  const sg2 = prs.addSlide();
-  sg2.background = { fill: 'F1F5F9' };
-  addHdr(sg2, 'GRÁFICOS  –  Caixa e Margens', 'Gráficos 2/2');
-
-  sg2.addShape('rect', { x: 0.25, y: 1.0, w: 6.15, h: 6.35, fill: { color: C.white }, line: { color: 'E2E8F0', pt: 1 }, shadow: mkShadow() });
-  sg2.addShape('rect', { x: 6.93, y: 1.0, w: 6.15, h: 6.35, fill: { color: C.white }, line: { color: 'E2E8F0', pt: 1 }, shadow: mkShadow() });
-
-  (sg2 as any).addChart('line', [
+  (sg1 as any).addChart('line', [
     { name: 'Caixa Operacional', labels: anoLabels, values: cCaixaOp  },
     { name: 'Caixa Livre',       labels: anoLabels, values: cCaixaLiv },
-  ], { x: 0.3, y: 1.05, w: 6.1, h: 6.2, ...lineOpts('Fluxo de Caixa (R$ MM)', ['2563EB', '34D399']) });
+  ], { x: gx1, y: gy2 + gth, w: gcw, h: gch, ...lineOpts('', ['2563EB', '34D399']), showTitle: false });
 
-  (sg2 as any).addChart('line', [
+  (sg1 as any).addChart('line', [
     { name: 'M. Contribuição', labels: anoLabels, values: cMCPct  },
     { name: 'M. EBTIDA',       labels: anoLabels, values: cEbPct  },
     { name: 'M. Líquida',      labels: anoLabels, values: cLucPct },
-  ], { x: 6.93, y: 1.05, w: 6.1, h: 6.2, ...lineOpts('Evolução das Margens (%)', ['6366F1', '38BDF8', 'F59E0B']) });
+  ], { x: gx2, y: gy2 + gth, w: gcw, h: gch, ...lineOpts('', ['6366F1', '38BDF8', 'F59E0B']), showTitle: false });
 
   // ── SLIDE 10 – Fluxo de Caixa ─────────────────────────────────────────────
   const s4 = prs.addSlide();
@@ -1024,6 +1041,128 @@ export async function generatePPT(): Promise<void> {
     colW: [3.5, 1.8, 1.8, 1.8, 1.8, 1.8],
   });
 
+  // ── SLIDE 11a – DFC BP 2025 ───────────────────────────────────────────────
+  const dfc25Data     = (financialData as any).dfc2025 ?? {};
+  const dfc25Periodo  = dfc25Data.periodo ?? 'Dezembro/2025';
+  const dfc25Secs: any[] = dfc25Data.sections ?? [];
+  const getSecRow25 = (si: number, lbl: string): number =>
+    dfc25Secs[si]?.rows?.find((r: any) => r.label === lbl)?.valor ?? 0;
+
+  const sBp25 = prs.addSlide();
+  sBp25.background = { fill: C.white };
+
+  sBp25.addShape('rect', { x: 0, y: 0, w: 13.33, h: 0.88, fill: { color: C.darkBlue }, line: { color: C.darkBlue } });
+  sBp25.addText(`DFC – DEMONSTRAÇÃO DO FLUXO DE CAIXA  |  ${dfc25Periodo}`, {
+    x: 0.4, y: 0.05, w: 10.5, h: 0.5,
+    fontSize: 16, bold: true, color: C.white, fontFace: 'Arial', valign: 'middle',
+  });
+  sBp25.addText('Em milhões de R$', {
+    x: 0.4, y: 0.57, w: 6, h: 0.25,
+    fontSize: 9.5, color: 'BFDBFE', fontFace: 'Arial', italic: true,
+  });
+  addLogo(sBp25, 11.5, 0.07, 1.55, 0.7);
+
+  const bp25Sec0Show = new Set([
+    'Lucro (Prejuízo) do período',
+    'Depreciação e amortização',
+    'Resultado na venda/baixa de ativo imobilizado',
+    'Redução ao valor recuperável do contas a receber',
+    'Lucro (Prejuízo) Ajustado',
+    'Geração (Consumo) Caixa Operacional',
+    'Fluxo de Caixa das Atividades Operacionais',
+  ]);
+  const bp25Sec3Show = new Set(['Caixa gerado das atividades operacionais']);
+  const bp25SecTitles = ['ATIVIDADES OPERACIONAIS', 'INVESTIMENTOS', 'FINANCIAMENTOS', 'RESULTADO'];
+  const dfcSecCfg = [
+    { hBg: '1E3A5F', boldBg: 'BFDBFE', rowBg: 'EFF6FF' },
+    { hBg: '1E4976', boldBg: 'BAE6FD', rowBg: 'F0F9FF' },
+    { hBg: '1E5C8A', boldBg: 'A5F3FC', rowBg: 'F0FDFF' },
+    { hBg: '155E75', boldBg: '1E3A5F', rowBg: 'ECFEFF' },
+  ];
+  const dfcColW: [number, number] = [4.3, 1.5];
+  const dfcRowH = 0.295;
+  const fmtDfc = (v: number): string => {
+    if (v === 0) return '–';
+    const abs = Math.abs(v) / 1000;
+    const s = abs.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    return v < 0 ? `(${s})` : s;
+  };
+
+  const bp25TRows: object[][] = [];
+  dfc25Secs.forEach((sec: any, si: number) => {
+    const cfg    = dfcSecCfg[si] ?? dfcSecCfg[0];
+    const isRes  = si === 3;
+    bp25TRows.push([
+      { text: bp25SecTitles[si] ?? sec.title, options: { bold: true, fontSize: 8, color: C.white, fill: { color: cfg.hBg }, fontFace: 'Arial', align: 'left', valign: 'middle' } },
+      { text: '', options: { fill: { color: cfg.hBg } } },
+    ]);
+    (sec.rows ?? []).forEach((row: any) => {
+      const isBold = !!row.bold;
+      const val: number = row.valor ?? 0;
+      if (si === 0 && !bp25Sec0Show.has(row.label)) return;
+      if (si === 3 && !bp25Sec3Show.has(row.label)) return;
+      if ((si === 1 || si === 2) && !isBold && val === 0) return;
+      const bg      = isBold ? cfg.boldBg : cfg.rowBg;
+      const isWhite = isRes && isBold;
+      const tColor  = isWhite ? C.white : C.gray;
+      const vColor  = isWhite ? C.white : '000000';
+      bp25TRows.push([
+        { text: isBold ? row.label : `   ${row.label}`, options: { bold: isBold, fontSize: 8.5, color: tColor, fill: { color: bg }, fontFace: 'Arial', align: 'left',  valign: 'middle' } },
+        { text: fmtDfc(val),                             options: { bold: isBold, fontSize: 8.5, color: vColor, fill: { color: bg }, fontFace: 'Arial', align: 'right', valign: 'middle' } },
+      ]);
+    });
+  });
+
+  sBp25.addTable(bp25TRows, {
+    x: 0.3, y: 0.95, w: 5.8, h: bp25TRows.length * dfcRowH,
+    colW: dfcColW, rowH: dfcRowH,
+    border: { pt: 0.3, color: 'E2E8F0' },
+  });
+
+  const bp25Vals = [
+    getSecRow25(0, 'Lucro (Prejuízo) Ajustado')                / 1000,
+    getSecRow25(0, 'Geração (Consumo) Caixa Operacional')      / 1000,
+    getSecRow25(1, 'Fluxo de Caixa de Investimentos')          / 1000,
+    getSecRow25(2, 'Fluxo de Caixa de Financiamentos')         / 1000,
+    getSecRow25(3, 'Caixa gerado das atividades operacionais') / 1000,
+  ];
+  const bp25Min = Math.floor(Math.min(...bp25Vals) * 1.35 / 5) * 5;
+  const bp25Max = Math.ceil(Math.max(...bp25Vals)  * 1.25 / 5) * 5;
+
+  (sBp25 as any).addChart('line', [{
+    name: 'R$ Milhões',
+    labels: ['Lucro\nAjustado', 'Caixa\nOperacional', 'Investimentos', 'Financiamentos', 'Caixa\nGerado'],
+    values: bp25Vals,
+  }], {
+    x: 6.4, y: 0.95, w: 6.65, h: 3.15,
+    showTitle: true,
+    title: `Consumo de Caixa  |  ${dfc25Periodo}`,
+    titleFontSize: 11, titleBold: true, titleColor: C.darkBlue,
+    lineDataSymbol: 'circle', lineDataSymbolSize: 9,
+    lineSize: 2.5, chartColors: ['2563EB'],
+    showValue: true, dataLabelFontSize: 9, dataLabelFontBold: true, dataLabelColor: C.darkBlue,
+    showLegend: false,
+    valAxisMinVal: bp25Min, valAxisMaxVal: bp25Max,
+    valGridLine: { style: 'solid', color: 'E5E7EB', size: 0.5 },
+    catAxisLabelFontSize: 9, valAxisLabelFontSize: 9,
+  });
+
+  const bp25AX = 6.4, bp25AY = 4.2, bp25AW = 6.65;
+  sBp25.addShape('rect', { x: bp25AX, y: bp25AY, w: bp25AW, h: 0.3, fill: { color: C.darkBlue }, line: { color: C.darkBlue } });
+  sBp25.addText('ANÁLISE', {
+    x: bp25AX + 0.12, y: bp25AY + 0.02, w: bp25AW - 0.2, h: 0.26,
+    fontSize: 8.5, bold: true, color: C.white, fontFace: 'Arial', valign: 'middle',
+  });
+  sBp25.addShape('rect', { x: bp25AX, y: bp25AY + 0.3, w: bp25AW, h: 2.7, fill: { color: 'EFF6FF' }, line: { color: 'BFDBFE', pt: 0.5 } });
+  sBp25.addText('▸  Lucro ajustado de R$ 78M em dezembro de 2025, composto por resultado líquido de R$ 53M, depreciação R$ 21M e ajustes de créditos e ativos de R$ 4M. O capital de giro contribuiu positivamente com R$ 83M em geração de caixa, elevando o fluxo operacional total a R$ 161M.', {
+    x: bp25AX + 0.18, y: bp25AY + 0.36, w: bp25AW - 0.35, h: 1.2,
+    fontSize: 9, color: C.gray, fontFace: 'Arial', valign: 'top', wrap: true, lineSpacingMultiple: 1.2,
+  });
+  sBp25.addText('▸  Investimentos em ativo fixo de R$ 6M. Fluxo de financiamentos negativo de R$ 88M, resultante de amortização de empréstimos (R$ 62M) e distribuição de capital e lucros (R$ 43M), parcialmente compensados por aportes de partes relacionadas (R$ 17M). Caixa gerado no período: R$ 67M.', {
+    x: bp25AX + 0.18, y: bp25AY + 1.62, w: bp25AW - 0.35, h: 1.2,
+    fontSize: 9, color: C.gray, fontFace: 'Arial', valign: 'top', wrap: true, lineSpacingMultiple: 1.2,
+  });
+
   // ── SLIDE 11 – DFC 1TRI 2026 ─────────────────────────────────────────────
   const dfc1tri = (financialData as any).dfc1tri ?? {};
   const dfcAno: number = dfc1tri.ano ?? 2026;
@@ -1045,12 +1184,6 @@ export async function generatePPT(): Promise<void> {
   addLogo(sDfc, 11.5, 0.07, 1.55, 0.7);
 
   // Helpers
-  const fmtDfc = (v: number): string => {
-    if (v === 0) return '–';
-    const abs = Math.abs(v) / 1000;
-    const s = abs.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-    return v < 0 ? `(${s})` : s;
-  };
   const getSecRow = (si: number, lbl: string): number =>
     dfcSections[si]?.rows?.find((r: any) => r.label === lbl)?.valor ?? 0;
 
@@ -1074,12 +1207,6 @@ export async function generatePPT(): Promise<void> {
     'INVESTIMENTOS',
     'FINANCIAMENTOS',
     'RESULTADO',
-  ];
-  const dfcSecCfg = [
-    { hBg: '1E3A5F', boldBg: 'BFDBFE', rowBg: 'EFF6FF' },
-    { hBg: '1E4976', boldBg: 'BAE6FD', rowBg: 'F0F9FF' },
-    { hBg: '1E5C8A', boldBg: 'A5F3FC', rowBg: 'F0FDFF' },
-    { hBg: '155E75', boldBg: '1E3A5F', rowBg: 'ECFEFF' },
   ];
 
   const dfcTRows: object[][] = [];
@@ -1107,8 +1234,6 @@ export async function generatePPT(): Promise<void> {
     });
   });
 
-  const dfcColW: [number, number] = [4.3, 1.5];
-  const dfcRowH = 0.295;
   sDfc.addTable(dfcTRows, {
     x: 0.3, y: 0.95, w: 5.8, h: dfcTRows.length * dfcRowH,
     colW: dfcColW, rowH: dfcRowH,
@@ -1160,7 +1285,6 @@ export async function generatePPT(): Promise<void> {
   const dfcAnaliseY = 4.2;
   const dfcAnaliseW = 6.65;
 
-  // Cabeçalho "ANÁLISE"
   sDfc.addShape('rect', {
     x: dfcAnaliseX, y: dfcAnaliseY, w: dfcAnaliseW, h: 0.3,
     fill: { color: C.darkBlue }, line: { color: C.darkBlue },
@@ -1170,116 +1294,128 @@ export async function generatePPT(): Promise<void> {
     fontSize: 8.5, bold: true, color: C.white, fontFace: 'Arial', valign: 'middle',
   });
 
-  // Fundo da caixa de análise
   sDfc.addShape('rect', {
     x: dfcAnaliseX, y: dfcAnaliseY + 0.3, w: dfcAnaliseW, h: 2.7,
     fill: { color: 'EFF6FF' }, line: { color: 'BFDBFE', pt: 0.5 },
   });
 
-  // Bullet 1 – Resultado & Capital de Giro
   sDfc.addText('▸  Lucro ajustado de R$ 23,8M no 1T26, composto por resultado líquido de R$ 18,2M e depreciação de R$ 5,2M. A variação de capital de giro consumiu R$ 8,7M, pressionada por crescimento de contas a receber (R$ 88,6M), parcialmente compensado por fornecedores (+R$ 28,1M) e obrigações salariais (+R$ 29,9M). Fluxo operacional total positivo de R$ 15,1M.', {
     x: dfcAnaliseX + 0.18, y: dfcAnaliseY + 0.36, w: dfcAnaliseW - 0.35, h: 1.2,
     fontSize: 9, color: C.gray, fontFace: 'Arial', valign: 'top',
     wrap: true, lineSpacingMultiple: 1.2,
   });
 
-  // Bullet 2 – Investimentos, Financiamentos & Caixa Final
   sDfc.addText('▸  Investimentos em imobilizado de R$ 14,3M financiados parcialmente por captações líquidas de R$ 17,9M (empréstimos R$ 12,7M + partes relacionadas R$ 5,2M). O caixa encerrou o trimestre em R$ 82,4M, crescimento de +29,4% em relação ao saldo inicial de R$ 63,7M.', {
     x: dfcAnaliseX + 0.18, y: dfcAnaliseY + 1.62, w: dfcAnaliseW - 0.35, h: 1.2,
     fontSize: 9, color: C.gray, fontFace: 'Arial', valign: 'top',
     wrap: true, lineSpacingMultiple: 1.2,
   });
 
-  // ── SLIDE 12 – Realizado vs Orçado ───────────────────────────────────────
-  const orcData = (financialData as any).orcamento?.summary ?? {};
-  const orcMeses = [
-    { key: 'janeiro',   label: 'Janeiro/2026' },
-    { key: 'fevereiro', label: 'Fevereiro/2026' },
-    { key: 'marco',     label: 'Março/2026' },
-  ];
-  const orcLinhas = ['RECEITAS', 'DESPESAS E CUSTOS', 'LUCRO LÍQUIDO'];
-  const orcLinhaColor: Record<string, string> = {
-    'RECEITAS': C.lightGray,
-    'DESPESAS E CUSTOS': C.lightBlue,
-    'LUCRO LÍQUIDO': 'EFF6FF',
-  };
+  // ── SLIDE 12 – RESUMO DRE – Orçado vs Realizado ─────────────────────────
+  const drvData = (financialData as any).dreOrcVsReal ?? {};
+  const drvMeses: any[] = drvData.meses ?? [];
+  const drvLinhas: any[] = drvData.linhas ?? [];
 
   const sOrc = prs.addSlide();
   sOrc.background = { fill: C.white };
 
-  // Header azul escuro
-  sOrc.addShape('rect', { x: 0, y: 0, w: 13.33, h: 1.1, fill: { color: C.darkBlue }, line: { color: C.darkBlue } });
-  sOrc.addText('REALIZADO VS ORÇADO  –  Jan–Mar/2026', {
-    x: 0.4, y: 0.08, w: 10.5, h: 0.55,
-    fontSize: 20, bold: true, color: C.white, fontFace: 'Arial',
+  // Header
+  sOrc.addShape('rect', { x: 0, y: 0, w: 13.33, h: 0.88, fill: { color: C.darkBlue }, line: { color: C.darkBlue } });
+  sOrc.addText('RESUMO DRE  –  ORÇADO VS REALIZADO  |  Jan–Mar/2026', {
+    x: 0.4, y: 0.05, w: 10.5, h: 0.5,
+    fontSize: 15, bold: true, color: C.white, fontFace: 'Arial', valign: 'middle',
   });
-  sOrc.addText('Comparativo mensal de Receitas, Despesas e Lucro Líquido  |  R$', {
-    x: 0.4, y: 0.62, w: 10, h: 0.35,
-    fontSize: 11, color: 'BFDBFE', fontFace: 'Arial', italic: true,
+  sOrc.addText('Em milhões de R$', {
+    x: 0.4, y: 0.57, w: 6, h: 0.25,
+    fontSize: 9, color: 'BFDBFE', fontFace: 'Arial', italic: true,
   });
-  addLogo(sOrc, 11.5, 0.12, 1.5, 0.75);
+  addLogo(sOrc, 11.5, 0.07, 1.55, 0.7);
 
-  // Cabeçalho da tabela
-  const orcHeaderFill = { type: 'solid', color: C.darkBlue };
-  const orcHeaderOpts = { fill: orcHeaderFill, color: C.white, bold: true, fontSize: 9, fontFace: 'Arial', align: 'center', valign: 'middle', border: { pt: 0.5, color: 'D1D5DB' } };
-  const orcCellOpts   = { fontSize: 9, fontFace: 'Arial', align: 'center', valign: 'middle', border: { pt: 0.5, color: 'D1D5DB' } };
+  // Helpers de formatação
+  const fmtDrv = (v: number): string => {
+    if (v === 0) return '–';
+    const abs = Math.abs(v);
+    const s = abs.toLocaleString('pt-BR', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
+    return v < 0 ? `(${s})` : s;
+  };
+  const fmtDrvPct = (v: number): string =>
+    (v * 100).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + '%';
+  const fmtDif = (o: number, r: number, isPct: boolean): string => {
+    if (o === 0) return '–';
+    const dif = (r - o) / Math.abs(o) * 100;
+    const abs = Math.abs(dif);
+    const s = abs.toLocaleString('pt-BR', { minimumFractionDigits: 0, maximumFractionDigits: 0 }) + '%';
+    return dif < 0 ? `(${s})` : `+${s}`;
+  };
+  const difColor = (o: number, r: number, isExpense: boolean): string => {
+    const dif = o === 0 ? 0 : (r - o) / Math.abs(o);
+    if (dif === 0) return C.gray;
+    // Para despesas (negativas): aumento é ruim; para receitas/resultados: aumento é bom
+    const isBad = isExpense ? dif > 0 : dif < 0;
+    return '000000';
+  };
 
-  const orcTableRows: object[][] = [
-    [
-      { text: '',                options: { ...orcHeaderOpts, align: 'left' } },
-      { text: 'Janeiro/2026',    options: { ...orcHeaderOpts, colspan: 3 } },
-      { text: 'Fevereiro/2026',  options: { ...orcHeaderOpts, colspan: 3 } },
-      { text: 'Março/2026',      options: { ...orcHeaderOpts, colspan: 3 } },
-    ],
-    [
-      { text: 'Indicador',  options: { ...orcHeaderOpts, align: 'left' } },
-      { text: 'Realizado',  options: orcHeaderOpts },
-      { text: 'Orçado',     options: orcHeaderOpts },
-      { text: 'Var%',       options: orcHeaderOpts },
-      { text: 'Realizado',  options: orcHeaderOpts },
-      { text: 'Orçado',     options: orcHeaderOpts },
-      { text: 'Var%',       options: orcHeaderOpts },
-      { text: 'Realizado',  options: orcHeaderOpts },
-      { text: 'Orçado',     options: orcHeaderOpts },
-      { text: 'Var%',       options: orcHeaderOpts },
-    ],
+  // Definição de cores por tipo de linha
+  const drvBg = (linha: any, i: number): string => {
+    if (linha.bold && !linha.pct) return C.lightBlue;
+    if (linha.pct) return 'EFF6FF';
+    return i % 2 === 0 ? C.white : C.lightGray;
+  };
+
+  // Header row 1 — grupos de meses
+  const drvHdrOpts = { bold: true, color: C.white, fill: { color: C.darkBlue }, fontFace: 'Arial', fontSize: 8.5, align: 'center' as const, valign: 'middle' as const, border: { pt: 0.3, color: 'E2E8F0' } };
+  const drvHdr1: object[] = [
+    { text: 'Descrição', options: { ...drvHdrOpts, align: 'left' as const } },
+    ...drvMeses.flatMap((m: any) => [
+      { text: m.label, options: { ...drvHdrOpts, colspan: 3 } },
+    ]),
+  ];
+  // Header row 2 — O / R / Dif%
+  const drvHdr2: object[] = [
+    { text: '', options: { ...drvHdrOpts, fill: { color: '0F2040' } } },
+    ...drvMeses.flatMap(() => [
+      { text: 'Orçado', options: { ...drvHdrOpts, fill: { color: '0F2040' } } },
+      { text: 'Realizado', options: { ...drvHdrOpts, fill: { color: '0F2040' } } },
+      { text: 'Dif.%', options: { ...drvHdrOpts, fill: { color: '0F2040' } } },
+    ]),
   ];
 
-  for (const linhaNome of orcLinhas) {
-    const bgColor = orcLinhaColor[linhaNome];
-    const rowFill = { type: 'solid', color: bgColor };
-    const isLucro = linhaNome === 'LUCRO LÍQUIDO';
-    const cells: object[] = [
-      { text: linhaNome, options: { ...orcCellOpts, fill: rowFill, align: 'left', bold: isLucro, color: C.gray } },
-    ];
-    for (const mes of orcMeses) {
-      const item = (orcData[mes.key] as any[])?.find((r: any) => r.label === linhaNome) ?? {};
-      const real = item.realizado ?? 0;
-      const orc  = item.orcado    ?? 0;
-      const pct  = item.pct       ?? 0;
-      const pctStr = (((Math.abs(pct) * 100)).toLocaleString('pt-BR', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + '%');
-      const pctFmt = pct < 0 ? `(${pctStr})` : pctStr;
-      const pctColor = '000000';
-      cells.push(
-        { text: fmtBig(real), options: { ...orcCellOpts, fill: rowFill, bold: isLucro, color: C.gray } },
-        { text: fmtBig(orc),  options: { ...orcCellOpts, fill: rowFill, bold: isLucro, color: C.gray } },
-        { text: pctFmt,       options: { ...orcCellOpts, fill: rowFill, bold: true, color: pctColor } },
-      );
-    }
-    orcTableRows.push(cells);
-  }
+  // Linhas de dados
+  const drvDataRows: object[][] = drvLinhas.map((linha: any, i: number) => {
+    const bg = drvBg(linha, i);
+    const isExpense = ['despesas','pessoal','outrasDespesas','depreciacao','resultadoFinanceiro','impostos'].includes(linha.key);
+    const lblOpts = { bold: linha.bold, fontSize: linha.pct ? 7.5 : 8.5, color: C.gray, fill: { color: bg }, fontFace: 'Arial', align: 'left' as const, valign: 'middle' as const, italic: linha.pct, border: { pt: 0.3, color: 'E2E8F0' } };
+    const valOpts = (bold: boolean) => ({ bold, fontSize: linha.pct ? 7.5 : 8.5, color: '000000', fill: { color: bg }, fontFace: 'Arial', align: 'right' as const, valign: 'middle' as const, italic: linha.pct, border: { pt: 0.3, color: 'E2E8F0' } });
+    const difOpts = (o: number, r: number) => ({ bold: linha.bold, fontSize: linha.pct ? 7.5 : 8.5, color: '000000', fill: { color: bg }, fontFace: 'Arial', align: 'right' as const, valign: 'middle' as const, border: { pt: 0.3, color: 'E2E8F0' } });
 
-  sOrc.addTable(orcTableRows, {
-    x: 0.3, y: 1.2, w: 12.73, h: 2.4,
-    colW: [2.4, 1.15, 1.15, 0.83, 1.15, 1.15, 0.83, 1.15, 1.15, 0.83],
-    rowH: [0.45, 0.35, 0.52, 0.52, 0.56],
-    border: { pt: 0.5, color: 'D1D5DB' },
+    return [
+      { text: linha.pct ? `   ${linha.label}` : linha.label, options: lblOpts },
+      ...drvMeses.flatMap((m: any) => {
+        const o: number = linha[m.key]?.o ?? 0;
+        const r: number = linha[m.key]?.r ?? 0;
+        const oFmt = linha.pct ? fmtDrvPct(o) : fmtDrv(o);
+        const rFmt = linha.pct ? fmtDrvPct(r) : fmtDrv(r);
+        const dFmt = fmtDif(o, r, linha.pct);
+        return [
+          { text: oFmt, options: valOpts(linha.bold) },
+          { text: rFmt, options: valOpts(linha.bold) },
+          { text: dFmt, options: difOpts(o, r) },
+        ];
+      }),
+    ];
   });
 
-  // Nota de rodapé
-  sOrc.addText('* Valores mensais em R$ (não consolidados). Variação = Realizado – Orçado. Negativo indica resultado abaixo do orçado.', {
-    x: 0.3, y: 3.85, w: 12.7, h: 0.4,
-    fontSize: 8, color: '6B7280', fontFace: 'Arial', italic: true,
+  // Altura por linha
+  const drvRowHNormal = 0.35;
+  const drvRowHPct    = 0.27;
+  const rowHeights = [0.36, 0.32, ...drvLinhas.map((l: any) => l.pct ? drvRowHPct : drvRowHNormal)];
+
+  sOrc.addTable([drvHdr1, drvHdr2, ...drvDataRows], {
+    x: 0.3, y: 0.95, w: 12.73,
+    h: rowHeights.reduce((a, b) => a + b, 0),
+    colW: [3.7, 1.1, 1.1, 0.81, 1.1, 1.1, 0.81, 1.1, 1.1, 0.81],
+    rowH: rowHeights,
+    border: { pt: 0.3, color: 'E2E8F0' },
   });
 
   // ── SLIDE 11 – Encerramento ────────────────────────────────────────────────

@@ -1410,7 +1410,7 @@
           "dfs": "Receitas financeiras",
           "code": "3120100000002",
           "name": "RENDAS DE APLICAÇÃO",
-          "realizado": 7.00000000000145e-05,
+          "realizado": 0.0000700000000000145,
           "orcado": 0.038823140071319144,
           "variacao": -0.03875314007131913,
           "pct": -0.9981969516151599
@@ -4031,7 +4031,7 @@
         "code": "3110100000023",
         "name": "VENDA DE PEIXE",
         "vlr25": 7000,
-        "pct25": 1.465713215520754e-06,
+        "pct25": 0.000001465713215520754,
         "prejAjus": 0,
         "ano1": 7571.923550180293,
         "ano2": 8178.162513371403,
@@ -4147,7 +4147,7 @@
         "code": "4110200000002",
         "name": "CANCELAMENTO DE VENDAS",
         "vlr25": -7999.9,
-        "pct25": -1.6750798789777828e-06,
+        "pct25": -0.0000016750798789777828,
         "prejAjus": 0,
         "ano1": -8653.518744155333,
         "ano2": -9346.354612959985,
@@ -4321,7 +4321,7 @@
         "code": "4240100000013",
         "name": "ICM",
         "vlr25": -6156,
-        "pct25": -1.2889900792493944e-06,
+        "pct25": -0.0000012889900792493944,
         "prejAjus": 0,
         "ano1": -6658.965910701413,
         "ano2": -7192.109776044908,
@@ -4930,7 +4930,7 @@
         "code": "4210100000007",
         "name": "Fretes E Entregas",
         "vlr25": -430766,
-        "pct25": -8.965380267570055e-05,
+        "pct25": -0.00008965380267570055,
         "prejAjus": 0,
         "ano1": -463154.5466431265,
         "ano2": -497223.6548502174,
@@ -4959,7 +4959,7 @@
         "code": "4210100000008",
         "name": "Assinaturas E Contribuições",
         "vlr25": -233557.73,
-        "pct25": -4.860954355451579e-05,
+        "pct25": -0.00004860954355451579,
         "prejAjus": 0,
         "ano1": -251118.52967306555,
         "ano2": -269590.51580004056,
@@ -5162,7 +5162,7 @@
         "code": "4220200000046",
         "name": "Premio Proteção Liderzan",
         "vlr25": -13500,
-        "pct25": -2.8097072102300496e-06,
+        "pct25": -0.0000028097072102300496,
         "prejAjus": 0,
         "ano1": -14515.041529930886,
         "ano2": -15582.751053885253,
@@ -5336,7 +5336,7 @@
         "code": "4220100000004",
         "name": "Férias E Indenizações",
         "vlr25": -63326.97,
-        "pct25": -1.3180018089705338e-05,
+        "pct25": -0.000013180018089705338,
         "prejAjus": 5676.346330978729,
         "ano1": -62412.06844788702,
         "ano2": -67003.02740271256,
@@ -5481,7 +5481,7 @@
         "code": "4220100000011",
         "name": "Contribuição Sindical",
         "vlr25": -32517.34,
-        "pct25": -6.767718863370518e-06,
+        "pct25": -0.000006767718863370518,
         "prejAjus": 2914.7089084190807,
         "ano1": -32047.553354016687,
         "ano2": -34404.93399705245,
@@ -5945,7 +5945,7 @@
         "code": "4220100000042",
         "name": "Adicional Responsável Técnico",
         "vlr25": -174582.45,
-        "pct25": -3.633522729960201e-05,
+        "pct25": -0.00003633522729960201,
         "prejAjus": 15648.789915430621,
         "ano1": -172060.21098435327,
         "ano2": -184716.7594057112,
@@ -5974,7 +5974,7 @@
         "code": "4220100000045",
         "name": "Indeniz.Compensatórias De Domingo 2019",
         "vlr25": -180378.69,
-        "pct25": -3.754157821221118e-05,
+        "pct25": -0.00003754157821221118,
         "prejAjus": 0,
         "ano1": -193941.05010848364,
         "ano2": -208207.12753303273,
@@ -6003,7 +6003,7 @@
         "code": "4220100000046",
         "name": "Indeniz.Compensatória De Domingo 2020",
         "vlr25": -219596.97,
-        "pct25": -4.570393999656829e-05,
+        "pct25": -0.00004570393999656829,
         "prejAjus": 0,
         "ano1": -236108.08439977685,
         "ano2": -253475.91968129695,
@@ -6032,7 +6032,7 @@
         "code": "4220100000047",
         "name": "Indeniz.Compensatória De Domingo 2021",
         "vlr25": -273694.65,
-        "pct25": -5.6963098630102956e-05,
+        "pct25": -0.000056963098630102956,
         "prejAjus": 0,
         "ano1": -294273.2749088814,
         "ano2": -315919.67375779676,
@@ -6061,7 +6061,7 @@
         "code": "4220100000048",
         "name": "Indeniz.Compensatória De Domingo 2022",
         "vlr25": -305105.66,
-        "pct25": -6.350056094696281e-05,
+        "pct25": -0.00006350056094696281,
         "prejAjus": 0,
         "ano1": -328046.02414199803,
         "ano2": -352176.70703047083,
@@ -6090,7 +6090,7 @@
         "code": "4220100000049",
         "name": "Indeniz.Compensatória De Domingo 2023",
         "vlr25": -344718.92,
-        "pct25": -7.174512852049745e-05,
+        "pct25": -0.00007174512852049745,
         "prejAjus": 0,
         "ano1": -370637.73629280913,
         "ano2": -397901.41584623605,
@@ -6119,7 +6119,7 @@
         "code": "4220100000050",
         "name": "INDENIZ.COMPENSATÓRIA DE DOMINGO 2024",
         "vlr25": -4698.6,
-        "pct25": -9.779029850360676e-07,
+        "pct25": -9.779029850360676e-7,
         "prejAjus": 0,
         "ano1": -5051.879565372835,
         "ano2": -5423.489933465575,
@@ -6177,7 +6177,7 @@
         "code": "4220200000002",
         "name": "Serviço De Terceiros - Pf",
         "vlr25": -166493,
-        "pct25": -3.465159870761716e-05,
+        "pct25": -0.00003465159870761716,
         "prejAjus": 0,
         "ano1": -179011.31921798395,
         "ano2": -192179.18305292726,
@@ -6351,7 +6351,7 @@
         "code": "4220200000015",
         "name": "Brindes E Doacoes",
         "vlr25": -248079.5,
-        "pct25": -5.163190813779745e-05,
+        "pct25": -0.00005163190813779745,
         "prejAjus": 0,
         "ano1": -266732.16631292517,
         "ano2": -286352.67333869095,
@@ -6612,7 +6612,7 @@
         "code": "4220200000027",
         "name": "Seguro De Vida",
         "vlr25": -29164.14,
-        "pct25": -6.069829217641378e-06,
+        "pct25": -0.000006069829217641378,
         "prejAjus": 0,
         "ano1": -31356.94098405323,
         "ano2": -33663.52098671534,
@@ -6670,7 +6670,7 @@
         "code": "4220200000034",
         "name": "Despesa Com Cartório",
         "vlr25": -75361.07,
-        "pct25": -1.5684632722196408e-05,
+        "pct25": -0.000015684632722196408,
         "prejAjus": 0,
         "ano1": -81027.33783629842,
         "ano2": -86987.61429366076,
@@ -6728,7 +6728,7 @@
         "code": "4220200000050",
         "name": "Despesa Acordo Extra Judicial",
         "vlr25": -113332.87,
-        "pct25": -2.358756903667147e-05,
+        "pct25": -0.00002358756903667147,
         "prejAjus": 0,
         "ano1": -121854.17146342654,
         "ano2": -130817.62218017336,
@@ -6786,7 +6786,7 @@
         "code": "4240100000021",
         "name": "Despesas Judiciais - Ai",
         "vlr25": -170153.13,
-        "pct25": -3.5413368607719334e-05,
+        "pct25": -0.000035413368607719334,
         "prejAjus": 0,
         "ano1": -182946.64802946144,
         "ano2": -196403.99006143518,
@@ -6844,7 +6844,7 @@
         "code": "4240100000001",
         "name": "Imposto De Localização",
         "vlr25": -279698.91,
-        "pct25": -5.821274400892486e-05,
+        "pct25": -0.00005821274400892486,
         "prejAjus": 0,
         "ano1": -300728.9847797334,
         "ano2": -322850.2581165227,
@@ -6902,7 +6902,7 @@
         "code": "4240100000018",
         "name": "ISS",
         "vlr25": -55160.61,
-        "pct25": -1.1480382491680576e-05,
+        "pct25": -0.000011480382491680576,
         "prejAjus": 0,
         "ano1": -59308.040367875634,
         "ano2": -63670.670637811374,
@@ -6931,7 +6931,7 @@
         "code": "4240100000022",
         "name": "IOF",
         "vlr25": -427.22,
-        "pct25": -8.891578624848014e-08,
+        "pct25": -8.891578624848014e-8,
         "prejAjus": 0,
         "ano1": -459.3419290679314,
         "ano2": -493.1305855733969,
@@ -6960,7 +6960,7 @@
         "code": "4240100000005",
         "name": "Imposto Sindical Patronal",
         "vlr25": -30860.95,
-        "pct25": -6.422980276262893e-06,
+        "pct25": -0.000006422980276262893,
         "prejAjus": 0,
         "ano1": -33181.33117800894,
         "ano2": -35622.11119528891,
@@ -6989,7 +6989,7 @@
         "code": "4240100000008",
         "name": "Imposto E Taxas Estaduais",
         "vlr25": -367517.26,
-        "pct25": -7.649006631896236e-05,
+        "pct25": -0.00007649006631896236,
         "prejAjus": 0,
         "ano1": -395150.24384195614,
         "ano2": -424217.03485822375,
@@ -7105,7 +7105,7 @@
         "code": "4310200000002",
         "name": "Recuperação De Despesas",
         "vlr25": -435536.35,
-        "pct25": -9.064663873424285e-05,
+        "pct25": -0.00009064663873424285,
         "prejAjus": 0,
         "ano1": -468283.57096626033,
         "ano2": -502729.9642198397,
@@ -7134,7 +7134,7 @@
         "code": "3120200000003",
         "name": "Receitas Eventuais",
         "vlr25": 421561.51,
-        "pct25": 8.773810475573831e-05,
+        "pct25": 0.00008773810475573831,
         "prejAjus": 0,
         "ano1": 453257.98704225,
         "ano2": 486599.1158688858,
@@ -7511,7 +7511,7 @@
         "code": "3120100000002",
         "name": "Rendas De Aplicação",
         "vlr25": 490.8,
-        "pct25": 1.0214846657636359e-07,
+        "pct25": 1.0214846657636359e-7,
         "prejAjus": 0,
         "ano1": 527.7023987325987,
         "ano2": 566.5195716479175,
@@ -7627,7 +7627,7 @@
         "code": "4230100000001",
         "name": "Juros Dispendidos",
         "vlr25": -239092.83,
-        "pct25": -4.976154432335611e-05,
+        "pct25": -0.00004976154432335611,
         "prejAjus": 0,
         "ano1": -257069.8042191634,
         "ano2": -275979.55915991915,
@@ -7656,7 +7656,7 @@
         "code": "4230100000003",
         "name": "Encargos Bancários",
         "vlr25": -289881.42,
-        "pct25": -6.0331993769312984e-05,
+        "pct25": -0.000060331993769312984,
         "prejAjus": 0,
         "ano1": -311677.10000409913,
         "ano2": -334603.7039264263,
@@ -7685,7 +7685,7 @@
         "code": "4230100000004",
         "name": "Variação Monetária Passiva",
         "vlr25": -159304.08,
-        "pct25": -3.3155394236671456e-05,
+        "pct25": -0.000033155394236671456,
         "prejAjus": 0,
         "ano1": -171281.87682129128,
         "ano2": -183881.1718894978,
@@ -7743,7 +7743,7 @@
         "code": "4230100000012",
         "name": "Descontos Concedidos",
         "vlr25": -163.24,
-        "pct25": -3.397456333318173e-08,
+        "pct25": -3.397456333318173e-8,
         "prejAjus": 0,
         "ano1": -175.51373180340136,
         "ano2": -188.42431718786884,
@@ -11873,5 +11873,406 @@
         ]
       }
     }
+  },
+  "dreOrcVsReal": {
+    "meses": [
+      {
+        "key": "jan",
+        "label": "Janeiro/26"
+      },
+      {
+        "key": "fev",
+        "label": "Fevereiro/26"
+      },
+      {
+        "key": "mar",
+        "label": "Março/26"
+      }
+    ],
+    "linhas": [
+      {
+        "key": "faturamentoBruto",
+        "label": "Faturamento Bruto",
+        "bold": true,
+        "pct": false,
+        "jan": {
+          "o": 483,
+          "r": 466
+        },
+        "fev": {
+          "o": 461,
+          "r": 434
+        },
+        "mar": {
+          "o": 513,
+          "r": 489
+        }
+      },
+      {
+        "key": "faturamentoLiquido",
+        "label": "Faturamento Líquido",
+        "bold": true,
+        "pct": false,
+        "jan": {
+          "o": 401,
+          "r": 393
+        },
+        "fev": {
+          "o": 382,
+          "r": 365
+        },
+        "mar": {
+          "o": 426,
+          "r": 409
+        }
+      },
+      {
+        "key": "margemSitema",
+        "label": "Margem Sitema",
+        "bold": true,
+        "pct": false,
+        "jan": {
+          "o": 82,
+          "r": 74
+        },
+        "fev": {
+          "o": 78,
+          "r": 69
+        },
+        "mar": {
+          "o": 87,
+          "r": 80
+        }
+      },
+      {
+        "key": "pctMS",
+        "label": "% MS s/ Fat. Líquido",
+        "bold": false,
+        "pct": true,
+        "jan": {
+          "o": 0.2043,
+          "r": 0.1881
+        },
+        "fev": {
+          "o": 0.2043,
+          "r": 0.1892
+        },
+        "mar": {
+          "o": 0.2043,
+          "r": 0.1968
+        }
+      },
+      {
+        "key": "margemContribuicao",
+        "label": "Margem de Contribuição",
+        "bold": true,
+        "pct": false,
+        "jan": {
+          "o": 107,
+          "r": 105
+        },
+        "fev": {
+          "o": 102,
+          "r": 98
+        },
+        "mar": {
+          "o": 113,
+          "r": 107
+        }
+      },
+      {
+        "key": "pctMC",
+        "label": "% MC s/ Fat. Líquido",
+        "bold": false,
+        "pct": true,
+        "jan": {
+          "o": 0.2662,
+          "r": 0.2677
+        },
+        "fev": {
+          "o": 0.2662,
+          "r": 0.269
+        },
+        "mar": {
+          "o": 0.2662,
+          "r": 0.2625
+        }
+      },
+      {
+        "key": "despesas",
+        "label": "Despesas",
+        "bold": true,
+        "pct": false,
+        "jan": {
+          "o": -78,
+          "r": -92
+        },
+        "fev": {
+          "o": -73,
+          "r": -89
+        },
+        "mar": {
+          "o": -83,
+          "r": -95
+        }
+      },
+      {
+        "key": "pessoal",
+        "label": "Pessoal",
+        "bold": false,
+        "pct": false,
+        "jan": {
+          "o": -62,
+          "r": -64
+        },
+        "fev": {
+          "o": -58,
+          "r": -64
+        },
+        "mar": {
+          "o": -66,
+          "r": -66
+        }
+      },
+      {
+        "key": "pctPessoal",
+        "label": "% Pessoal s/ Fat. Líquido",
+        "bold": false,
+        "pct": true,
+        "jan": {
+          "o": 0.1533,
+          "r": 0.1641
+        },
+        "fev": {
+          "o": 0.1526,
+          "r": 0.1766
+        },
+        "mar": {
+          "o": 0.1542,
+          "r": 0.1623
+        }
+      },
+      {
+        "key": "outrasDespesas",
+        "label": "Outras despesas oper.",
+        "bold": false,
+        "pct": false,
+        "jan": {
+          "o": -16,
+          "r": -28
+        },
+        "fev": {
+          "o": -15,
+          "r": -24
+        },
+        "mar": {
+          "o": -18,
+          "r": -29
+        }
+      },
+      {
+        "key": "ebtida",
+        "label": "EBTIDA",
+        "bold": true,
+        "pct": false,
+        "jan": {
+          "o": 29,
+          "r": 13
+        },
+        "fev": {
+          "o": 29,
+          "r": 10
+        },
+        "mar": {
+          "o": 30,
+          "r": 12
+        }
+      },
+      {
+        "key": "pctEBTIDA",
+        "label": "% EBTIDA s/ Fat. Líquido",
+        "bold": false,
+        "pct": true,
+        "jan": {
+          "o": 0.0726,
+          "r": 0.0336
+        },
+        "fev": {
+          "o": 0.0748,
+          "r": 0.0261
+        },
+        "mar": {
+          "o": 0.0701,
+          "r": 0.029
+        }
+      },
+      {
+        "key": "depreciacao",
+        "label": "Depreciação",
+        "bold": false,
+        "pct": false,
+        "jan": {
+          "o": -2,
+          "r": -4
+        },
+        "fev": {
+          "o": -2,
+          "r": -4
+        },
+        "mar": {
+          "o": -2,
+          "r": -3
+        }
+      },
+      {
+        "key": "resultadoFinanceiro",
+        "label": "Resultado Financeiro",
+        "bold": false,
+        "pct": false,
+        "jan": {
+          "o": -2,
+          "r": -1
+        },
+        "fev": {
+          "o": -2,
+          "r": -2
+        },
+        "mar": {
+          "o": -2,
+          "r": -1
+        }
+      },
+      {
+        "key": "impostos",
+        "label": "Impostos",
+        "bold": false,
+        "pct": false,
+        "jan": {
+          "o": -8,
+          "r": -2
+        },
+        "fev": {
+          "o": -8,
+          "r": -2
+        },
+        "mar": {
+          "o": -9,
+          "r": -2
+        }
+      },
+      {
+        "key": "lucroLiquido",
+        "label": "Lucro Líquido",
+        "bold": true,
+        "pct": false,
+        "jan": {
+          "o": 16,
+          "r": 5
+        },
+        "fev": {
+          "o": 16,
+          "r": 1
+        },
+        "mar": {
+          "o": 17,
+          "r": 5
+        }
+      }
+    ]
+  },
+  "dfc2025": {
+    "periodo": "Dezembro/2025",
+    "sections": [
+      {
+        "title": "ATIVIDADES OPERACIONAIS",
+        "rows": [
+          {
+            "label": "Lucro (Prejuízo) do período",
+            "valor": 53000,
+            "bold": true
+          },
+          {
+            "label": "Depreciação e amortização",
+            "valor": 21000,
+            "bold": false
+          },
+          {
+            "label": "Resultado na venda/baixa de ativo imobilizado",
+            "valor": 1000,
+            "bold": false
+          },
+          {
+            "label": "Redução ao valor recuperável do contas a receber",
+            "valor": 3000,
+            "bold": false
+          },
+          {
+            "label": "Lucro (Prejuízo) Ajustado",
+            "valor": 78000,
+            "bold": true
+          },
+          {
+            "label": "Geração (Consumo) Caixa Operacional",
+            "valor": 83000,
+            "bold": true
+          },
+          {
+            "label": "Fluxo de Caixa das Atividades Operacionais",
+            "valor": 161000,
+            "bold": true
+          }
+        ]
+      },
+      {
+        "title": "INVESTIMENTOS",
+        "rows": [
+          {
+            "label": "Aquisição de ativo imobilizado e intangível",
+            "valor": -6000,
+            "bold": false
+          },
+          {
+            "label": "Fluxo de Caixa de Investimentos",
+            "valor": -6000,
+            "bold": true
+          }
+        ]
+      },
+      {
+        "title": "FINANCIAMENTOS",
+        "rows": [
+          {
+            "label": "Empréstimos e financiamentos, líquido",
+            "valor": -62000,
+            "bold": false
+          },
+          {
+            "label": "Aporte de capital/Distribuição de lucros",
+            "valor": -43000,
+            "bold": false
+          },
+          {
+            "label": "Partes relacionadas",
+            "valor": 17000,
+            "bold": false
+          },
+          {
+            "label": "Fluxo de Caixa de Financiamentos",
+            "valor": -88000,
+            "bold": true
+          }
+        ]
+      },
+      {
+        "title": "RESULTADO",
+        "rows": [
+          {
+            "label": "Caixa gerado das atividades operacionais",
+            "valor": 67000,
+            "bold": true
+          }
+        ]
+      }
+    ]
   }
 }
