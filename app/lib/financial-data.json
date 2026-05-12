@@ -12274,5 +12274,24 @@
         ]
       }
     ]
+  },
+  "dre2025": {
+    "periodo": "Dezembro/2025",
+    "rows": [
+      { "label": "Receita operacional líquida",                                       "v2025": 4805,   "v2024": 4516,   "pct": 6,   "bold": false },
+      { "label": "Custos das mercadorias vendidas e dos serviços prestados",           "v2025": -3433,  "v2024": -3262,  "pct": 5,   "bold": false },
+      { "label": "LUCRO OPERACIONAL BRUTO",                                          "v2025": 1372,   "v2024": 1254,   "pct": 9,   "bold": true  },
+      { "label": "Despesas gerais e administrativas",                                 "v2025": -1289,  "v2024": -1215,  "pct": 6,   "bold": false },
+      { "label": "Despesas comerciais",                                               "v2025": -20,    "v2024": -19,    "pct": 7,   "bold": false },
+      { "label": "Despesas tributárias",                                             "v2025": -6,     "v2024": -6,     "pct": -5,  "bold": false },
+      { "label": "Outras receitas (despesas), líquido",                              "v2025": 23,     "v2024": 33,     "pct": -32, "bold": false },
+      { "label": "TOTAL RECEITAS E DESPESAS OPERACIONAIS",                           "v2025": -1292,  "v2024": -1207,  "pct": 7,   "bold": true  },
+      { "label": "Receitas financeiras",                                              "v2025": 28,     "v2024": 61,     "pct": -54, "bold": false },
+      { "label": "Despesas financeiras",                                              "v2025": -23,    "v2024": -15,    "pct": 50,  "bold": false },
+      { "label": "RESULTADO FINANCEIRO",                                             "v2025": 5,      "v2024": 46,     "pct": -89, "bold": true  },
+      { "label": "RESULTADO ANTES DOS IMPOSTOS",                                     "v2025": 85,     "v2024": 92,     "pct": -8,  "bold": true  },
+      { "label": "Imposto de renda e contribuição social",                            "v2025": -32,    "v2024": -31,    "pct": 5,   "bold": false },
+      { "label": "LUCRO (PREJUÍZO) LÍQUIDO",                                        "v2025": 53,     "v2024": 61,     "pct": -14, "bold": true  }
+    ]
   }
 }

@@ -1311,6 +1311,78 @@ export async function generatePPT(): Promise<void> {
     wrap: true, lineSpacingMultiple: 1.2,
   });
 
+  // ── SLIDE 11c – DRE BP 2025 ────────────────────────────────────────────────
+  const dre25Raw = (financialData as any).dre2025 ?? {};
+  const dre25Rows: any[] = dre25Raw.rows ?? [];
+  const dre25Periodo = dre25Raw.periodo ?? 'Dezembro/2025';
+
+  const sDre25 = prs.addSlide();
+  sDre25.background = { fill: C.white };
+
+  sDre25.addShape('rect', { x: 0, y: 0, w: 13.33, h: 0.88, fill: { color: C.darkBlue }, line: { color: C.darkBlue } });
+  sDre25.addText(`DRE – DEMONSTRAÇÃO DO RESULTADO DO EXERCÍCIO  |  ${dre25Periodo}`, {
+    x: 0.4, y: 0.05, w: 10.5, h: 0.5,
+    fontSize: 14, bold: true, color: C.white, fontFace: 'Arial', valign: 'middle',
+  });
+  sDre25.addText('Em milhões de R$', {
+    x: 0.4, y: 0.57, w: 6, h: 0.25,
+    fontSize: 9.5, color: 'BFDBFE', fontFace: 'Arial', italic: true,
+  });
+  addLogo(sDre25, 11.5, 0.07, 1.55, 0.7);
+
+  const fmtDre25 = (v: number): string => {
+    if (v === 0) return '–';
+    const abs = Math.abs(v);
+    const s = abs.toLocaleString('pt-BR', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
+    return v < 0 ? `(${s})` : s;
+  };
+  const fmtPct25 = (v: number): string => {
+    if (v === 0) return '–';
+    const s = Math.abs(v) + '%';
+    return v < 0 ? `(${s})` : s;
+  };
+
+  const dre25Header: object[] = [
+    { text: 'Descrição', options: { bold: true, color: C.white, fill: { color: C.darkBlue }, fontSize: 9.5, fontFace: 'Arial', align: 'left',   valign: 'middle' } },
+    { text: '2025',      options: { bold: true, color: C.white, fill: { color: C.darkBlue }, fontSize: 9.5, fontFace: 'Arial', align: 'center', valign: 'middle' } },
+    { text: '2024',      options: { bold: true, color: C.white, fill: { color: C.darkBlue }, fontSize: 9.5, fontFace: 'Arial', align: 'center', valign: 'middle' } },
+    { text: '%',         options: { bold: true, color: C.white, fill: { color: C.darkBlue }, fontSize: 9.5, fontFace: 'Arial', align: 'center', valign: 'middle' } },
+  ];
+
+  const dre25TableRows: object[][] = [dre25Header, ...dre25Rows.map((row: any, i: number) => {
+    const isEven = i % 2 === 0;
+    const bg = row.bold ? C.lightBlue : isEven ? C.white : C.lightGray;
+    return [
+      { text: row.bold ? row.label : `   ${row.label}`, options: { bold: row.bold, fontSize: 9, color: C.gray, fill: { color: bg }, fontFace: 'Arial', align: 'left',  valign: 'middle' } },
+      { text: fmtDre25(row.v2025), options: { bold: row.bold, fontSize: 9, color: C.gray, fill: { color: bg }, fontFace: 'Arial', align: 'right', valign: 'middle' } },
+      { text: fmtDre25(row.v2024), options: { bold: row.bold, fontSize: 9, color: C.gray, fill: { color: bg }, fontFace: 'Arial', align: 'right', valign: 'middle' } },
+      { text: fmtPct25(row.pct),   options: { bold: row.bold, fontSize: 9, color: C.gray, fill: { color: bg }, fontFace: 'Arial', align: 'right', valign: 'middle' } },
+    ];
+  })];
+
+  sDre25.addTable(dre25TableRows, {
+    x: 0.3, y: 0.95, w: 12.7,
+    rowH: 0.30,
+    border: { pt: 0.3, color: 'E2E8F0' },
+    colW: [7.5, 1.8, 1.8, 1.6],
+  });
+
+  const dre25AX = 0.3, dre25AY = 5.52, dre25AW = 12.7;
+  sDre25.addShape('rect', { x: dre25AX, y: dre25AY,       w: dre25AW, h: 0.3,  fill: { color: C.darkBlue }, line: { color: C.darkBlue } });
+  sDre25.addText('ANÁLISE', {
+    x: dre25AX + 0.12, y: dre25AY + 0.02, w: dre25AW - 0.2, h: 0.26,
+    fontSize: 8.5, bold: true, color: C.white, fontFace: 'Arial', valign: 'middle',
+  });
+  sDre25.addShape('rect', { x: dre25AX, y: dre25AY + 0.3, w: dre25AW, h: 1.62, fill: { color: 'EFF6FF' }, line: { color: 'BFDBFE', pt: 0.5 } });
+  sDre25.addText('▸  Receita operacional líquida de R$ 4.805M em 2025, crescimento de 6% sobre os R$ 4.516M de 2024. Lucro Operacional Bruto de R$ 1.372M (margem de 28,6%), com expansão de 9% frente ao exercício anterior. Despesas operacionais totalizaram R$ 1.292M (+7%), concentradas em despesas gerais e administrativas de R$ 1.289M.', {
+    x: dre25AX + 0.18, y: dre25AY + 0.36, w: dre25AW - 0.35, h: 0.72,
+    fontSize: 9, color: C.gray, fontFace: 'Arial', valign: 'top', wrap: true, lineSpacingMultiple: 1.2,
+  });
+  sDre25.addText('▸  Resultado financeiro de R$ 5M (vs. R$ 46M em 2024, -89%), reflexo da queda nas receitas financeiras de R$ 61M para R$ 28M. Resultado antes dos impostos de R$ 85M (-8%). Lucro líquido encerrou em R$ 53M, com retração de 14% frente aos R$ 61M de 2024.', {
+    x: dre25AX + 0.18, y: dre25AY + 1.14, w: dre25AW - 0.35, h: 0.72,
+    fontSize: 9, color: C.gray, fontFace: 'Arial', valign: 'top', wrap: true, lineSpacingMultiple: 1.2,
+  });
+
   // ── SLIDE 12 – RESUMO DRE – Orçado vs Realizado ─────────────────────────
   const drvData = (financialData as any).dreOrcVsReal ?? {};
   const drvMeses: any[] = drvData.meses ?? [];
