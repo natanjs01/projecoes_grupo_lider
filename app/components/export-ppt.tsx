@@ -1054,66 +1054,106 @@ export async function generatePPT(): Promise<void> {
   const getSecRow = (si: number, lbl: string): number =>
     dfcSections[si]?.rows?.find((r: any) => r.label === lbl)?.valor ?? 0;
 
-  // ── KPI Cards ────────────────────────────────────────────────────────────
-  const dfcKpis = [
-    { label: 'Lucro Ajustado',           value: getSecRow(0, 'Lucro (Prejuízo) Ajustado'),                       bg: C.lightBlue, fgL: C.darkBlue, fgV: C.midBlue  },
-    { label: 'Fluxo Operacional',         value: getSecRow(0, 'Fluxo de Caixa das Atividades Operacionais'),      bg: 'DCFCE7',    fgL: '166534',   fgV: '15803D'   },
-    { label: 'Fluxo de Investimentos',    value: getSecRow(1, 'Fluxo de Caixa de Investimentos'),                 bg: 'FEE2E2',    fgL: '991B1B',   fgV: C.negative },
-    { label: 'Caixa no Final do Período', value: getSecRow(3, 'Caixa no final do período'),                       bg: C.darkBlue,  fgL: 'BFDBFE',   fgV: C.white    },
+  // ── Tabela filtrada (lado esquerdo) ───────────────────────────────────────
+  const sec0Show = new Set([
+    'Lucro (Prejuízo) do período',
+    'Depreciação e amortização',
+    'Resultado na venda/baixa de ativo imobilizado',
+    'Redução ao valor recuperável do contas a receber',
+    'Lucro (Prejuízo) Ajustado',
+    'Geração (Consumo) Caixa Operacional',
+    'Fluxo de Caixa das Atividades Operacionais',
+  ]);
+  const sec3Show = new Set([
+    'Caixa gerado das atividades operacionais',
+    'Caixa no início do período',
+    'Caixa no final do período',
+  ]);
+  const secShortTitle = [
+    'ATIVIDADES OPERACIONAIS',
+    'INVESTIMENTOS',
+    'FINANCIAMENTOS',
+    'RESULTADO',
   ];
-  const kCardW = 2.95; const kCardGap = 0.18; const kCardY = 0.95; const kCardH = 0.72;
-  dfcKpis.forEach((kpi, i) => {
-    const cx = 0.38 + i * (kCardW + kCardGap);
-    sDfc.addShape('rect', { x: cx, y: kCardY, w: kCardW, h: kCardH, fill: { color: kpi.bg }, line: { color: kpi.bg } });
-    sDfc.addText(kpi.label,       { x: cx + 0.12, y: kCardY + 0.05, w: kCardW - 0.2, h: 0.24, fontSize: 9,  color: kpi.fgL, fontFace: 'Arial' });
-    sDfc.addText(fmtDfc(kpi.value), { x: cx + 0.12, y: kCardY + 0.3,  w: kCardW - 0.2, h: 0.36, fontSize: 14, bold: true, color: kpi.fgV, fontFace: 'Arial' });
+  const dfcSecCfg = [
+    { hBg: '1E3A5F', boldBg: 'BFDBFE', rowBg: 'EFF6FF' },
+    { hBg: '1E4976', boldBg: 'BAE6FD', rowBg: 'F0F9FF' },
+    { hBg: '1E5C8A', boldBg: 'A5F3FC', rowBg: 'F0FDFF' },
+    { hBg: '155E75', boldBg: '1E3A5F', rowBg: 'ECFEFF' },
+  ];
+
+  const dfcTRows: object[][] = [];
+  dfcSections.forEach((sec: any, si: number) => {
+    const cfg = dfcSecCfg[si] ?? dfcSecCfg[0];
+    const isRes = si === 3;
+    dfcTRows.push([
+      { text: secShortTitle[si] ?? sec.title, options: { bold: true, fontSize: 8, color: C.white, fill: { color: cfg.hBg }, fontFace: 'Arial', align: 'left', valign: 'middle' } },
+      { text: '',                              options: { fill: { color: cfg.hBg } } },
+    ]);
+    (sec.rows ?? []).forEach((row: any) => {
+      const isBold = !!row.bold;
+      const val: number = row.valor ?? 0;
+      if (si === 0 && !sec0Show.has(row.label)) return;
+      if (si === 3 && !sec3Show.has(row.label)) return;
+      if ((si === 1 || si === 2) && !isBold && val === 0) return;
+      const bg       = isBold ? cfg.boldBg : cfg.rowBg;
+      const isWhite  = isRes && isBold;
+      const tColor   = isWhite ? C.white : C.gray;
+      const vColor   = isWhite ? C.white : (val < 0 ? C.negative : (isBold ? C.positive : '4B5563'));
+      dfcTRows.push([
+        { text: isBold ? row.label : `   ${row.label}`, options: { bold: isBold, fontSize: 8.5, color: tColor, fill: { color: bg }, fontFace: 'Arial', align: 'left',  valign: 'middle' } },
+        { text: fmtDfc(val),                             options: { bold: isBold, fontSize: 8.5, color: vColor, fill: { color: bg }, fontFace: 'Arial', align: 'right', valign: 'middle' } },
+      ]);
+    });
   });
 
-  // ── Duas tabelas lado a lado ──────────────────────────────────────────────
-  const dfcTColW: [number, number] = [4.35, 1.65]; // 6.0 por tabela
-  const dfcTW = dfcTColW[0] + dfcTColW[1];
-  const dfcTX0 = 0.38;
-  const dfcTX1 = dfcTX0 + dfcTW + 0.2;
-  const dfcTY = 1.75;
-  const dfcMaxH = 5.55;
+  const dfcColW: [number, number] = [4.3, 1.5];
+  const dfcRowH = 0.295;
+  sDfc.addTable(dfcTRows, {
+    x: 0.3, y: 0.95, w: 5.8, h: dfcTRows.length * dfcRowH,
+    colW: dfcColW, rowH: dfcRowH,
+    border: { pt: 0.3, color: 'E2E8F0' },
+  });
 
-  const dfcSecCfg = [
-    { hBg: '1E3A5F', boldBg: 'BFDBFE', rowBg: 'EFF6FF', isRes: false },
-    { hBg: '1E4976', boldBg: 'BAE6FD', rowBg: 'F0F9FF', isRes: false },
-    { hBg: '1E5C8A', boldBg: 'A5F3FC', rowBg: 'F0FDFF', isRes: false },
-    { hBg: '155E75', boldBg: '1E3A5F', rowBg: 'ECFEFF', isRes: true  },
+  // ── Gráfico de linha (lado direito) ────────────────────────────────────────
+  const dfcChartVals = [
+    getSecRow(0, 'Lucro (Prejuízo) Ajustado')                  / 1000,
+    getSecRow(0, 'Geração (Consumo) Caixa Operacional')        / 1000,
+    getSecRow(1, 'Fluxo de Caixa de Investimentos')            / 1000,
+    getSecRow(2, 'Fluxo de Caixa de Financiamentos')           / 1000,
+    getSecRow(3, 'Caixa gerado das atividades operacionais')   / 1000,
   ];
+  const dfcChartMin = Math.floor(Math.min(...dfcChartVals) * 1.35 / 5) * 5;
+  const dfcChartMax = Math.ceil(Math.max(...dfcChartVals)  * 1.25 / 5) * 5;
 
-  const buildDfcTable = (secIndexes: number[]): object[][] => {
-    const rows: object[][] = [];
-    for (const si of secIndexes) {
-      const sec = dfcSections[si]; if (!sec) continue;
-      const cfg = dfcSecCfg[si];
-      rows.push([
-        { text: sec.title, options: { bold: true, fontSize: 8, color: C.white, fill: { color: cfg.hBg }, fontFace: 'Arial', align: 'left', valign: 'middle' } },
-        { text: '',        options: { fill: { color: cfg.hBg } } },
-      ]);
-      for (const row of sec.rows ?? []) {
-        const isBold = !!row.bold;
-        const bg   = isBold ? cfg.boldBg : cfg.rowBg;
-        const isWhite = cfg.isRes && isBold;
-        const tColor = isWhite ? C.white : C.gray;
-        const vColor = isWhite ? C.white : (row.valor < 0 ? C.negative : (isBold ? C.positive : '4B5563'));
-        rows.push([
-          { text: isBold ? row.label : `   ${row.label}`, options: { bold: isBold, fontSize: 8.5, color: tColor, fill: { color: bg }, fontFace: 'Arial', align: 'left',  valign: 'middle' } },
-          { text: fmtDfc(row.valor),                       options: { bold: isBold, fontSize: 8.5, color: vColor, fill: { color: bg }, fontFace: 'Arial', align: 'right', valign: 'middle' } },
-        ]);
-      }
-    }
-    return rows;
-  };
-
-  const leftDfcRows  = buildDfcTable([0]);
-  const rightDfcRows = buildDfcTable([1, 2, 3]);
-  const rowHLeft  = Math.min(dfcMaxH / leftDfcRows.length,  0.31);
-  const rowHRight = Math.min(dfcMaxH / rightDfcRows.length, 0.31);
-  sDfc.addTable(leftDfcRows,  { x: dfcTX0, y: dfcTY, w: dfcTW, h: leftDfcRows.length  * rowHLeft,  colW: dfcTColW, rowH: rowHLeft,  border: { pt: 0.3, color: 'E2E8F0' } });
-  sDfc.addTable(rightDfcRows, { x: dfcTX1, y: dfcTY, w: dfcTW, h: rightDfcRows.length * rowHRight, colW: dfcTColW, rowH: rowHRight, border: { pt: 0.3, color: 'E2E8F0' } });
+  (sDfc as any).addChart('line', [
+    {
+      name: 'R$ Milhões',
+      labels: ['Lucro\nAjustado', 'Caixa\nCíclico', 'Investimentos', 'Financiamentos', 'Caixa\nGerado'],
+      values: dfcChartVals,
+    },
+  ], {
+    x: 6.4, y: 0.95, w: 6.65, h: 6.3,
+    showTitle: true,
+    title: `Fluxo de Caixa  |  1º TRI ${dfcAno}`,
+    titleFontSize: 11,
+    titleBold: true,
+    titleColor: C.darkBlue,
+    lineDataSymbol: 'circle',
+    lineDataSymbolSize: 9,
+    lineSize: 2.5,
+    chartColors: ['2563EB'],
+    showValue: true,
+    dataLabelFontSize: 9,
+    dataLabelFontBold: true,
+    dataLabelColor: C.darkBlue,
+    showLegend: false,
+    valAxisMinVal: dfcChartMin,
+    valAxisMaxVal: dfcChartMax,
+    valGridLine: { style: 'solid', color: 'E5E7EB', size: 0.5 },
+    catAxisLabelFontSize: 9,
+    valAxisLabelFontSize: 9,
+  });
 
   // ── SLIDE 12 – Realizado vs Orçado ───────────────────────────────────────
   const orcData = (financialData as any).orcamento?.summary ?? {};
