@@ -7,7 +7,7 @@ const ANO: number = dfc1tri?.ano ?? 2026;
 const SECTIONS: any[] = dfc1tri?.sections ?? [];
 
 function fmt(v: number): string {
-  const abs = Math.abs(v) / 1_000_000;
+  const abs = Math.abs(v) / 1_000;
   const s = abs.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   return v < 0 ? `(${s})` : s;
 }
