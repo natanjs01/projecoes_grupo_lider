@@ -70,11 +70,11 @@ export default function FcTab({ scenario }: Props) {
                 {showMonths && MONTHS.map((m: string) => (
                   <th key={m} className="text-right min-w-[90px]">{m}</th>
                 ))}
-                <th className="text-right min-w-[120px]">Ano 1</th>
-                <th className="text-right min-w-[120px]">Ano 2</th>
-                <th className="text-right min-w-[120px]">Ano 3</th>
-                <th className="text-right min-w-[120px]">Ano 4</th>
-                <th className="text-right min-w-[120px]">Ano 5</th>
+                <th className="text-right min-w-[120px]">2026</th>
+                <th className="text-right min-w-[120px]">2027</th>
+                <th className="text-right min-w-[120px]">2028</th>
+                <th className="text-right min-w-[120px]">2029</th>
+                <th className="text-right min-w-[120px]">2030</th>
               </tr>
             </thead>
             <tbody>

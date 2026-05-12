@@ -139,13 +139,13 @@ export default function KpisTab({ scenario }: Props) {
 
   const kpiCards = [
     { label: 'VPL 10 anos', value: formatCompact(vpnRow?.ano1 ?? 0), sub: `Taxa: ${formatPct(taxaRow?.ano1)}`, icon: Target, color: 'text-red-400', tooltip: 'Valor Presente Líquido\nVPL = Σ FCL / (1 + taxa)^n\nFluxo de caixa livre descontado a 10 anos' },
-    { label: 'Margem Bruta (Ano 1)', value: formatPct(kpis?.[0]?.margemBruta), sub: `Ano 5: ${formatPct(kpis?.[4]?.margemBruta)}`, icon: Percent, color: 'text-emerald-400', tooltip: 'Margem Bruta = Lucro Bruto / Receita Líquida\nMede a rentabilidade após custos diretos' },
-    { label: 'Margem EBITDA Aj. (Ano 1)', value: formatPct(kpis?.[0]?.margemEbitdaAjus), sub: `Ano 5: ${formatPct(kpis?.[4]?.margemEbitdaAjus)}`, icon: Activity, color: 'text-blue-400', tooltip: 'Margem EBITDA Aj. = EBITDA Ajustado / Receita Líquida\nEficiência operacional antes de juros, impostos, depreciação e amortização' },
-    { label: 'Margem Líquida (Ano 1)', value: formatPct(kpis?.[0]?.margemLiquida), sub: `Ano 5: ${formatPct(kpis?.[4]?.margemLiquida)}`, icon: TrendingUp, color: 'text-amber-400', tooltip: 'Margem Líquida = Lucro Líquido / Receita Líquida\nRentabilidade final após todas as deduções' },
-    { label: 'EBITDA Ajustado (Ano 1)', value: 'R$ ' + formatCompact(kpis?.[0]?.ebitdaAjustado), sub: `Ano 5: R$ ${formatCompact(kpis?.[4]?.ebitdaAjustado)}`, icon: BarChart3, color: 'text-red-400', tooltip: 'EBITDA Ajustado\nLucro antes de Juros, Impostos, Depreciação e Amortização\najustado por itens não recorrentes' },
-    { label: 'Caixa Livre (Ano 1)', value: 'R$ ' + formatCompact(kpis?.[0]?.caixaLivre), sub: `Ano 5: R$ ${formatCompact(kpis?.[4]?.caixaLivre)}`, icon: Wallet, color: 'text-emerald-400', tooltip: 'Caixa Livre\nCaixa disponível após todas as obrigações\noperacionais, investimentos e financiamentos' },
-    { label: 'Lucro Líquido (Ano 1)', value: 'R$ ' + formatCompact(kpis?.[0]?.lucroLiquido), sub: `Ano 5: R$ ${formatCompact(kpis?.[4]?.lucroLiquido)}`, icon: DollarSign, color: 'text-blue-400', tooltip: 'Lucro Líquido\nResultado final após todas as receitas\nmenos custos, despesas, juros e impostos' },
-    { label: 'Ciclo Financeiro (Ano 1)', value: `${Math.round(kpis?.[0]?.ccc ?? 0)} dias`, sub: `Ano 5: ${Math.round(kpis?.[4]?.ccc ?? 0)} dias`, icon: Clock, color: 'text-amber-400', tooltip: 'Ciclo de Conversão de Caixa (CCC)\nCCC = DSO + DIO - DPO\nTempo entre pagar fornecedores e receber de clientes' },
+    { label: 'Margem Bruta (2026)', value: formatPct(kpis?.[0]?.margemBruta), sub: `2030: ${formatPct(kpis?.[4]?.margemBruta)}`, icon: Percent, color: 'text-emerald-400', tooltip: 'Margem Bruta = Lucro Bruto / Receita Líquida\nMede a rentabilidade após custos diretos' },
+    { label: 'Margem EBITDA Aj. (2026)', value: formatPct(kpis?.[0]?.margemEbitdaAjus), sub: `2030: ${formatPct(kpis?.[4]?.margemEbitdaAjus)}`, icon: Activity, color: 'text-blue-400', tooltip: 'Margem EBITDA Aj. = EBITDA Ajustado / Receita Líquida\nEficiência operacional antes de juros, impostos, depreciação e amortização' },
+    { label: 'Margem Líquida (2026)', value: formatPct(kpis?.[0]?.margemLiquida), sub: `2030: ${formatPct(kpis?.[4]?.margemLiquida)}`, icon: TrendingUp, color: 'text-amber-400', tooltip: 'Margem Líquida = Lucro Líquido / Receita Líquida\nRentabilidade final após todas as deduções' },
+    { label: 'EBITDA Ajustado (2026)', value: 'R$ ' + formatCompact(kpis?.[0]?.ebitdaAjustado), sub: `2030: R$ ${formatCompact(kpis?.[4]?.ebitdaAjustado)}`, icon: BarChart3, color: 'text-red-400', tooltip: 'EBITDA Ajustado\nLucro antes de Juros, Impostos, Depreciação e Amortização\najustado por itens não recorrentes' },
+    { label: 'Caixa Livre (2026)', value: 'R$ ' + formatCompact(kpis?.[0]?.caixaLivre), sub: `2030: R$ ${formatCompact(kpis?.[4]?.caixaLivre)}`, icon: Wallet, color: 'text-emerald-400', tooltip: 'Caixa Livre\nCaixa disponível após todas as obrigações\noperacionais, investimentos e financiamentos' },
+    { label: 'Lucro Líquido (2026)', value: 'R$ ' + formatCompact(kpis?.[0]?.lucroLiquido), sub: `2030: R$ ${formatCompact(kpis?.[4]?.lucroLiquido)}`, icon: DollarSign, color: 'text-blue-400', tooltip: 'Lucro Líquido\nResultado final após todas as receitas\nmenos custos, despesas, juros e impostos' },
+    { label: 'Ciclo Financeiro (2026)', value: `${Math.round(kpis?.[0]?.ccc ?? 0)} dias`, sub: `2030: ${Math.round(kpis?.[4]?.ccc ?? 0)} dias`, icon: Clock, color: 'text-amber-400', tooltip: 'Ciclo de Conversão de Caixa (CCC)\nCCC = DSO + DIO - DPO\nTempo entre pagar fornecedores e receber de clientes' },
   ];
 
   interface KpiRowConfig {
@@ -242,11 +242,11 @@ export default function KpisTab({ scenario }: Props) {
             <thead>
               <tr>
                 <th className="min-w-[280px]">Indicador</th>
-                <th className="text-right min-w-[120px]">Ano 1</th>
-                <th className="text-right min-w-[120px]">Ano 2</th>
-                <th className="text-right min-w-[120px]">Ano 3</th>
-                <th className="text-right min-w-[120px]">Ano 4</th>
-                <th className="text-right min-w-[120px]">Ano 5</th>
+                <th className="text-right min-w-[120px]">2026</th>
+                <th className="text-right min-w-[120px]">2027</th>
+                <th className="text-right min-w-[120px]">2028</th>
+                <th className="text-right min-w-[120px]">2029</th>
+                <th className="text-right min-w-[120px]">2030</th>
               </tr>
             </thead>
             <tbody>
