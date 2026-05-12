@@ -157,16 +157,16 @@ export async function generatePPT(): Promise<void> {
       ];
       if (row.total) return [
         { text: row.label, options: { bold: true, color: C.darkBlue, fill: { color: C.lightBlue }, fontSize: 8.5 } },
-        { text: fmtBpV(row.valor),    options: { bold: true, align: 'right', fontSize: 8.5, color: C.midBlue,  fill: { color: C.lightBlue } } },
+        { text: fmtBpV(row.valor),    options: { bold: true, align: 'right', fontSize: 8.5, color: '000000',  fill: { color: C.lightBlue } } },
         { text: fmtBpV(row.anterior), options: { bold: true, align: 'right', fontSize: 8.5, color: C.gray,    fill: { color: C.lightBlue } } },
-        { text: fmtBpP(row.pct),      options: { bold: true, align: 'right', fontSize: 8.5, color: row.pct >= 0 ? '16A34A' : C.negative, fill: { color: C.lightBlue } } },
+        { text: fmtBpP(row.pct),      options: { bold: true, align: 'right', fontSize: 8.5, color: '000000', fill: { color: C.lightBlue } } },
       ];
       const bg = i % 2 === 0 ? C.white : C.lightGray;
       return [
         { text: row.label, options: { fontSize: 8, color: C.gray, fill: { color: bg } } },
-        { text: fmtBpV(row.valor),    options: { align: 'right', fontSize: 8, color: C.gray,   fill: { color: bg } } },
+        { text: fmtBpV(row.valor),    options: { bold: true, align: 'right', fontSize: 8, color: '000000', fill: { color: bg } } },
         { text: fmtBpV(row.anterior), options: { align: 'right', fontSize: 8, color: '9CA3AF', fill: { color: bg } } },
-        { text: fmtBpP(row.pct),      options: { align: 'right', fontSize: 8, color: row.pct > 0 ? '16A34A' : row.pct < 0 ? C.negative : '9CA3AF', fill: { color: bg } } },
+        { text: fmtBpP(row.pct),      options: { bold: true, align: 'right', fontSize: 8, color: '000000', fill: { color: bg } } },
       ];
     });
 
@@ -452,7 +452,7 @@ export async function generatePPT(): Promise<void> {
     const get = (off: number, yr: number): number => estoqSec[b + off]?.[`ano${yr}`] ?? 0;
     estoqTRows.push([
       { text: `Tipo ${t}  –  Saldo Inicial`, options: { bold: true, fontSize: 9, color: C.darkBlue, fill: { color: bgH } } },
-      ...YRS.map(yr => ({ text: fmtBig(get(0, yr)), options: { align: 'right', fontSize: 9, bold: true, color: C.midBlue, fill: { color: bgH } } })),
+      ...YRS.map(yr => ({ text: fmtBig(get(0, yr)), options: { align: 'right', fontSize: 9, bold: true, color: '000000', fill: { color: bgH } } })),
     ]);
     estoqTRows.push([
       { text: '   Compras', options: { bold: false, fontSize: 8.5, color: C.gray, fill: { color: bgR } } },
@@ -460,11 +460,11 @@ export async function generatePPT(): Promise<void> {
     ]);
     estoqTRows.push([
       { text: '   Baixa CMV', options: { bold: false, fontSize: 8.5, color: C.gray, fill: { color: bgR } } },
-      ...YRS.map(yr => ({ text: fmtBig(get(2, yr)), options: { align: 'right', fontSize: 8.5, color: C.negative, fill: { color: bgR } } })),
+      ...YRS.map(yr => ({ text: fmtBig(get(2, yr)), options: { align: 'right', fontSize: 8.5, bold: true, color: '000000', fill: { color: bgR } } })),
     ]);
     estoqTRows.push([
       { text: `Tipo ${t}  –  Saldo Final`, options: { bold: true, fontSize: 9, color: C.darkBlue, fill: { color: bgH } } },
-      ...YRS.map(yr => ({ text: fmtBig(get(5, yr)), options: { align: 'right', fontSize: 9, bold: true, color: C.midBlue, fill: { color: bgH } } })),
+      ...YRS.map(yr => ({ text: fmtBig(get(5, yr)), options: { align: 'right', fontSize: 9, bold: true, color: '000000', fill: { color: bgH } } })),
     ]);
   });
   sp2.addTable([estoqHdr, ...estoqTRows], {
@@ -488,7 +488,7 @@ export async function generatePPT(): Promise<void> {
       { text: 'Ano', options: { bold: true, color: C.white, fill: { color: C.midBlue }, fontSize: 8.5, align: 'center', underline: true } },
     ],
     [
-      { text: fmtOrc(compras2026), options: { bold: true, align: 'center', fontSize: 9, color: C.midBlue, fill: { color: C.white } } },
+      { text: fmtOrc(compras2026), options: { bold: true, align: 'center', fontSize: 9, color: '000000', fill: { color: C.white } } },
       { text: '2026', options: { align: 'center', fontSize: 9, color: C.gray, fill: { color: C.white } } },
     ],
     [
@@ -496,7 +496,7 @@ export async function generatePPT(): Promise<void> {
       { text: '2025', options: { align: 'center', fontSize: 9, color: C.gray, fill: { color: C.lightGray } } },
     ],
     [
-      { text: varStr, options: { bold: true, align: 'center', fontSize: 9, color: varCompras < 0 ? C.negative : '16A34A', fill: { color: C.white } } },
+      { text: varStr, options: { bold: true, align: 'center', fontSize: 9, color: '000000', fill: { color: C.white } } },
       { text: '', options: { fill: { color: C.white } } },
     ],
   ], {
@@ -552,7 +552,7 @@ export async function generatePPT(): Promise<void> {
     const bg = r.bold ? C.lightBlue : i % 2 === 0 ? C.white : C.lightGray;
     return [
       { text: r.label, options: { bold: r.bold, fontSize: 10, color: r.bold ? C.darkBlue : C.gray, fill: { color: bg } } },
-      ...r.vals.map((v: number) => ({ text: fmtBig(v), options: { align: 'right', fontSize: 10, bold: r.bold, color: v < 0 ? C.negative : C.midBlue, fill: { color: bg } } })),
+      ...r.vals.map((v: number) => ({ text: fmtBig(v), options: { align: 'right', fontSize: 10, bold: true, color: '000000', fill: { color: bg } } })),
     ];
   });
   sp3.addTable([imoHdr2, ...imoTRows], {
@@ -602,7 +602,7 @@ export async function generatePPT(): Promise<void> {
     const bg = r.bold ? C.lightBlue : i % 2 === 0 ? C.white : C.lightGray;
     return [
       { text: r.label, options: { bold: r.bold, fontSize: 9.5, color: r.bold ? C.darkBlue : C.gray, fill: { color: bg } } },
-      ...YRS.map(yr => { const v = getEmp(r.key, yr); return { text: fmtBig(v), options: { align: 'right', fontSize: 9.5, bold: r.bold, color: v < 0 ? C.negative : C.midBlue, fill: { color: bg } } }; }),
+      ...YRS.map(yr => { const v = getEmp(r.key, yr); return { text: fmtBig(v), options: { align: 'right', fontSize: 9.5, bold: true, color: '000000', fill: { color: bg } } }; }),
     ];
   });
   sp4.addTable([empHdr2, ...empTRows], {
@@ -656,7 +656,7 @@ export async function generatePPT(): Promise<void> {
       { text: r.label, options: { bold: r.bold, fontSize: 10.5, color: r.bold ? C.darkBlue : C.gray, fill: { color: bg } } },
       ...r.vals.map((v: number) => ({
         text: v === 0 ? '–' : fmtBig(v),
-        options: { align: 'right', fontSize: 10.5, bold: r.bold, color: v < 0 ? C.negative : C.midBlue, fill: { color: bg } },
+        options: { align: 'right', fontSize: 10.5, bold: true, color: '000000', fill: { color: bg } },
       })),
     ];
   });
@@ -712,8 +712,8 @@ export async function generatePPT(): Promise<void> {
         return {
           text: display,
           options: {
-            align: 'right', fontSize: 9, bold: row.bold,
-            color: v < 0 ? C.negative : row.bold ? C.midBlue : C.gray,
+            align: 'right', fontSize: 9, bold: true,
+            color: '000000',
             fill: { color: bg },
           },
         };
@@ -987,7 +987,7 @@ export async function generatePPT(): Promise<void> {
   };
   const fcTextColor = (style: string | undefined, v: number) => {
     if (style === 'final') return C.white;
-    return v < 0 ? C.negative : C.midBlue;
+    return '000000';
   };
 
   const fcHeaderRow = [
@@ -1008,7 +1008,7 @@ export async function generatePPT(): Promise<void> {
         return {
           text: v === 0 ? '–' : fmtBig(v),
           options: {
-            align: 'right' as const, fontSize: 10, bold: !!row.bold,
+            align: 'right' as const, fontSize: 10, bold: true,
             color: fcTextColor(row.style, v),
             fill: { color: bg },
           },
@@ -1099,7 +1099,7 @@ export async function generatePPT(): Promise<void> {
       const bg       = isBold ? cfg.boldBg : cfg.rowBg;
       const isWhite  = isRes && isBold;
       const tColor   = isWhite ? C.white : C.gray;
-      const vColor   = isWhite ? C.white : (val < 0 ? C.negative : (isBold ? C.positive : '4B5563'));
+      const vColor   = isWhite ? C.white : '000000';
       dfcTRows.push([
         { text: isBold ? row.label : `   ${row.label}`, options: { bold: isBold, fontSize: 8.5, color: tColor, fill: { color: bg }, fontFace: 'Arial', align: 'left',  valign: 'middle' } },
         { text: fmtDfc(val),                             options: { bold: isBold, fontSize: 8.5, color: vColor, fill: { color: bg }, fontFace: 'Arial', align: 'right', valign: 'middle' } },
@@ -1259,11 +1259,11 @@ export async function generatePPT(): Promise<void> {
       const pct  = item.pct       ?? 0;
       const pctStr = (((Math.abs(pct) * 100)).toLocaleString('pt-BR', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + '%');
       const pctFmt = pct < 0 ? `(${pctStr})` : pctStr;
-      const pctColor = pct < 0 ? C.negative : C.positive;
+      const pctColor = '000000';
       cells.push(
         { text: fmtBig(real), options: { ...orcCellOpts, fill: rowFill, bold: isLucro, color: C.gray } },
         { text: fmtBig(orc),  options: { ...orcCellOpts, fill: rowFill, bold: isLucro, color: C.gray } },
-        { text: pctFmt,       options: { ...orcCellOpts, fill: rowFill, bold: isLucro, color: pctColor } },
+        { text: pctFmt,       options: { ...orcCellOpts, fill: rowFill, bold: true, color: pctColor } },
       );
     }
     orcTableRows.push(cells);
