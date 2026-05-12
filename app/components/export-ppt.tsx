@@ -1033,86 +1033,87 @@ export async function generatePPT(): Promise<void> {
   sDfc.background = { fill: C.white };
 
   // Header
-  sDfc.addShape('rect', { x: 0, y: 0, w: 13.33, h: 1.0, fill: { color: C.darkBlue }, line: { color: C.darkBlue } });
+  sDfc.addShape('rect', { x: 0, y: 0, w: 13.33, h: 0.88, fill: { color: C.darkBlue }, line: { color: C.darkBlue } });
   sDfc.addText(`DFC – DEMONSTRAÇÃO DO FLUXO DE CAIXA  |  1º Trimestre ${dfcAno}`, {
-    x: 0.4, y: 0.07, w: 10.5, h: 0.52,
-    fontSize: 17, bold: true, color: C.white, fontFace: 'Arial',
+    x: 0.4, y: 0.05, w: 10.5, h: 0.5,
+    fontSize: 16, bold: true, color: C.white, fontFace: 'Arial', valign: 'middle',
   });
   sDfc.addText('Em milhões de R$', {
-    x: 0.4, y: 0.6, w: 6, h: 0.32,
-    fontSize: 10, color: 'BFDBFE', fontFace: 'Arial', italic: true,
+    x: 0.4, y: 0.57, w: 6, h: 0.25,
+    fontSize: 9.5, color: 'BFDBFE', fontFace: 'Arial', italic: true,
   });
-  addLogo(sDfc, 11.5, 0.1, 1.55, 0.75);
+  addLogo(sDfc, 11.5, 0.07, 1.55, 0.7);
 
-  // Helper: formata valor em milhões com 2 casas
+  // Helpers
   const fmtDfc = (v: number): string => {
     if (v === 0) return '–';
     const abs = Math.abs(v) / 1000;
     const s = abs.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
     return v < 0 ? `(${s})` : s;
   };
+  const getSecRow = (si: number, lbl: string): number =>
+    dfcSections[si]?.rows?.find((r: any) => r.label === lbl)?.valor ?? 0;
 
-  // Cores por seção
-  const dfcSecColors: Record<string, string> = {
-    'FLUXO DE CAIXA DAS ATIVIDADES OPERACIONAIS': '1E3A5F',
-    'FLUXO DE CAIXA DE INVESTIMENTOS':            '1E4976',
-    'FLUXO DE CAIXA DE FINANCIAMENTOS':           '1E5C8A',
-    'RESULTADO':                                   '155E75',
-  };
-  const dfcSecRowBg: Record<string, string> = {
-    'FLUXO DE CAIXA DAS ATIVIDADES OPERACIONAIS': 'EFF6FF',
-    'FLUXO DE CAIXA DE INVESTIMENTOS':            'F0F9FF',
-    'FLUXO DE CAIXA DE FINANCIAMENTOS':           'F0FDFF',
-    'RESULTADO':                                   'ECFEFF',
-  };
-  const dfcBoldBg: Record<string, string> = {
-    'FLUXO DE CAIXA DAS ATIVIDADES OPERACIONAIS': 'BFDBFE',
-    'FLUXO DE CAIXA DE INVESTIMENTOS':            'BAE6FD',
-    'FLUXO DE CAIXA DE FINANCIAMENTOS':           'A5F3FC',
-    'RESULTADO':                                   '1E3A5F',
-  };
-
-  // Monta todas as linhas da tabela
-  const dfcAllRows: object[][] = [];
-  const dfcColW = [7.5, 5.0];
-
-  for (const sec of dfcSections) {
-    const secColor   = dfcSecColors[sec.title]  ?? C.darkBlue;
-    const rowBg      = dfcSecRowBg[sec.title]   ?? C.lightGray;
-    const boldBg     = dfcBoldBg[sec.title]     ?? C.lightBlue;
-    const isResultado = sec.title === 'RESULTADO';
-
-    // Linha título da seção
-    dfcAllRows.push([
-      { text: sec.title, options: { bold: true, fontSize: 9.5, color: C.white, fill: { type: 'solid', color: secColor }, fontFace: 'Arial', colspan: 2, align: 'left', valign: 'middle' } },
-      { text: '',        options: { fill: { type: 'solid', color: secColor } } },
-    ]);
-
-    for (const row of sec.rows ?? []) {
-      const isBold = !!row.bold;
-      const bg   = isBold ? boldBg : rowBg;
-      const textColor = isBold
-        ? (isResultado && boldBg === '1E3A5F' ? C.white : C.darkBlue)
-        : C.gray;
-      const valColor  = isBold
-        ? (isResultado && boldBg === '1E3A5F' ? C.white : (row.valor < 0 ? C.negative : C.positive))
-        : (row.valor < 0 ? C.negative : C.gray);
-      const label = isBold ? row.label : `    ${row.label}`;
-      dfcAllRows.push([
-        { text: label,            options: { bold: isBold, fontSize: 9, color: textColor, fill: { type: 'solid', color: bg }, fontFace: 'Arial', align: 'left',  valign: 'middle' } },
-        { text: fmtDfc(row.valor), options: { bold: isBold, fontSize: 9, color: valColor,  fill: { type: 'solid', color: bg }, fontFace: 'Arial', align: 'right', valign: 'middle' } },
-      ]);
-    }
-  }
-
-  const totalRows = dfcAllRows.length;
-  const tableH = Math.min(6.2, totalRows * 0.27);
-  sDfc.addTable(dfcAllRows, {
-    x: 0.4, y: 1.1, w: 12.5, h: tableH,
-    colW: dfcColW,
-    rowH: tableH / totalRows,
-    border: { pt: 0.3, color: 'E2E8F0' },
+  // ── KPI Cards ────────────────────────────────────────────────────────────
+  const dfcKpis = [
+    { label: 'Lucro Ajustado',           value: getSecRow(0, 'Lucro (Prejuízo) Ajustado'),                       bg: C.lightBlue, fgL: C.darkBlue, fgV: C.midBlue  },
+    { label: 'Fluxo Operacional',         value: getSecRow(0, 'Fluxo de Caixa das Atividades Operacionais'),      bg: 'DCFCE7',    fgL: '166534',   fgV: '15803D'   },
+    { label: 'Fluxo de Investimentos',    value: getSecRow(1, 'Fluxo de Caixa de Investimentos'),                 bg: 'FEE2E2',    fgL: '991B1B',   fgV: C.negative },
+    { label: 'Caixa no Final do Período', value: getSecRow(3, 'Caixa no final do período'),                       bg: C.darkBlue,  fgL: 'BFDBFE',   fgV: C.white    },
+  ];
+  const kCardW = 2.95; const kCardGap = 0.18; const kCardY = 0.95; const kCardH = 0.72;
+  dfcKpis.forEach((kpi, i) => {
+    const cx = 0.38 + i * (kCardW + kCardGap);
+    sDfc.addShape('rect', { x: cx, y: kCardY, w: kCardW, h: kCardH, fill: { color: kpi.bg }, line: { color: kpi.bg } });
+    sDfc.addText(kpi.label,       { x: cx + 0.12, y: kCardY + 0.05, w: kCardW - 0.2, h: 0.24, fontSize: 9,  color: kpi.fgL, fontFace: 'Arial' });
+    sDfc.addText(fmtDfc(kpi.value), { x: cx + 0.12, y: kCardY + 0.3,  w: kCardW - 0.2, h: 0.36, fontSize: 14, bold: true, color: kpi.fgV, fontFace: 'Arial' });
   });
+
+  // ── Duas tabelas lado a lado ──────────────────────────────────────────────
+  const dfcTColW: [number, number] = [4.35, 1.65]; // 6.0 por tabela
+  const dfcTW = dfcTColW[0] + dfcTColW[1];
+  const dfcTX0 = 0.38;
+  const dfcTX1 = dfcTX0 + dfcTW + 0.2;
+  const dfcTY = 1.75;
+  const dfcMaxH = 5.55;
+
+  const dfcSecCfg = [
+    { hBg: '1E3A5F', boldBg: 'BFDBFE', rowBg: 'EFF6FF', isRes: false },
+    { hBg: '1E4976', boldBg: 'BAE6FD', rowBg: 'F0F9FF', isRes: false },
+    { hBg: '1E5C8A', boldBg: 'A5F3FC', rowBg: 'F0FDFF', isRes: false },
+    { hBg: '155E75', boldBg: '1E3A5F', rowBg: 'ECFEFF', isRes: true  },
+  ];
+
+  const buildDfcTable = (secIndexes: number[]): object[][] => {
+    const rows: object[][] = [];
+    for (const si of secIndexes) {
+      const sec = dfcSections[si]; if (!sec) continue;
+      const cfg = dfcSecCfg[si];
+      rows.push([
+        { text: sec.title, options: { bold: true, fontSize: 8, color: C.white, fill: { color: cfg.hBg }, fontFace: 'Arial', align: 'left', valign: 'middle', colspan: 2 } },
+        { text: '',        options: { fill: { color: cfg.hBg } } },
+      ]);
+      for (const row of sec.rows ?? []) {
+        const isBold = !!row.bold;
+        const bg   = isBold ? cfg.boldBg : cfg.rowBg;
+        const isWhite = cfg.isRes && isBold;
+        const tColor = isWhite ? C.white : C.gray;
+        const vColor = isWhite ? C.white : (row.valor < 0 ? C.negative : (isBold ? C.positive : '4B5563'));
+        rows.push([
+          { text: isBold ? row.label : `   ${row.label}`, options: { bold: isBold, fontSize: 8.5, color: tColor, fill: { color: bg }, fontFace: 'Arial', align: 'left',  valign: 'middle' } },
+          { text: fmtDfc(row.valor),                       options: { bold: isBold, fontSize: 8.5, color: vColor, fill: { color: bg }, fontFace: 'Arial', align: 'right', valign: 'middle' } },
+        ]);
+      }
+    }
+    return rows;
+  };
+
+  const leftDfcRows  = buildDfcTable([0]);
+  const rightDfcRows = buildDfcTable([1, 2, 3]);
+  const rowHLeft  = Math.min(dfcMaxH / leftDfcRows.length,  0.31);
+  const rowHRight = Math.min(dfcMaxH / rightDfcRows.length, 0.31);
+  sDfc.addTable(leftDfcRows,  { x: dfcTX0, y: dfcTY, w: dfcTW, h: leftDfcRows.length  * rowHLeft,  colW: dfcTColW, rowH: rowHLeft,  border: { pt: 0.3, color: 'E2E8F0' } });
+  sDfc.addTable(rightDfcRows, { x: dfcTX1, y: dfcTY, w: dfcTW, h: rightDfcRows.length * rowHRight, colW: dfcTColW, rowH: rowHRight, border: { pt: 0.3, color: 'E2E8F0' } });
 
   // ── SLIDE 12 – Realizado vs Orçado ───────────────────────────────────────
   const orcData = (financialData as any).orcamento?.summary ?? {};
