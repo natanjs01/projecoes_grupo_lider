@@ -1500,7 +1500,186 @@ export async function generatePPT(): Promise<void> {
     border: { pt: 0.3, color: 'E2E8F0' },
   });
 
-  // ── SLIDE 11 – Encerramento ────────────────────────────────────────────────
+  // ── SLIDE 11 – Contexto Macroeconômico ───────────────────────────────────
+  const sMacro = prs.addSlide();
+  sMacro.background = { fill: C.white };
+  addHdr(sMacro, 'CONTEXTO MACROECONÔMICO  –  Leitura Executiva para o Varejo', 'Mai/2026');
+
+  // KPI cards
+  const macroKpis = [
+    { label: 'IPCA Geral', value: '4,83%', period: 'Acum. 2025', note: '↑ Meta: 3,0% ±1,5pp', accent: 'DC2626', bg: 'FEF2F2' },
+    { label: 'IPCA Alimentos', value: '7,1%', period: 'Acum. 2025', note: '↑ Pressão sobre CPV', accent: 'EA580C', bg: 'FFF7ED' },
+    { label: 'PIB Brasil', value: '+3,4%', period: '2025 (est.)', note: '↓ Proj. 2026: +2,2%', accent: '059669', bg: 'F0FDF4' },
+    { label: 'Desemprego', value: '6,2%', period: 'PNAD T4/2025', note: '↓ Mínima histórica', accent: '0891B2', bg: 'ECFEFF' },
+    { label: 'SELIC', value: '14,75%', period: 'Mai/2026', note: '↑ Ciclo de alta ativo', accent: '7C3AED', bg: 'F5F3FF' },
+  ];
+  const mcW = 2.4; const mcH = 2.3; const mcY = 1.05; const mcGap = 0.16;
+  macroKpis.forEach((k, i) => {
+    const cx = 0.2 + i * (mcW + mcGap);
+    sMacro.addShape('rect', { x: cx, y: mcY, w: mcW, h: mcH, fill: { color: k.bg }, line: { color: 'E5E7EB', pt: 0.5 } });
+    sMacro.addShape('rect', { x: cx, y: mcY, w: mcW, h: 0.22, fill: { color: k.accent }, line: { color: k.accent } });
+    sMacro.addText(k.label, { x: cx + 0.12, y: mcY + 0.28, w: mcW - 0.24, h: 0.35, fontSize: 9.5, bold: true, color: C.darkBlue, fontFace: 'Arial', valign: 'middle' });
+    sMacro.addText(k.value, { x: cx + 0.12, y: mcY + 0.62, w: mcW - 0.24, h: 0.72, fontSize: 26, bold: true, color: k.accent, fontFace: 'Arial', valign: 'middle' });
+    sMacro.addText(k.period, { x: cx + 0.12, y: mcY + 1.34, w: mcW - 0.24, h: 0.28, fontSize: 8.5, color: '6B7280', fontFace: 'Arial', valign: 'middle', italic: true });
+    sMacro.addText(k.note, { x: cx + 0.12, y: mcY + 1.65, w: mcW - 0.24, h: 0.48, fontSize: 8.5, bold: true, color: k.accent, fontFace: 'Arial', valign: 'middle', wrap: true });
+  });
+
+  // Header leitura executiva
+  sMacro.addShape('rect', { x: 0.2, y: 3.5, w: 12.9, h: 0.3, fill: { color: C.darkBlue }, line: { color: C.darkBlue } });
+  sMacro.addText('O QUE O CENÁRIO MACRO MUDA NA ESTRATÉGIA 2026–2030', {
+    x: 0.38, y: 3.52, w: 12.5, h: 0.26,
+    fontSize: 8.5, bold: true, color: C.white, fontFace: 'Arial', valign: 'middle',
+  });
+
+  // Painel esquerdo – Pressões e Riscos
+  sMacro.addShape('rect', { x: 0.2, y: 3.85, w: 6.25, h: 3.15, fill: { color: 'FFF5F5' }, line: { color: 'FCA5A5', pt: 0.5 } });
+  sMacro.addShape('rect', { x: 0.2, y: 3.85, w: 6.25, h: 0.3, fill: { color: 'DC2626' }, line: { color: 'DC2626' } });
+  sMacro.addText('⚠   PRESSÕES E RISCOS', {
+    x: 0.35, y: 3.87, w: 5.9, h: 0.26,
+    fontSize: 8.5, bold: true, color: C.white, fontFace: 'Arial', valign: 'middle',
+  });
+  const macroRiscos = [
+    '▸  IPCA Alimentos acima de 7% comprime margem bruta — repricing anual deixa de ser opção e passa a ser imperativo operacional.',
+    '▸  SELIC em 14,75% eleva o custo do capital de giro: cada dia extra de estoque especulativo tem preço explícito no resultado.',
+    '▸  Desaceleração do PIB para +2,2% em 2026 reduz o "vento de trás" do consumo — crescimento terá de ser conquistado, não herdado.',
+  ];
+  macroRiscos.forEach((txt, i) => {
+    sMacro.addText(txt, {
+      x: 0.32, y: 4.24 + i * 0.88, w: 6.0, h: 0.78,
+      fontSize: 8.5, color: C.gray, fontFace: 'Arial', wrap: true, valign: 'top', lineSpacingMultiple: 1.25,
+    });
+  });
+
+  // Painel direito – Resposta Estratégica
+  sMacro.addShape('rect', { x: 6.88, y: 3.85, w: 6.25, h: 3.15, fill: { color: 'F0FDF4' }, line: { color: '86EFAC', pt: 0.5 } });
+  sMacro.addShape('rect', { x: 6.88, y: 3.85, w: 6.25, h: 0.3, fill: { color: '059669' }, line: { color: '059669' } });
+  sMacro.addText('✔   RESPOSTA ESTRATÉGICA', {
+    x: 7.03, y: 3.87, w: 5.9, h: 0.26,
+    fontSize: 8.5, bold: true, color: C.white, fontFace: 'Arial', valign: 'middle',
+  });
+  const macroEstrat = [
+    '▸  Contratos plurianuais com fornecedores corrigidos pelo IPCA — lock de custo como proteção estrutural de margem.',
+    '▸  Monetizar pleno emprego elevando mix premium e ticket médio antes de expandir unidades novas.',
+    '▸  Automação e tecnologia para ganhar produtividade sem adicionar peso linear de folha e overhead fixo.',
+  ];
+  macroEstrat.forEach((txt, i) => {
+    sMacro.addText(txt, {
+      x: 7.0, y: 4.24 + i * 0.88, w: 6.0, h: 0.78,
+      fontSize: 8.5, color: C.gray, fontFace: 'Arial', wrap: true, valign: 'top', lineSpacingMultiple: 1.25,
+    });
+  });
+
+  // Rodapé de fontes
+  sMacro.addText('Fontes: IBGE – IPCA, PNAD Contínua, PIB  |  Banco Central do Brasil – SELIC, Relatório Focus  |  Análise Grupo Líder / TMSI — Mai/2026', {
+    x: 0.2, y: 7.2, w: 12.9, h: 0.22,
+    fontSize: 7, color: '9CA3AF', fontFace: 'Arial', italic: true, align: 'center',
+  });
+
+  // ── SLIDE 12 – Projeções Macro Focus 2026–2030 ────────────────────────────
+  const sMacroProj = prs.addSlide();
+  sMacroProj.background = { fill: C.white };
+  addHdr(sMacroProj, 'PROJEÇÕES MACROECONÔMICAS  –  Relatório Focus / BCB  |  2026–2030', 'Mai/2026');
+
+  // Grupos de indicadores com cores
+  type MacroRow = { grupo: string; indicador: string; unidade: string; fonte: string; v26: string; v27: string; v28: string; v29: string; v30: string; dir: 'up'|'down'|'neutral'; cor: string };
+  const macroRows: MacroRow[] = [
+    // Inflação
+    { grupo: 'INFLAÇÃO', indicador: 'IPCA Geral',               unidade: '% a.a.', fonte: 'Focus',       v26: '5,65', v27: '4,33', v28: '3,95', v29: '3,60', v30: '3,50', dir: 'down', cor: 'DC2626' },
+    { grupo: 'INFLAÇÃO', indicador: 'IPCA Alimentos',            unidade: '% a.a.', fonte: 'Proj. TMSI',  v26: '6,80', v27: '5,20', v28: '4,20', v29: '3,80', v30: '3,60', dir: 'down', cor: 'EA580C' },
+    // Atividade
+    { grupo: 'ATIVIDADE', indicador: 'PIB Real',                 unidade: '% a.a.', fonte: 'Focus',       v26: '2,01', v27: '1,84', v28: '2,00', v29: '2,00', v30: '2,10', dir: 'neutral', cor: '059669' },
+    { grupo: 'ATIVIDADE', indicador: 'Consumo das Famílias',     unidade: '% a.a.', fonte: 'Focus',       v26: '3,16', v27: '2,80', v28: '3,00', v29: '3,10', v30: '3,20', dir: 'neutral', cor: '059669' },
+    // Emprego
+    { grupo: 'EMPREGO',   indicador: 'Desemprego (PNAD)',         unidade: '%',      fonte: 'Focus',       v26: '6,50', v27: '6,80', v28: '7,00', v29: '6,90', v30: '6,80', dir: 'up',   cor: '0891B2' },
+    // Juros & Câmbio
+    { grupo: 'JUROS',     indicador: 'SELIC (fim de período)',   unidade: '% a.a.', fonte: 'Focus',       v26: '14,75', v27: '12,00', v28: '10,50', v29: '10,00', v30: '9,75', dir: 'down', cor: '7C3AED' },
+    { grupo: 'CÂMBIO',    indicador: 'Câmbio R$/US$ (médio)',    unidade: 'R$/US$', fonte: 'Focus',       v26: '5,87', v27: '5,75', v28: '5,69', v29: '5,65', v30: '5,62', dir: 'down', cor: 'B45309' },
+  ];
+
+  // Configuração de cores por grupo
+  const grupoColors: Record<string, { bg: string; hdr: string }> = {
+    'INFLAÇÃO':  { bg: 'FEF2F2', hdr: 'FEE2E2' },
+    'ATIVIDADE': { bg: 'F0FDF4', hdr: 'DCFCE7' },
+    'EMPREGO':   { bg: 'ECFEFF', hdr: 'CFFAFE' },
+    'JUROS':     { bg: 'F5F3FF', hdr: 'EDE9FE' },
+    'CÂMBIO':    { bg: 'FFFBEB', hdr: 'FEF3C7' },
+  };
+
+  const dirArrow: Record<string, string> = { up: '↑', down: '↓', neutral: '→' };
+
+  // Colw: [Indicador, Unidade, Fonte, 2026, 2027, 2028, 2029, 2030, Tend.]
+  const mpColW = [2.9, 1.0, 1.1, 1.05, 1.05, 1.05, 1.05, 1.05, 0.9];
+
+  // Linha de cabeçalho da tabela
+  const mpHdr = [
+    { text: 'Indicador',    options: { fill: { color: C.darkBlue }, bold: true, fontSize: 9,   color: C.white,  fontFace: 'Arial', valign: 'middle', align: 'left'   } },
+    { text: 'Unidade',      options: { fill: { color: C.darkBlue }, bold: true, fontSize: 8.5, color: 'BFDBFE', fontFace: 'Arial', valign: 'middle', align: 'center' } },
+    { text: 'Fonte',        options: { fill: { color: C.darkBlue }, bold: true, fontSize: 8.5, color: 'BFDBFE', fontFace: 'Arial', valign: 'middle', align: 'center' } },
+    { text: '2026',         options: { fill: { color: C.darkBlue }, bold: true, fontSize: 9,   color: C.white,  fontFace: 'Arial', valign: 'middle', align: 'center' } },
+    { text: '2027',         options: { fill: { color: C.darkBlue }, bold: true, fontSize: 9,   color: C.white,  fontFace: 'Arial', valign: 'middle', align: 'center' } },
+    { text: '2028',         options: { fill: { color: C.darkBlue }, bold: true, fontSize: 9,   color: C.white,  fontFace: 'Arial', valign: 'middle', align: 'center' } },
+    { text: '2029',         options: { fill: { color: C.darkBlue }, bold: true, fontSize: 9,   color: C.white,  fontFace: 'Arial', valign: 'middle', align: 'center' } },
+    { text: '2030',         options: { fill: { color: C.darkBlue }, bold: true, fontSize: 9,   color: C.white,  fontFace: 'Arial', valign: 'middle', align: 'center' } },
+    { text: 'Tend.',        options: { fill: { color: C.darkBlue }, bold: true, fontSize: 8.5, color: 'BFDBFE', fontFace: 'Arial', valign: 'middle', align: 'center' } },
+  ];
+
+  let lastGrupo = '';
+  const mpDataRows = macroRows.flatMap((r) => {
+    const gc = grupoColors[r.grupo] ?? { bg: C.lightGray, hdr: C.lightBlue };
+    const rows: any[][] = [];
+    // linha separadora de grupo
+    if (r.grupo !== lastGrupo) {
+      lastGrupo = r.grupo;
+      rows.push(mpColW.map((_, ci) => ({
+        text: ci === 0 ? r.grupo : '',
+        options: { fill: { color: gc.hdr }, bold: true, fontSize: 7.5, color: '374151', fontFace: 'Arial', valign: 'middle', align: 'left' },
+      })));
+    }
+    // linha de dado
+    const arrowColor = r.dir === 'down' ? '059669' : r.dir === 'up' ? 'DC2626' : '6B7280';
+    rows.push([
+      { text: r.indicador, options: { fill: { color: gc.bg }, bold: false, fontSize: 9,   color: C.darkBlue, fontFace: 'Arial', valign: 'middle', align: 'left'   } },
+      { text: r.unidade,   options: { fill: { color: gc.bg }, bold: false, fontSize: 8,   color: '6B7280',   fontFace: 'Arial', valign: 'middle', align: 'center', italic: true } },
+      { text: r.fonte,     options: { fill: { color: gc.bg }, bold: false, fontSize: 8,   color: '6B7280',   fontFace: 'Arial', valign: 'middle', align: 'center', italic: true } },
+      { text: r.v26,       options: { fill: { color: gc.bg }, bold: true,  fontSize: 9.5, color: r.cor,      fontFace: 'Arial', valign: 'middle', align: 'center' } },
+      { text: r.v27,       options: { fill: { color: gc.bg }, bold: false, fontSize: 9,   color: C.gray,     fontFace: 'Arial', valign: 'middle', align: 'center' } },
+      { text: r.v28,       options: { fill: { color: gc.bg }, bold: false, fontSize: 9,   color: C.gray,     fontFace: 'Arial', valign: 'middle', align: 'center' } },
+      { text: r.v29,       options: { fill: { color: gc.bg }, bold: false, fontSize: 9,   color: C.gray,     fontFace: 'Arial', valign: 'middle', align: 'center' } },
+      { text: r.v30,       options: { fill: { color: gc.bg }, bold: true,  fontSize: 9,   color: C.gray,     fontFace: 'Arial', valign: 'middle', align: 'center' } },
+      { text: dirArrow[r.dir], options: { fill: { color: gc.bg }, bold: true, fontSize: 14, color: arrowColor, fontFace: 'Arial', valign: 'middle', align: 'center' } },
+    ]);
+    return rows;
+  });
+
+  const mpRowH = macroRows.flatMap((r, ri) => {
+    const isNewGrupo = ri === 0 || macroRows[ri - 1].grupo !== r.grupo;
+    return isNewGrupo ? [0.22, 0.5] : [0.5];
+  });
+
+  sMacroProj.addTable([mpHdr, ...mpDataRows], {
+    x: 0.2, y: 1.05, w: 12.9,
+    h: mpRowH.reduce((a, b) => a + b, 0.5),
+    colW: mpColW,
+    rowH: [0.38, ...mpRowH],
+    border: { pt: 0.3, color: 'E2E8F0' },
+  });
+
+  // Nota de leitura
+  sMacroProj.addShape('rect', { x: 0.2, y: 6.55, w: 12.9, h: 0.72, fill: { color: 'EFF6FF' }, line: { color: 'BFDBFE', pt: 0.5 } });
+  sMacroProj.addText(
+    '▸  IPCA convergindo à meta somente a partir de 2028 — pressão sobre CPV persiste nos dois primeiros anos do horizonte de projeção.  ' +
+    '▸  SELIC em trajetória descendente libera custo financeiro gradualmente — impacto positivo no capital de giro a partir de 2027.  ' +
+    '▸  PIB moderado (+2%) reforça necessidade de ganho de market share ativo em vez de depender do crescimento orgânico do mercado.',
+    { x: 0.35, y: 6.61, w: 12.55, h: 0.60, fontSize: 8, color: C.gray, fontFace: 'Arial', wrap: true, valign: 'top', lineSpacingMultiple: 1.3 }
+  );
+
+  // Rodapé
+  sMacroProj.addText('Fontes: Relatório Focus (BCB) – Mediana do mercado  |  Projeção IPCA Alimentos: TMSI com base em IBGE  |  Data-base: 09/mai/2026', {
+    x: 0.2, y: 7.25, w: 12.9, h: 0.2,
+    fontSize: 7, color: '9CA3AF', fontFace: 'Arial', italic: true, align: 'center',
+  });
+
+  // ── SLIDE 13 – Encerramento ────────────────────────────────────────────────
   const s5 = prs.addSlide();
   s5.background = { fill: C.darkBlue };
 
