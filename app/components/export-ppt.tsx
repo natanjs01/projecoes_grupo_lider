@@ -1133,7 +1133,7 @@ export async function generatePPT(): Promise<void> {
       values: dfcChartVals,
     },
   ], {
-    x: 6.4, y: 0.95, w: 6.65, h: 6.3,
+    x: 6.4, y: 0.95, w: 6.65, h: 3.15,
     showTitle: true,
     title: `Fluxo de Caixa  |  1º TRI ${dfcAno}`,
     titleFontSize: 11,
@@ -1153,6 +1153,41 @@ export async function generatePPT(): Promise<void> {
     valGridLine: { style: 'solid', color: 'E5E7EB', size: 0.5 },
     catAxisLabelFontSize: 9,
     valAxisLabelFontSize: 9,
+  });
+
+  // ── Análise textual (abaixo do gráfico) ───────────────────────────────────
+  const dfcAnaliseX = 6.4;
+  const dfcAnaliseY = 4.2;
+  const dfcAnaliseW = 6.65;
+
+  // Cabeçalho "ANÁLISE"
+  sDfc.addShape('rect', {
+    x: dfcAnaliseX, y: dfcAnaliseY, w: dfcAnaliseW, h: 0.3,
+    fill: { color: C.darkBlue }, line: { color: C.darkBlue },
+  });
+  sDfc.addText('ANÁLISE', {
+    x: dfcAnaliseX + 0.12, y: dfcAnaliseY + 0.02, w: dfcAnaliseW - 0.2, h: 0.26,
+    fontSize: 8.5, bold: true, color: C.white, fontFace: 'Arial', valign: 'middle',
+  });
+
+  // Fundo da caixa de análise
+  sDfc.addShape('rect', {
+    x: dfcAnaliseX, y: dfcAnaliseY + 0.3, w: dfcAnaliseW, h: 2.7,
+    fill: { color: 'EFF6FF' }, line: { color: 'BFDBFE', pt: 0.5 },
+  });
+
+  // Bullet 1 – Resultado & Capital de Giro
+  sDfc.addText('▸  Lucro ajustado de R$ 23,8M no 1T26, composto por resultado líquido de R$ 18,2M e depreciação de R$ 5,2M. A variação de capital de giro consumiu R$ 8,7M, pressionada por crescimento de contas a receber (R$ 88,6M), parcialmente compensado por fornecedores (+R$ 28,1M) e obrigações salariais (+R$ 29,9M). Fluxo operacional total positivo de R$ 15,1M.', {
+    x: dfcAnaliseX + 0.18, y: dfcAnaliseY + 0.36, w: dfcAnaliseW - 0.35, h: 1.2,
+    fontSize: 9, color: C.gray, fontFace: 'Arial', valign: 'top',
+    wrap: true, lineSpacingMultiple: 1.2,
+  });
+
+  // Bullet 2 – Investimentos, Financiamentos & Caixa Final
+  sDfc.addText('▸  Investimentos em imobilizado de R$ 14,3M financiados parcialmente por captações líquidas de R$ 17,9M (empréstimos R$ 12,7M + partes relacionadas R$ 5,2M). O caixa encerrou o trimestre em R$ 82,4M, crescimento de +29,4% em relação ao saldo inicial de R$ 63,7M.', {
+    x: dfcAnaliseX + 0.18, y: dfcAnaliseY + 1.62, w: dfcAnaliseW - 0.35, h: 1.2,
+    fontSize: 9, color: C.gray, fontFace: 'Arial', valign: 'top',
+    wrap: true, lineSpacingMultiple: 1.2,
   });
 
   // ── SLIDE 12 – Realizado vs Orçado ───────────────────────────────────────
