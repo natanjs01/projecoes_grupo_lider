@@ -7,8 +7,8 @@ const ANO: number = dfc1tri?.ano ?? 2026;
 const SECTIONS: any[] = dfc1tri?.sections ?? [];
 
 function fmt(v: number): string {
-  const abs = Math.round(Math.abs(v));
-  const s = abs.toLocaleString('pt-BR', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
+  const abs = Math.abs(v) / 1_000_000;
+  const s = abs.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   return v < 0 ? `(${s})` : s;
 }
 
@@ -19,7 +19,7 @@ export default function DfcTab() {
     <div>
       <div className="mb-5">
         <h2 className="font-display text-xl font-bold tracking-tight">DFC — Demonstração do Fluxo de Caixa</h2>
-        <p className="text-xs text-muted-foreground mt-0.5">Em milhares de R$</p>
+        <p className="text-xs text-muted-foreground mt-0.5">Em milhões de R$</p>
       </div>
 
       <div className="bg-card rounded-lg border border-border overflow-hidden" style={{ boxShadow: 'var(--shadow-md)' }}>
