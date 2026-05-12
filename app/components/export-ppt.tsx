@@ -165,7 +165,7 @@ export async function generatePPT(): Promise<void> {
       return [
         { text: row.label, options: { fontSize: 8, color: C.gray, fill: { color: bg } } },
         { text: fmtBpV(row.valor),    options: { bold: true, align: 'right', fontSize: 8, color: '000000', fill: { color: bg } } },
-        { text: fmtBpV(row.anterior), options: { align: 'right', fontSize: 8, color: '9CA3AF', fill: { color: bg } } },
+        { text: fmtBpV(row.anterior), options: { bold: true, align: 'right', fontSize: 8, color: '000000', fill: { color: bg } } },
         { text: fmtBpP(row.pct),      options: { bold: true, align: 'right', fontSize: 8, color: '000000', fill: { color: bg } } },
       ];
     });
