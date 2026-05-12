@@ -808,19 +808,19 @@ export async function generatePPT(): Promise<void> {
     colW: [3.5, ...anos.map(() => (12.9 - 3.5) / anos.length)],
   });
 
-  s2.addShape('rect', { x: 0.4, y: 5.72, w: 12.5, h: 0.3, fill: { color: C.darkBlue }, line: { color: C.darkBlue } });
+  s2.addShape('rect', { x: 0.4, y: 5.88, w: 12.5, h: 0.3, fill: { color: C.darkBlue }, line: { color: C.darkBlue } });
   s2.addText('ANÁLISE', {
-    x: 0.52, y: 5.74, w: 12.3, h: 0.26,
+    x: 0.52, y: 5.90, w: 12.3, h: 0.26,
     fontSize: 8.5, bold: true, color: C.white, fontFace: 'Arial', valign: 'middle',
   });
-  s2.addShape('rect', { x: 0.4, y: 6.02, w: 12.5, h: 1.4, fill: { color: 'EFF6FF' }, line: { color: 'BFDBFE', pt: 0.5 } });
+  s2.addShape('rect', { x: 0.4, y: 6.18, w: 12.5, h: 1.0, fill: { color: 'EFF6FF' }, line: { color: 'BFDBFE', pt: 0.5 } });
   s2.addText(
     '▸  O Resumo DRE, Orçado para o Exercício de 2026, é a projeção do resultado a partir das premissas alinhadas com a ' +
     'Administração do Grupo Líder, somado às projeções de redução de despesas elaboradas pela empresa TMSI, que estima uma ' +
     'redução de 73MM na folha, 53MM em materiais de uso e consumo, 72MM em contas de consumo (água, luz e telefone) e 6MM ' +
     'em despesas diversas; para os demais exercícios as projeções são variáveis que leva em consideração o percentual de ' +
     'cada despesa sobre a receita líquida de 2026, replicando esse percentual sobre as receitas líquidas projetadas.',
-    { x: 0.58, y: 6.08, w: 12.2, h: 1.24, fontSize: 9, color: C.gray, fontFace: 'Arial', wrap: true, valign: 'top', lineSpacingMultiple: 1.2 }
+    { x: 0.58, y: 6.24, w: 12.2, h: 0.84, fontSize: 9, color: C.gray, fontFace: 'Arial', wrap: true, valign: 'top', lineSpacingMultiple: 1.2 }
   );
 
   // ── SLIDE 9 – KPIs (completo) ─────────────────────────────────────────────
