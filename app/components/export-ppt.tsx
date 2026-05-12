@@ -426,6 +426,7 @@ export async function generatePPT(): Promise<void> {
   // ── Análise comparativa 2025 vs 2024 ─────────────────────────────────────
   const anY  = TM_Y + TM_H + 0.12;
   const anH  = 1.50;
+  const anCw = (TM_W - 0.2) / 3; // 3 cards iguais
   const pSign = (v: number) => (v >= 0 ? '+' : '') + v.toFixed(1) + '%';
   const varAt  = (totA25 / totA24 - 1) * 100;
   const varAC  = (bpV.ac25 / bpV.ac24 - 1) * 100;
@@ -434,23 +435,32 @@ export async function generatePPT(): Promise<void> {
   const varPnc = (bpV.pnc25 / bpV.pnc24 - 1) * 100;
   const varPl  = (bpV.pl25 / bpV.pl24 - 1) * 100;
 
-  sbpa.addShape('rect', { x: TM_X, y: anY, w: TM_W, h: 0.3, fill: { color: C.darkBlue }, line: { color: C.darkBlue } });
-  sbpa.addText('ANÁLISE', {
-    x: TM_X + 0.12, y: anY + 0.02, w: TM_W - 0.2, h: 0.26,
-    fontSize: 8.5, bold: true, color: C.white, fontFace: 'Arial', valign: 'middle',
-  });
-  sbpa.addShape('rect', { x: TM_X, y: anY + 0.3, w: TM_W, h: anH, fill: { color: 'EFF6FF' }, line: { color: 'BFDBFE', pt: 0.5 } });
-  sbpa.addText(`▸  Crescimento do Ativo ${pSign(varAt)}: O ativo total cresceu ${pSign(varAt)} (R$${fmtMi(totA24)} → R$${fmtMi(totA25)} Mi). O ANC avançou ${pSign(varAnc)}, sinalizando investimentos em capacidade produtiva ou imobilizado. O AC cresceu ${pSign(varAC)}, mantendo a liquidez operacional.`, {
-    x: TM_X + 0.18, y: anY + 0.36, w: TM_W - 0.35, h: 0.42,
-    fontSize: 8.5, color: C.gray, fontFace: 'Arial', valign: 'top', wrap: true, lineSpacingMultiple: 1.2,
-  });
-  sbpa.addText(`▸  Alavancagem  PC ${pSign(varPc)} · PNC ${pSign(varPnc)}: PC e PNC cresceram acima do ativo, elevando a dependência de capital de terceiros. O PL avançou apenas ${pSign(varPl)}, indicando que a expansão foi financiada majoritariamente por dívida de curto e longo prazo.`, {
-    x: TM_X + 0.18, y: anY + 0.84, w: TM_W - 0.35, h: 0.42,
-    fontSize: 8.5, color: C.gray, fontFace: 'Arial', valign: 'top', wrap: true, lineSpacingMultiple: 1.2,
-  });
-  sbpa.addText(`▸  Composição do Passivo  PL ${pSign(varPl)}: A participação do PL recuou de ${(bpV.pl24 / totP24 * 100).toFixed(1)}% para ${(bpV.pl25 / totP25 * 100).toFixed(1)}%. O PC subiu de ${(bpV.pc24 / totP24 * 100).toFixed(1)}% para ${(bpV.pc25 / totP25 * 100).toFixed(1)}%. Recomenda-se monitorar a liquidez corrente e o custo médio da dívida.`, {
-    x: TM_X + 0.18, y: anY + 1.32, w: TM_W - 0.35, h: 0.42,
-    fontSize: 8.5, color: C.gray, fontFace: 'Arial', valign: 'top', wrap: true, lineSpacingMultiple: 1.2,
+  const anCards = [
+    {
+      title: `Crescimento do Ativo  ${pSign(varAt)}`,
+      color: '0D9488', bg: 'F0FDFA',
+      body: `O ativo total cresceu ${pSign(varAt)} (R$${fmtMi(totA24)} → R$${fmtMi(totA25)} Mi). O ANC avançou ${pSign(varAnc)}, sinalizando investimentos em capacidade produtiva ou imobilizado. O AC cresceu ${pSign(varAC)}, mantendo a liquidez operacional.`,
+    },
+    {
+      title: `Alavancagem  PC ${pSign(varPc)}  ·  PNC ${pSign(varPnc)}`,
+      color: 'D97706', bg: 'FFFBEB',
+      body: `PC e PNC cresceram acima do ativo, elevando a dependência de capital de terceiros. O PL avançou apenas ${pSign(varPl)}, indicando que a expansão foi financiada majoritariamente por dívida de curto e longo prazo.`,
+    },
+    {
+      title: `Composição do Passivo  PL ${pSign(varPl)}`,
+      color: '2563EB', bg: 'EFF6FF',
+      body: `A participação do PL recuou de ${(bpV.pl24 / totP24 * 100).toFixed(1)}% para ${(bpV.pl25 / totP25 * 100).toFixed(1)}%. O PC subiu de ${(bpV.pc24 / totP24 * 100).toFixed(1)}% para ${(bpV.pc25 / totP25 * 100).toFixed(1)}%. Recomenda-se monitorar a liquidez corrente e o custo médio da dívida.`,
+    },
+  ];
+
+  anCards.forEach((card, i) => {
+    const cx = TM_X + i * (anCw + 0.1);
+    sbpa.addShape('rect', { x: cx, y: anY, w: anCw, h: anH,
+      fill: { color: card.bg }, line: { color: card.color, pt: 1.5 } });
+    sbpa.addText(card.title, { x: cx + 0.12, y: anY + 0.10, w: anCw - 0.22, h: 0.34,
+      fontSize: 8, bold: true, color: card.color, fontFace: 'Arial', wrap: true });
+    sbpa.addText(card.body,  { x: cx + 0.12, y: anY + 0.46, w: anCw - 0.22, h: anH - 0.56,
+      fontSize: 7.5, color: '374151', fontFace: 'Arial', wrap: true, valign: 'top' });
   });
 
   // ── SLIDE 3 – Premissas: Taxas e Cenários ─────────────────────────────────
