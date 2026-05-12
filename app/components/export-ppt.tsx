@@ -1090,7 +1090,7 @@ export async function generatePPT(): Promise<void> {
       const sec = dfcSections[si]; if (!sec) continue;
       const cfg = dfcSecCfg[si];
       rows.push([
-        { text: sec.title, options: { bold: true, fontSize: 8, color: C.white, fill: { color: cfg.hBg }, fontFace: 'Arial', align: 'left', valign: 'middle', colspan: 2 } },
+        { text: sec.title, options: { bold: true, fontSize: 8, color: C.white, fill: { color: cfg.hBg }, fontFace: 'Arial', align: 'left', valign: 'middle' } },
         { text: '',        options: { fill: { color: cfg.hBg } } },
       ]);
       for (const row of sec.rows ?? []) {
