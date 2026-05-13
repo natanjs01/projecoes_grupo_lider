@@ -1597,8 +1597,8 @@ export async function generatePPT(scenario: 'realista' | 'otimista' | 'pessimist
     fontSize: 8.5, bold: true, color: C.white, fontFace: 'Arial', valign: 'middle',
   });
   const macroEstrat = [
-    '▸  Contratos plurianuais com fornecedores corrigidos pelo IPCA — lock de custo como proteção estrutural de margem.',
-    '▸  Monetizar pleno emprego elevando mix premium e ticket médio antes de expandir unidades novas.',
+    '▸  Fechar contratos de longo prazo com fornecedores já com reajuste atrelado ao IPCA — garantindo previsibilidade de custos e protegendo a margem bruta mesmo em ciclos de alta da inflação.',
+    '▸  Com o desemprego no menor nível histórico e o consumidor aquecido, priorizar o aumento do ticket médio e a venda de produtos de maior valor agregado antes de comprometer capital com abertura de novas unidades.',
     '▸  Automação e tecnologia para ganhar produtividade sem adicionar peso linear de folha e overhead fixo.',
   ];
   macroEstrat.forEach((txt, i) => {
