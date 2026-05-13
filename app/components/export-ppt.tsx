@@ -132,7 +132,61 @@ export async function generatePPT(scenario: 'realista' | 'otimista' | 'pessimist
     addLogo(sl, 11.6, 0.1, 1.55, 0.7);
   };
 
-  // ── SLIDE 2 – Balanço Patrimonial ─────────────────────────────────────────
+  // ── SLIDE 2 – Índice ──────────────────────────────────────────────────────
+  const sIdx = prs.addSlide();
+  sIdx.background = { fill: C.white };
+  addHdr(sIdx, 'ÍNDICE');
+
+  const idxItems = [
+    { num: '01', title: 'Balanço Patrimonial',               sub: 'BP 2025 vs 2024' },
+    { num: '02', title: 'DRE',                               sub: 'Resultado 2025' },
+    { num: '03', title: 'DFC',                               sub: 'Fluxo de Caixa 2025' },
+    { num: '04', title: 'BP – Avaliação',                    sub: 'KPIs e análise do balanço' },
+    { num: '05', title: 'Premissas',                         sub: 'Taxas, estoques, imobilizado, empréstimos, capital de giro' },
+    { num: '06', title: 'Resumo DRE',                        sub: 'Projeção do resultado 2026–2030' },
+    { num: '07', title: 'KPIs Financeiros',                  sub: 'Projeção 5 anos' },
+    { num: '08', title: 'Fluxo de Caixa',                    sub: 'Projeção 5 anos' },
+    { num: '09', title: 'Resumo DRE – Orçado vs Realizado',  sub: 'Jan–Mar/2026' },
+    { num: '10', title: 'DFC – 1º Trimestre 2026',           sub: 'Demonstração do fluxo de caixa' },
+    { num: '11', title: 'Contexto Macroeconômico',           sub: 'Leitura executiva para o varejo' },
+    { num: '12', title: 'Projeções Macro Focus',             sub: '2026–2030' },
+    { num: '13', title: 'Auditoria',                         sub: 'Status e cronograma 2026' },
+  ];
+
+  // Duas colunas de até 7 itens cada
+  const idxCol1 = idxItems.slice(0, 7);
+  const idxCol2 = idxItems.slice(7);
+  const idxColX = [0.35, 6.9];
+  const idxW    = 6.25;
+  const idxRowH = 0.72;
+  const idxStartY = 1.05;
+
+  [idxCol1, idxCol2].forEach((col, ci) => {
+    const x = idxColX[ci];
+    col.forEach((item, i) => {
+      const y = idxStartY + i * idxRowH;
+      const bgColor = i % 2 === 0 ? 'F8FAFC' : C.white;
+      sIdx.addShape('rect', { x, y, w: idxW, h: idxRowH - 0.05, fill: { color: bgColor }, line: { color: 'E2E8F0', pt: 0.5 } });
+      // Número
+      sIdx.addShape('rect', { x, y, w: 0.55, h: idxRowH - 0.05, fill: { color: C.darkBlue }, line: { color: C.darkBlue } });
+      sIdx.addText(item.num, {
+        x, y: y + 0.02, w: 0.55, h: idxRowH - 0.09,
+        fontSize: 11, bold: true, color: C.white, fontFace: 'Arial', align: 'center', valign: 'middle',
+      });
+      // Título
+      sIdx.addText(item.title, {
+        x: x + 0.65, y: y + 0.06, w: idxW - 0.75, h: 0.3,
+        fontSize: 10.5, bold: true, color: C.darkBlue, fontFace: 'Arial', valign: 'middle',
+      });
+      // Subtítulo
+      sIdx.addText(item.sub, {
+        x: x + 0.65, y: y + 0.36, w: idxW - 0.75, h: 0.26,
+        fontSize: 8.5, color: '6B7280', fontFace: 'Arial', italic: true, valign: 'middle',
+      });
+    });
+  });
+
+  // ── SLIDE 3 – Balanço Patrimonial ─────────────────────────────────────────
   const sbp = prs.addSlide();
   sbp.background = { fill: C.white };
   addHdr(sbp, 'BALANÇO PATRIMONIAL  –  2025 vs 2024', 'BP');
