@@ -168,19 +168,19 @@ export async function generatePPT(scenario: 'realista' | 'otimista' | 'pessimist
       const bgColor = i % 2 === 0 ? 'F8FAFC' : C.white;
       sIdx.addShape('rect', { x, y, w: idxW, h: idxRowH - 0.05, fill: { color: bgColor }, line: { color: 'E2E8F0', pt: 0.5 } });
       // Número
-      sIdx.addShape('rect', { x, y, w: 0.55, h: idxRowH - 0.05, fill: { color: C.darkBlue }, line: { color: C.darkBlue } });
+      sIdx.addShape('rect', { x, y, w: 0.825, h: idxRowH - 0.05, fill: { color: C.darkBlue }, line: { color: C.darkBlue } });
       sIdx.addText(item.num, {
-        x, y: y + 0.02, w: 0.55, h: idxRowH - 0.09,
+        x, y: y + 0.02, w: 0.825, h: idxRowH - 0.09,
         fontSize: 11, bold: true, color: C.white, fontFace: 'Arial', align: 'center', valign: 'middle',
       });
       // Título
       sIdx.addText(item.title, {
-        x: x + 0.65, y: y + 0.06, w: idxW - 0.75, h: 0.3,
+        x: x + 0.9, y: y + 0.06, w: idxW - 1.0, h: 0.3,
         fontSize: 10.5, bold: true, color: C.darkBlue, fontFace: 'Arial', valign: 'middle',
       });
       // Subtítulo
       sIdx.addText(item.sub, {
-        x: x + 0.65, y: y + 0.36, w: idxW - 0.75, h: 0.26,
+        x: x + 0.9, y: y + 0.36, w: idxW - 1.0, h: 0.26,
         fontSize: 8.5, color: '6B7280', fontFace: 'Arial', italic: true, valign: 'middle',
       });
     });
