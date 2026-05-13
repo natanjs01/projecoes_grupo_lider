@@ -592,7 +592,7 @@ export async function generatePPT(scenario: 'realista' | 'otimista' | 'pessimist
   // ── SLIDE 3 – Premissas: Taxas e Cenários ─────────────────────────────────
   const sp1 = prs.addSlide();
   sp1.background = { fill: C.white };
-  addHdr(sp1, 'PREMISSAS  –  Taxas de Crescimento e Cenários', scenLabel);
+  addHdr(sp1, 'PREMISSAS  –  Taxas de Crescimento e Cenários');
 
   const scens = [
     { name: 'Pessimista', rate: scenRates?.pessimista ?? 0.04, color: 'D97706', bg: 'FFFBEB',
@@ -605,8 +605,13 @@ export async function generatePPT(scenario: 'realista' | 'otimista' | 'pessimist
 
   scens.forEach((sc, i) => {
     const x = 0.3 + i * 4.3;
-    sp1.addShape('rect', { x, y: 1.05, w: 4.1, h: 2.5, fill: { color: sc.bg }, line: { color: sc.color, pt: 2 } });
-    sp1.addText(sc.name.toUpperCase(), { x: x + 0.18, y: 1.15, w: 3.7, h: 0.42, fontSize: 12, bold: true, color: sc.color, fontFace: 'Arial' });
+    const isActive = sc.name.toLowerCase() === scenario;
+    sp1.addShape('rect', { x, y: 1.05, w: 4.1, h: 2.5, fill: { color: sc.bg }, line: { color: sc.color, pt: isActive ? 4 : 2 } });
+    sp1.addText(sc.name.toUpperCase(), { x: x + 0.18, y: 1.15, w: isActive ? 2.6 : 3.7, h: 0.42, fontSize: 12, bold: true, color: sc.color, fontFace: 'Arial' });
+    if (isActive) {
+      sp1.addShape('rect', { x: x + 2.85, y: 1.12, w: 1.1, h: 0.28, fill: { color: sc.color }, line: { color: sc.color } });
+      sp1.addText('● EM USO', { x: x + 2.85, y: 1.12, w: 1.1, h: 0.28, fontSize: 7.5, bold: true, color: C.white, fontFace: 'Arial', align: 'center', valign: 'middle' });
+    }
     sp1.addText(fmtPct(sc.rate) + ' a.a.', { x: x + 0.18, y: 1.57, w: 3.7, h: 0.72, fontSize: 30, bold: true, color: sc.color, fontFace: 'Arial' });
     sp1.addText(sc.desc, { x: x + 0.18, y: 2.35, w: 3.7, h: 1.0, fontSize: 9, color: '4B5563', fontFace: 'Arial', wrap: true });
   });
@@ -617,11 +622,12 @@ export async function generatePPT(scenario: 'realista' | 'otimista' | 'pessimist
     { text: 'Acumulado 5 anos', options: { bold: true, color: C.white, fill: { color: C.midBlue }, align: 'center', fontSize: 9, fontFace: 'Arial' } },
   ];
   const impRows = scens.map((sc, i) => {
-    const bg = i % 2 === 0 ? C.white : C.lightGray;
+    const isActive = sc.name.toLowerCase() === scenario;
+    const bg = isActive ? sc.bg : (i % 2 === 0 ? C.white : C.lightGray);
     return [
-      { text: sc.name, options: { bold: true, fontSize: 8, color: sc.color, fill: { color: bg }, fontFace: 'Arial' } },
-      ...YRS.map(yr => ({ text: fmtPct(Math.pow(1 + sc.rate, yr) - 1), options: { align: 'center', fontSize: 8, color: sc.color, fill: { color: bg }, fontFace: 'Arial' } })),
-      { text: fmtPct(Math.pow(1 + sc.rate, 5) - 1), options: { align: 'center', fontSize: 8, bold: true, color: sc.color, fill: { color: bg }, fontFace: 'Arial' } },
+      { text: isActive ? `● ${sc.name}` : sc.name, options: { bold: true, fontSize: isActive ? 9 : 8, color: sc.color, fill: { color: bg }, fontFace: 'Arial' } },
+      ...YRS.map(yr => ({ text: fmtPct(Math.pow(1 + sc.rate, yr) - 1), options: { align: 'center', fontSize: isActive ? 9 : 8, bold: isActive, color: sc.color, fill: { color: bg }, fontFace: 'Arial' } })),
+      { text: fmtPct(Math.pow(1 + sc.rate, 5) - 1), options: { align: 'center', fontSize: isActive ? 9 : 8, bold: true, color: sc.color, fill: { color: bg }, fontFace: 'Arial' } },
     ];
   });
   sp1.addTable([impHdr, ...impRows], {
