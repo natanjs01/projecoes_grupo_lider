@@ -88,7 +88,7 @@ export async function generatePPT(scenario: 'realista' | 'otimista' | 'pessimist
   const YR_LABELS = ['2026', '2027', '2028', '2029', '2030'];
   const fcRows: any[] = fc?.rows ?? [];
   const getFC = (label: string, yr: number) =>
-    fcRows.find((r: any) => r.label === label)?.[`ano${yr}`] ?? 0;
+    fcRows.find((r: any) => r.label?.trim() === label.trim())?.[`ano${yr}`] ?? 0;
   const getDRE = (key: string, yr: number) => {
     const map: Record<string, number> = { 1: 0, 2: 1, 3: 2, 4: 3, 5: 4 };
     const anoKey = ['2026O', '2027P', '2028P', '2029P', '2030P'][map[yr]];
