@@ -777,7 +777,7 @@ export async function generatePPT(scenario: 'realista' | 'otimista' | 'pessimist
   });
   sp3.addShape('rect', { x: 0.4, y: 4.45, w: 12.5, h: 2.6, fill: { color: 'EFF6FF' }, line: { color: 'BFDBFE', pt: 0.5 } });
   sp3.addText(
-    `▸  O plano prevê investimentos totais de aproximadamente ${fmtBig(custoAcum)} em 5 anos, incluindo a abertura de nova unidade (~R$ 50MM). ` +
+    `▸  O plano prevê investimentos totais de aproximadamente ${fmtBig(custoAcum)} em 5 anos, incluindo a abertura de novas unidades (~R$ 50MM/Un). ` +
     `A depreciação acumulada no período é de ${fmtBig(depAcum)}. ` +
     `O imobilizado líquido evolui de ${fmtBig(imoInit)} (Ano 1) para ${fmtBig(imoFinal)} (Ano 5), ` +
     `refletindo os novos ativos já deduzidos da depreciação acumulada.`,
@@ -948,10 +948,10 @@ export async function generatePPT(scenario: 'realista' | 'otimista' | 'pessimist
   });
   s2.addShape('rect', { x: 0.4, y: 6.18, w: 12.5, h: 1.0, fill: { color: 'EFF6FF' }, line: { color: 'BFDBFE', pt: 0.5 } });
   s2.addText(
-    '▸  O Resumo DRE, Orçado para o Exercício de 2026, é a projeção do resultado a partir das premissas alinhadas com a ' +
+    '▸  Resumo DRE, orçado para o Exercício de 2026, é a projeção do resultado a partir das premissas alinhadas com a ' +
     'Administração do Grupo Líder, somado às projeções de redução de despesas elaboradas pela empresa TMSI, que estima uma ' +
     'redução de 73MM na folha, 53MM em materiais de uso e consumo, 72MM em contas de consumo (água, luz e telefone) e 6MM ' +
-    'em despesas diversas; para os demais exercícios as projeções são variáveis que leva em consideração o percentual de ' +
+    'em despesas diversas; para os demais exercícios as projeções são variáveis que levam em consideração o percentual de ' +
     'cada despesa sobre a receita líquida de 2026, replicando esse percentual sobre as receitas líquidas projetadas.',
     { x: 0.58, y: 6.24, w: 12.2, h: 0.84, fontSize: 9, color: C.gray, fontFace: 'Arial', wrap: true, valign: 'top', lineSpacingMultiple: 1.2 }
   );
@@ -1257,155 +1257,7 @@ export async function generatePPT(scenario: 'realista' | 'otimista' | 'pessimist
     colW: [3.5, 1.8, 1.8, 1.8, 1.8, 1.8],
   });
 
-  // ── SLIDE 11 – DFC 1TRI 2026 ─────────────────────────────────────────────
-  const dfc1tri = (financialData as any).dfc1tri ?? {};
-  const dfcAno: number = dfc1tri.ano ?? 2026;
-  const dfcSections: any[] = dfc1tri.sections ?? [];
-
-  const sDfc = prs.addSlide();
-  sDfc.background = { fill: C.white };
-
-  // Header
-  sDfc.addShape('rect', { x: 0, y: 0, w: 13.33, h: 0.88, fill: { color: C.darkBlue }, line: { color: C.darkBlue } });
-  sDfc.addText(`DFC – DEMONSTRAÇÃO DO FLUXO DE CAIXA  |  1º Trimestre ${dfcAno}`, {
-    x: 0.4, y: 0.05, w: 10.5, h: 0.5,
-    fontSize: 16, bold: true, color: C.white, fontFace: 'Arial', valign: 'middle',
-  });
-  sDfc.addText('Em milhões de R$', {
-    x: 0.4, y: 0.57, w: 6, h: 0.25,
-    fontSize: 9.5, color: 'BFDBFE', fontFace: 'Arial', italic: true,
-  });
-  addLogo(sDfc, 11.5, 0.07, 1.55, 0.7);
-
-  // Helpers
-  const getSecRow = (si: number, lbl: string): number =>
-    dfcSections[si]?.rows?.find((r: any) => r.label === lbl)?.valor ?? 0;
-
-  // ── Tabela filtrada (lado esquerdo) ───────────────────────────────────────
-  const sec0Show = new Set([
-    'Lucro (Prejuízo) do período',
-    'Depreciação e amortização',
-    'Resultado na venda/baixa de ativo imobilizado',
-    'Redução ao valor recuperável do contas a receber',
-    'Lucro (Prejuízo) Ajustado',
-    'Geração (Consumo) Caixa Operacional',
-    'Fluxo de Caixa das Atividades Operacionais',
-  ]);
-  const sec3Show = new Set([
-    'Caixa gerado das atividades operacionais',
-    'Caixa no início do período',
-    'Caixa no final do período',
-  ]);
-  const secShortTitle = [
-    'ATIVIDADES OPERACIONAIS',
-    'INVESTIMENTOS',
-    'FINANCIAMENTOS',
-    'RESULTADO',
-  ];
-
-  const dfcTRows: object[][] = [];
-  dfcSections.forEach((sec: any, si: number) => {
-    const cfg = dfcSecCfg[si] ?? dfcSecCfg[0];
-    const isRes = si === 3;
-    dfcTRows.push([
-      { text: secShortTitle[si] ?? sec.title, options: { bold: true, fontSize: 9, color: C.white, fill: { color: cfg.hBg }, fontFace: 'Arial', align: 'left', valign: 'middle' } },
-      { text: 'Valor',                          options: { bold: true, fontSize: 9, color: C.white, fill: { color: cfg.hBg }, fontFace: 'Arial', align: 'right', valign: 'middle' } },
-    ]);
-    (sec.rows ?? []).forEach((row: any) => {
-      const isBold = !!row.bold;
-      const val: number = row.valor ?? 0;
-      if (si === 0 && !sec0Show.has(row.label)) return;
-      if (si === 3 && !sec3Show.has(row.label)) return;
-      if ((si === 1 || si === 2) && !isBold && val === 0) return;
-      const bg       = isBold ? cfg.boldBg : cfg.rowBg;
-      const isWhite  = isRes && isBold;
-      const tColor   = isWhite ? C.white : C.gray;
-      const vColor   = isWhite ? C.white : '000000';
-      dfcTRows.push([
-        { text: isBold ? row.label : `   ${row.label}`, options: { bold: isBold, fontSize: isBold ? 9 : 8, color: tColor, fill: { color: bg }, fontFace: 'Arial', align: 'left',  valign: 'middle' } },
-        { text: fmtDfc(val),                             options: { bold: isBold, fontSize: isBold ? 9 : 8, color: vColor, fill: { color: bg }, fontFace: 'Arial', align: 'right', valign: 'middle' } },
-      ]);
-    });
-  });
-
-  sDfc.addTable(dfcTRows, {
-    x: 0.3, y: 0.95, w: 5.8, h: dfcTRows.length * dfcRowH,
-    colW: dfcColW, rowH: dfcRowH,
-    border: { pt: 0.3, color: 'E2E8F0' },
-  });
-
-  // ── Gráfico de linha (lado direito) ────────────────────────────────────────
-  const dfcChartVals = [
-    getSecRow(0, 'Lucro (Prejuízo) Ajustado')                  / 1000,
-    getSecRow(0, 'Geração (Consumo) Caixa Operacional')        / 1000,
-    getSecRow(1, 'Fluxo de Caixa de Investimentos')            / 1000,
-    getSecRow(2, 'Fluxo de Caixa de Financiamentos')           / 1000,
-    getSecRow(3, 'Caixa gerado das atividades operacionais')   / 1000,
-  ];
-  const dfcChartMin = Math.floor(Math.min(...dfcChartVals) * 1.35 / 5) * 5;
-  const dfcChartMax = Math.ceil(Math.max(...dfcChartVals)  * 1.25 / 5) * 5;
-
-  (sDfc as any).addChart('line', [
-    {
-      name: 'R$ Milhões',
-      labels: ['Lucro\nAjustado', 'Caixa\nCíclico', 'Investimentos', 'Financiamentos', 'Caixa\nGerado'],
-      values: dfcChartVals,
-    },
-  ], {
-    x: 6.4, y: 0.95, w: 6.65, h: 3.15,
-    showTitle: true,
-    title: `Fluxo de Caixa  |  1º TRI ${dfcAno}`,
-    titleFontSize: 11,
-    titleBold: true,
-    titleColor: C.darkBlue,
-    lineDataSymbol: 'circle',
-    lineDataSymbolSize: 9,
-    lineSize: 2.5,
-    chartColors: ['2563EB'],
-    showValue: true,
-    dataLabelFontSize: 9,
-    dataLabelFontBold: true,
-    dataLabelColor: C.darkBlue,
-    showLegend: false,
-    valAxisMinVal: dfcChartMin,
-    valAxisMaxVal: dfcChartMax,
-    valGridLine: { style: 'solid', color: 'E5E7EB', size: 0.5 },
-    catAxisLabelFontSize: 9,
-    valAxisLabelFontSize: 9,
-  });
-
-  // ── Análise textual (abaixo do gráfico) ───────────────────────────────────
-  const dfcAnaliseX = 6.4;
-  const dfcAnaliseY = 4.2;
-  const dfcAnaliseW = 6.65;
-
-  sDfc.addShape('rect', {
-    x: dfcAnaliseX, y: dfcAnaliseY, w: dfcAnaliseW, h: 0.3,
-    fill: { color: C.darkBlue }, line: { color: C.darkBlue },
-  });
-  sDfc.addText('ANÁLISE', {
-    x: dfcAnaliseX + 0.12, y: dfcAnaliseY + 0.02, w: dfcAnaliseW - 0.2, h: 0.26,
-    fontSize: 8.5, bold: true, color: C.white, fontFace: 'Arial', valign: 'middle',
-  });
-
-  sDfc.addShape('rect', {
-    x: dfcAnaliseX, y: dfcAnaliseY + 0.3, w: dfcAnaliseW, h: 2.7,
-    fill: { color: 'EFF6FF' }, line: { color: 'BFDBFE', pt: 0.5 },
-  });
-
-  sDfc.addText('▸  Lucro ajustado de R$ 23,8M no 1T26, composto por resultado líquido de R$ 18,2M e depreciação de R$ 5,2M. A variação de capital de giro consumiu R$ 8,7M, pressionada por crescimento de contas a receber (R$ 88,6M), parcialmente compensado por fornecedores (+R$ 28,1M) e obrigações salariais (+R$ 29,9M). Fluxo operacional total positivo de R$ 15,1M.', {
-    x: dfcAnaliseX + 0.18, y: dfcAnaliseY + 0.36, w: dfcAnaliseW - 0.35, h: 1.2,
-    fontSize: 9, color: C.gray, fontFace: 'Arial', valign: 'top',
-    wrap: true, lineSpacingMultiple: 1.2,
-  });
-
-  sDfc.addText('▸  Investimentos em imobilizado de R$ 14,3M financiados parcialmente por captações líquidas de R$ 17,9M (empréstimos R$ 12,7M + partes relacionadas R$ 5,2M). O caixa encerrou o trimestre em R$ 82,4M, crescimento de +29,4% em relação ao saldo inicial de R$ 63,7M.', {
-    x: dfcAnaliseX + 0.18, y: dfcAnaliseY + 1.62, w: dfcAnaliseW - 0.35, h: 1.2,
-    fontSize: 9, color: C.gray, fontFace: 'Arial', valign: 'top',
-    wrap: true, lineSpacingMultiple: 1.2,
-  });
-
-  // ── SLIDE 12 – RESUMO DRE – Orçado vs Realizado ─────────────────────────
+  // ── SLIDE 11 – RESUMO DRE – Orçado vs Realizado ─────────────────────────
   const drvData = (financialData as any).dreOrcVsReal ?? {};
   const drvMeses: any[] = drvData.meses ?? [];
   const drvLinhas: any[] = drvData.linhas ?? [];
@@ -1512,7 +1364,128 @@ export async function generatePPT(scenario: 'realista' | 'otimista' | 'pessimist
     border: { pt: 0.3, color: 'E2E8F0' },
   });
 
-  // ── SLIDE 11 – Contexto Macroeconômico ───────────────────────────────────
+  // ── SLIDE 12 – DFC 1TRI 2026 ─────────────────────────────────────────────
+  const dfc1tri = (financialData as any).dfc1tri ?? {};
+  const dfcAno: number = dfc1tri.ano ?? 2026;
+  const dfcSections: any[] = dfc1tri.sections ?? [];
+
+  const sDfc = prs.addSlide();
+  sDfc.background = { fill: C.white };
+
+  sDfc.addShape('rect', { x: 0, y: 0, w: 13.33, h: 0.88, fill: { color: C.darkBlue }, line: { color: C.darkBlue } });
+  sDfc.addText(`DFC – DEMONSTRAÇÃO DO FLUXO DE CAIXA  |  1º Trimestre ${dfcAno}`, {
+    x: 0.4, y: 0.05, w: 10.5, h: 0.5,
+    fontSize: 16, bold: true, color: C.white, fontFace: 'Arial', valign: 'middle',
+  });
+  sDfc.addText('Em milhões de R$', {
+    x: 0.4, y: 0.57, w: 6, h: 0.25,
+    fontSize: 9.5, color: 'BFDBFE', fontFace: 'Arial', italic: true,
+  });
+  addLogo(sDfc, 11.5, 0.07, 1.55, 0.7);
+
+  const getSecRow = (si: number, lbl: string): number =>
+    dfcSections[si]?.rows?.find((r: any) => r.label === lbl)?.valor ?? 0;
+
+  const sec0Show = new Set([
+    'Lucro (Prejuízo) do período',
+    'Depreciação e amortização',
+    'Resultado na venda/baixa de ativo imobilizado',
+    'Redução ao valor recuperável do contas a receber',
+    'Lucro (Prejuízo) Ajustado',
+    'Geração (Consumo) Caixa Operacional',
+    'Fluxo de Caixa das Atividades Operacionais',
+  ]);
+  const sec3Show = new Set([
+    'Caixa gerado das atividades operacionais',
+    'Caixa no início do período',
+    'Caixa no final do período',
+  ]);
+  const secShortTitle = [
+    'ATIVIDADES OPERACIONAIS',
+    'INVESTIMENTOS',
+    'FINANCIAMENTOS',
+    'RESULTADO',
+  ];
+
+  const dfcTRows: object[][] = [];
+  dfcSections.forEach((sec: any, si: number) => {
+    const cfg = dfcSecCfg[si] ?? dfcSecCfg[0];
+    const isRes = si === 3;
+    dfcTRows.push([
+      { text: secShortTitle[si] ?? sec.title, options: { bold: true, fontSize: 9, color: C.white, fill: { color: cfg.hBg }, fontFace: 'Arial', align: 'left', valign: 'middle' } },
+      { text: 'Valor',                          options: { bold: true, fontSize: 9, color: C.white, fill: { color: cfg.hBg }, fontFace: 'Arial', align: 'right', valign: 'middle' } },
+    ]);
+    (sec.rows ?? []).forEach((row: any) => {
+      const isBold = !!row.bold;
+      const val: number = row.valor ?? 0;
+      if (si === 0 && !sec0Show.has(row.label)) return;
+      if (si === 3 && !sec3Show.has(row.label)) return;
+      if ((si === 1 || si === 2) && !isBold && val === 0) return;
+      const bg      = isBold ? cfg.boldBg : cfg.rowBg;
+      const isWhite = isRes && isBold;
+      const tColor  = isWhite ? C.white : C.gray;
+      const vColor  = isWhite ? C.white : '000000';
+      dfcTRows.push([
+        { text: isBold ? row.label : `   ${row.label}`, options: { bold: isBold, fontSize: isBold ? 9 : 8, color: tColor, fill: { color: bg }, fontFace: 'Arial', align: 'left',  valign: 'middle' } },
+        { text: fmtDfc(val),                             options: { bold: isBold, fontSize: isBold ? 9 : 8, color: vColor, fill: { color: bg }, fontFace: 'Arial', align: 'right', valign: 'middle' } },
+      ]);
+    });
+  });
+
+  sDfc.addTable(dfcTRows, {
+    x: 0.3, y: 0.95, w: 5.8, h: dfcTRows.length * dfcRowH,
+    colW: dfcColW, rowH: dfcRowH,
+    border: { pt: 0.3, color: 'E2E8F0' },
+  });
+
+  const dfcChartVals = [
+    getSecRow(0, 'Lucro (Prejuízo) Ajustado')                / 1000,
+    getSecRow(0, 'Geração (Consumo) Caixa Operacional')      / 1000,
+    getSecRow(1, 'Fluxo de Caixa de Investimentos')          / 1000,
+    getSecRow(2, 'Fluxo de Caixa de Financiamentos')         / 1000,
+    getSecRow(3, 'Caixa gerado das atividades operacionais') / 1000,
+  ];
+  const dfcChartMin = Math.floor(Math.min(...dfcChartVals) * 1.35 / 5) * 5;
+  const dfcChartMax = Math.ceil(Math.max(...dfcChartVals)  * 1.25 / 5) * 5;
+
+  (sDfc as any).addChart('line', [{
+    name: 'R$ Milhões',
+    labels: ['Lucro\nAjustado', 'Caixa\nCíclico', 'Investimentos', 'Financiamentos', 'Caixa\nGerado'],
+    values: dfcChartVals,
+  }], {
+    x: 6.4, y: 0.95, w: 6.65, h: 3.15,
+    showTitle: true,
+    title: `Fluxo de Caixa  |  1º TRI ${dfcAno}`,
+    titleFontSize: 11, titleBold: true, titleColor: C.darkBlue,
+    lineDataSymbol: 'circle', lineDataSymbolSize: 9, lineSize: 2.5,
+    chartColors: ['2563EB'],
+    showValue: true, dataLabelFontSize: 9, dataLabelFontBold: true, dataLabelColor: C.darkBlue,
+    showLegend: false,
+    valAxisMinVal: dfcChartMin, valAxisMaxVal: dfcChartMax,
+    valGridLine: { style: 'solid', color: 'E5E7EB', size: 0.5 },
+    catAxisLabelFontSize: 9, valAxisLabelFontSize: 9,
+  });
+
+  const dfcAnaliseX = 6.4;
+  const dfcAnaliseY = 4.2;
+  const dfcAnaliseW = 6.65;
+
+  sDfc.addShape('rect', { x: dfcAnaliseX, y: dfcAnaliseY, w: dfcAnaliseW, h: 0.3, fill: { color: C.darkBlue }, line: { color: C.darkBlue } });
+  sDfc.addText('ANÁLISE', {
+    x: dfcAnaliseX + 0.12, y: dfcAnaliseY + 0.02, w: dfcAnaliseW - 0.2, h: 0.26,
+    fontSize: 8.5, bold: true, color: C.white, fontFace: 'Arial', valign: 'middle',
+  });
+  sDfc.addShape('rect', { x: dfcAnaliseX, y: dfcAnaliseY + 0.3, w: dfcAnaliseW, h: 2.7, fill: { color: 'EFF6FF' }, line: { color: 'BFDBFE', pt: 0.5 } });
+  sDfc.addText('▸  Lucro ajustado de R$ 23,8M no 1T26, composto por resultado líquido de R$ 18,2M e depreciação de R$ 5,2M. A variação de capital de giro consumiu R$ 8,7M, pressionada por crescimento de contas a receber (R$ 88,6M), parcialmente compensado por fornecedores (+R$ 28,1M) e obrigações salariais (+R$ 29,9M). Fluxo operacional total positivo de R$ 15,1M.', {
+    x: dfcAnaliseX + 0.18, y: dfcAnaliseY + 0.36, w: dfcAnaliseW - 0.35, h: 1.2,
+    fontSize: 9, color: C.gray, fontFace: 'Arial', valign: 'top', wrap: true, lineSpacingMultiple: 1.2,
+  });
+  sDfc.addText('▸  Investimentos em imobilizado de R$ 14,3M financiados parcialmente por captações líquidas de R$ 17,9M (empréstimos R$ 12,7M + partes relacionadas R$ 5,2M). O caixa encerrou o trimestre em R$ 82,4M, crescimento de +29,4% em relação ao saldo inicial de R$ 63,7M.', {
+    x: dfcAnaliseX + 0.18, y: dfcAnaliseY + 1.62, w: dfcAnaliseW - 0.35, h: 1.2,
+    fontSize: 9, color: C.gray, fontFace: 'Arial', valign: 'top', wrap: true, lineSpacingMultiple: 1.2,
+  });
+
+  // ── SLIDE 13 – Contexto Macroeconômico ───────────────────────────────────
   const sMacro = prs.addSlide();
   sMacro.background = { fill: C.white };
   addHdr(sMacro, 'CONTEXTO MACROECONÔMICO  –  Leitura Executiva para o Varejo', 'Mai/2026');
