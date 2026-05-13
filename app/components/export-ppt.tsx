@@ -1609,7 +1609,7 @@ export async function generatePPT(scenario: 'realista' | 'otimista' | 'pessimist
   });
 
   // Rodapé de fontes
-  sMacro.addText('Fontes: IBGE – IPCA, PNAD Contínua, PIB  |  Banco Central do Brasil – SELIC, Relatório Focus  |  Análise Grupo Líder / TMSI — Mai/2026', {
+  sMacro.addText('Fontes: IBGE – IPCA, PNAD Contínua, PIB  |  Banco Central do Brasil – SELIC, Relatório Focus  |  Análise Grupo Líder — Mai/2026', {
     x: 0.2, y: 7.2, w: 12.9, h: 0.22,
     fontSize: 7, color: '9CA3AF', fontFace: 'Arial', italic: true, align: 'center',
   });
@@ -1624,7 +1624,7 @@ export async function generatePPT(scenario: 'realista' | 'otimista' | 'pessimist
   const macroRows: MacroRow[] = [
     // Inflação
     { grupo: 'INFLAÇÃO', indicador: 'IPCA Geral',               unidade: '% a.a.', fonte: 'Focus',       v26: '5,65', v27: '4,33', v28: '3,95', v29: '3,60', v30: '3,50', dir: 'down', cor: 'DC2626' },
-    { grupo: 'INFLAÇÃO', indicador: 'IPCA Alimentos',            unidade: '% a.a.', fonte: 'Proj. TMSI',  v26: '6,80', v27: '5,20', v28: '4,20', v29: '3,80', v30: '3,60', dir: 'down', cor: 'EA580C' },
+    { grupo: 'INFLAÇÃO', indicador: 'IPCA Alimentos',            unidade: '% a.a.', fonte: 'Focus',  v26: '6,80', v27: '5,20', v28: '4,20', v29: '3,80', v30: '3,60', dir: 'down', cor: 'EA580C' },
     // Atividade
     { grupo: 'ATIVIDADE', indicador: 'PIB Real',                 unidade: '% a.a.', fonte: 'Focus',       v26: '2,01', v27: '1,84', v28: '2,00', v29: '2,00', v30: '2,10', dir: 'neutral', cor: '059669' },
     { grupo: 'ATIVIDADE', indicador: 'Consumo das Famílias',     unidade: '% a.a.', fonte: 'Focus',       v26: '3,16', v27: '2,80', v28: '3,00', v29: '3,10', v30: '3,20', dir: 'neutral', cor: '059669' },
@@ -1713,7 +1713,7 @@ export async function generatePPT(scenario: 'realista' | 'otimista' | 'pessimist
   );
 
   // Rodapé
-  sMacroProj.addText('Fontes: Relatório Focus (BCB) – Mediana do mercado  |  Projeção IPCA Alimentos: TMSI com base em IBGE  |  Data-base: 09/mai/2026', {
+  sMacroProj.addText('Fontes: Relatório Focus (BCB) – Mediana do mercado  |  Data-base: 09/mai/2026', {
     x: 0.2, y: 7.25, w: 12.9, h: 0.2,
     fontSize: 7, color: '9CA3AF', fontFace: 'Arial', italic: true, align: 'center',
   });
