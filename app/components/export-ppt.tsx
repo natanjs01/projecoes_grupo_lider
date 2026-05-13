@@ -1691,7 +1691,49 @@ export async function generatePPT(scenario: 'realista' | 'otimista' | 'pessimist
     fontSize: 7, color: '9CA3AF', fontFace: 'Arial', italic: true, align: 'center',
   });
 
-  // ── SLIDE 13 – Encerramento ────────────────────────────────────────────────
+  // ── SLIDE 13 – Auditoria ──────────────────────────────────────────────────
+  const sAud = prs.addSlide();
+  sAud.background = { fill: C.white };
+  addHdr(sAud, 'AUDITORIA  –  Status / Cronograma');
+
+  // Caixa de texto introdutório
+  sAud.addShape('rect', { x: 0.3, y: 1.05, w: 12.7, h: 1.5, fill: { color: 'EFF6FF' }, line: { color: '93C5FD', pt: 1 } });
+  sAud.addText(
+    'Para o exercício de 2026 o Grupo Líder contratou a empresa de auditoria independente RSM, que é uma das maiores redes globais de auditoria, consultoria e assessoria tributária do mundo, com presença em mais de 120 países e cerca de 65 mil profissionais. Reconhecida pela elevada qualidade técnica, governança e padronização internacional, ocupando globalmente o 9º lugar em seu segmento.',
+    { x: 0.45, y: 1.1, w: 12.4, h: 1.4, fontSize: 10.5, color: C.gray, fontFace: 'Arial', wrap: true, valign: 'middle' }
+  );
+
+  // Quadros dos trimestres
+  const triData = [
+    {
+      label: '1º TRI 2026', date: '07/2026', color: 'D97706', bg: 'FFFBEB', border: 'D97706',
+      items: ['Para o 1º TRI de 2026 estão sendo realizadas as seguintes analises:', 'Avaliação de controles interno com base em 31/12/2025', 'Análise das DFs na data-base 31/03/2026'],
+    },
+    {
+      label: '2º TRI 2026', date: '10/2026', color: '2563EB', bg: 'EFF6FF', border: '2563EB',
+      items: ['Para o 2º TRI de 2026 estão sendo realizadas as seguintes analises:', 'Análise das DFs na data-base 30/03/2026'],
+    },
+    {
+      label: '3º TRI 2026', date: '12/2026', color: '16A34A', bg: 'F0FDF4', border: '16A34A',
+      items: ['Para o 3º TRI de 2026 estão sendo realizadas as seguintes analises:', 'Análise das DFs na data-base 30/09/2026'],
+    },
+    {
+      label: '4º TRI 2026', date: '04/2027', color: '6B7280', bg: 'F9FAFB', border: '9CA3AF',
+      items: ['Para o 1º TRI de 2026 estão sendo realizadas as seguintes analises:', 'Avaliação de Laudos (Imob. / Estoq / Atv. Biol.)', 'Análise das DFs na data-base 31/12/2026'],
+    },
+  ];
+
+  triData.forEach((tri, i) => {
+    const x = 0.3 + i * 3.2;
+    const w = 3.0;
+    sAud.addShape('rect', { x, y: 2.75, w, h: 4.35, fill: { color: tri.bg }, line: { color: tri.border, pt: 1.5 } });
+    sAud.addText(tri.label, { x: x + 0.12, y: 2.87, w: w - 0.24, h: 0.35, fontSize: 11, bold: true, color: tri.color, fontFace: 'Arial' });
+    sAud.addText(tri.date,  { x: x + 0.12, y: 3.22, w: w - 0.24, h: 0.72, fontSize: 32, bold: true, color: tri.color, fontFace: 'Arial' });
+    const bodyText = tri.items.join('\n\n');
+    sAud.addText(bodyText,  { x: x + 0.12, y: 4.0,  w: w - 0.24, h: 3.0,  fontSize: 8.5, color: '374151', fontFace: 'Arial', wrap: true, valign: 'top' });
+  });
+
+  // ── SLIDE 14 – Encerramento ────────────────────────────────────────────────
   const s5 = prs.addSlide();
   s5.background = { fill: C.darkBlue };
 
