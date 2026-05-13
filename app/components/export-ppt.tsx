@@ -54,7 +54,7 @@ interface Pptx {
 }
 
 // ── Geração do arquivo ───────────────────────────────────────────────────────
-export async function generatePPT(): Promise<void> {
+export async function generatePPT(scenario: 'realista' | 'otimista' | 'pessimista' = 'realista'): Promise<void> {
   const mod = await import('pptxgenjs');
   const PptxGenJS = (mod as any).default ?? mod;
   const prs = new (PptxGenJS as any)() as unknown as Pptx;
@@ -95,6 +95,12 @@ export async function generatePPT(): Promise<void> {
     return rows.find((r: any) => r.key === key)?.values?.[anoKey] ?? 0;
   };
 
+  // Cenário selecionado
+  const { premissas } = financialData as any;
+  const scenRates = premissas?.scenarioRates ?? {};
+  const scenLabel = scenario === 'otimista' ? 'Cenário Otimista' : scenario === 'pessimista' ? 'Cenário Pessimista' : 'Cenário Realista';
+  const scenRate  = scenRates?.[scenario] ?? (scenario === 'otimista' ? 0.09 : scenario === 'pessimista' ? 0.04 : 0.06);
+
   // ── SLIDE 1 – Capa ─────────────────────────────────────────────────────────
   const s1 = prs.addSlide();
   s1.background = { fill: C.darkBlue };
@@ -110,15 +116,13 @@ export async function generatePPT(): Promise<void> {
     x: 0.6, y: 2.7, w: 10, h: 0.7,
     fontSize: 22, color: 'BFDBFE', fontFace: 'Arial',
   });
-  s1.addText('Cenário Realista  |  Em milhões de R$', {
+  s1.addText(`${scenLabel}  |  Em milhões de R$`, {
     x: 0.6, y: 6.1, w: 10, h: 0.5,
     fontSize: 13, color: C.white, fontFace: 'Arial', italic: true,
   });
   addLogo(s1, 10.3, 6.05, 2.8, 1.25);
 
   // ── Premissas: dados base ─────────────────────────────────────────────────
-  const { premissas } = financialData as any;
-  const scenRates = premissas?.scenarioRates ?? {};
   const premSecs: any[] = premissas?.sections ?? [];
   // helper: cabeçalho padrão de slide
   const addHdr = (sl: PptxSlide, t: string, badge?: string) => {
@@ -588,7 +592,7 @@ export async function generatePPT(): Promise<void> {
   // ── SLIDE 3 – Premissas: Taxas e Cenários ─────────────────────────────────
   const sp1 = prs.addSlide();
   sp1.background = { fill: C.white };
-  addHdr(sp1, 'PREMISSAS  –  Taxas de Crescimento e Cenários', 'Premissas 1/5');
+  addHdr(sp1, 'PREMISSAS  –  Taxas de Crescimento e Cenários', scenLabel);
 
   const scens = [
     { name: 'Pessimista', rate: scenRates?.pessimista ?? 0.04, color: 'D97706', bg: 'FFFBEB',
@@ -625,14 +629,14 @@ export async function generatePPT(): Promise<void> {
     rowH: 0.38, border: { pt: 0.5, color: 'D1D5DB' },
     colW: [2.2, 1.7, 1.7, 1.7, 1.7, 1.7, 2.2],
   });
-  sp1.addText('Crescimento acumulado em relação a 2025 (Realizado). Aplicado sobre faturamento bruto e demais linhas de resultado.', {
+  sp1.addText(`¹O Cenário utilizado para as projeções a seguir é o ${scenLabel.toLowerCase()} que usa a taxa de ${fmtPct(scenRate)} de crescimento sobre as receitas do exercício anterior.`, {
     x: 0.3, y: 6.75, w: 12.7, h: 0.4, fontSize: 8, color: '9CA3AF', italic: true, fontFace: 'Arial',
   });
 
   // ── SLIDE 4 – Projeção de Estoques ────────────────────────────────────────
   const sp2 = prs.addSlide();
   sp2.background = { fill: C.white };
-  addHdr(sp2, 'PREMISSAS  –  Projeção de Estoques', 'Premissas 2/5');
+  addHdr(sp2, 'PREMISSAS  –  Projeção de Estoques', scenLabel);
 
   const estoqSec: any[] = premSecs.find((s: any) => s.title === 'Projeção estoques')?.rows ?? [];
   const estoqHdr = [
@@ -719,7 +723,7 @@ export async function generatePPT(): Promise<void> {
   // ── SLIDE 5 – Projeção de Imobilizado ─────────────────────────────────────
   const sp3 = prs.addSlide();
   sp3.background = { fill: C.white };
-  addHdr(sp3, 'PREMISSAS  –  Projeção de Imobilizado', 'Premissas 3/5');
+  addHdr(sp3, 'PREMISSAS  –  Projeção de Imobilizado', scenLabel);
 
   const imoSec: any[] = premSecs.find((s: any) => s.title === 'Projeção Imobilizado')?.rows ?? [];
   const getImo = (label: string, yr: number): number => imoSec.find((r: any) => r.label === label)?.[`ano${yr}`] ?? 0;
@@ -777,7 +781,7 @@ export async function generatePPT(): Promise<void> {
   // ── SLIDE 6 – Projeção de Empréstimos ─────────────────────────────────────
   const sp4 = prs.addSlide();
   sp4.background = { fill: C.white };
-  addHdr(sp4, 'PREMISSAS  –  Projeção de Empréstimos', 'Premissas 4/5');
+  addHdr(sp4, 'PREMISSAS  –  Projeção de Empréstimos', scenLabel);
 
   const empSec: any[] = premSecs.find((s: any) => s.title === 'Projeção Empréstimos')?.rows ?? [];
   const getEmp = (label: string, yr: number): number => empSec.find((r: any) => r.label === label)?.[`ano${yr}`] ?? 0;
@@ -816,7 +820,7 @@ export async function generatePPT(): Promise<void> {
   // ── SLIDE 7 – Fluxo Financeiro e Capital de Giro ──────────────────────────
   const sp5 = prs.addSlide();
   sp5.background = { fill: C.white };
-  addHdr(sp5, 'PREMISSAS  –  Fluxo Financeiro e Capital de Giro', 'Premissas 5/5');
+  addHdr(sp5, 'PREMISSAS  –  Fluxo Financeiro e Capital de Giro', scenLabel);
 
   const cr  = kpiData?.contasReceber ?? {};
   const cpd = kpiData?.contasPagar   ?? {};
@@ -951,7 +955,7 @@ export async function generatePPT(): Promise<void> {
   s3.background = { fill: C.white };
 
   s3.addShape('rect', { x: 0, y: 0, w: 13.33, h: 0.9, fill: { color: C.darkBlue }, line: { color: C.darkBlue } });
-  s3.addText('KPIs FINANCEIROS  –  Projeção 5 Anos (Cenário Realista)', {
+  s3.addText(`KPIs FINANCEIROS  –  Projeção 5 Anos (${scenLabel})`, {
     x: 0.3, y: 0.05, w: 11.2, h: 0.8,
     fontSize: 16, bold: true, color: C.white, fontFace: 'Arial', valign: 'middle',
   });
@@ -1701,10 +1705,10 @@ export async function generatePPT(): Promise<void> {
 }
 
 // ── Botão de exportação ──────────────────────────────────────────────────────
-export default function ExportPPTButton() {
+export default function ExportPPTButton({ scenario = 'realista' }: { scenario?: 'realista' | 'otimista' | 'pessimista' }) {
   const handleExport = async () => {
     try {
-      await generatePPT();
+      await generatePPT(scenario);
     } catch (err) {
       console.error('Erro ao gerar PPT:', err);
       alert('Ocorreu um erro ao gerar o arquivo PowerPoint.');

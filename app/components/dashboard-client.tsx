@@ -76,7 +76,7 @@ export default function DashboardClient() {
                   {scenario === 'otimista' ? 'Cenário Otimista' : 'Cenário Pessimista'}
                 </span>
               )}
-              <ExportPPTButton />
+              <ExportPPTButton scenario={scenario} />
             </div>
           </div>
 
