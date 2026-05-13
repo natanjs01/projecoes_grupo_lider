@@ -1347,7 +1347,7 @@ export async function generatePPT(scenario: 'realista' | 'otimista' | 'pessimist
     const dif = (r - o) / Math.abs(o) * 100;
     const abs = Math.abs(dif);
     const s = abs.toLocaleString('pt-BR', { minimumFractionDigits: 0, maximumFractionDigits: 0 }) + '%';
-    return dif < 0 ? `(${s})` : `+${s}`;
+    return dif < 0 ? `(${s})` : s;
   };
   const difColor = (o: number, r: number, isExpense: boolean): string => {
     const dif = o === 0 ? 0 : (r - o) / Math.abs(o);
