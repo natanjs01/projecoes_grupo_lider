@@ -151,31 +151,31 @@ export async function generatePPT(): Promise<void> {
   const buildBpSide = (arr: any[]): any[][] =>
     arr.map((row: any, i: number) => {
       if (row.header) return [
-        { text: row.label || '', options: { bold: true, color: 'BFDBFE', fill: { color: C.darkBlue }, fontSize: 8.5 } },
+        { text: row.label || '', options: { bold: true, color: 'BFDBFE', fill: { color: C.darkBlue }, fontSize: 9, fontFace: 'Arial' } },
         { text: '', options: { fill: { color: C.darkBlue } } },
         { text: '', options: { fill: { color: C.darkBlue } } },
         { text: '', options: { fill: { color: C.darkBlue } } },
       ];
       if (row.total) return [
-        { text: row.label, options: { bold: true, color: C.darkBlue, fill: { color: C.lightBlue }, fontSize: 8.5 } },
-        { text: fmtBpV(row.valor),    options: { bold: true, align: 'right', fontSize: 8.5, color: '000000',  fill: { color: C.lightBlue } } },
-        { text: fmtBpV(row.anterior), options: { bold: true, align: 'right', fontSize: 8.5, color: C.gray,    fill: { color: C.lightBlue } } },
-        { text: fmtBpP(row.pct),      options: { bold: true, align: 'right', fontSize: 8.5, color: '000000', fill: { color: C.lightBlue } } },
+        { text: row.label, options: { bold: true, color: C.darkBlue, fill: { color: C.lightBlue }, fontSize: 9, fontFace: 'Arial' } },
+        { text: fmtBpV(row.valor),    options: { bold: true, align: 'right', fontSize: 9, color: '000000',  fill: { color: C.lightBlue }, fontFace: 'Arial' } },
+        { text: fmtBpV(row.anterior), options: { bold: true, align: 'right', fontSize: 9, color: C.gray,    fill: { color: C.lightBlue }, fontFace: 'Arial' } },
+        { text: fmtBpP(row.pct),      options: { bold: true, align: 'right', fontSize: 9, color: '000000', fill: { color: C.lightBlue }, fontFace: 'Arial' } },
       ];
       const bg = i % 2 === 0 ? C.white : C.lightGray;
       return [
-        { text: row.label, options: { fontSize: 8, color: C.gray, fill: { color: bg } } },
-        { text: fmtBpV(row.valor),    options: { bold: true, align: 'right', fontSize: 8, color: '000000', fill: { color: bg } } },
-        { text: fmtBpV(row.anterior), options: { bold: true, align: 'right', fontSize: 8, color: '000000', fill: { color: bg } } },
-        { text: fmtBpP(row.pct),      options: { bold: true, align: 'right', fontSize: 8, color: '000000', fill: { color: bg } } },
+        { text: row.label, options: { fontSize: 8, color: C.gray, fill: { color: bg }, fontFace: 'Arial' } },
+        { text: fmtBpV(row.valor),    options: { bold: true, align: 'right', fontSize: 8, color: '000000', fill: { color: bg }, fontFace: 'Arial' } },
+        { text: fmtBpV(row.anterior), options: { bold: true, align: 'right', fontSize: 8, color: '000000', fill: { color: bg }, fontFace: 'Arial' } },
+        { text: fmtBpP(row.pct),      options: { bold: true, align: 'right', fontSize: 8, color: '000000', fill: { color: bg }, fontFace: 'Arial' } },
       ];
     });
 
   const bpColHdr = (title: string) => [
-    { text: title, options: { bold: true, color: C.white, fill: { color: C.midBlue }, fontSize: 9 } },
-    { text: '2025 (R$Mi)', options: { bold: true, color: C.white, fill: { color: C.midBlue }, align: 'right', fontSize: 9 } },
-    { text: '2024 (R$Mi)', options: { bold: true, color: C.white, fill: { color: C.midBlue }, align: 'right', fontSize: 9 } },
-    { text: 'Var%', options: { bold: true, color: C.white, fill: { color: C.midBlue }, align: 'right', fontSize: 9 } },
+    { text: title, options: { bold: true, color: C.white, fill: { color: C.midBlue }, fontSize: 9, fontFace: 'Arial' } },
+    { text: '2025 (R$Mi)', options: { bold: true, color: C.white, fill: { color: C.midBlue }, align: 'right', fontSize: 9, fontFace: 'Arial' } },
+    { text: '2024 (R$Mi)', options: { bold: true, color: C.white, fill: { color: C.midBlue }, align: 'right', fontSize: 9, fontFace: 'Arial' } },
+    { text: 'Var%', options: { bold: true, color: C.white, fill: { color: C.midBlue }, align: 'right', fontSize: 9, fontFace: 'Arial' } },
   ];
 
   const bpAtivoRows = buildBpSide(bpAtivo);
@@ -214,7 +214,7 @@ export async function generatePPT(): Promise<void> {
     fontSize: 7.5, color: '9CA3AF', italic: true, fontFace: 'Arial',
   });
 
-  // ── SLIDE DRE BP 2025 ────────────────────────────────────────────────────────
+  // ── SLIDE 3 – DRE BP 2025 ────────────────────────────────────────────────────
   const dre25Raw = (financialData as any).dre2025 ?? {};
   const dre25Rows: any[] = dre25Raw.rows ?? [];
   const dre25Periodo = dre25Raw.periodo ?? 'Dezembro/2025';
@@ -246,20 +246,20 @@ export async function generatePPT(): Promise<void> {
   };
 
   const dre25Header: object[] = [
-    { text: 'Descrição', options: { bold: true, color: C.white, fill: { color: C.darkBlue }, fontSize: 9.5, fontFace: 'Arial', align: 'left',   valign: 'middle' } },
-    { text: '2025',      options: { bold: true, color: C.white, fill: { color: C.darkBlue }, fontSize: 9.5, fontFace: 'Arial', align: 'center', valign: 'middle' } },
-    { text: '2024',      options: { bold: true, color: C.white, fill: { color: C.darkBlue }, fontSize: 9.5, fontFace: 'Arial', align: 'center', valign: 'middle' } },
-    { text: '%',         options: { bold: true, color: C.white, fill: { color: C.darkBlue }, fontSize: 9.5, fontFace: 'Arial', align: 'center', valign: 'middle' } },
+    { text: 'Descrição', options: { bold: true, color: C.white, fill: { color: C.darkBlue }, fontSize: 9, fontFace: 'Arial', align: 'left',   valign: 'middle' } },
+    { text: '2025',      options: { bold: true, color: C.white, fill: { color: C.darkBlue }, fontSize: 9, fontFace: 'Arial', align: 'center', valign: 'middle' } },
+    { text: '2024',      options: { bold: true, color: C.white, fill: { color: C.darkBlue }, fontSize: 9, fontFace: 'Arial', align: 'center', valign: 'middle' } },
+    { text: '%',         options: { bold: true, color: C.white, fill: { color: C.darkBlue }, fontSize: 9, fontFace: 'Arial', align: 'center', valign: 'middle' } },
   ];
 
   const dre25TableRows: object[][] = [dre25Header, ...dre25Rows.map((row: any, i: number) => {
     const isEven = i % 2 === 0;
     const bg = row.bold ? C.lightBlue : isEven ? C.white : C.lightGray;
     return [
-      { text: row.bold ? row.label : `   ${row.label}`, options: { bold: row.bold, fontSize: 9, color: C.gray, fill: { color: bg }, fontFace: 'Arial', align: 'left',  valign: 'middle' } },
-      { text: fmtDre25(row.v2025), options: { bold: row.bold, fontSize: 9, color: C.gray, fill: { color: bg }, fontFace: 'Arial', align: 'right', valign: 'middle' } },
-      { text: fmtDre25(row.v2024), options: { bold: row.bold, fontSize: 9, color: C.gray, fill: { color: bg }, fontFace: 'Arial', align: 'right', valign: 'middle' } },
-      { text: fmtPct25(row.pct),   options: { bold: row.bold, fontSize: 9, color: C.gray, fill: { color: bg }, fontFace: 'Arial', align: 'right', valign: 'middle' } },
+      { text: row.bold ? row.label : `   ${row.label}`, options: { bold: row.bold, fontSize: row.bold ? 9 : 8, color: C.gray, fill: { color: bg }, fontFace: 'Arial', align: 'left',  valign: 'middle' } },
+      { text: fmtDre25(row.v2025), options: { bold: row.bold, fontSize: row.bold ? 9 : 8, color: C.gray, fill: { color: bg }, fontFace: 'Arial', align: 'right', valign: 'middle' } },
+      { text: fmtDre25(row.v2024), options: { bold: row.bold, fontSize: row.bold ? 9 : 8, color: C.gray, fill: { color: bg }, fontFace: 'Arial', align: 'right', valign: 'middle' } },
+      { text: fmtPct25(row.pct),   options: { bold: row.bold, fontSize: row.bold ? 9 : 8, color: C.gray, fill: { color: bg }, fontFace: 'Arial', align: 'right', valign: 'middle' } },
     ];
   })];
 
@@ -283,6 +283,128 @@ export async function generatePPT(): Promise<void> {
   });
   sDre25.addText('▸  Resultado financeiro de R$ 5M (vs. R$ 46M em 2024, -89%), reflexo da queda nas receitas financeiras de R$ 61M para R$ 28M. Resultado antes dos impostos de R$ 85M (-8%). Lucro líquido encerrou em R$ 53M, com retração de 14% frente aos R$ 61M de 2024.', {
     x: dre25AX + 0.18, y: dre25AY + 1.14, w: dre25AW - 0.35, h: 0.72,
+    fontSize: 9, color: C.gray, fontFace: 'Arial', valign: 'top', wrap: true, lineSpacingMultiple: 1.2,
+  });
+
+  // ── SLIDE 4 – DFC BP 2025 ────────────────────────────────────────────────────
+  const dfc25Data     = (financialData as any).dfc2025 ?? {};
+  const dfc25Periodo  = dfc25Data.periodo ?? 'Dezembro/2025';
+  const dfc25Secs: any[] = dfc25Data.sections ?? [];
+  const getSecRow25 = (si: number, lbl: string): number =>
+    dfc25Secs[si]?.rows?.find((r: any) => r.label === lbl)?.valor ?? 0;
+
+  const sBp25 = prs.addSlide();
+  sBp25.background = { fill: C.white };
+
+  sBp25.addShape('rect', { x: 0, y: 0, w: 13.33, h: 0.88, fill: { color: C.darkBlue }, line: { color: C.darkBlue } });
+  sBp25.addText(`DFC – DEMONSTRAÇÃO DO FLUXO DE CAIXA  |  ${dfc25Periodo}`, {
+    x: 0.4, y: 0.05, w: 10.5, h: 0.5,
+    fontSize: 16, bold: true, color: C.white, fontFace: 'Arial', valign: 'middle',
+  });
+  sBp25.addText('Em milhões de R$', {
+    x: 0.4, y: 0.57, w: 6, h: 0.25,
+    fontSize: 9.5, color: 'BFDBFE', fontFace: 'Arial', italic: true,
+  });
+  addLogo(sBp25, 11.5, 0.07, 1.55, 0.7);
+
+  const bp25Sec0Show = new Set([
+    'Lucro (Prejuízo) do período',
+    'Depreciação e amortização',
+    'Resultado na venda/baixa de ativo imobilizado',
+    'Redução ao valor recuperável do contas a receber',
+    'Lucro (Prejuízo) Ajustado',
+    'Geração (Consumo) Caixa Operacional',
+    'Fluxo de Caixa das Atividades Operacionais',
+  ]);
+  const bp25Sec3Show = new Set(['Caixa gerado das atividades operacionais']);
+  const bp25SecTitles = ['ATIVIDADES OPERACIONAIS', 'INVESTIMENTOS', 'FINANCIAMENTOS', 'RESULTADO'];
+  const dfcSecCfg = [
+    { hBg: '1E3A5F', boldBg: 'BFDBFE', rowBg: 'EFF6FF' },
+    { hBg: '1E4976', boldBg: 'BAE6FD', rowBg: 'F0F9FF' },
+    { hBg: '1E5C8A', boldBg: 'A5F3FC', rowBg: 'F0FDFF' },
+    { hBg: '155E75', boldBg: '1E3A5F', rowBg: 'ECFEFF' },
+  ];
+  const dfcColW: [number, number] = [4.3, 1.5];
+  const dfcRowH = 0.295;
+  const fmtDfc = (v: number): string => {
+    if (v === 0) return '–';
+    const abs = Math.abs(v) / 1000;
+    const s = abs.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    return v < 0 ? `(${s})` : s;
+  };
+
+  const bp25TRows: object[][] = [];
+  dfc25Secs.forEach((sec: any, si: number) => {
+    const cfg    = dfcSecCfg[si] ?? dfcSecCfg[0];
+    const isRes  = si === 3;
+    bp25TRows.push([
+      { text: bp25SecTitles[si] ?? sec.title, options: { bold: true, fontSize: 9, color: C.white, fill: { color: cfg.hBg }, fontFace: 'Arial', align: 'left', valign: 'middle' } },
+      { text: 'Valor', options: { bold: true, fontSize: 9, color: C.white, fill: { color: cfg.hBg }, fontFace: 'Arial', align: 'right', valign: 'middle' } },
+    ]);
+    (sec.rows ?? []).forEach((row: any) => {
+      const isBold = !!row.bold;
+      const val: number = row.valor ?? 0;
+      if (si === 0 && !bp25Sec0Show.has(row.label)) return;
+      if (si === 3 && !bp25Sec3Show.has(row.label)) return;
+      if ((si === 1 || si === 2) && !isBold && val === 0) return;
+      const bg      = isBold ? cfg.boldBg : cfg.rowBg;
+      const isWhite = isRes && isBold;
+      const tColor  = isWhite ? C.white : C.gray;
+      const vColor  = isWhite ? C.white : '000000';
+      bp25TRows.push([
+        { text: isBold ? row.label : `   ${row.label}`, options: { bold: isBold, fontSize: isBold ? 9 : 8, color: tColor, fill: { color: bg }, fontFace: 'Arial', align: 'left',  valign: 'middle' } },
+        { text: fmtDfc(val),                             options: { bold: isBold, fontSize: isBold ? 9 : 8, color: vColor, fill: { color: bg }, fontFace: 'Arial', align: 'right', valign: 'middle' } },
+      ]);
+    });
+  });
+
+  sBp25.addTable(bp25TRows, {
+    x: 0.3, y: 0.95, w: 5.8, h: bp25TRows.length * dfcRowH,
+    colW: dfcColW, rowH: dfcRowH,
+    border: { pt: 0.3, color: 'E2E8F0' },
+  });
+
+  const bp25Vals = [
+    getSecRow25(0, 'Lucro (Prejuízo) Ajustado')                / 1000,
+    getSecRow25(0, 'Geração (Consumo) Caixa Operacional')      / 1000,
+    getSecRow25(1, 'Fluxo de Caixa de Investimentos')          / 1000,
+    getSecRow25(2, 'Fluxo de Caixa de Financiamentos')         / 1000,
+    getSecRow25(3, 'Caixa gerado das atividades operacionais') / 1000,
+  ];
+  const bp25Min = Math.floor(Math.min(...bp25Vals) * 1.35 / 5) * 5;
+  const bp25Max = Math.ceil(Math.max(...bp25Vals)  * 1.25 / 5) * 5;
+
+  (sBp25 as any).addChart('line', [{
+    name: 'R$ Milhões',
+    labels: ['Lucro\nAjustado', 'Caixa\nOperacional', 'Investimentos', 'Financiamentos', 'Caixa\nGerado'],
+    values: bp25Vals,
+  }], {
+    x: 6.4, y: 0.95, w: 6.65, h: 3.15,
+    showTitle: true,
+    title: `Consumo de Caixa  |  ${dfc25Periodo}`,
+    titleFontSize: 11, titleBold: true, titleColor: C.darkBlue,
+    lineDataSymbol: 'circle', lineDataSymbolSize: 9,
+    lineSize: 2.5, chartColors: ['2563EB'],
+    showValue: true, dataLabelFontSize: 9, dataLabelFontBold: true, dataLabelColor: C.darkBlue,
+    showLegend: false,
+    valAxisMinVal: bp25Min, valAxisMaxVal: bp25Max,
+    valGridLine: { style: 'solid', color: 'E5E7EB', size: 0.5 },
+    catAxisLabelFontSize: 9, valAxisLabelFontSize: 9,
+  });
+
+  const bp25AX = 6.4, bp25AY = 4.2, bp25AW = 6.65;
+  sBp25.addShape('rect', { x: bp25AX, y: bp25AY, w: bp25AW, h: 0.3, fill: { color: C.darkBlue }, line: { color: C.darkBlue } });
+  sBp25.addText('ANÁLISE', {
+    x: bp25AX + 0.12, y: bp25AY + 0.02, w: bp25AW - 0.2, h: 0.26,
+    fontSize: 8.5, bold: true, color: C.white, fontFace: 'Arial', valign: 'middle',
+  });
+  sBp25.addShape('rect', { x: bp25AX, y: bp25AY + 0.3, w: bp25AW, h: 2.7, fill: { color: 'EFF6FF' }, line: { color: 'BFDBFE', pt: 0.5 } });
+  sBp25.addText('▸  Lucro ajustado de R$ 78M em dezembro de 2025, composto por resultado líquido de R$ 53M, depreciação R$ 21M e ajustes de créditos e ativos de R$ 4M. O capital de giro contribuiu positivamente com R$ 83M em geração de caixa, elevando o fluxo operacional total a R$ 161M.', {
+    x: bp25AX + 0.18, y: bp25AY + 0.36, w: bp25AW - 0.35, h: 1.2,
+    fontSize: 9, color: C.gray, fontFace: 'Arial', valign: 'top', wrap: true, lineSpacingMultiple: 1.2,
+  });
+  sBp25.addText('▸  Investimentos em ativo fixo de R$ 6M. Fluxo de financiamentos negativo de R$ 88M, resultante de amortização de empréstimos (R$ 62M) e distribuição de capital e lucros (R$ 43M), parcialmente compensados por aportes de partes relacionadas (R$ 17M). Caixa gerado no período: R$ 67M.', {
+    x: bp25AX + 0.18, y: bp25AY + 1.62, w: bp25AW - 0.35, h: 1.2,
     fontSize: 9, color: C.gray, fontFace: 'Arial', valign: 'top', wrap: true, lineSpacingMultiple: 1.2,
   });
 
@@ -486,16 +608,16 @@ export async function generatePPT(): Promise<void> {
   });
 
   const impHdr = [
-    { text: 'Cenário', options: { bold: true, color: C.white, fill: { color: C.midBlue }, fontSize: 10 } },
-    ...YRS.map((n, i) => ({ text: YR_LABELS[i], options: { bold: true, color: C.white, fill: { color: C.midBlue }, align: 'center', fontSize: 10 } })),
-    { text: 'Acumulado 5 anos', options: { bold: true, color: C.white, fill: { color: C.midBlue }, align: 'center', fontSize: 10 } },
+    { text: 'Cenário', options: { bold: true, color: C.white, fill: { color: C.midBlue }, fontSize: 9, fontFace: 'Arial' } },
+    ...YRS.map((n, i) => ({ text: YR_LABELS[i], options: { bold: true, color: C.white, fill: { color: C.midBlue }, align: 'center', fontSize: 9, fontFace: 'Arial' } })),
+    { text: 'Acumulado 5 anos', options: { bold: true, color: C.white, fill: { color: C.midBlue }, align: 'center', fontSize: 9, fontFace: 'Arial' } },
   ];
   const impRows = scens.map((sc, i) => {
     const bg = i % 2 === 0 ? C.white : C.lightGray;
     return [
-      { text: sc.name, options: { bold: true, fontSize: 10, color: sc.color, fill: { color: bg } } },
-      ...YRS.map(yr => ({ text: fmtPct(Math.pow(1 + sc.rate, yr) - 1), options: { align: 'center', fontSize: 10, color: sc.color, fill: { color: bg } } })),
-      { text: fmtPct(Math.pow(1 + sc.rate, 5) - 1), options: { align: 'center', fontSize: 10, bold: true, color: sc.color, fill: { color: bg } } },
+      { text: sc.name, options: { bold: true, fontSize: 8, color: sc.color, fill: { color: bg }, fontFace: 'Arial' } },
+      ...YRS.map(yr => ({ text: fmtPct(Math.pow(1 + sc.rate, yr) - 1), options: { align: 'center', fontSize: 8, color: sc.color, fill: { color: bg }, fontFace: 'Arial' } })),
+      { text: fmtPct(Math.pow(1 + sc.rate, 5) - 1), options: { align: 'center', fontSize: 8, bold: true, color: sc.color, fill: { color: bg }, fontFace: 'Arial' } },
     ];
   });
   sp1.addTable([impHdr, ...impRows], {
@@ -514,8 +636,8 @@ export async function generatePPT(): Promise<void> {
 
   const estoqSec: any[] = premSecs.find((s: any) => s.title === 'Projeção estoques')?.rows ?? [];
   const estoqHdr = [
-    { text: 'Componente', options: { bold: true, color: C.white, fill: { color: C.midBlue }, fontSize: 9.5 } },
-    ...YRS.map((n, i) => ({ text: YR_LABELS[i], options: { bold: true, color: C.white, fill: { color: C.midBlue }, align: 'right', fontSize: 9.5 } })),
+    { text: 'Componente', options: { bold: true, color: C.white, fill: { color: C.midBlue }, fontSize: 9, fontFace: 'Arial' } },
+    ...YRS.map((n, i) => ({ text: YR_LABELS[i], options: { bold: true, color: C.white, fill: { color: C.midBlue }, align: 'right', fontSize: 9, fontFace: 'Arial' } })),
   ];
   const estoqTRows: any[] = [];
   ['A', 'B', 'C', 'D'].forEach((t, ti) => {
@@ -524,20 +646,20 @@ export async function generatePPT(): Promise<void> {
     const bgR = ti % 2 === 0 ? C.white : C.lightGray;
     const get = (off: number, yr: number): number => estoqSec[b + off]?.[`ano${yr}`] ?? 0;
     estoqTRows.push([
-      { text: `Tipo ${t}  –  Saldo Inicial`, options: { bold: true, fontSize: 9, color: C.darkBlue, fill: { color: bgH } } },
-      ...YRS.map(yr => ({ text: fmtBig(get(0, yr)), options: { align: 'right', fontSize: 9, bold: true, color: '000000', fill: { color: bgH } } })),
+      { text: `Tipo ${t}  –  Saldo Inicial`, options: { bold: true, fontSize: 9, color: C.darkBlue, fill: { color: bgH }, fontFace: 'Arial' } },
+      ...YRS.map(yr => ({ text: fmtBig(get(0, yr)), options: { align: 'right', fontSize: 9, bold: true, color: '000000', fill: { color: bgH }, fontFace: 'Arial' } })),
     ]);
     estoqTRows.push([
-      { text: '   Compras', options: { bold: false, fontSize: 8.5, color: C.gray, fill: { color: bgR } } },
-      ...YRS.map(yr => ({ text: fmtBig(get(1, yr)), options: { align: 'right', fontSize: 8.5, color: C.gray, fill: { color: bgR } } })),
+      { text: '   Compras', options: { bold: false, fontSize: 8, color: C.gray, fill: { color: bgR }, fontFace: 'Arial' } },
+      ...YRS.map(yr => ({ text: fmtBig(get(1, yr)), options: { align: 'right', fontSize: 8, color: C.gray, fill: { color: bgR }, fontFace: 'Arial' } })),
     ]);
     estoqTRows.push([
-      { text: '   Baixa CMV', options: { bold: false, fontSize: 8.5, color: C.gray, fill: { color: bgR } } },
-      ...YRS.map(yr => ({ text: fmtBig(get(2, yr)), options: { align: 'right', fontSize: 8.5, bold: true, color: '000000', fill: { color: bgR } } })),
+      { text: '   Baixa CMV', options: { bold: false, fontSize: 8, color: C.gray, fill: { color: bgR }, fontFace: 'Arial' } },
+      ...YRS.map(yr => ({ text: fmtBig(get(2, yr)), options: { align: 'right', fontSize: 8, bold: true, color: '000000', fill: { color: bgR }, fontFace: 'Arial' } })),
     ]);
     estoqTRows.push([
-      { text: `Tipo ${t}  –  Saldo Final`, options: { bold: true, fontSize: 9, color: C.darkBlue, fill: { color: bgH } } },
-      ...YRS.map(yr => ({ text: fmtBig(get(5, yr)), options: { align: 'right', fontSize: 9, bold: true, color: '000000', fill: { color: bgH } } })),
+      { text: `Tipo ${t}  –  Saldo Final`, options: { bold: true, fontSize: 9, color: C.darkBlue, fill: { color: bgH }, fontFace: 'Arial' } },
+      ...YRS.map(yr => ({ text: fmtBig(get(5, yr)), options: { align: 'right', fontSize: 9, bold: true, color: '000000', fill: { color: bgH }, fontFace: 'Arial' } })),
     ]);
   });
   sp2.addTable([estoqHdr, ...estoqTRows], {
@@ -557,16 +679,16 @@ export async function generatePPT(): Promise<void> {
   sp2.addText('Orçamento 2026', { x: 10.1, y: 5.55, w: 3.05, h: 0.32, fontSize: 9, bold: true, color: C.white, align: 'center', valign: 'middle', fontFace: 'Arial' });
   sp2.addTable([
     [
-      { text: 'Compra', options: { bold: true, color: C.white, fill: { color: C.midBlue }, fontSize: 8.5, align: 'center' } },
-      { text: 'Ano', options: { bold: true, color: C.white, fill: { color: C.midBlue }, fontSize: 8.5, align: 'center', underline: true } },
+      { text: 'Compra', options: { bold: true, color: C.white, fill: { color: C.midBlue }, fontSize: 9, align: 'center', fontFace: 'Arial' } },
+      { text: 'Ano', options: { bold: true, color: C.white, fill: { color: C.midBlue }, fontSize: 9, align: 'center', underline: true, fontFace: 'Arial' } },
     ],
     [
       { text: fmtOrc(compras2026), options: { bold: true, align: 'center', fontSize: 9, color: '000000', fill: { color: C.white } } },
       { text: '2026', options: { align: 'center', fontSize: 9, color: C.gray, fill: { color: C.white } } },
     ],
     [
-      { text: fmtOrc(compras2025), options: { align: 'center', fontSize: 9, color: C.gray, fill: { color: C.lightGray } } },
-      { text: '2025', options: { align: 'center', fontSize: 9, color: C.gray, fill: { color: C.lightGray } } },
+      { text: fmtOrc(compras2025), options: { align: 'center', fontSize: 8, color: C.gray, fill: { color: C.lightGray } } },
+      { text: '2025', options: { align: 'center', fontSize: 8, color: C.gray, fill: { color: C.lightGray } } },
     ],
     [
       { text: varStr, options: { bold: true, align: 'center', fontSize: 9, color: '000000', fill: { color: C.white } } },
@@ -603,8 +725,8 @@ export async function generatePPT(): Promise<void> {
   const getImo = (label: string, yr: number): number => imoSec.find((r: any) => r.label === label)?.[`ano${yr}`] ?? 0;
 
   const imoHdr2 = [
-    { text: 'Imobilizado', options: { bold: true, color: C.white, fill: { color: C.midBlue }, fontSize: 11 } },
-    ...YRS.map((n, i) => ({ text: YR_LABELS[i], options: { bold: true, color: C.white, fill: { color: C.midBlue }, align: 'right', fontSize: 11 } })),
+    { text: 'Imobilizado', options: { bold: true, color: C.white, fill: { color: C.midBlue }, fontSize: 9, fontFace: 'Arial' } },
+    ...YRS.map((n, i) => ({ text: YR_LABELS[i], options: { bold: true, color: C.white, fill: { color: C.midBlue }, align: 'right', fontSize: 9, fontFace: 'Arial' } })),
   ];
   // Saldo Final calculado (ano2 está zerado no JSON — dado incompleto na fonte)
   const imoSaldoFinal = (yr: number) => {
@@ -624,8 +746,8 @@ export async function generatePPT(): Promise<void> {
   const imoTRows = imoDef.map((r, i) => {
     const bg = r.bold ? C.lightBlue : i % 2 === 0 ? C.white : C.lightGray;
     return [
-      { text: r.label, options: { bold: r.bold, fontSize: 10, color: r.bold ? C.darkBlue : C.gray, fill: { color: bg } } },
-      ...r.vals.map((v: number) => ({ text: fmtBig(v), options: { align: 'right', fontSize: 10, bold: true, color: '000000', fill: { color: bg } } })),
+      { text: r.label, options: { bold: r.bold, fontSize: r.bold ? 9 : 8, color: r.bold ? C.darkBlue : C.gray, fill: { color: bg }, fontFace: 'Arial' } },
+      ...r.vals.map((v: number) => ({ text: fmtBig(v), options: { align: 'right', fontSize: r.bold ? 9 : 8, bold: true, color: '000000', fill: { color: bg }, fontFace: 'Arial' } })),
     ];
   });
   sp3.addTable([imoHdr2, ...imoTRows], {
@@ -661,8 +783,8 @@ export async function generatePPT(): Promise<void> {
   const getEmp = (label: string, yr: number): number => empSec.find((r: any) => r.label === label)?.[`ano${yr}`] ?? 0;
 
   const empHdr2 = [
-    { text: 'Empréstimos', options: { bold: true, color: C.white, fill: { color: C.midBlue }, fontSize: 10 } },
-    ...YRS.map((n, i) => ({ text: YR_LABELS[i], options: { bold: true, color: C.white, fill: { color: C.midBlue }, align: 'right', fontSize: 10 } })),
+    { text: 'Empréstimos', options: { bold: true, color: C.white, fill: { color: C.midBlue }, fontSize: 9, fontFace: 'Arial' } },
+    ...YRS.map((n, i) => ({ text: YR_LABELS[i], options: { bold: true, color: C.white, fill: { color: C.midBlue }, align: 'right', fontSize: 9, fontFace: 'Arial' } })),
   ];
   const empDef = [
     { label: 'Saldo Inicial',                key: 'Empréstimo líquido - Saldo inicial',    bold: true },
@@ -678,8 +800,8 @@ export async function generatePPT(): Promise<void> {
   const empTRows = empDef.map((r, i) => {
     const bg = r.bold ? C.lightBlue : i % 2 === 0 ? C.white : C.lightGray;
     return [
-      { text: r.label, options: { bold: r.bold, fontSize: 9.5, color: r.bold ? C.darkBlue : C.gray, fill: { color: bg } } },
-      ...YRS.map(yr => { const v = getEmp(r.key, yr); return { text: fmtBig(v), options: { align: 'right', fontSize: 9.5, bold: true, color: '000000', fill: { color: bg } } }; }),
+      { text: r.label, options: { bold: r.bold, fontSize: r.bold ? 9 : 8, color: r.bold ? C.darkBlue : C.gray, fill: { color: bg }, fontFace: 'Arial' } },
+      ...YRS.map(yr => { const v = getEmp(r.key, yr); return { text: fmtBig(v), options: { align: 'right', fontSize: r.bold ? 9 : 8, bold: true, color: '000000', fill: { color: bg }, fontFace: 'Arial' } }; }),
     ];
   });
   sp4.addTable([empHdr2, ...empTRows], {
@@ -718,8 +840,8 @@ export async function generatePPT(): Promise<void> {
   const ncgVar = (yr: number) => crVar(yr) + estVar(yr) + cpdVar(yr);
 
   const wrkHdr = [
-    { text: 'Variação Capital de Giro (R$)', options: { bold: true, color: C.white, fill: { color: C.midBlue }, fontSize: 11 } },
-    ...YRS.map((n, i) => ({ text: YR_LABELS[i], options: { bold: true, color: C.white, fill: { color: C.midBlue }, align: 'right', fontSize: 11 } })),
+    { text: 'Variação Capital de Giro (R$)', options: { bold: true, color: C.white, fill: { color: C.midBlue }, fontSize: 9, fontFace: 'Arial' } },
+    ...YRS.map((n, i) => ({ text: YR_LABELS[i], options: { bold: true, color: C.white, fill: { color: C.midBlue }, align: 'right', fontSize: 9, fontFace: 'Arial' } })),
   ];
   const wrkDef = [
     { label: '( + ) Contas a Receber',              vals: YRS.map(yr => crVar(yr)),           bold: false },
@@ -730,10 +852,10 @@ export async function generatePPT(): Promise<void> {
   const wrkTRows = wrkDef.map((r, i) => {
     const bg = r.bold ? C.lightBlue : i % 2 === 0 ? C.white : C.lightGray;
     return [
-      { text: r.label, options: { bold: r.bold, fontSize: 10.5, color: r.bold ? C.darkBlue : C.gray, fill: { color: bg } } },
+      { text: r.label, options: { bold: r.bold, fontSize: r.bold ? 9 : 8, color: r.bold ? C.darkBlue : C.gray, fill: { color: bg }, fontFace: 'Arial' } },
       ...r.vals.map((v: number) => ({
         text: v === 0 ? '–' : fmtBig(v),
-        options: { align: 'right', fontSize: 10.5, bold: true, color: '000000', fill: { color: bg } },
+        options: { align: 'right', fontSize: r.bold ? 9 : 8, bold: true, color: '000000', fill: { color: bg }, fontFace: 'Arial' },
       })),
     ];
   });
@@ -770,10 +892,10 @@ export async function generatePPT(): Promise<void> {
   addLogo(s2, 11.6, 0.1, 1.55, 0.7);
 
   const headerRow = [
-    { text: 'Descrição', options: { bold: true, color: C.white, fill: { color: C.midBlue }, fontSize: 10 } },
+    { text: 'Descrição', options: { bold: true, color: C.white, fill: { color: C.midBlue }, fontSize: 9, fontFace: 'Arial' } },
     ...anos.map((a: string) => ({
       text: a,
-      options: { bold: true, color: C.white, fill: { color: C.midBlue }, align: 'center', fontSize: 10 },
+      options: { bold: true, color: C.white, fill: { color: C.midBlue }, align: 'center', fontSize: 9, fontFace: 'Arial' },
     })),
   ];
 
@@ -783,7 +905,7 @@ export async function generatePPT(): Promise<void> {
     return [
       {
         text: row.label,
-        options: { bold: row.bold, fontSize: 9, color: C.gray, fill: { color: bg }, indent: row.bold ? 0 : 8 },
+        options: { bold: row.bold, fontSize: row.bold ? 9 : 8, color: C.gray, fill: { color: bg }, indent: row.bold ? 0 : 8, fontFace: 'Arial' },
       },
       ...anos.map((a: string) => {
         const v = row.values?.[a] ?? 0;
@@ -791,9 +913,10 @@ export async function generatePPT(): Promise<void> {
         return {
           text: display,
           options: {
-            align: 'right', fontSize: 9, bold: true,
+            align: 'right', fontSize: row.bold ? 9 : 8, bold: true,
             color: '000000',
             fill: { color: bg },
+            fontFace: 'Arial',
           },
         };
       }),
@@ -878,22 +1001,22 @@ export async function generatePPT(): Promise<void> {
   });
 
   const kSecHdr = (title: string) => [
-    { text: title, options: { bold: true, color: C.white, fill: { color: C.midBlue }, fontSize: 9.5 } },
+    { text: title, options: { bold: true, color: C.white, fill: { color: C.midBlue }, fontSize: 9, fontFace: 'Arial' } },
     ...YRS.map(() => ({ text: '', options: { fill: { color: C.midBlue } } })),
   ];
   const kRow = (label: string, vals: string[], bg: string, colorFn?: (v: string) => string) => [
-    { text: label, options: { fontSize: 8.5, color: C.gray, fill: { color: bg } } },
+    { text: label, options: { fontSize: 8, color: C.gray, fill: { color: bg }, fontFace: 'Arial' } },
     ...vals.map(v => ({
       text: v,
-      options: { align: 'right', fontSize: 8.5, color: colorFn ? colorFn(v) : C.gray, fill: { color: bg } },
+      options: { align: 'right', fontSize: 8, color: colorFn ? colorFn(v) : C.gray, fill: { color: bg }, fontFace: 'Arial' },
     })),
   ];
 
   const kpiTableRows: any[][] = [
     // cabeçalho da tabela
     [
-      { text: 'INDICADOR', options: { bold: true, color: 'BFDBFE', fill: { color: '0F2040' }, fontSize: 9 } },
-      ...YRS.map((n, i) => ({ text: YR_LABELS[i], options: { bold: true, color: 'BFDBFE', fill: { color: '0F2040' }, align: 'right', fontSize: 9 } })),
+      { text: 'INDICADOR', options: { bold: true, color: 'BFDBFE', fill: { color: '0F2040' }, fontSize: 9, fontFace: 'Arial' } },
+      ...YRS.map((n, i) => ({ text: YR_LABELS[i], options: { bold: true, color: 'BFDBFE', fill: { color: '0F2040' }, align: 'right', fontSize: 9, fontFace: 'Arial' } })),
     ],
     // ── Margens
     kSecHdr('Margens'),
@@ -1090,10 +1213,10 @@ export async function generatePPT(): Promise<void> {
   };
 
   const fcHeaderRow = [
-    { text: 'Fluxo Financeiro', options: { bold: true, color: C.white, fill: { color: C.midBlue }, fontSize: 11 } },
+    { text: 'Fluxo Financeiro', options: { bold: true, color: C.white, fill: { color: C.midBlue }, fontSize: 9, fontFace: 'Arial' } },
     ...['2026','2027','2028','2029','2030'].map(a => ({
       text: a,
-      options: { bold: true, color: C.white, fill: { color: C.midBlue }, align: 'right' as const, fontSize: 11 },
+      options: { bold: true, color: C.white, fill: { color: C.midBlue }, align: 'right' as const, fontSize: 9, fontFace: 'Arial' },
     })),
   ];
 
@@ -1101,15 +1224,16 @@ export async function generatePPT(): Promise<void> {
     const bg = row.style ? fcBg[row.style] : i % 2 === 0 ? C.white : C.lightGray;
     const labelText = row.indent ? `    ${row.label}` : row.label;
     return [
-      { text: labelText, options: { bold: !!row.bold, fontSize: 10, color: row.style === 'final' ? C.white : C.gray, fill: { color: bg } } },
+      { text: labelText, options: { bold: !!row.bold, fontSize: !!row.bold ? 9 : 8, color: row.style === 'final' ? C.white : C.gray, fill: { color: bg }, fontFace: 'Arial' } },
       ...[1,2,3,4,5].map(yr => {
         const v = row.getValue ? row.getValue(yr) : getFC(row.label, yr);
         return {
           text: v === 0 ? '–' : fmtBig(v),
           options: {
-            align: 'right' as const, fontSize: 10, bold: true,
+            align: 'right' as const, fontSize: !!row.bold ? 9 : 8, bold: true,
             color: fcTextColor(row.style, v),
             fill: { color: bg },
+            fontFace: 'Arial',
           },
         };
       }),
@@ -1121,128 +1245,6 @@ export async function generatePPT(): Promise<void> {
     rowH: (5.3 / 12),
     border: { pt: 0.5, color: 'D1D5DB' },
     colW: [3.5, 1.8, 1.8, 1.8, 1.8, 1.8],
-  });
-
-  // ── SLIDE 11a – DFC BP 2025 ───────────────────────────────────────────────
-  const dfc25Data     = (financialData as any).dfc2025 ?? {};
-  const dfc25Periodo  = dfc25Data.periodo ?? 'Dezembro/2025';
-  const dfc25Secs: any[] = dfc25Data.sections ?? [];
-  const getSecRow25 = (si: number, lbl: string): number =>
-    dfc25Secs[si]?.rows?.find((r: any) => r.label === lbl)?.valor ?? 0;
-
-  const sBp25 = prs.addSlide();
-  sBp25.background = { fill: C.white };
-
-  sBp25.addShape('rect', { x: 0, y: 0, w: 13.33, h: 0.88, fill: { color: C.darkBlue }, line: { color: C.darkBlue } });
-  sBp25.addText(`DFC – DEMONSTRAÇÃO DO FLUXO DE CAIXA  |  ${dfc25Periodo}`, {
-    x: 0.4, y: 0.05, w: 10.5, h: 0.5,
-    fontSize: 16, bold: true, color: C.white, fontFace: 'Arial', valign: 'middle',
-  });
-  sBp25.addText('Em milhões de R$', {
-    x: 0.4, y: 0.57, w: 6, h: 0.25,
-    fontSize: 9.5, color: 'BFDBFE', fontFace: 'Arial', italic: true,
-  });
-  addLogo(sBp25, 11.5, 0.07, 1.55, 0.7);
-
-  const bp25Sec0Show = new Set([
-    'Lucro (Prejuízo) do período',
-    'Depreciação e amortização',
-    'Resultado na venda/baixa de ativo imobilizado',
-    'Redução ao valor recuperável do contas a receber',
-    'Lucro (Prejuízo) Ajustado',
-    'Geração (Consumo) Caixa Operacional',
-    'Fluxo de Caixa das Atividades Operacionais',
-  ]);
-  const bp25Sec3Show = new Set(['Caixa gerado das atividades operacionais']);
-  const bp25SecTitles = ['ATIVIDADES OPERACIONAIS', 'INVESTIMENTOS', 'FINANCIAMENTOS', 'RESULTADO'];
-  const dfcSecCfg = [
-    { hBg: '1E3A5F', boldBg: 'BFDBFE', rowBg: 'EFF6FF' },
-    { hBg: '1E4976', boldBg: 'BAE6FD', rowBg: 'F0F9FF' },
-    { hBg: '1E5C8A', boldBg: 'A5F3FC', rowBg: 'F0FDFF' },
-    { hBg: '155E75', boldBg: '1E3A5F', rowBg: 'ECFEFF' },
-  ];
-  const dfcColW: [number, number] = [4.3, 1.5];
-  const dfcRowH = 0.295;
-  const fmtDfc = (v: number): string => {
-    if (v === 0) return '–';
-    const abs = Math.abs(v) / 1000;
-    const s = abs.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-    return v < 0 ? `(${s})` : s;
-  };
-
-  const bp25TRows: object[][] = [];
-  dfc25Secs.forEach((sec: any, si: number) => {
-    const cfg    = dfcSecCfg[si] ?? dfcSecCfg[0];
-    const isRes  = si === 3;
-    bp25TRows.push([
-      { text: bp25SecTitles[si] ?? sec.title, options: { bold: true, fontSize: 8, color: C.white, fill: { color: cfg.hBg }, fontFace: 'Arial', align: 'left', valign: 'middle' } },
-      { text: '', options: { fill: { color: cfg.hBg } } },
-    ]);
-    (sec.rows ?? []).forEach((row: any) => {
-      const isBold = !!row.bold;
-      const val: number = row.valor ?? 0;
-      if (si === 0 && !bp25Sec0Show.has(row.label)) return;
-      if (si === 3 && !bp25Sec3Show.has(row.label)) return;
-      if ((si === 1 || si === 2) && !isBold && val === 0) return;
-      const bg      = isBold ? cfg.boldBg : cfg.rowBg;
-      const isWhite = isRes && isBold;
-      const tColor  = isWhite ? C.white : C.gray;
-      const vColor  = isWhite ? C.white : '000000';
-      bp25TRows.push([
-        { text: isBold ? row.label : `   ${row.label}`, options: { bold: isBold, fontSize: 8.5, color: tColor, fill: { color: bg }, fontFace: 'Arial', align: 'left',  valign: 'middle' } },
-        { text: fmtDfc(val),                             options: { bold: isBold, fontSize: 8.5, color: vColor, fill: { color: bg }, fontFace: 'Arial', align: 'right', valign: 'middle' } },
-      ]);
-    });
-  });
-
-  sBp25.addTable(bp25TRows, {
-    x: 0.3, y: 0.95, w: 5.8, h: bp25TRows.length * dfcRowH,
-    colW: dfcColW, rowH: dfcRowH,
-    border: { pt: 0.3, color: 'E2E8F0' },
-  });
-
-  const bp25Vals = [
-    getSecRow25(0, 'Lucro (Prejuízo) Ajustado')                / 1000,
-    getSecRow25(0, 'Geração (Consumo) Caixa Operacional')      / 1000,
-    getSecRow25(1, 'Fluxo de Caixa de Investimentos')          / 1000,
-    getSecRow25(2, 'Fluxo de Caixa de Financiamentos')         / 1000,
-    getSecRow25(3, 'Caixa gerado das atividades operacionais') / 1000,
-  ];
-  const bp25Min = Math.floor(Math.min(...bp25Vals) * 1.35 / 5) * 5;
-  const bp25Max = Math.ceil(Math.max(...bp25Vals)  * 1.25 / 5) * 5;
-
-  (sBp25 as any).addChart('line', [{
-    name: 'R$ Milhões',
-    labels: ['Lucro\nAjustado', 'Caixa\nOperacional', 'Investimentos', 'Financiamentos', 'Caixa\nGerado'],
-    values: bp25Vals,
-  }], {
-    x: 6.4, y: 0.95, w: 6.65, h: 3.15,
-    showTitle: true,
-    title: `Consumo de Caixa  |  ${dfc25Periodo}`,
-    titleFontSize: 11, titleBold: true, titleColor: C.darkBlue,
-    lineDataSymbol: 'circle', lineDataSymbolSize: 9,
-    lineSize: 2.5, chartColors: ['2563EB'],
-    showValue: true, dataLabelFontSize: 9, dataLabelFontBold: true, dataLabelColor: C.darkBlue,
-    showLegend: false,
-    valAxisMinVal: bp25Min, valAxisMaxVal: bp25Max,
-    valGridLine: { style: 'solid', color: 'E5E7EB', size: 0.5 },
-    catAxisLabelFontSize: 9, valAxisLabelFontSize: 9,
-  });
-
-  const bp25AX = 6.4, bp25AY = 4.2, bp25AW = 6.65;
-  sBp25.addShape('rect', { x: bp25AX, y: bp25AY, w: bp25AW, h: 0.3, fill: { color: C.darkBlue }, line: { color: C.darkBlue } });
-  sBp25.addText('ANÁLISE', {
-    x: bp25AX + 0.12, y: bp25AY + 0.02, w: bp25AW - 0.2, h: 0.26,
-    fontSize: 8.5, bold: true, color: C.white, fontFace: 'Arial', valign: 'middle',
-  });
-  sBp25.addShape('rect', { x: bp25AX, y: bp25AY + 0.3, w: bp25AW, h: 2.7, fill: { color: 'EFF6FF' }, line: { color: 'BFDBFE', pt: 0.5 } });
-  sBp25.addText('▸  Lucro ajustado de R$ 78M em dezembro de 2025, composto por resultado líquido de R$ 53M, depreciação R$ 21M e ajustes de créditos e ativos de R$ 4M. O capital de giro contribuiu positivamente com R$ 83M em geração de caixa, elevando o fluxo operacional total a R$ 161M.', {
-    x: bp25AX + 0.18, y: bp25AY + 0.36, w: bp25AW - 0.35, h: 1.2,
-    fontSize: 9, color: C.gray, fontFace: 'Arial', valign: 'top', wrap: true, lineSpacingMultiple: 1.2,
-  });
-  sBp25.addText('▸  Investimentos em ativo fixo de R$ 6M. Fluxo de financiamentos negativo de R$ 88M, resultante de amortização de empréstimos (R$ 62M) e distribuição de capital e lucros (R$ 43M), parcialmente compensados por aportes de partes relacionadas (R$ 17M). Caixa gerado no período: R$ 67M.', {
-    x: bp25AX + 0.18, y: bp25AY + 1.62, w: bp25AW - 0.35, h: 1.2,
-    fontSize: 9, color: C.gray, fontFace: 'Arial', valign: 'top', wrap: true, lineSpacingMultiple: 1.2,
   });
 
   // ── SLIDE 11 – DFC 1TRI 2026 ─────────────────────────────────────────────
@@ -1296,8 +1298,8 @@ export async function generatePPT(): Promise<void> {
     const cfg = dfcSecCfg[si] ?? dfcSecCfg[0];
     const isRes = si === 3;
     dfcTRows.push([
-      { text: secShortTitle[si] ?? sec.title, options: { bold: true, fontSize: 8, color: C.white, fill: { color: cfg.hBg }, fontFace: 'Arial', align: 'left', valign: 'middle' } },
-      { text: '',                              options: { fill: { color: cfg.hBg } } },
+      { text: secShortTitle[si] ?? sec.title, options: { bold: true, fontSize: 9, color: C.white, fill: { color: cfg.hBg }, fontFace: 'Arial', align: 'left', valign: 'middle' } },
+      { text: 'Valor',                          options: { bold: true, fontSize: 9, color: C.white, fill: { color: cfg.hBg }, fontFace: 'Arial', align: 'right', valign: 'middle' } },
     ]);
     (sec.rows ?? []).forEach((row: any) => {
       const isBold = !!row.bold;
@@ -1310,8 +1312,8 @@ export async function generatePPT(): Promise<void> {
       const tColor   = isWhite ? C.white : C.gray;
       const vColor   = isWhite ? C.white : '000000';
       dfcTRows.push([
-        { text: isBold ? row.label : `   ${row.label}`, options: { bold: isBold, fontSize: 8.5, color: tColor, fill: { color: bg }, fontFace: 'Arial', align: 'left',  valign: 'middle' } },
-        { text: fmtDfc(val),                             options: { bold: isBold, fontSize: 8.5, color: vColor, fill: { color: bg }, fontFace: 'Arial', align: 'right', valign: 'middle' } },
+        { text: isBold ? row.label : `   ${row.label}`, options: { bold: isBold, fontSize: isBold ? 9 : 8, color: tColor, fill: { color: bg }, fontFace: 'Arial', align: 'left',  valign: 'middle' } },
+        { text: fmtDfc(val),                             options: { bold: isBold, fontSize: isBold ? 9 : 8, color: vColor, fill: { color: bg }, fontFace: 'Arial', align: 'right', valign: 'middle' } },
       ]);
     });
   });
@@ -1445,7 +1447,7 @@ export async function generatePPT(): Promise<void> {
   };
 
   // Header row 1 — grupos de meses
-  const drvHdrOpts = { bold: true, color: C.white, fill: { color: C.darkBlue }, fontFace: 'Arial', fontSize: 8.5, align: 'center' as const, valign: 'middle' as const, border: { pt: 0.3, color: 'E2E8F0' } };
+  const drvHdrOpts = { bold: true, color: C.white, fill: { color: C.darkBlue }, fontFace: 'Arial', fontSize: 9, align: 'center' as const, valign: 'middle' as const, border: { pt: 0.3, color: 'E2E8F0' } };
   const drvHdr1: object[] = [
     { text: 'Descrição', options: { ...drvHdrOpts, align: 'left' as const } },
     ...drvMeses.flatMap((m: any) => [
@@ -1466,9 +1468,9 @@ export async function generatePPT(): Promise<void> {
   const drvDataRows: object[][] = drvLinhas.map((linha: any, i: number) => {
     const bg = drvBg(linha, i);
     const isExpense = ['despesas','pessoal','outrasDespesas','depreciacao','resultadoFinanceiro','impostos'].includes(linha.key);
-    const lblOpts = { bold: linha.bold, fontSize: linha.pct ? 7.5 : 8.5, color: C.gray, fill: { color: bg }, fontFace: 'Arial', align: 'left' as const, valign: 'middle' as const, italic: linha.pct, border: { pt: 0.3, color: 'E2E8F0' } };
-    const valOpts = (bold: boolean) => ({ bold, fontSize: linha.pct ? 7.5 : 8.5, color: '000000', fill: { color: bg }, fontFace: 'Arial', align: 'right' as const, valign: 'middle' as const, italic: linha.pct, border: { pt: 0.3, color: 'E2E8F0' } });
-    const difOpts = (o: number, r: number) => ({ bold: linha.bold, fontSize: linha.pct ? 7.5 : 8.5, color: '000000', fill: { color: bg }, fontFace: 'Arial', align: 'right' as const, valign: 'middle' as const, border: { pt: 0.3, color: 'E2E8F0' } });
+    const lblOpts = { bold: linha.bold, fontSize: linha.pct ? 7.5 : (linha.bold ? 9 : 8), color: C.gray, fill: { color: bg }, fontFace: 'Arial', align: 'left' as const, valign: 'middle' as const, italic: linha.pct, border: { pt: 0.3, color: 'E2E8F0' } };
+    const valOpts = (bold: boolean) => ({ bold, fontSize: linha.pct ? 7.5 : (linha.bold ? 9 : 8), color: '000000', fill: { color: bg }, fontFace: 'Arial', align: 'right' as const, valign: 'middle' as const, italic: linha.pct, border: { pt: 0.3, color: 'E2E8F0' } });
+    const difOpts = (o: number, r: number) => ({ bold: linha.bold, fontSize: linha.pct ? 7.5 : (linha.bold ? 9 : 8), color: '000000', fill: { color: bg }, fontFace: 'Arial', align: 'right' as const, valign: 'middle' as const, border: { pt: 0.3, color: 'E2E8F0' } });
 
     return [
       { text: linha.pct ? `   ${linha.label}` : linha.label, options: lblOpts },
@@ -1613,14 +1615,14 @@ export async function generatePPT(): Promise<void> {
   // Linha de cabeçalho da tabela
   const mpHdr = [
     { text: 'Indicador',    options: { fill: { color: C.darkBlue }, bold: true, fontSize: 9,   color: C.white,  fontFace: 'Arial', valign: 'middle', align: 'left'   } },
-    { text: 'Unidade',      options: { fill: { color: C.darkBlue }, bold: true, fontSize: 8.5, color: 'BFDBFE', fontFace: 'Arial', valign: 'middle', align: 'center' } },
-    { text: 'Fonte',        options: { fill: { color: C.darkBlue }, bold: true, fontSize: 8.5, color: 'BFDBFE', fontFace: 'Arial', valign: 'middle', align: 'center' } },
+    { text: 'Unidade',      options: { fill: { color: C.darkBlue }, bold: true, fontSize: 9, color: 'BFDBFE', fontFace: 'Arial', valign: 'middle', align: 'center' } },
+    { text: 'Fonte',        options: { fill: { color: C.darkBlue }, bold: true, fontSize: 9, color: 'BFDBFE', fontFace: 'Arial', valign: 'middle', align: 'center' } },
     { text: '2026',         options: { fill: { color: C.darkBlue }, bold: true, fontSize: 9,   color: C.white,  fontFace: 'Arial', valign: 'middle', align: 'center' } },
     { text: '2027',         options: { fill: { color: C.darkBlue }, bold: true, fontSize: 9,   color: C.white,  fontFace: 'Arial', valign: 'middle', align: 'center' } },
     { text: '2028',         options: { fill: { color: C.darkBlue }, bold: true, fontSize: 9,   color: C.white,  fontFace: 'Arial', valign: 'middle', align: 'center' } },
     { text: '2029',         options: { fill: { color: C.darkBlue }, bold: true, fontSize: 9,   color: C.white,  fontFace: 'Arial', valign: 'middle', align: 'center' } },
     { text: '2030',         options: { fill: { color: C.darkBlue }, bold: true, fontSize: 9,   color: C.white,  fontFace: 'Arial', valign: 'middle', align: 'center' } },
-    { text: 'Tend.',        options: { fill: { color: C.darkBlue }, bold: true, fontSize: 8.5, color: 'BFDBFE', fontFace: 'Arial', valign: 'middle', align: 'center' } },
+    { text: 'Tend.',        options: { fill: { color: C.darkBlue }, bold: true, fontSize: 9, color: 'BFDBFE', fontFace: 'Arial', valign: 'middle', align: 'center' } },
   ];
 
   let lastGrupo = '';
@@ -1638,13 +1640,13 @@ export async function generatePPT(): Promise<void> {
     // linha de dado
     const arrowColor = r.dir === 'down' ? '059669' : r.dir === 'up' ? 'DC2626' : '6B7280';
     rows.push([
-      { text: r.indicador, options: { fill: { color: gc.bg }, bold: false, fontSize: 9,   color: C.darkBlue, fontFace: 'Arial', valign: 'middle', align: 'left'   } },
+      { text: r.indicador, options: { fill: { color: gc.bg }, bold: false, fontSize: 8,   color: C.darkBlue, fontFace: 'Arial', valign: 'middle', align: 'left'   } },
       { text: r.unidade,   options: { fill: { color: gc.bg }, bold: false, fontSize: 8,   color: '6B7280',   fontFace: 'Arial', valign: 'middle', align: 'center', italic: true } },
       { text: r.fonte,     options: { fill: { color: gc.bg }, bold: false, fontSize: 8,   color: '6B7280',   fontFace: 'Arial', valign: 'middle', align: 'center', italic: true } },
-      { text: r.v26,       options: { fill: { color: gc.bg }, bold: true,  fontSize: 9.5, color: r.cor,      fontFace: 'Arial', valign: 'middle', align: 'center' } },
-      { text: r.v27,       options: { fill: { color: gc.bg }, bold: false, fontSize: 9,   color: C.gray,     fontFace: 'Arial', valign: 'middle', align: 'center' } },
-      { text: r.v28,       options: { fill: { color: gc.bg }, bold: false, fontSize: 9,   color: C.gray,     fontFace: 'Arial', valign: 'middle', align: 'center' } },
-      { text: r.v29,       options: { fill: { color: gc.bg }, bold: false, fontSize: 9,   color: C.gray,     fontFace: 'Arial', valign: 'middle', align: 'center' } },
+      { text: r.v26,       options: { fill: { color: gc.bg }, bold: true,  fontSize: 9,   color: r.cor,      fontFace: 'Arial', valign: 'middle', align: 'center' } },
+      { text: r.v27,       options: { fill: { color: gc.bg }, bold: false, fontSize: 8,   color: C.gray,     fontFace: 'Arial', valign: 'middle', align: 'center' } },
+      { text: r.v28,       options: { fill: { color: gc.bg }, bold: false, fontSize: 8,   color: C.gray,     fontFace: 'Arial', valign: 'middle', align: 'center' } },
+      { text: r.v29,       options: { fill: { color: gc.bg }, bold: false, fontSize: 8,   color: C.gray,     fontFace: 'Arial', valign: 'middle', align: 'center' } },
       { text: r.v30,       options: { fill: { color: gc.bg }, bold: true,  fontSize: 9,   color: C.gray,     fontFace: 'Arial', valign: 'middle', align: 'center' } },
       { text: dirArrow[r.dir], options: { fill: { color: gc.bg }, bold: true, fontSize: 14, color: arrowColor, fontFace: 'Arial', valign: 'middle', align: 'center' } },
     ]);
