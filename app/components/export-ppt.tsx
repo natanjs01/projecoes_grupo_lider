@@ -1738,7 +1738,7 @@ export async function generatePPT(scenario: 'realista' | 'otimista' | 'pessimist
     },
     {
       label: '2º TRI 2026', date: '10/2026', color: '2563EB', bg: 'EFF6FF', border: '2563EB',
-      items: ['Para o 2º TRI de 2026 estão sendo realizadas as seguintes analises:', 'Análise das DFs na data-base 30/03/2026'],
+      items: ['Para o 2º TRI de 2026 estão sendo realizadas as seguintes analises:', 'Análise das DFs na data-base 30/06/2026'],
     },
     {
       label: '3º TRI 2026', date: '12/2026', color: '16A34A', bg: 'F0FDF4', border: '16A34A',
