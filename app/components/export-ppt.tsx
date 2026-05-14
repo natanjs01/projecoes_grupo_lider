@@ -151,6 +151,7 @@ export async function generatePPT(scenario: 'realista' | 'otimista' | 'pessimist
     { num: '17', title: 'Contexto Macroeconômico',           sub: 'Leitura executiva para o varejo' },
     { num: '18', title: 'Projeções Macro Focus',             sub: '2026–2030' },
     { num: '19', title: 'Auditoria',                         sub: 'Status e cronograma 2026' },
+    { num: '20', title: 'Quadro de Funcionários',            sub: 'Posição em 31/12/2025 por setor' },
   ];
 
   // Duas colunas de até 7 itens cada
