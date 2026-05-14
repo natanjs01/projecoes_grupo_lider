@@ -132,26 +132,78 @@ export async function generatePPT(scenario: 'realista' | 'otimista' | 'pessimist
     addLogo(sl, 11.6, 0.1, 1.55, 0.7);
   };
 
-  // ── SLIDE 2 – Índice ──────────────────────────────────────────────────────
+  // ── SLIDE 2 – Confidencialidade ────────────────────────────────────────────
+  const sConf = prs.addSlide();
+  sConf.background = { fill: '0B1F3A' };
+
+  // Linha decorativa topo
+  sConf.addShape('rect', { x: 0, y: 0, w: 13.33, h: 0.06, fill: { color: C.midBlue }, line: { color: C.midBlue } });
+  // Linha decorativa base
+  sConf.addShape('rect', { x: 0, y: 7.44, w: 13.33, h: 0.06, fill: { color: C.midBlue }, line: { color: C.midBlue } });
+
+  // Ícone cadeado
+  sConf.addText('🔒', {
+    x: 5.67, y: 0.7, w: 2.0, h: 1.4,
+    fontSize: 48, align: 'center', valign: 'middle',
+  });
+
+  // Título
+  sConf.addText('DOCUMENTO CONFIDENCIAL', {
+    x: 1.0, y: 2.1, w: 11.33, h: 0.65,
+    fontSize: 22, bold: true, color: 'BFDBFE', fontFace: 'Arial', align: 'center', valign: 'middle',
+    charSpacing: 3,
+  });
+
+  // Subtítulo
+  sConf.addText('USO EXCLUSIVO DA DIRETORIA', {
+    x: 1.0, y: 2.75, w: 11.33, h: 0.45,
+    fontSize: 13, bold: false, color: '93C5FD', fontFace: 'Arial', align: 'center', italic: true,
+  });
+
+  // Linha separadora
+  sConf.addShape('rect', { x: 3.5, y: 3.35, w: 6.33, h: 0.03, fill: { color: '1D4ED8' }, line: { color: '1D4ED8' } });
+
+  // Corpo do aviso legal
+  sConf.addText(
+    'Este documento foi elaborado exclusivamente para uso interno da Diretoria do Grupo Líder e contém ' +
+    'informações financeiras estratégicas de natureza estritamente confidencial.\n\n' +
+    'É vedada a reprodução, distribuição ou divulgação total ou parcial do seu conteúdo a terceiros ' +
+    'sem autorização prévia e expressa da Administração.\n\n' +
+    'As projeções e estimativas aqui apresentadas baseiam-se em premissas e cenários definidos pela gestão ' +
+    'e não constituem garantia de resultados futuros.',
+    {
+      x: 1.5, y: 3.55, w: 10.33, h: 2.8,
+      fontSize: 10, color: '94A3B8', fontFace: 'Arial', align: 'center', valign: 'top',
+      lineSpacingMultiple: 1.4, wrap: true,
+    }
+  );
+
+  // Rodapé
+  sConf.addText(`Grupo Líder  |  Projeções Financeiras 2026–2030  |  Maio de 2026`, {
+    x: 1.0, y: 6.85, w: 11.33, h: 0.35,
+    fontSize: 8.5, color: '475569', fontFace: 'Arial', align: 'center', italic: true,
+  });
+
+  // ── SLIDE 3 – Índice ──────────────────────────────────────────────────────
   const sIdx = prs.addSlide();
   sIdx.background = { fill: C.white };
   addHdr(sIdx, 'ÍNDICE');
 
   const idxItems = [
-    { num: '03', title: 'Balanço Patrimonial',               sub: 'BP 2025 vs 2024' },
-    { num: '04', title: 'DRE',                               sub: 'Resultado 2025' },
-    { num: '05', title: 'DFC',                               sub: 'Fluxo de Caixa 2025' },
-    { num: '06', title: 'BP – Avaliação',                    sub: 'KPIs e análise do balanço' },
-    { num: '07–11', title: 'Premissas',                      sub: 'Taxas, estoques, imobilizado, empréstimos, capital de giro' },
-    { num: '12', title: 'Resumo DRE',                        sub: 'Projeção do resultado 2026–2030' },
-    { num: '13', title: 'KPIs Financeiros',                  sub: 'Projeção 5 anos' },
-    { num: '14', title: 'Fluxo de Caixa',                    sub: 'Projeção 5 anos' },
-    { num: '15', title: 'Resumo DRE – Orçado vs Realizado',  sub: 'Jan–Mar/2026' },
-    { num: '16', title: 'DFC – 1º Trimestre 2026',           sub: 'Demonstração do fluxo de caixa' },
-    { num: '17', title: 'Contexto Macroeconômico',           sub: 'Leitura executiva para o varejo' },
-    { num: '18', title: 'Projeções Macro Focus',             sub: '2026–2030' },
-    { num: '19', title: 'Auditoria',                         sub: 'Status e cronograma 2026' },
-    { num: '20', title: 'Quadro de Funcionários',            sub: 'Posição em 31/12/2025 por setor' },
+    { num: '04', title: 'Balanço Patrimonial',               sub: 'BP 2025 vs 2024' },
+    { num: '05', title: 'DRE',                               sub: 'Resultado 2025' },
+    { num: '06', title: 'DFC',                               sub: 'Fluxo de Caixa 2025' },
+    { num: '07', title: 'BP – Avaliação',                    sub: 'KPIs e análise do balanço' },
+    { num: '08–12', title: 'Premissas',                      sub: 'Taxas, estoques, imobilizado, empréstimos, capital de giro' },
+    { num: '13', title: 'Resumo DRE',                        sub: 'Projeção do resultado 2026–2030' },
+    { num: '14', title: 'KPIs Financeiros',                  sub: 'Projeção 5 anos' },
+    { num: '15', title: 'Fluxo de Caixa',                    sub: 'Projeção 5 anos' },
+    { num: '16', title: 'Resumo DRE – Orçado vs Realizado',  sub: 'Jan–Mar/2026' },
+    { num: '17', title: 'DFC – 1º Trimestre 2026',           sub: 'Demonstração do fluxo de caixa' },
+    { num: '18', title: 'Contexto Macroeconômico',           sub: 'Leitura executiva para o varejo' },
+    { num: '19', title: 'Projeções Macro Focus',             sub: '2026–2030' },
+    { num: '20', title: 'Auditoria',                         sub: 'Status e cronograma 2026' },
+    { num: '21', title: 'Quadro de Funcionários',            sub: 'Posição em 31/12/2025 por setor' },
   ];
 
   // Duas colunas de até 7 itens cada
@@ -1817,7 +1869,7 @@ export async function generatePPT(scenario: 'realista' | 'otimista' | 'pessimist
     barDir: 'bar',
     barGrouping: 'clustered',
     barGapWidthPct: 40,
-    chartColors: ['1E3A5F'],
+    chartColors: ['93C5FD'],
     plotAreaBkgndColor: 'F8FAFC',
     chartAreaBkgndColor: 'FFFFFF',
     valGridLine: { style: 'solid', color: 'E2E8F0', pt: 0.5 },
