@@ -1830,6 +1830,11 @@ export async function generatePPT(scenario: 'realista' | 'otimista' | 'pessimist
     colW: [7.5, 2.6, 2.63],
   });
 
+  sFuncs.addText('* Fonte: Informações fornecidas pelo Setor Pessoal em 14/05/2026.', {
+    x: 0.3, y: 7.18, w: 12.73, h: 0.3,
+    fontSize: 8, color: '9CA3AF', italic: true, fontFace: 'Arial',
+  });
+
   // ── SLIDE 14 – Encerramento ────────────────────────────────────────────────
   const s5 = prs.addSlide();
   s5.background = { fill: C.darkBlue };
