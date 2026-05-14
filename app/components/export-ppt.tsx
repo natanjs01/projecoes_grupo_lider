@@ -1800,35 +1800,35 @@ export async function generatePPT(scenario: 'realista' | 'otimista' | 'pessimist
     fontSize: 20, bold: true, color: C.white, fontFace: 'Arial', valign: 'middle', align: 'right', margin: [0, 16, 0, 0],
   });
 
-  // Tabela de setores
-  const fHdr = [
-    { text: 'Setor / Unidade de Negócio', options: { bold: true, color: C.white, fill: { color: C.midBlue }, fontSize: 9, fontFace: 'Arial', valign: 'middle' } },
-    { text: 'Funcionários', options: { bold: true, color: C.white, fill: { color: C.midBlue }, fontSize: 9, fontFace: 'Arial', valign: 'middle', align: 'right' } },
-    { text: '% do Total', options: { bold: true, color: C.white, fill: { color: C.midBlue }, fontSize: 9, fontFace: 'Arial', valign: 'middle', align: 'right' } },
-  ];
+  // Ordenado do maior para o menor
+  const funcSorted = [...funcData].sort((a, b) => b.qtd - a.qtd);
 
-  const fRows = funcData.map((r, i) => {
-    const bg = i % 2 === 0 ? C.white : C.lightGray;
-    const pct = ((r.qtd / totalFuncs) * 100).toFixed(1) + '%';
-    return [
-      { text: r.setor, options: { fontSize: 9, color: C.gray, fill: { color: bg }, fontFace: 'Arial', valign: 'middle' } },
-      { text: r.qtd.toLocaleString('pt-BR'), options: { bold: true, align: 'right', fontSize: 9, color: '000000', fill: { color: bg }, fontFace: 'Arial', valign: 'middle' } },
-      { text: pct, options: { align: 'right', fontSize: 9, color: C.gray, fill: { color: bg }, fontFace: 'Arial', valign: 'middle' } },
-    ];
-  });
-
-  // Linha de total no rodapé da tabela
-  const fTotal = [
-    { text: 'TOTAL', options: { bold: true, fontSize: 9, color: C.darkBlue, fill: { color: C.lightBlue }, fontFace: 'Arial', valign: 'middle' } },
-    { text: totalFuncs.toLocaleString('pt-BR'), options: { bold: true, align: 'right', fontSize: 9, color: C.darkBlue, fill: { color: C.lightBlue }, fontFace: 'Arial', valign: 'middle' } },
-    { text: '100,0%', options: { bold: true, align: 'right', fontSize: 9, color: C.darkBlue, fill: { color: C.lightBlue }, fontFace: 'Arial', valign: 'middle' } },
-  ];
-
-  sFuncs.addTable([fHdr, ...fRows, fTotal], {
-    x: 0.3, y: 1.75, w: 12.73, h: 5.3,
-    rowH: 0.44,
-    border: { pt: 0.5, color: 'D1D5DB' },
-    colW: [7.5, 2.6, 2.63],
+  (sFuncs as any).addChart('bar', [
+    {
+      name: 'Funcionários',
+      labels: funcSorted.map(r => {
+        const pct = ((r.qtd / totalFuncs) * 100).toFixed(1).replace('.', ',');
+        return `${r.setor}  (${pct}%)`;
+      }),
+      values: funcSorted.map(r => r.qtd),
+    },
+  ], {
+    x: 0.3, y: 1.75, w: 12.73, h: 5.5,
+    barDir: 'bar',
+    barGrouping: 'clustered',
+    barGapWidthPct: 40,
+    chartColors: ['1E3A5F'],
+    plotAreaBkgndColor: 'F8FAFC',
+    chartAreaBkgndColor: 'FFFFFF',
+    valGridLine: { style: 'solid', color: 'E2E8F0', pt: 0.5 },
+    catGridLine: { style: 'none' },
+    showLegend: false,
+    showValue: true,
+    dataLabelFontSize: 9,
+    dataLabelColor: '1E3A5F',
+    valAxisLabelFontSize: 8,
+    catAxisLabelFontSize: 9,
+    showTitle: false,
   });
 
   sFuncs.addText('* Fonte: Informações fornecidas pelo Setor Pessoal em 14/05/2026.', {
