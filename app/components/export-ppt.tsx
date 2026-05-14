@@ -1762,6 +1762,74 @@ export async function generatePPT(scenario: 'realista' | 'otimista' | 'pessimist
     sAud.addText(bodyText,  { x: x + 0.12, y: 4.0,  w: w - 0.24, h: 3.0,  fontSize: 8.5, color: '374151', fontFace: 'Arial', wrap: true, valign: 'top' });
   });
 
+  // ── SLIDE – Quadro de Funcionários (31/12/2025) ───────────────────────────
+  const sFuncs = prs.addSlide();
+  sFuncs.background = { fill: C.white };
+
+  sFuncs.addShape('rect', { x: 0, y: 0, w: 13.33, h: 0.9, fill: { color: C.darkBlue }, line: { color: C.darkBlue } });
+  sFuncs.addText('QUADRO DE FUNCIONÁRIOS  –  31/12/2025', {
+    x: 0.3, y: 0.05, w: 11.2, h: 0.8,
+    fontSize: 16, bold: true, color: C.white, fontFace: 'Arial', valign: 'middle',
+  });
+  addLogo(sFuncs, 11.6, 0.1, 1.55, 0.7);
+
+  const funcData = [
+    { setor: 'Supermercado',   qtd: 10714 },
+    { setor: 'Magazan',        qtd: 3841  },
+    { setor: 'Home Center',    qtd: 647   },
+    { setor: 'Farmácia',       qtd: 614   },
+    { setor: 'Pet Shop',       qtd: 266   },
+    { setor: 'Obra',           qtd: 254   },
+    { setor: 'Café',           qtd: 56    },
+    { setor: 'Ótica',          qtd: 51    },
+    { setor: 'Nutri Líder',    qtd: 10    },
+    { setor: 'Administrativo', qtd: 890   },
+  ];
+
+  const totalFuncs = funcData.reduce((s, r) => s + r.qtd, 0);
+
+  // Card total no topo
+  sFuncs.addShape('rect', { x: 0.3, y: 1.05, w: 12.73, h: 0.62, fill: { color: C.darkBlue }, line: { color: C.darkBlue } });
+  sFuncs.addText('TOTAL DE FUNCIONÁRIOS', {
+    x: 0.3, y: 1.05, w: 7.5, h: 0.62,
+    fontSize: 13, bold: true, color: 'BFDBFE', fontFace: 'Arial', valign: 'middle', align: 'left', margin: [0, 0, 0, 16],
+  });
+  sFuncs.addText(totalFuncs.toLocaleString('pt-BR'), {
+    x: 7.8, y: 1.05, w: 5.23, h: 0.62,
+    fontSize: 20, bold: true, color: C.white, fontFace: 'Arial', valign: 'middle', align: 'right', margin: [0, 16, 0, 0],
+  });
+
+  // Tabela de setores
+  const fHdr = [
+    { text: 'Setor / Unidade de Negócio', options: { bold: true, color: C.white, fill: { color: C.midBlue }, fontSize: 9, fontFace: 'Arial', valign: 'middle' } },
+    { text: 'Funcionários', options: { bold: true, color: C.white, fill: { color: C.midBlue }, fontSize: 9, fontFace: 'Arial', valign: 'middle', align: 'right' } },
+    { text: '% do Total', options: { bold: true, color: C.white, fill: { color: C.midBlue }, fontSize: 9, fontFace: 'Arial', valign: 'middle', align: 'right' } },
+  ];
+
+  const fRows = funcData.map((r, i) => {
+    const bg = i % 2 === 0 ? C.white : C.lightGray;
+    const pct = ((r.qtd / totalFuncs) * 100).toFixed(1) + '%';
+    return [
+      { text: r.setor, options: { fontSize: 9, color: C.gray, fill: { color: bg }, fontFace: 'Arial', valign: 'middle' } },
+      { text: r.qtd.toLocaleString('pt-BR'), options: { bold: true, align: 'right', fontSize: 9, color: '000000', fill: { color: bg }, fontFace: 'Arial', valign: 'middle' } },
+      { text: pct, options: { align: 'right', fontSize: 9, color: C.gray, fill: { color: bg }, fontFace: 'Arial', valign: 'middle' } },
+    ];
+  });
+
+  // Linha de total no rodapé da tabela
+  const fTotal = [
+    { text: 'TOTAL', options: { bold: true, fontSize: 9, color: C.darkBlue, fill: { color: C.lightBlue }, fontFace: 'Arial', valign: 'middle' } },
+    { text: totalFuncs.toLocaleString('pt-BR'), options: { bold: true, align: 'right', fontSize: 9, color: C.darkBlue, fill: { color: C.lightBlue }, fontFace: 'Arial', valign: 'middle' } },
+    { text: '100,0%', options: { bold: true, align: 'right', fontSize: 9, color: C.darkBlue, fill: { color: C.lightBlue }, fontFace: 'Arial', valign: 'middle' } },
+  ];
+
+  sFuncs.addTable([fHdr, ...fRows, fTotal], {
+    x: 0.3, y: 1.75, w: 12.73, h: 5.3,
+    rowH: 0.44,
+    border: { pt: 0.5, color: 'D1D5DB' },
+    colW: [7.5, 2.6, 2.63],
+  });
+
   // ── SLIDE 14 – Encerramento ────────────────────────────────────────────────
   const s5 = prs.addSlide();
   s5.background = { fill: C.darkBlue };
