@@ -37,6 +37,12 @@ function fmtBig(v: number): string {
       : abs.toLocaleString('pt-BR', { maximumFractionDigits: 0 });
   return v < 0 ? `(${s})` : s;
 }
+function fmtM(v: number): string {
+  if (v === 0) return '–';
+  const abs = Math.abs(v);
+  const s = (abs / 1e6).toLocaleString('pt-BR', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+  return v < 0 ? `(${s})` : s;
+}
 
 // ── Tipos locais ─────────────────────────────────────────────────────────────
 interface PptxSlide {
@@ -125,9 +131,10 @@ export async function generatePPT(scenario: 'realista' | 'otimista' | 'pessimist
   // ── Premissas: dados base ─────────────────────────────────────────────────
   const premSecs: any[] = premissas?.sections ?? [];
   // helper: cabeçalho padrão de slide
-  const addHdr = (sl: PptxSlide, t: string, badge?: string) => {
+  const addHdr = (sl: PptxSlide, t: string, badge?: string, subtitle?: string) => {
     sl.addShape('rect', { x: 0, y: 0, w: 13.33, h: 0.9, fill: { color: C.darkBlue }, line: { color: C.darkBlue } });
-    sl.addText(t, { x: 0.3, y: 0.05, w: 9.2, h: 0.8, fontSize: 16, bold: true, color: C.white, fontFace: 'Arial', valign: 'middle' });
+    sl.addText(t, { x: 0.3, y: 0.05, w: 9.2, h: subtitle ? 0.5 : 0.8, fontSize: 16, bold: true, color: C.white, fontFace: 'Arial', valign: 'middle' });
+    if (subtitle) sl.addText(subtitle, { x: 0.3, y: 0.57, w: 6, h: 0.25, fontSize: 9, color: 'BFDBFE', fontFace: 'Arial', italic: true });
     if (badge) sl.addText(badge, { x: 9.5, y: 0.2, w: 2.0, h: 0.5, fontSize: 9.5, color: 'BFDBFE', align: 'right', valign: 'middle', fontFace: 'Arial', italic: true });
     addLogo(sl, 11.6, 0.1, 1.55, 0.7);
   };
@@ -822,7 +829,7 @@ export async function generatePPT(scenario: 'realista' | 'otimista' | 'pessimist
   // ── SLIDE 4 – Projeção de Estoques ────────────────────────────────────────
   const sp2 = prs.addSlide();
   sp2.background = { fill: C.white };
-  addHdr(sp2, 'PREMISSAS  –  Projeção de Estoques', scenLabel);
+  addHdr(sp2, 'PREMISSAS  –  Projeção de Estoques', scenLabel, 'Em milhões de R$');
 
   const estoqSec: any[] = premSecs.find((s: any) => s.title === 'Projeção estoques')?.rows ?? [];
   const estoqHdr = [
@@ -837,19 +844,19 @@ export async function generatePPT(scenario: 'realista' | 'otimista' | 'pessimist
     const get = (off: number, yr: number): number => estoqSec[b + off]?.[`ano${yr}`] ?? 0;
     estoqTRows.push([
       { text: `Tipo ${t}  –  Saldo Inicial`, options: { bold: true, fontSize: 9, color: C.darkBlue, fill: { color: bgH }, fontFace: 'Arial', valign: 'middle' } },
-      ...YRS.map(yr => ({ text: fmtBig(get(0, yr)), options: { align: 'right', fontSize: 9, bold: true, color: '000000', fill: { color: bgH }, fontFace: 'Arial', valign: 'middle' } })),
+      ...YRS.map(yr => ({ text: fmtM(get(0, yr)), options: { align: 'right', fontSize: 9, bold: true, color: '000000', fill: { color: bgH }, fontFace: 'Arial', valign: 'middle' } })),
     ]);
     estoqTRows.push([
       { text: '   Compras', options: { bold: false, fontSize: 8, color: C.gray, fill: { color: bgR }, fontFace: 'Arial', valign: 'middle' } },
-      ...YRS.map(yr => ({ text: fmtBig(get(1, yr)), options: { align: 'right', fontSize: 8, color: C.gray, fill: { color: bgR }, fontFace: 'Arial', valign: 'middle' } })),
+      ...YRS.map(yr => ({ text: fmtM(get(1, yr)), options: { align: 'right', fontSize: 8, color: C.gray, fill: { color: bgR }, fontFace: 'Arial', valign: 'middle' } })),
     ]);
     estoqTRows.push([
       { text: '   Baixa CMV', options: { bold: false, fontSize: 8, color: C.gray, fill: { color: bgR }, fontFace: 'Arial', valign: 'middle' } },
-      ...YRS.map(yr => ({ text: fmtBig(get(2, yr)), options: { align: 'right', fontSize: 8, bold: true, color: '000000', fill: { color: bgR }, fontFace: 'Arial', valign: 'middle' } })),
+      ...YRS.map(yr => ({ text: fmtM(get(2, yr)), options: { align: 'right', fontSize: 8, bold: true, color: '000000', fill: { color: bgR }, fontFace: 'Arial', valign: 'middle' } })),
     ]);
     estoqTRows.push([
       { text: `Tipo ${t}  –  Saldo Final`, options: { bold: true, fontSize: 9, color: C.darkBlue, fill: { color: bgH }, fontFace: 'Arial', valign: 'middle' } },
-      ...YRS.map(yr => ({ text: fmtBig(get(5, yr)), options: { align: 'right', fontSize: 9, bold: true, color: '000000', fill: { color: bgH }, fontFace: 'Arial', valign: 'middle' } })),
+      ...YRS.map(yr => ({ text: fmtM(get(5, yr)), options: { align: 'right', fontSize: 9, bold: true, color: '000000', fill: { color: bgH }, fontFace: 'Arial', valign: 'middle' } })),
     ]);
   });
   sp2.addTable([estoqHdr, ...estoqTRows], {
@@ -909,7 +916,7 @@ export async function generatePPT(scenario: 'realista' | 'otimista' | 'pessimist
   // ── SLIDE 5 – Projeção de Imobilizado ─────────────────────────────────────
   const sp3 = prs.addSlide();
   sp3.background = { fill: C.white };
-  addHdr(sp3, 'PREMISSAS  –  Projeção de Imobilizado', scenLabel);
+  addHdr(sp3, 'PREMISSAS  –  Projeção de Imobilizado', scenLabel, 'Em milhões de R$');
 
   const imoSec: any[] = premSecs.find((s: any) => s.title === 'Projeção Imobilizado')?.rows ?? [];
   const getImo = (label: string, yr: number): number => imoSec.find((r: any) => r.label === label)?.[`ano${yr}`] ?? 0;
@@ -937,7 +944,7 @@ export async function generatePPT(scenario: 'realista' | 'otimista' | 'pessimist
     const bg = r.bold ? C.lightBlue : i % 2 === 0 ? C.white : C.lightGray;
     return [
       { text: r.label, options: { bold: r.bold, fontSize: r.bold ? 9 : 8, color: r.bold ? C.darkBlue : C.gray, fill: { color: bg }, fontFace: 'Arial', valign: 'middle' } },
-      ...r.vals.map((v: number) => ({ text: fmtBig(v), options: { align: 'right', fontSize: r.bold ? 9 : 8, bold: true, color: '000000', fill: { color: bg }, fontFace: 'Arial', valign: 'middle' } })),
+      ...r.vals.map((v: number) => ({ text: fmtM(v), options: { align: 'right', fontSize: r.bold ? 9 : 8, bold: true, color: '000000', fill: { color: bg }, fontFace: 'Arial', valign: 'middle' } })),
     ];
   });
   sp3.addTable([imoHdr2, ...imoTRows], {
@@ -957,9 +964,9 @@ export async function generatePPT(scenario: 'realista' | 'otimista' | 'pessimist
   });
   sp3.addShape('rect', { x: 0.4, y: 4.45, w: 12.5, h: 2.6, fill: { color: 'EFF6FF' }, line: { color: 'BFDBFE', pt: 0.5 } });
   sp3.addText(
-    `▸  O plano prevê investimentos totais de aproximadamente ${fmtBig(custoAcum)} em 5 anos, incluindo a abertura de novas unidades (~R$ 50MM/Un). ` +
-    `A depreciação acumulada no período é de ${fmtBig(depAcum)}. ` +
-    `O imobilizado líquido evolui de ${fmtBig(imoInit)} (Ano 1) para ${fmtBig(imoFinal)} (Ano 5), ` +
+    `▸  O plano prevê investimentos totais de aproximadamente ${fmtM(custoAcum)} em 5 anos, incluindo a abertura de novas unidades (~R$ 50MM/Un). ` +
+    `A depreciação acumulada no período é de ${fmtM(depAcum)}. ` +
+    `O imobilizado líquido evolui de ${fmtM(imoInit)} (Ano 1) para ${fmtM(imoFinal)} (Ano 5), ` +
     `refletindo os novos ativos já deduzidos da depreciação acumulada.`,
     { x: 0.58, y: 4.51, w: 12.2, h: 1.2, fontSize: 9, color: C.gray, fontFace: 'Arial', wrap: true, valign: 'top', lineSpacingMultiple: 1.2 }
   );
@@ -967,7 +974,7 @@ export async function generatePPT(scenario: 'realista' | 'otimista' | 'pessimist
   // ── SLIDE 6 – Projeção de Empréstimos ─────────────────────────────────────
   const sp4 = prs.addSlide();
   sp4.background = { fill: C.white };
-  addHdr(sp4, 'PREMISSAS  –  Projeção de Empréstimos', scenLabel);
+  addHdr(sp4, 'PREMISSAS  –  Projeção de Empréstimos', scenLabel, 'Em milhões de R$');
 
   const empSec: any[] = premSecs.find((s: any) => s.title === 'Projeção Empréstimos')?.rows ?? [];
   const getEmp = (label: string, yr: number): number => empSec.find((r: any) => r.label === label)?.[`ano${yr}`] ?? 0;
@@ -991,7 +998,7 @@ export async function generatePPT(scenario: 'realista' | 'otimista' | 'pessimist
     const bg = r.bold ? C.lightBlue : i % 2 === 0 ? C.white : C.lightGray;
     return [
       { text: r.label, options: { bold: r.bold, fontSize: r.bold ? 9 : 8, color: r.bold ? C.darkBlue : C.gray, fill: { color: bg }, fontFace: 'Arial', valign: 'middle' } },
-      ...YRS.map(yr => { const v = getEmp(r.key, yr); return { text: fmtBig(v), options: { align: 'right', fontSize: r.bold ? 9 : 8, bold: true, color: '000000', fill: { color: bg }, fontFace: 'Arial', valign: 'middle' } }; }),
+      ...YRS.map(yr => { const v = getEmp(r.key, yr); return { text: fmtM(v), options: { align: 'right', fontSize: r.bold ? 9 : 8, bold: true, color: '000000', fill: { color: bg }, fontFace: 'Arial', valign: 'middle' } }; }),
     ];
   });
   sp4.addTable([empHdr2, ...empTRows], {
@@ -1006,7 +1013,7 @@ export async function generatePPT(scenario: 'realista' | 'otimista' | 'pessimist
   // ── SLIDE 7 – Fluxo Financeiro e Capital de Giro ──────────────────────────
   const sp5 = prs.addSlide();
   sp5.background = { fill: C.white };
-  addHdr(sp5, 'PREMISSAS  –  Fluxo Financeiro e Capital de Giro', scenLabel);
+  addHdr(sp5, 'PREMISSAS  –  Fluxo Financeiro e Capital de Giro', scenLabel, 'Em milhões de R$');
 
   const cr  = kpiData?.contasReceber ?? {};
   const cpd = kpiData?.contasPagar   ?? {};
@@ -1044,7 +1051,7 @@ export async function generatePPT(scenario: 'realista' | 'otimista' | 'pessimist
     return [
       { text: r.label, options: { bold: r.bold, fontSize: r.bold ? 9 : 8, color: r.bold ? C.darkBlue : C.gray, fill: { color: bg }, fontFace: 'Arial', valign: 'middle' } },
       ...r.vals.map((v: number) => ({
-        text: v === 0 ? '–' : fmtBig(v),
+        text: v === 0 ? '–' : fmtM(v),
         options: { align: 'right', fontSize: r.bold ? 9 : 8, bold: true, color: '000000', fill: { color: bg }, fontFace: 'Arial', valign: 'middle' },
       })),
     ];
@@ -1075,9 +1082,13 @@ export async function generatePPT(scenario: 'realista' | 'otimista' | 'pessimist
   s2.background = { fill: C.white };
 
   s2.addShape('rect', { x: 0, y: 0, w: 13.33, h: 0.9, fill: { color: C.darkBlue }, line: { color: C.darkBlue } });
-  s2.addText('RESUMO DRE  –  Em milhões de R$', {
-    x: 0.3, y: 0.05, w: 11.2, h: 0.8,
+  s2.addText('RESUMO DRE', {
+    x: 0.3, y: 0.05, w: 11.2, h: 0.5,
     fontSize: 16, bold: true, color: C.white, fontFace: 'Arial', valign: 'middle',
+  });
+  s2.addText('Em milhões de R$', {
+    x: 0.3, y: 0.57, w: 6, h: 0.25,
+    fontSize: 9, color: 'BFDBFE', fontFace: 'Arial', italic: true,
   });
   addLogo(s2, 11.6, 0.1, 1.55, 0.7);
 
@@ -1143,8 +1154,12 @@ export async function generatePPT(scenario: 'realista' | 'otimista' | 'pessimist
 
   s3.addShape('rect', { x: 0, y: 0, w: 13.33, h: 0.9, fill: { color: C.darkBlue }, line: { color: C.darkBlue } });
   s3.addText(`KPIs FINANCEIROS  –  Projeção 5 Anos (${scenLabel})`, {
-    x: 0.3, y: 0.05, w: 11.2, h: 0.8,
+    x: 0.3, y: 0.05, w: 11.2, h: 0.5,
     fontSize: 16, bold: true, color: C.white, fontFace: 'Arial', valign: 'middle',
+  });
+  s3.addText('Valores Absolutos em milhões de R$', {
+    x: 0.3, y: 0.57, w: 8, h: 0.25,
+    fontSize: 9, color: 'BFDBFE', fontFace: 'Arial', italic: true,
   });
   addLogo(s3, 11.6, 0.1, 1.55, 0.7);
 
@@ -1217,13 +1232,13 @@ export async function generatePPT(scenario: 'realista' | 'otimista' | 'pessimist
     kRow('Margem L\u00edquida',   kpiCalc.map(k => fmtPct(k.margemLiq)),      C.lightGray),
     // ── Valores Absolutos
     kSecHdr('Valores Absolutos (R$)'),
-    kRow('Receita L\u00edquida',  kpiCalc.map(k => fmtBig(k.rl)),  C.white),
-    kRow('Lucro Bruto',            kpiCalc.map(k => fmtBig(k.lb)),  C.lightGray),
-    kRow('EBITDA Ajustado',        kpiCalc.map(k => fmtBig(k.eba)), C.white),
-    kRow('Lucro L\u00edquido',    kpiCalc.map(k => fmtBig(k.ll)),  C.lightGray),
-    kRow('Caixa Operacional',      kpiCalc.map(k => fmtBig(k.co)),  C.white),
-    kRow('Caixa Livre',            kpiCalc.map(k => fmtBig(k.cl)),  C.lightGray),
-    kRow('CAPEX',                  kpiCalc.map(k => fmtBig(k.cp)),  C.white),
+    kRow('Receita L\u00edquida',  kpiCalc.map(k => fmtM(k.rl)),  C.white),
+    kRow('Lucro Bruto',            kpiCalc.map(k => fmtM(k.lb)),  C.lightGray),
+    kRow('EBITDA Ajustado',        kpiCalc.map(k => fmtM(k.eba)), C.white),
+    kRow('Lucro L\u00edquido',    kpiCalc.map(k => fmtM(k.ll)),  C.lightGray),
+    kRow('Caixa Operacional',      kpiCalc.map(k => fmtM(k.co)),  C.white),
+    kRow('Caixa Livre',            kpiCalc.map(k => fmtM(k.cl)),  C.lightGray),
+    kRow('CAPEX',                  kpiCalc.map(k => fmtM(k.cp)),  C.white),
     // ── Ciclos Financeiros
     kSecHdr('Ciclos Financeiros'),
     kRow('DSO (Prazo M\u00e9dio de Recebimento)', kpiCalc.map(k => `${Math.round(k.dso)} dias`), C.white),
@@ -1358,8 +1373,12 @@ export async function generatePPT(scenario: 'realista' | 'otimista' | 'pessimist
 
   s4.addShape('rect', { x: 0, y: 0, w: 13.33, h: 0.9, fill: { color: C.darkBlue }, line: { color: C.darkBlue } });
   s4.addText('FLUXO DE CAIXA  –  Projeção 5 Anos', {
-    x: 0.3, y: 0.05, w: 11.2, h: 0.8,
+    x: 0.3, y: 0.05, w: 11.2, h: 0.5,
     fontSize: 16, bold: true, color: C.white, fontFace: 'Arial', valign: 'middle',
+  });
+  s4.addText('Em milhões de R$', {
+    x: 0.3, y: 0.57, w: 6, h: 0.25,
+    fontSize: 9, color: 'BFDBFE', fontFace: 'Arial', italic: true,
   });
   addLogo(s4, 11.6, 0.1, 1.55, 0.7);
 
@@ -1367,7 +1386,7 @@ export async function generatePPT(scenario: 'realista' | 'otimista' | 'pessimist
   const taxaVal  = getFC('TAXA', 1);
   const vplVal   = getFC('VPL 10 anos', 1);
   const taxaStr  = taxaVal ? `${(taxaVal * 100).toFixed(0)}%` : '–';
-  const vplStr   = vplVal  ? fmtBig(vplVal) : '–';
+  const vplStr   = vplVal  ? fmtM(vplVal) : '–';
 
   // Box TAXA
   s4.addShape('rect', { x: 0.4, y: 1.0, w: 2.8, h: 0.45, fill: { color: C.lightBlue }, line: { color: 'BFDBFE' } });
@@ -1419,7 +1438,7 @@ export async function generatePPT(scenario: 'realista' | 'otimista' | 'pessimist
       ...[1,2,3,4,5].map(yr => {
         const v = row.getValue ? row.getValue(yr) : getFC(row.label, yr);
         return {
-          text: v === 0 ? '–' : fmtBig(v),
+          text: v === 0 ? '–' : fmtM(v),
           options: {
             align: 'right' as const, fontSize: !!row.bold ? 9 : 8, bold: true,
             color: fcTextColor(row.style, v),
