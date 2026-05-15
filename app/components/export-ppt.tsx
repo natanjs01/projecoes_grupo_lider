@@ -198,19 +198,20 @@ export async function generatePPT(scenario: 'realista' | 'otimista' | 'pessimist
 
   const idxItems = [
     { num: '04', title: 'Balanço Patrimonial',               sub: 'BP 2025 vs 2024' },
-    { num: '05', title: 'DRE',                               sub: 'Resultado 2025' },
-    { num: '06', title: 'DFC',                               sub: 'Fluxo de Caixa 2025' },
-    { num: '07', title: 'BP – Avaliação',                    sub: 'KPIs e análise do balanço' },
-    { num: '08–12', title: 'Premissas',                      sub: 'Taxas, estoques, imobilizado, empréstimos, capital de giro' },
-    { num: '13', title: 'Resumo DRE',                        sub: 'Projeção do resultado 2026–2030' },
-    { num: '14', title: 'KPIs Financeiros',                  sub: 'Projeção 5 anos' },
-    { num: '15', title: 'Fluxo de Caixa',                    sub: 'Projeção 5 anos' },
-    { num: '16', title: 'Resumo DRE – Orçado vs Realizado',  sub: 'Jan–Mar/2026' },
-    { num: '17', title: 'DFC – 1º Trimestre 2026',           sub: 'Demonstração do fluxo de caixa' },
-    { num: '18', title: 'Contexto Macroeconômico',           sub: 'Leitura executiva para o varejo' },
-    { num: '19', title: 'Projeções Macro Focus',             sub: '2026–2030' },
-    { num: '20', title: 'Auditoria',                         sub: 'Status e cronograma 2026' },
-    { num: '21', title: 'Quadro de Funcionários',            sub: 'Posição em 31/12/2025 por setor' },
+    { num: '05', title: 'BP – Avaliação',                    sub: 'KPIs e análise do balanço' },
+    { num: '06', title: 'DRE',                               sub: 'Resultado 2025' },
+    { num: '07', title: 'DFC',                               sub: 'Fluxo de Caixa 2025' },
+    { num: '08', title: 'Quadro de Funcionários',            sub: 'Posição em 31/12/2025 por setor' },
+    { num: '09–13', title: 'Premissas',                      sub: 'Taxas, estoques, imobilizado, empréstimos, capital de giro' },
+    { num: '14', title: 'Resumo DRE',                        sub: 'Projeção do resultado 2026–2030' },
+    { num: '15', title: 'KPIs Financeiros',                  sub: 'Projeção 5 anos' },
+    { num: '16–17', title: 'Gráficos',                       sub: 'Resultados financeiros' },
+    { num: '18', title: 'Fluxo de Caixa',                    sub: 'Projeção 5 anos' },
+    { num: '19', title: 'Resumo DRE – Orçado vs Realizado',  sub: 'Jan–Mar/2026' },
+    { num: '20', title: 'DFC – 1º Trimestre 2026',           sub: 'Demonstração do fluxo de caixa' },
+    { num: '21', title: 'Contexto Macroeconômico',           sub: 'Leitura executiva para o varejo' },
+    { num: '22', title: 'Projeções Macro Focus',             sub: '2026–2030' },
+    { num: '23', title: 'Auditoria',                         sub: 'Status e cronograma 2026' },
   ];
 
   // Duas colunas de até 7 itens cada
