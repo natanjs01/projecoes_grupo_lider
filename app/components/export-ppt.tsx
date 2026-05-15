@@ -20,8 +20,8 @@ const C = {
 // ── Helpers ──────────────────────────────────────────────────────────────────
 function fmtMi(v: number): string {
   if (v === 0) return '–';
-  const abs = Math.round(Math.abs(v));
-  const s = abs.toLocaleString('pt-BR');
+  const abs = Math.abs(v);
+  const s = abs.toLocaleString('pt-BR', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
   return v < 0 ? `(${s})` : s;
 }
 function fmtPct(v: number): string {
