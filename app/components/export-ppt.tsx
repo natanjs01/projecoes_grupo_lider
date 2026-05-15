@@ -1694,11 +1694,11 @@ export async function generatePPT(scenario: 'realista' | 'otimista' | 'pessimist
 
   // KPI cards
   const macroKpis = [
-    { label: 'IPCA Geral', value: '4,83%', period: 'Acum. 2025', note: '↑ Meta: 3,0% ±1,5pp', accent: 'DC2626', bg: 'FEF2F2' },
-    { label: 'IPCA Alimentos', value: '7,1%', period: 'Acum. 2025', note: '↑ Pressão sobre CPV', accent: 'EA580C', bg: 'FFF7ED' },
-    { label: 'PIB Brasil', value: '+3,4%', period: '2025 (est.)', note: '↓ Proj. 2026: +2,2%', accent: '059669', bg: 'F0FDF4' },
-    { label: 'Desemprego', value: '6,2%', period: 'PNAD T4/2025', note: '↓ Mínima histórica', accent: '0891B2', bg: 'ECFEFF' },
-    { label: 'SELIC', value: '14,75%', period: 'Mai/2026', note: '↑ Ciclo de alta ativo', accent: '7C3AED', bg: 'F5F3FF' },
+    { label: 'IPCA Geral', value: '4,39%', period: '12m Abr/2026', note: '↑ Meta: 3,0% ±1,5pp', accent: 'DC2626', bg: 'FEF2F2' },
+    { label: 'IPCA Alimentos', value: '7,8%', period: '12m Abr/2026', note: '↑ Pressão sobre CPV', accent: 'EA580C', bg: 'FFF7ED' },
+    { label: 'PIB Brasil', value: '+2,3%', period: '2025 (IBGE)', note: '↓ Proj. 2026: ~+2,0%', accent: '059669', bg: 'F0FDF4' },
+    { label: 'Desemprego', value: '6,1%', period: 'PNAD 1ºTri/2026', note: '↓ Mínima histórica', accent: '0891B2', bg: 'ECFEFF' },
+    { label: 'SELIC', value: '14,50%', period: 'Abr/2026', note: '↓ 2ª queda consecutiva', accent: '7C3AED', bg: 'F5F3FF' },
   ];
   const mcW = 2.4; const mcH = 2.3; const mcY = 1.05; const mcGap = 0.16;
   macroKpis.forEach((k, i) => {
