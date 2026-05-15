@@ -1308,7 +1308,7 @@ export async function generatePPT(scenario: 'realista' | 'otimista' | 'pessimist
     valGridLine: { style: 'solid' as const, color: 'E2E8F0', pt: 0.5 },
     catGridLine: { style: 'none' as const },
     showLegend: true, legendPos: 'b' as const, legendFontSize: 9,
-    showValue: false, dataLabelPosition: 'b' as const,
+    showValue: true, dataLabelFontSize: 8, dataLabelFontBold: true, dataLabelColor: C.darkBlue, dataLabelPosition: 'b' as const,
     valAxisLabelFontSize: 8, catAxisLabelFontSize: 9,
     title, showTitle: true, titleFontSize: 12, titleBold: true, titleColor: C.darkBlue,
   });
