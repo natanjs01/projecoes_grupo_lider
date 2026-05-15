@@ -215,8 +215,8 @@ export async function generatePPT(scenario: 'realista' | 'otimista' | 'pessimist
   ];
 
   // Duas colunas de até 7 itens cada
-  const idxCol1 = idxItems.slice(0, 7);
-  const idxCol2 = idxItems.slice(7);
+  const idxCol1 = idxItems.slice(0, 8);
+  const idxCol2 = idxItems.slice(8);
   const idxColX = [0.35, 6.9];
   const idxW    = 6.25;
   const idxRowH = 0.72;
