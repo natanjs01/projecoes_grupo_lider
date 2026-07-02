@@ -202,16 +202,16 @@ export async function generatePPT(scenario: 'realista' | 'otimista' | 'pessimist
     { num: '06', title: 'DRE',                               sub: 'Resultado abr/26 vs abr/25' },
     { num: '07', title: 'DFC',                               sub: 'Fluxo de Caixa 2025' },
     { num: '08', title: 'Quadro de Funcionários',            sub: 'Posição em 31/12/2025 por setor' },
-    { num: '09–13', title: 'Premissas',                      sub: 'Taxas, estoques, imobilizado, empréstimos, capital de giro' },
-    { num: '14', title: 'Resumo DRE',                        sub: 'Projeção do resultado 2026–2030' },
-    { num: '15', title: 'KPIs Financeiros',                  sub: 'Projeção 5 anos' },
-    { num: '16–17', title: 'Gráficos',                       sub: 'Resultados financeiros' },
-    { num: '18', title: 'Fluxo de Caixa',                    sub: 'Projeção 5 anos' },
-    { num: '19', title: 'Resumo DRE – Orçado vs Realizado',  sub: 'Jan–Mar/2026' },
-    { num: '20', title: 'DFC – 1º Trimestre 2026',           sub: 'Demonstração do fluxo de caixa' },
-    { num: '21', title: 'Contexto Macroeconômico',           sub: 'Leitura executiva para o varejo' },
-    { num: '22', title: 'Projeções Macro Focus',             sub: '2026–2030' },
-    { num: '23', title: 'Auditoria',                         sub: 'Status e cronograma 2026' },
+    { num: '09', title: 'Contexto Macroeconômico',           sub: 'Leitura executiva para o varejo' },
+    { num: '10', title: 'Projeções Macro Focus',             sub: '2026–2030' },
+    { num: '11–15', title: 'Premissas',                      sub: 'Estoques, taxas, fluxo financeiro, imobilizado e empréstimos' },
+    { num: '16', title: 'Resumo DRE',                        sub: 'Projeção do resultado 2026–2030' },
+    { num: '17', title: 'KPIs Financeiros',                  sub: 'Projeção 5 anos' },
+    { num: '18–19', title: 'Gráficos e Fluxo de Caixa',      sub: 'Resultados financeiros e projeção 5 anos' },
+    { num: '20', title: 'Resumo DRE – Orçado vs Realizado',  sub: '1º TRI e Abr/2026' },
+    { num: '21', title: 'DFC – 1º Trimestre 2026',           sub: 'Demonstração do fluxo de caixa' },
+    { num: '22', title: 'Auditoria',                         sub: 'Status e cronograma 2026' },
+    { num: '23', title: 'Encerramento',                      sub: 'Mensagem final' },
   ];
 
   // Duas colunas de até 7 itens cada
@@ -958,6 +958,9 @@ export async function generatePPT(scenario: 'realista' | 'otimista' | 'pessimist
     fontSize: 7, color: '9CA3AF', fontFace: 'Arial', italic: true, align: 'center',
   });
 
+  // Pré-aloca o slide de Estoques para ficar antes de Taxas de Crescimento.
+  const sp2 = prs.addSlide();
+
   // ── SLIDE 3 – Premissas: Taxas e Cenários ─────────────────────────────────
   const sp1 = prs.addSlide();
   sp1.background = { fill: C.white };
@@ -1008,8 +1011,12 @@ export async function generatePPT(scenario: 'realista' | 'otimista' | 'pessimist
     x: 0.3, y: 6.75, w: 12.7, h: 0.4, fontSize: 8, color: '9CA3AF', italic: true, fontFace: 'Arial',
   });
 
+  // Sequência esperada após Taxas: Fluxo Financeiro -> Imobilizado -> Empréstimos.
+  const sp5 = prs.addSlide();
+  const sp3 = prs.addSlide();
+  const sp4 = prs.addSlide();
+
   // ── SLIDE 4 – Projeção de Estoques ────────────────────────────────────────
-  const sp2 = prs.addSlide();
   sp2.background = { fill: C.white };
   addHdr(sp2, 'PREMISSAS  –  Projeção de Estoques', scenLabel, 'Em milhões de R$');
 
@@ -1096,7 +1103,6 @@ export async function generatePPT(scenario: 'realista' | 'otimista' | 'pessimist
   });
 
   // ── SLIDE 5 – Projeção de Imobilizado ─────────────────────────────────────
-  const sp3 = prs.addSlide();
   sp3.background = { fill: C.white };
   addHdr(sp3, 'PREMISSAS  –  Projeção de Imobilizado', scenLabel, 'Em milhões de R$');
 
@@ -1154,7 +1160,6 @@ export async function generatePPT(scenario: 'realista' | 'otimista' | 'pessimist
   );
 
   // ── SLIDE 6 – Projeção de Empréstimos ─────────────────────────────────────
-  const sp4 = prs.addSlide();
   sp4.background = { fill: C.white };
   addHdr(sp4, 'PREMISSAS  –  Projeção de Empréstimos', scenLabel, 'Em milhões de R$');
 
@@ -1193,7 +1198,6 @@ export async function generatePPT(scenario: 'realista' | 'otimista' | 'pessimist
   });
 
   // ── SLIDE 7 – Fluxo Financeiro e Capital de Giro ──────────────────────────
-  const sp5 = prs.addSlide();
   sp5.background = { fill: C.white };
   addHdr(sp5, 'PREMISSAS  –  Fluxo Financeiro e Capital de Giro', scenLabel, 'Em milhões de R$');
 
@@ -1650,7 +1654,7 @@ export async function generatePPT(scenario: 'realista' | 'otimista' | 'pessimist
 
   // Header
   sOrc.addShape('rect', { x: 0, y: 0, w: 13.33, h: 0.88, fill: { color: C.darkBlue }, line: { color: C.darkBlue } });
-  sOrc.addText('RESUMO DRE  –  ORÇADO VS REALIZADO  |  Jan–Mar/2026', {
+  sOrc.addText('RESUMO DRE  –  ORÇADO VS REALIZADO  |  1º TRI e Abr/2026', {
     x: 0.4, y: 0.05, w: 10.5, h: 0.5,
     fontSize: 15, bold: true, color: C.white, fontFace: 'Arial', valign: 'middle',
   });
@@ -1724,7 +1728,8 @@ export async function generatePPT(scenario: 'realista' | 'otimista' | 'pessimist
         const r: number = linha[m.key]?.r ?? 0;
         const oFmt = linha.pct ? fmtDrvPct(o) : fmtDrv(o);
         const rFmt = linha.pct ? fmtDrvPct(r) : fmtDrv(r);
-        const dFmt = fmtDif(o, r, linha.pct);
+        const customDif = linha[m.key]?.d;
+        const dFmt = typeof customDif === 'string' ? customDif : fmtDif(o, r, linha.pct);
         return [
           { text: oFmt, options: valOpts(linha.bold) },
           { text: rFmt, options: valOpts(linha.bold) },
@@ -1738,11 +1743,12 @@ export async function generatePPT(scenario: 'realista' | 'otimista' | 'pessimist
   const drvRowHNormal = 0.35;
   const drvRowHPct    = 0.27;
   const rowHeights = [0.36, 0.32, ...drvLinhas.map((l: any) => l.pct ? drvRowHPct : drvRowHNormal)];
+  const drvColW = [3.7, ...drvMeses.flatMap(() => [1.1, 1.1, 0.81])];
 
   sOrc.addTable([drvHdr1, drvHdr2, ...drvDataRows], {
     x: 0.3, y: 0.95, w: 12.73,
     h: rowHeights.reduce((a, b) => a + b, 0),
-    colW: [3.7, 1.1, 1.1, 0.81, 1.1, 1.1, 0.81, 1.1, 1.1, 0.81],
+    colW: drvColW,
     rowH: rowHeights,
     border: { pt: 0.3, color: 'E2E8F0' },
   });
