@@ -715,7 +715,8 @@ export async function generatePPT(scenario: 'realista' | 'otimista' | 'pessimist
   });
   addLogo(sFuncs, 11.6, 0.1, 1.55, 0.7);
 
-  const funcData = [
+  const funcRaw = (financialData as any).funcionarios ?? {};
+  const funcData: { setor: string; qtd: number }[] = funcRaw.setores ?? [
     { setor: 'Supermercado',   qtd: 10714 },
     { setor: 'Magazan',        qtd: 3841  },
     { setor: 'Home Center',    qtd: 647   },
@@ -727,6 +728,7 @@ export async function generatePPT(scenario: 'realista' | 'otimista' | 'pessimist
     { setor: 'Nutri Líder',    qtd: 10    },
     { setor: 'Administrativo', qtd: 890   },
   ];
+  const funcFonte = funcRaw.fonte ?? 'Informações fornecidas pelo Setor Pessoal em 14/05/2026.';
 
   const totalFuncs = funcData.reduce((s, r) => s + r.qtd, 0);
 
@@ -772,7 +774,7 @@ export async function generatePPT(scenario: 'realista' | 'otimista' | 'pessimist
     showTitle: false,
   });
 
-  sFuncs.addText('* Fonte: Informações fornecidas pelo Setor Pessoal em 14/05/2026.', {
+  sFuncs.addText(`* Fonte: ${funcFonte}`, {
     x: 0.3, y: 7.18, w: 12.73, h: 0.3,
     fontSize: 8, color: '9CA3AF', italic: true, fontFace: 'Arial',
   });

@@ -13,6 +13,7 @@ import GraficosTab from './graficos-tab';
 import ResumoDreTab from './resumodre-tab';
 import DfcTab from './dfc-tab';
 import BpTab from './bp-tab';
+import FuncionariosTab from './funcionarios-tab';
 import ExportPPTButton from './export-ppt';
 
 const TABS = [
@@ -23,6 +24,7 @@ const TABS = [
   { id: 'fc', label: 'Fluxo de Caixa', icon: DollarSign },
   { id: 'dfc', label: 'DFC', icon: DollarSign },
   { id: 'bp', label: 'BP', icon: BarChart3 },
+  { id: 'funcionarios', label: 'Funcionários', icon: BarChart3 },
   { id: 'kpis', label: 'KPIs', icon: BarChart3 },
   { id: 'graficos', label: 'Gráficos', icon: LineChart },
 ] as const;
@@ -42,6 +44,7 @@ export default function DashboardClient() {
       case 'fc': return <FcTab scenario={scenario} />;
       case 'dfc': return <DfcTab />;
       case 'bp': return <BpTab />;
+      case 'funcionarios': return <FuncionariosTab />;
       case 'kpis': return <KpisTab scenario={scenario} />;
       case 'graficos': return <GraficosTab scenario={scenario} />;
       case 'resumodre': return <ResumoDreTab />;

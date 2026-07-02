@@ -12524,6 +12524,22 @@
       }
     ]
   },
+  "funcionarios": {
+    "data": "31/12/2025",
+    "fonte": "Informações fornecidas pelo Setor Pessoal em 14/05/2026.",
+    "setores": [
+      { "setor": "Supermercado",   "qtd": 10714 },
+      { "setor": "Magazan",        "qtd": 3841  },
+      { "setor": "Administrativo", "qtd": 890   },
+      { "setor": "Home Center",    "qtd": 647   },
+      { "setor": "Farmácia",       "qtd": 614   },
+      { "setor": "Pet Shop",       "qtd": 266   },
+      { "setor": "Obra",           "qtd": 254   },
+      { "setor": "Café",           "qtd": 56    },
+      { "setor": "Ótica",          "qtd": 51    },
+      { "setor": "Nutri Líder",    "qtd": 10    }
+    ]
+  },
   "dre2025": {
     "periodo": "Abril/2026",
     "rows": [
