@@ -186,7 +186,7 @@ export async function generatePPT(scenario: 'realista' | 'otimista' | 'pessimist
   );
 
   // Rodapé
-  sConf.addText(`Grupo Líder  |  Projeções Financeiras 2026–2030  |  Maio de 2026`, {
+  sConf.addText(`Grupo Líder  |  Projeções Financeiras 2026–2030  |  Julho de 2026`, {
     x: 1.0, y: 6.85, w: 11.33, h: 0.35,
     fontSize: 8.5, color: '475569', fontFace: 'Arial', align: 'center', italic: true,
   });
@@ -199,7 +199,7 @@ export async function generatePPT(scenario: 'realista' | 'otimista' | 'pessimist
   const idxItems = [
     { num: '04', title: 'Balanço Patrimonial',               sub: 'BP 2025 vs 2024' },
     { num: '05', title: 'BP – Avaliação',                    sub: 'KPIs e análise do balanço' },
-    { num: '06', title: 'DRE',                               sub: 'Resultado 2025' },
+    { num: '06', title: 'DRE',                               sub: 'Resultado abr/26 vs abr/25' },
     { num: '07', title: 'DFC',                               sub: 'Fluxo de Caixa 2025' },
     { num: '08', title: 'Quadro de Funcionários',            sub: 'Posição em 31/12/2025 por setor' },
     { num: '09–13', title: 'Premissas',                      sub: 'Taxas, estoques, imobilizado, empréstimos, capital de giro' },
@@ -543,8 +543,8 @@ export async function generatePPT(scenario: 'realista' | 'otimista' | 'pessimist
 
   const dre25Header: object[] = [
     { text: 'Descrição', options: { bold: true, color: C.white, fill: { color: C.darkBlue }, fontSize: 9, fontFace: 'Arial', align: 'left',   valign: 'middle' } },
-    { text: '2025',      options: { bold: true, color: C.white, fill: { color: C.darkBlue }, fontSize: 9, fontFace: 'Arial', align: 'center', valign: 'middle' } },
-    { text: '2024',      options: { bold: true, color: C.white, fill: { color: C.darkBlue }, fontSize: 9, fontFace: 'Arial', align: 'center', valign: 'middle' } },
+    { text: 'abr/26',    options: { bold: true, color: C.white, fill: { color: C.darkBlue }, fontSize: 9, fontFace: 'Arial', align: 'center', valign: 'middle' } },
+    { text: 'abr/25',    options: { bold: true, color: C.white, fill: { color: C.darkBlue }, fontSize: 9, fontFace: 'Arial', align: 'center', valign: 'middle' } },
     { text: '%',         options: { bold: true, color: C.white, fill: { color: C.darkBlue }, fontSize: 9, fontFace: 'Arial', align: 'center', valign: 'middle' } },
   ];
 
@@ -573,11 +573,11 @@ export async function generatePPT(scenario: 'realista' | 'otimista' | 'pessimist
     fontSize: 8.5, bold: true, color: C.white, fontFace: 'Arial', valign: 'middle',
   });
   sDre25.addShape('rect', { x: dre25AX, y: dre25AY + 0.3, w: dre25AW, h: 1.62, fill: { color: 'EFF6FF' }, line: { color: 'BFDBFE', pt: 0.5 } });
-  sDre25.addText('▸  Receita operacional líquida de R$ 4.805M em 2025, crescimento de 6% sobre os R$ 4.516M de 2024. Lucro Operacional Bruto de R$ 1.372M (margem de 28,6%), com expansão de 9% frente ao exercício anterior. Despesas operacionais totalizaram R$ 1.292M (+7%), concentradas em despesas gerais e administrativas de R$ 1.289M.', {
+  sDre25.addText('▸  Receita operacional líquida de R$ 1.577M em abr/26, crescimento de 6% sobre os R$ 1.492M de abr/25. Lucro Operacional Bruto de R$ 446M (margem de 28,3%), com expansão de 5% frente ao período anterior. Despesas operacionais totalizaram R$ 417M (+7%), concentradas em despesas gerais e administrativas de R$ 422M.', {
     x: dre25AX + 0.18, y: dre25AY + 0.36, w: dre25AW - 0.35, h: 0.72,
     fontSize: 9, color: C.gray, fontFace: 'Arial', valign: 'top', wrap: true, lineSpacingMultiple: 1.2,
   });
-  sDre25.addText('▸  Resultado financeiro de R$ 5M (vs. R$ 46M em 2024, -89%), reflexo da queda nas receitas financeiras de R$ 61M para R$ 28M. Resultado antes dos impostos de R$ 85M (-8%). Lucro líquido encerrou em R$ 53M, com retração de 14% frente aos R$ 61M de 2024.', {
+  sDre25.addText('▸  Resultado financeiro de R$ (2)M (vs. R$ 0M em abr/25, -89%), reflexo da queda nas receitas financeiras de R$ 9M para R$ 4M. Resultado antes dos impostos de R$ 27M (-8%). Lucro líquido encerrou em R$ 20M, variação de -14% frente aos R$ 8M de abr/25.', {
     x: dre25AX + 0.18, y: dre25AY + 1.14, w: dre25AW - 0.35, h: 0.72,
     fontSize: 9, color: C.gray, fontFace: 'Arial', valign: 'top', wrap: true, lineSpacingMultiple: 1.2,
   });
@@ -784,11 +784,11 @@ export async function generatePPT(scenario: 'realista' | 'otimista' | 'pessimist
 
   const scens = [
     { name: 'Pessimista', rate: scenRates?.pessimista ?? 0.04, color: 'D97706', bg: 'FFFBEB',
-      desc: 'Crescimento conservador, abaixo da inflação projetada. Utilizado para análise de risco e stress test do modelo financeiro.' },
+      desc: 'Crescimento conservador, abaixo da inflação projetada (IPCA 4,39% a.a.). Utilizado para análise de risco e stress test com SELIC em 14,50% e PIB projetado em +2,0% para 2026.' },
     { name: 'Realista',   rate: scenRates?.realista   ?? 0.06, color: '2563EB', bg: 'EFF6FF',
-      desc: 'Cenário-base. Taxa alinhada à expectativa de crescimento nominal com inflação projetada para 2026–2030.' },
+      desc: 'Cenário-base. Taxa alinhada ao crescimento nominal considerando IPCA de 4,39%, expansão do consumo com desemprego em mínima histórica (6,1%) e PIB projetado em +2,0% para 2026.' },
     { name: 'Otimista',   rate: scenRates?.otimista   ?? 0.09, color: '16A34A', bg: 'F0FDF4',
-      desc: 'Crescimento acelerado. Reflete expansão de market share, ganhos de eficiência e melhora do mix de produtos.' },
+      desc: 'Crescimento acelerado. Reflete expansão de market share, ganhos de eficiência, melhora do mix de produtos e aproveitamento do ciclo de queda da SELIC (14,50% com 2ª queda consecutiva).' },
   ];
 
   scens.forEach((sc, i) => {
@@ -1690,15 +1690,15 @@ export async function generatePPT(scenario: 'realista' | 'otimista' | 'pessimist
   // ── SLIDE 13 – Contexto Macroeconômico ───────────────────────────────────
   const sMacro = prs.addSlide();
   sMacro.background = { fill: C.white };
-  addHdr(sMacro, 'CONTEXTO MACROECONÔMICO  –  Leitura Executiva para o Varejo', 'Mai/2026');
+  addHdr(sMacro, 'CONTEXTO MACROECONÔMICO  –  Leitura Executiva para o Varejo', 'Jul/2026');
 
   // KPI cards
   const macroKpis = [
-    { label: 'IPCA Geral', value: '4,39%', period: '12m Abr/2026', note: '↑ Meta: 3,0% ±1,5pp', accent: 'DC2626', bg: 'FEF2F2' },
-    { label: 'IPCA Alimentos', value: '7,8%', period: '12m Abr/2026', note: '↑ Pressão sobre CPV', accent: 'EA580C', bg: 'FFF7ED' },
-    { label: 'PIB Brasil', value: '+2,3%', period: '2025 (IBGE)', note: '↓ Proj. 2026: ~+2,0%', accent: '059669', bg: 'F0FDF4' },
-    { label: 'Desemprego', value: '6,1%', period: 'PNAD 1ºTri/2026', note: '↓ Mínima histórica', accent: '0891B2', bg: 'ECFEFF' },
-    { label: 'SELIC', value: '14,50%', period: 'Abr/2026', note: '↓ 2ª queda consecutiva', accent: '7C3AED', bg: 'F5F3FF' },
+    { label: 'IPCA Geral',       value: '4,72%',  period: '12m Mai/2026',      note: '↑ Avançou vs 4,39% de Abr/2026',         accent: 'DC2626', bg: 'FEF2F2' },
+    { label: 'IPCA Alimentos',    value: '4,80%',  period: '12m Jun/2026',      note: '↑ Alimentos +0,74% — pressão sobre CPV', accent: 'EA580C', bg: 'FFF7ED' },
+    { label: 'PIB Brasil',       value: '+2,3%',  period: 'Proj. SPE Mai/2026', note: '↑ 1º Tri forte (+1,1%) sustenta projeção', accent: '059669', bg: 'F0FDF4' },
+    { label: 'Desemprego',       value: '5,6%',   period: 'PNAD Mai/2026',     note: '↓ Mínima histórica da série PNAD',        accent: '0891B2', bg: 'ECFEFF' },
+    { label: 'SELIC',            value: '14,25%', period: 'Copom Jun/2026',    note: '↓ 3º corte consecutivo (-0,25 p.p.)',     accent: '7C3AED', bg: 'F5F3FF' },
   ];
   const mcW = 2.4; const mcH = 2.3; const mcY = 1.05; const mcGap = 0.16;
   macroKpis.forEach((k, i) => {
@@ -1726,9 +1726,9 @@ export async function generatePPT(scenario: 'realista' | 'otimista' | 'pessimist
     fontSize: 8.5, bold: true, color: C.white, fontFace: 'Arial', valign: 'middle',
   });
   const macroRiscos = [
-    '▸  IPCA Alimentos acima de 7% comprime margem bruta — repricing anual deixa de ser opção e passa a ser imperativo operacional.',
-    '▸  SELIC em 14,75% eleva o custo do capital de giro: cada dia extra de estoque especulativo tem preço explícito no resultado.',
-    '▸  Desaceleração do PIB para +2,2% em 2026 reduz o "vento de trás" do consumo — crescimento terá de ser conquistado, não herdado.',
+    '▸  IPCA acumulado voltou a subir para 4,72% (mai/26) e o IPCA-15 de junho já marca 4,80% — pressionado por alimentos (+0,74% no mês). Repricing cirúrgico e contratos atrelados ao IPCA são imperativo operacional imediato.',
+    '▸  SELIC em 14,25% (3º corte consecutivo) alivia o custo de capital de giro, mas segue em nível restritivo. Cada dia extra de estoque especulativo ainda tem preço explícito no resultado — eficiência de giro é prêmio real.',
+    '▸  PIB projetado em +2,3% pela SPE (mai/26) com 1º trimestre forte (+1,1%), porém a desaceleração do consumo no 2º semestre exige crescimento conquistado — não herdado de vento de trás.',
   ];
   macroRiscos.forEach((txt, i) => {
     sMacro.addText(txt, {
@@ -1745,9 +1745,9 @@ export async function generatePPT(scenario: 'realista' | 'otimista' | 'pessimist
     fontSize: 8.5, bold: true, color: C.white, fontFace: 'Arial', valign: 'middle',
   });
   const macroEstrat = [
-    '▸  Fechar contratos de longo prazo com fornecedores já com reajuste atrelado ao IPCA — garantindo previsibilidade de custos e protegendo a margem bruta mesmo em ciclos de alta da inflação.',
-    '▸  Com o desemprego no menor nível histórico e o consumidor aquecido, priorizar o aumento do ticket médio e a venda de produtos de maior valor agregado antes de comprometer capital com abertura de novas unidades.',
-    '▸  Automação e tecnologia para ganhar produtividade sem adicionar peso linear de folha e overhead fixo.',
+    '▸  Com SELIC caindo (14,25%, 3º corte) e desemprego na mínima histórica (5,6%), o consumidor segue ativo — priorizar aumento de ticket médio e produtos de maior valor agregado captura a demanda sem comprometer capital fixo.',
+    '▸  Repassar inflação de forma cirúrgica e negociar prazos longos com fornecedores tornou-se ainda mais urgente: IPCA-15 de junho a 4,80% puxado por alimentos exige contrato com correção atrelada ao índice para proteger margem bruta.',
+    '▸  Aproveitar o ciclo de redução da SELIC para refinanciar dívidas e alongar passivos — reduzindo o custo financeiro enquanto o custo de capital ainda é alto e criando folga para investimentos estratégicos.',
   ];
   macroEstrat.forEach((txt, i) => {
     sMacro.addText(txt, {
@@ -1757,7 +1757,7 @@ export async function generatePPT(scenario: 'realista' | 'otimista' | 'pessimist
   });
 
   // Rodapé de fontes
-  sMacro.addText('Fontes: IBGE – IPCA, PNAD Contínua, PIB  |  Banco Central do Brasil – SELIC, Relatório Focus  |  Análise Grupo Líder — Mai/2026', {
+  sMacro.addText('Fontes: IBGE – IPCA, PNAD Contínua, PIB  |  Banco Central do Brasil – SELIC, Relatório Focus  |  Análise Grupo Líder — Jul/2026', {
     x: 0.2, y: 7.2, w: 12.9, h: 0.22,
     fontSize: 7, color: '9CA3AF', fontFace: 'Arial', italic: true, align: 'center',
   });
@@ -1765,22 +1765,22 @@ export async function generatePPT(scenario: 'realista' | 'otimista' | 'pessimist
   // ── SLIDE 12 – Projeções Macro Focus 2026–2030 ────────────────────────────
   const sMacroProj = prs.addSlide();
   sMacroProj.background = { fill: C.white };
-  addHdr(sMacroProj, 'PROJEÇÕES MACROECONÔMICAS  –  Relatório Focus / BCB  |  2026–2030', 'Mai/2026');
+  addHdr(sMacroProj, 'PROJEÇÕES MACROECONÔMICAS  –  Relatório Focus / BCB  |  2026–2030', 'Jul/2026');
 
   // Grupos de indicadores com cores
   type MacroRow = { grupo: string; indicador: string; unidade: string; fonte: string; v26: string; v27: string; v28: string; v29: string; v30: string; dir: 'up'|'down'|'neutral'; cor: string };
   const macroRows: MacroRow[] = [
     // Inflação
-    { grupo: 'INFLAÇÃO', indicador: 'IPCA Geral',               unidade: '% a.a.', fonte: 'Focus',       v26: '5,65', v27: '4,33', v28: '3,95', v29: '3,60', v30: '3,50', dir: 'down', cor: 'DC2626' },
-    { grupo: 'INFLAÇÃO', indicador: 'IPCA Alimentos',            unidade: '% a.a.', fonte: 'Focus',  v26: '6,80', v27: '5,20', v28: '4,20', v29: '3,80', v30: '3,60', dir: 'down', cor: 'EA580C' },
+    { grupo: 'INFLAÇÃO', indicador: 'IPCA Geral',               unidade: '% a.a.', fonte: 'Focus/BCB', v26: '5,33', v27: '4,17', v28: '3,70', v29: '3,50', v30: '3,50', dir: 'down', cor: 'DC2626' },
+    { grupo: 'INFLAÇÃO', indicador: 'IPCA Alimentos',           unidade: '% a.a.', fonte: 'Focus/BCB', v26: '6,80', v27: '5,20', v28: '4,20', v29: '3,80', v30: '3,60', dir: 'down', cor: 'EA580C' },
     // Atividade
-    { grupo: 'ATIVIDADE', indicador: 'PIB Real',                 unidade: '% a.a.', fonte: 'Focus',       v26: '2,01', v27: '1,84', v28: '2,00', v29: '2,00', v30: '2,10', dir: 'neutral', cor: '059669' },
-    { grupo: 'ATIVIDADE', indicador: 'Consumo das Famílias',     unidade: '% a.a.', fonte: 'Focus',       v26: '3,16', v27: '2,80', v28: '3,00', v29: '3,10', v30: '3,20', dir: 'neutral', cor: '059669' },
+    { grupo: 'ATIVIDADE', indicador: 'PIB Real',                unidade: '% a.a.', fonte: 'Focus/BCB', v26: '1,99', v27: '1,68', v28: '2,00', v29: '2,00', v30: '2,10', dir: 'neutral', cor: '059669' },
+    { grupo: 'ATIVIDADE', indicador: 'Consumo das Famílias',    unidade: '% a.a.', fonte: 'Focus/BCB', v26: '3,16', v27: '2,80', v28: '3,00', v29: '3,10', v30: '3,20', dir: 'neutral', cor: '059669' },
     // Emprego
-    { grupo: 'EMPREGO',   indicador: 'Desemprego (PNAD)',         unidade: '%',      fonte: 'Focus',       v26: '6,50', v27: '6,80', v28: '7,00', v29: '6,90', v30: '6,80', dir: 'up',   cor: '0891B2' },
+    { grupo: 'EMPREGO',   indicador: 'Desemprego (PNAD)',       unidade: '%',      fonte: 'IBGE',      v26: '5,60', v27: '6,20', v28: '6,50', v29: '6,60', v30: '6,60', dir: 'up',   cor: '0891B2' },
     // Juros & Câmbio
-    { grupo: 'JUROS',     indicador: 'SELIC (fim de período)',   unidade: '% a.a.', fonte: 'Focus',       v26: '14,75', v27: '12,00', v28: '10,50', v29: '10,00', v30: '9,75', dir: 'down', cor: '7C3AED' },
-    { grupo: 'CÂMBIO',    indicador: 'Câmbio R$/US$ (médio)',    unidade: 'R$/US$', fonte: 'Focus',       v26: '5,87', v27: '5,75', v28: '5,69', v29: '5,65', v30: '5,62', dir: 'down', cor: 'B45309' },
+    { grupo: 'JUROS',     indicador: 'SELIC (fim de período)', unidade: '% a.a.', fonte: 'Focus/BCB', v26: '14,00', v27: '12,00', v28: '10,50', v29: '10,00', v30: '9,75', dir: 'down', cor: '7C3AED' },
+    { grupo: 'CÂMBIO',    indicador: 'Câmbio R$/US$ (fim)',    unidade: 'R$/US$', fonte: 'Focus/BCB', v26: '5,20',  v27: '5,28',  v28: '5,35',  v29: '5,40',  v30: '5,42', dir: 'up',   cor: 'B45309' },
   ];
 
   // Configuração de cores por grupo
@@ -1854,14 +1854,14 @@ export async function generatePPT(scenario: 'realista' | 'otimista' | 'pessimist
   // Nota de leitura
   sMacroProj.addShape('rect', { x: 0.2, y: 6.55, w: 12.9, h: 0.72, fill: { color: 'EFF6FF' }, line: { color: 'BFDBFE', pt: 0.5 } });
   sMacroProj.addText(
-    '▸  IPCA convergindo à meta somente a partir de 2028 — pressão sobre CPV persiste nos dois primeiros anos do horizonte de projeção.  ' +
-    '▸  SELIC em trajetória descendente libera custo financeiro gradualmente — impacto positivo no capital de giro a partir de 2027.  ' +
-    '▸  PIB moderado (+2%) reforça necessidade de ganho de market share ativo em vez de depender do crescimento orgânico do mercado.',
+    '▸  IPCA 2026 revisado para 5,33% — acima do teto da meta (4,5%), convergindo à meta somente a partir de 2028. Pressão sobre CPV persiste nos dois primeiros anos do horizonte de projeção.  ' +
+    '▸  SELIC encerra 2026 em 14,00% (3º corte consecutivo em jun/26) e segue trajetória descendente — alivia custo financeiro e de capital de giro gradualmente a partir de 2027.  ' +
+    '▸  PIB 2026 projetado em +1,99% e câmbio estabilizado em R$ 5,20 — ambiente exige ganho ativo de market share em vez de depender do crescimento orgânico do mercado.',
     { x: 0.35, y: 6.61, w: 12.55, h: 0.60, fontSize: 8, color: C.gray, fontFace: 'Arial', wrap: true, valign: 'top', lineSpacingMultiple: 1.3 }
   );
 
   // Rodapé
-  sMacroProj.addText('Fontes: Relatório Focus (BCB) – Mediana do mercado  |  Data-base: 09/mai/2026', {
+  sMacroProj.addText('Fontes: Relatório Focus (BCB) – Mediana do mercado  |  Data-base: 02/jul/2026', {
     x: 0.2, y: 7.25, w: 12.9, h: 0.2,
     fontSize: 7, color: '9CA3AF', fontFace: 'Arial', italic: true, align: 'center',
   });

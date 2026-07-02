@@ -11621,12 +11621,261 @@
   },
   "bp": {
     "anos": [
+      "2026",
       "2025"
     ],
     "periodos": {
+      "2026": {
+        "anoAtual": "abr/26",
+        "anoAnterior": "dez/25",
+        "ativo": [
+          {
+            "label": "ATIVO",
+            "valor": 0,
+            "anterior": 0,
+            "pct": 0,
+            "header": true,
+            "total": false
+          },
+          {
+            "label": "CIRCULANTE",
+            "valor": 0,
+            "anterior": 0,
+            "pct": 0,
+            "header": true,
+            "total": false
+          },
+          {
+            "label": "Caixa e equivalentes de caixa",
+            "valor": 91,
+            "anterior": 111,
+            "pct": -0.18018018018018017,
+            "header": false,
+            "total": false
+          },
+          {
+            "label": "Contas a receber",
+            "valor": 230,
+            "anterior": 266,
+            "pct": -0.13533834586466165,
+            "header": false,
+            "total": false
+          },
+          {
+            "label": "Estoques",
+            "valor": 607,
+            "anterior": 650,
+            "pct": -0.06615384615384617,
+            "header": false,
+            "total": false
+          },
+          {
+            "label": "Outros",
+            "valor": 64,
+            "anterior": 39,
+            "pct": 0.6410256410256411,
+            "header": false,
+            "total": false
+          },
+          {
+            "label": "TOTAL  ATIVO  CIRCULANTE",
+            "valor": 992,
+            "anterior": 1066,
+            "pct": -0.06941838649155723,
+            "header": false,
+            "total": true
+          },
+          {
+            "label": "NÃO CIRCULANTE",
+            "valor": 0,
+            "anterior": 0,
+            "pct": 0,
+            "header": true,
+            "total": false
+          },
+          {
+            "label": "Partes relacionadas NC",
+            "valor": 77,
+            "anterior": 78,
+            "pct": -0.01282051282051282,
+            "header": false,
+            "total": false
+          },
+          {
+            "label": "Ativo biológico",
+            "valor": 10,
+            "anterior": 10,
+            "pct": 0,
+            "header": false,
+            "total": false
+          },
+          {
+            "label": "Imobilizado",
+            "valor": 378,
+            "anterior": 385,
+            "pct": -0.01818181818181818,
+            "header": false,
+            "total": false
+          },
+          {
+            "label": "TOTAL DO ATIVO NÃO CIRCULANTE",
+            "valor": 465,
+            "anterior": 473,
+            "pct": -0.016913319238900634,
+            "header": false,
+            "total": true
+          },
+          {
+            "label": "TOTAL DO ATIVO",
+            "valor": 1457,
+            "anterior": 1539,
+            "pct": -0.05328137881798696,
+            "header": false,
+            "total": true
+          }
+        ],
+        "passivo": [
+          {
+            "label": "PASSIVO",
+            "valor": 0,
+            "anterior": 0,
+            "pct": 0,
+            "header": true,
+            "total": false
+          },
+          {
+            "label": "CIRCULANTE",
+            "valor": 0,
+            "anterior": 0,
+            "pct": 0,
+            "header": true,
+            "total": false
+          },
+          {
+            "label": "Fornecedores",
+            "valor": 507,
+            "anterior": 613,
+            "pct": -0.17290552584670228,
+            "header": false,
+            "total": false
+          },
+          {
+            "label": "Fornecedores partes relacionadas",
+            "valor": 0,
+            "anterior": 0,
+            "pct": 0,
+            "header": false,
+            "total": false
+          },
+          {
+            "label": "Empréstimos e financiamentos",
+            "valor": 42,
+            "anterior": 29,
+            "pct": 0.4482758620689655,
+            "header": false,
+            "total": false
+          },
+          {
+            "label": "Outros",
+            "valor": 349,
+            "anterior": 317,
+            "pct": 0.10094637223974763,
+            "header": false,
+            "total": false
+          },
+          {
+            "label": "TOTAL PASSIVO CIRCULANTE",
+            "valor": 898,
+            "anterior": 959,
+            "pct": -0.06360792349726776,
+            "header": false,
+            "total": true
+          },
+          {
+            "label": "NÃO CIRCULANTE",
+            "valor": 0,
+            "anterior": 0,
+            "pct": 0,
+            "header": true,
+            "total": false
+          },
+          {
+            "label": "Empréstimos e financiamentos NC",
+            "valor": 56,
+            "anterior": 80,
+            "pct": -0.3,
+            "header": false,
+            "total": false
+          },
+          {
+            "label": "Provisões para perdas cíveis, fiscais e trabalhistas",
+            "valor": 35,
+            "anterior": 34,
+            "pct": 0.029411764705882353,
+            "header": false,
+            "total": false
+          },
+          {
+            "label": "Outros",
+            "valor": 5.8,
+            "anterior": 6.3,
+            "pct": -0.07936507936507936,
+            "header": false,
+            "total": false
+          },
+          {
+            "label": "TOTAL  DO PASSIVO NÃO CIRCULANTE",
+            "valor": 97,
+            "anterior": 120,
+            "pct": -0.19166666666666668,
+            "header": false,
+            "total": true
+          },
+          {
+            "label": "Patrimônio líquido",
+            "valor": 0,
+            "anterior": 0,
+            "pct": 0,
+            "header": true,
+            "total": false
+          },
+          {
+            "label": "Capital social",
+            "valor": 100,
+            "anterior": 100,
+            "pct": 0,
+            "header": false,
+            "total": false
+          },
+          {
+            "label": "Lucros a acumulados",
+            "valor": 362,
+            "anterior": 359,
+            "pct": 0.008356545961002785,
+            "header": false,
+            "total": false
+          },
+          {
+            "label": "TOTAL DO PATRIMÔNIO LÍQUIDO",
+            "valor": 462,
+            "anterior": 459,
+            "pct": 0.006535947712418301,
+            "header": false,
+            "total": true
+          },
+          {
+            "label": "TOTAL DO PASSIVO E PATRIMÔNIO LÍQUIDO",
+            "valor": 1457,
+            "anterior": 1539,
+            "pct": -0.05328137881798696,
+            "header": false,
+            "total": true
+          }
+        ]
+      },
       "2025": {
-        "anoAtual": "2025",
-        "anoAnterior": "2024",
+        "anoAtual": "dez/25",
+        "anoAnterior": "dez/24",
         "ativo": [
           {
             "label": "ATIVO",
@@ -12181,19 +12430,19 @@
     ]
   },
   "dfc2025": {
-    "periodo": "Dezembro/2025",
+    "periodo": "Abril/2026",
     "sections": [
       {
         "title": "ATIVIDADES OPERACIONAIS",
         "rows": [
           {
             "label": "Lucro (Prejuízo) do período",
-            "valor": 53000,
+            "valor": 20000,
             "bold": true
           },
           {
             "label": "Depreciação e amortização",
-            "valor": 21000,
+            "valor": 7000,
             "bold": false
           },
           {
@@ -12203,22 +12452,22 @@
           },
           {
             "label": "Redução ao valor recuperável do contas a receber",
-            "valor": 3000,
+            "valor": 0,
             "bold": false
           },
           {
             "label": "Lucro (Prejuízo) Ajustado",
-            "valor": 78000,
+            "valor": 27000,
             "bold": true
           },
           {
             "label": "Geração (Consumo) Caixa Operacional",
-            "valor": 83000,
+            "valor": 21000,
             "bold": true
           },
           {
             "label": "Fluxo de Caixa das Atividades Operacionais",
-            "valor": 161000,
+            "valor": 48000,
             "bold": true
           }
         ]
@@ -12228,12 +12477,12 @@
         "rows": [
           {
             "label": "Aquisição de ativo imobilizado e intangível",
-            "valor": -6000,
+            "valor": -2000,
             "bold": false
           },
           {
             "label": "Fluxo de Caixa de Investimentos",
-            "valor": -6000,
+            "valor": -2000,
             "bold": true
           }
         ]
@@ -12243,22 +12492,22 @@
         "rows": [
           {
             "label": "Empréstimos e financiamentos, líquido",
-            "valor": -62000,
+            "valor": -29000,
             "bold": false
           },
           {
             "label": "Aporte de capital/Distribuição de lucros",
-            "valor": -43000,
+            "valor": 0,
             "bold": false
           },
           {
             "label": "Partes relacionadas",
-            "valor": 17000,
+            "valor": 5000,
             "bold": false
           },
           {
             "label": "Fluxo de Caixa de Financiamentos",
-            "valor": -88000,
+            "valor": -24000,
             "bold": true
           }
         ]
@@ -12268,7 +12517,7 @@
         "rows": [
           {
             "label": "Caixa gerado das atividades operacionais",
-            "valor": 67000,
+            "valor": 22000,
             "bold": true
           }
         ]
@@ -12276,22 +12525,22 @@
     ]
   },
   "dre2025": {
-    "periodo": "Dezembro/2025",
+    "periodo": "Abril/2026",
     "rows": [
-      { "label": "Receita operacional líquida",                                       "v2025": 4805,   "v2024": 4516,   "pct": 6,   "bold": false },
-      { "label": "Custos das mercadorias vendidas e dos serviços prestados",           "v2025": -3433,  "v2024": -3262,  "pct": 5,   "bold": false },
-      { "label": "LUCRO OPERACIONAL BRUTO",                                          "v2025": 1372,   "v2024": 1254,   "pct": 9,   "bold": true  },
-      { "label": "Despesas gerais e administrativas",                                 "v2025": -1289,  "v2024": -1215,  "pct": 6,   "bold": false },
-      { "label": "Despesas comerciais",                                               "v2025": -20,    "v2024": -19,    "pct": 7,   "bold": false },
-      { "label": "Despesas tributárias",                                             "v2025": -6,     "v2024": -6,     "pct": -5,  "bold": false },
-      { "label": "Outras receitas (despesas), líquido",                              "v2025": 23,     "v2024": 33,     "pct": -32, "bold": false },
-      { "label": "TOTAL RECEITAS E DESPESAS OPERACIONAIS",                           "v2025": -1292,  "v2024": -1207,  "pct": 7,   "bold": true  },
-      { "label": "Receitas financeiras",                                              "v2025": 28,     "v2024": 61,     "pct": -54, "bold": false },
-      { "label": "Despesas financeiras",                                              "v2025": -23,    "v2024": -15,    "pct": 50,  "bold": false },
-      { "label": "RESULTADO FINANCEIRO",                                             "v2025": 5,      "v2024": 46,     "pct": -89, "bold": true  },
-      { "label": "RESULTADO ANTES DOS IMPOSTOS",                                     "v2025": 85,     "v2024": 92,     "pct": -8,  "bold": true  },
-      { "label": "Imposto de renda e contribuição social",                            "v2025": -32,    "v2024": -31,    "pct": 5,   "bold": false },
-      { "label": "LUCRO (PREJUÍZO) LÍQUIDO",                                        "v2025": 53,     "v2024": 61,     "pct": -14, "bold": true  }
+      { "label": "Receita operacional líquida",                                       "v2025": 1577,   "v2024": 1492,   "pct": 6,    "bold": false },
+      { "label": "Custos das mercadorias vendidas e dos serviços prestados",           "v2025": -1130,  "v2024": -1065,  "pct": 6,    "bold": false },
+      { "label": "LUCRO OPERACIONAL BRUTO",                                          "v2025": 446,    "v2024": 427,    "pct": 5,    "bold": true  },
+      { "label": "Despesas gerais e administrativas",                                 "v2025": -422,   "v2024": -415,   "pct": 2,    "bold": false },
+      { "label": "Despesas comerciais",                                               "v2025": -3,     "v2024": -7,     "pct": -50,  "bold": false },
+      { "label": "Despesas tributárias",                                             "v2025": -3,     "v2024": -1,     "pct": 111,  "bold": false },
+      { "label": "Outras receitas (despesas), líquido",                              "v2025": 11,     "v2024": 13,     "pct": -17,  "bold": false },
+      { "label": "TOTAL RECEITAS E DESPESAS OPERACIONAIS",                           "v2025": -417,   "v2024": -410,   "pct": 7,    "bold": true  },
+      { "label": "Receitas financeiras",                                              "v2025": 4,      "v2024": 9,      "pct": -59,  "bold": false },
+      { "label": "Despesas financeiras",                                              "v2025": -6,     "v2024": -10,    "pct": -36,  "bold": false },
+      { "label": "RESULTADO FINANCEIRO",                                             "v2025": -2,     "v2024": 0,      "pct": -89,  "bold": true  },
+      { "label": "RESULTADO ANTES DOS IMPOSTOS",                                     "v2025": 27,     "v2024": 17,     "pct": -8,   "bold": true  },
+      { "label": "Imposto de renda e contribuição social",                            "v2025": -7,     "v2024": -8,     "pct": -16,  "bold": false },
+      { "label": "LUCRO (PREJUÍZO) LÍQUIDO",                                        "v2025": 20,     "v2024": 8,      "pct": -14,  "bold": true  }
     ]
   }
 }

@@ -16,7 +16,7 @@ function fmt(v: number): string {
 }
 
 function fmtPct(v: number): string {
-  if (v === 0) return '-';
+  if (v === 0) return '0%';
   const pct = Math.round(v * 100);
   return pct.toLocaleString('pt-BR') + '%';
 }
