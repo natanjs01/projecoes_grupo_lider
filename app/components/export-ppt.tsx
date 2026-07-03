@@ -670,21 +670,20 @@ export async function generatePPT(scenario: 'realista' | 'otimista' | 'pessimist
   const bp25Min = Math.floor(Math.min(...bp25Vals) * 1.35 / 5) * 5;
   const bp25Max = Math.ceil(Math.max(...bp25Vals)  * 1.25 / 5) * 5;
 
-  (sBp25 as any).addChart('line', [{
+  (sBp25 as any).addChart('bar', [{
     name: 'R$ Milhões',
     labels: ['Lucro\nAjustado', 'Caixa\nOperacional', 'Investimentos', 'Financiamentos', 'Caixa\nGerado'],
     values: bp25Vals,
   }], {
     x: 6.4, y: 0.95, w: 6.65, h: 3.15,
-    showTitle: true,
-    title: `Consumo de Caixa  |  ${dfc25Periodo}`,
-    titleFontSize: 11, titleBold: true, titleColor: C.darkBlue,
-    lineDataSymbol: 'circle', lineDataSymbolSize: 9,
-    lineSize: 2.5, chartColors: ['2563EB'],
-    showValue: true, dataLabelFontSize: 9, dataLabelFontBold: true, dataLabelColor: C.darkBlue, dataLabelPosition: 'b',
+    barDir: 'col',
+    chartColors: ['2563EB'],
+    showValue: true, dataLabelFontSize: 9, dataLabelColor: '1E3A5F',
     showLegend: false,
     valAxisMinVal: bp25Min, valAxisMaxVal: bp25Max,
     valGridLine: { style: 'solid', color: 'E5E7EB', size: 0.5 },
+    title: `Consumo de Caixa  |  ${dfc25Periodo}`,
+    showTitle: true, titleFontSize: 11, titleBold: true, titleColor: C.darkBlue,
     catAxisLabelFontSize: 9, valAxisLabelFontSize: 9,
   });
 
@@ -1837,21 +1836,20 @@ export async function generatePPT(scenario: 'realista' | 'otimista' | 'pessimist
   const dfcChartMin = Math.floor(Math.min(...dfcChartVals) * 1.35 / 5) * 5;
   const dfcChartMax = Math.ceil(Math.max(...dfcChartVals)  * 1.25 / 5) * 5;
 
-  (sDfc as any).addChart('line', [{
+  (sDfc as any).addChart('bar', [{
     name: 'R$ Milhões',
     labels: ['Lucro\nAjustado', 'Caixa\nCíclico', 'Investimentos', 'Financiamentos', 'Caixa\nGerado'],
     values: dfcChartVals,
   }], {
     x: 6.4, y: 0.95, w: 6.65, h: 3.15,
-    showTitle: true,
-    title: `Fluxo de Caixa  |  1º TRI ${dfcAno}`,
-    titleFontSize: 11, titleBold: true, titleColor: C.darkBlue,
-    lineDataSymbol: 'circle', lineDataSymbolSize: 9, lineSize: 2.5,
+    barDir: 'col',
     chartColors: ['2563EB'],
-    showValue: true, dataLabelFontSize: 9, dataLabelFontBold: true, dataLabelColor: C.darkBlue, dataLabelPosition: 'b',
+    showValue: true, dataLabelFontSize: 9, dataLabelColor: '1E3A5F',
     showLegend: false,
     valAxisMinVal: dfcChartMin, valAxisMaxVal: dfcChartMax,
     valGridLine: { style: 'solid', color: 'E5E7EB', size: 0.5 },
+    title: `Fluxo de Caixa  |  1º TRI ${dfcAno}`,
+    showTitle: true, titleFontSize: 11, titleBold: true, titleColor: C.darkBlue,
     catAxisLabelFontSize: 9, valAxisLabelFontSize: 9,
   });
 
