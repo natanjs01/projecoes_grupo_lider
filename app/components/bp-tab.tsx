@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useMemo } from 'react';
 import financialData from '../lib/financial-data.json';
 
 const { bp } = financialData as any;
@@ -83,8 +83,7 @@ function RowCells({ row }: { row: any }) {
   );
 }
 
-export default function BpTab() {
-  const [anoSel, setAnoSel] = useState<string>(ANOS[0] ?? '');
+export default function BpTab({ anoSel, setAnoSel }: { anoSel: string; setAnoSel: (v: string) => void }) {
   const periodo = bp?.periodos?.[anoSel];
 
   const [leftRows, rightRows] = useMemo(() => {

@@ -34,6 +34,7 @@ type TabId = typeof TABS[number]['id'];
 export default function DashboardClient() {
   const [activeTab, setActiveTab] = useState<TabId>('orcamento');
   const [scenario, setScenario] = useState<'realista' | 'otimista' | 'pessimista'>('realista');
+  const [bpAno, setBpAno] = useState<string>('2026');
   const logoSrc = "https://natanjs01.github.io/projecoes_grupo_lider/grupolider.png";
 
   const renderTab = () => {
@@ -43,7 +44,7 @@ export default function DashboardClient() {
       case 'dre': return <DreTab scenario={scenario} />;
       case 'fc': return <FcTab scenario={scenario} />;
       case 'dfc': return <DfcTab />;
-      case 'bp': return <BpTab />;
+      case 'bp': return <BpTab anoSel={bpAno} setAnoSel={setBpAno} />;
       case 'funcionarios': return <FuncionariosTab />;
       case 'kpis': return <KpisTab scenario={scenario} />;
       case 'graficos': return <GraficosTab scenario={scenario} />;
@@ -79,7 +80,7 @@ export default function DashboardClient() {
                   {scenario === 'otimista' ? 'Cenário Otimista' : 'Cenário Pessimista'}
                 </span>
               )}
-              <ExportPPTButton scenario={scenario} />
+              <ExportPPTButton scenario={scenario} bpAno={bpAno} />
             </div>
           </div>
 

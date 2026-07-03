@@ -60,7 +60,7 @@ interface Pptx {
 }
 
 // ── Geração do arquivo ───────────────────────────────────────────────────────
-export async function generatePPT(scenario: 'realista' | 'otimista' | 'pessimista' = 'realista'): Promise<void> {
+export async function generatePPT(scenario: 'realista' | 'otimista' | 'pessimista' = 'realista', bpAno: string = '2026'): Promise<void> {
   const mod = await import('pptxgenjs');
   const PptxGenJS = (mod as any).default ?? mod;
   const prs = new (PptxGenJS as any)() as unknown as Pptx;
@@ -250,11 +250,14 @@ export async function generatePPT(scenario: 'realista' | 'otimista' | 'pessimist
   // ── SLIDE 3 – Balanço Patrimonial ─────────────────────────────────────────
   const sbp = prs.addSlide();
   sbp.background = { fill: C.white };
-  addHdr(sbp, 'BALANÇO PATRIMONIAL  –  2025 vs 2024', 'BP');
-
-  const bpPeriodo = bpData?.periodos?.['2025'];
+  const bpPeriodo = bpData?.periodos?.[bpAno] ?? bpData?.periodos?.['2025'];
+  const bpAnoAtual    = bpPeriodo?.anoAtual    ?? bpAno;
+  const bpAnoAnterior = bpPeriodo?.anoAnterior ?? '';
+  addHdr(sbp, `BALANÇO PATRIMONIAL  –  ${bpAnoAtual} vs ${bpAnoAnterior}`, 'BP');
   const bpAtivo: any[]   = bpPeriodo?.ativo   ?? [];
   const bpPassivo: any[] = bpPeriodo?.passivo ?? [];
+  const bpColAtual    = bpAnoAtual;
+  const bpColAnterior = bpAnoAnterior;
 
   const fmtBpV = (v: number): string => {
     if (v === 0) return '–';
@@ -292,8 +295,8 @@ export async function generatePPT(scenario: 'realista' | 'otimista' | 'pessimist
 
   const bpColHdr = (title: string) => [
     { text: title, options: { bold: true, color: C.white, fill: { color: C.midBlue }, fontSize: 9, fontFace: 'Arial', valign: 'middle' } },
-    { text: '2025 (R$Mi)', options: { bold: true, color: C.white, fill: { color: C.midBlue }, align: 'right', fontSize: 9, fontFace: 'Arial', valign: 'middle' } },
-    { text: '2024 (R$Mi)', options: { bold: true, color: C.white, fill: { color: C.midBlue }, align: 'right', fontSize: 9, fontFace: 'Arial', valign: 'middle' } },
+    { text: `${bpColAtual} (R$Mi)`, options: { bold: true, color: C.white, fill: { color: C.midBlue }, align: 'right', fontSize: 9, fontFace: 'Arial', valign: 'middle' } },
+    { text: `${bpColAnterior} (R$Mi)`, options: { bold: true, color: C.white, fill: { color: C.midBlue }, align: 'right', fontSize: 9, fontFace: 'Arial', valign: 'middle' } },
     { text: 'Var%', options: { bold: true, color: C.white, fill: { color: C.midBlue }, align: 'right', fontSize: 9, fontFace: 'Arial', valign: 'middle' } },
   ];
 
@@ -328,7 +331,7 @@ export async function generatePPT(scenario: 'realista' | 'otimista' | 'pessimist
     border: { pt: 0.3, color: 'E5E7EB' },
     colW: [2.8, 1.2, 1.2, 1.3],
   });
-  sbp.addText('Valores em milhões de R$  |  Fonte: Balanço Patrimonial 2025 (Realizado)', {
+  sbp.addText(`Valores em milhões de R$  |  Fonte: Balanço Patrimonial ${bpAnoAtual}`, {
     x: 0.15, y: 7.2, w: 13.0, h: 0.25,
     fontSize: 7.5, color: '9CA3AF', italic: true, fontFace: 'Arial',
   });
@@ -1946,10 +1949,10 @@ export async function generatePPT(scenario: 'realista' | 'otimista' | 'pessimist
 }
 
 // ── Botão de exportação ──────────────────────────────────────────────────────
-export default function ExportPPTButton({ scenario = 'realista' }: { scenario?: 'realista' | 'otimista' | 'pessimista' }) {
+export default function ExportPPTButton({ scenario = 'realista', bpAno = '2026' }: { scenario?: 'realista' | 'otimista' | 'pessimista'; bpAno?: string }) {
   const handleExport = async () => {
     try {
-      await generatePPT(scenario);
+      await generatePPT(scenario, bpAno);
     } catch (err) {
       console.error('Erro ao gerar PPT:', err);
       alert('Ocorreu um erro ao gerar o arquivo PowerPoint.');
