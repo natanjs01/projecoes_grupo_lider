@@ -368,7 +368,7 @@
         },
         {
           "category": "DESPESAS E CUSTOS",
-          "dfs": "Custostos das mercadorias vendidas e dos serviços prestados",
+          "dfs": "Custos das mercadorias vendidas e dos serviços prestados",
           "code": "4120100000002",
           "name": "CUSTOS DAS MERCAD. VENDIDAS",
           "realizado": -278941.19853,
@@ -378,7 +378,7 @@
         },
         {
           "category": "DESPESAS E CUSTOS",
-          "dfs": "Custostos das mercadorias vendidas e dos serviços prestados",
+          "dfs": "Custos das mercadorias vendidas e dos serviços prestados",
           "code": "4120100000003",
           "name": "CUSTOS DOS PRODUTOS VENDIDOS",
           "realizado": -818.7144499999999,
@@ -1248,7 +1248,7 @@
         },
         {
           "category": "CUSTEIO TRANSITÓRIO",
-          "dfs": "Custostos das mercadorias vendidas e dos serviços prestados",
+          "dfs": "Custos das mercadorias vendidas e dos serviços prestados",
           "code": "5110200000001",
           "name": "SALÁRIOS E ORDENADOS",
           "realizado": -26.22109,
@@ -1258,7 +1258,7 @@
         },
         {
           "category": "CUSTEIO TRANSITÓRIO",
-          "dfs": "Custostos das mercadorias vendidas e dos serviços prestados",
+          "dfs": "Custos das mercadorias vendidas e dos serviços prestados",
           "code": "5110200000003",
           "name": "FÉRIAS E INDENIZAÇÕES",
           "realizado": 3.6772,
@@ -1268,7 +1268,7 @@
         },
         {
           "category": "CUSTEIO TRANSITÓRIO",
-          "dfs": "Custostos das mercadorias vendidas e dos serviços prestados",
+          "dfs": "Custos das mercadorias vendidas e dos serviços prestados",
           "code": "5110200000007",
           "name": "CONTRIBUIÇÕES DE PREVIDÊNCIA",
           "realizado": -7.5508500000000005,
@@ -1278,7 +1278,7 @@
         },
         {
           "category": "CUSTEIO TRANSITÓRIO",
-          "dfs": "Custostos das mercadorias vendidas e dos serviços prestados",
+          "dfs": "Custos das mercadorias vendidas e dos serviços prestados",
           "code": "5110200000008",
           "name": "FGTS",
           "realizado": -2.34075,
@@ -1288,7 +1288,7 @@
         },
         {
           "category": "CUSTEIO TRANSITÓRIO",
-          "dfs": "Custostos das mercadorias vendidas e dos serviços prestados",
+          "dfs": "Custos das mercadorias vendidas e dos serviços prestados",
           "code": "5110200000012",
           "name": "SEGURO ACIDENTE DE TRABALHO",
           "realizado": -0.5009100000000001,
@@ -1298,7 +1298,7 @@
         },
         {
           "category": "CUSTEIO TRANSITÓRIO",
-          "dfs": "Custostos das mercadorias vendidas e dos serviços prestados",
+          "dfs": "Custos das mercadorias vendidas e dos serviços prestados",
           "code": "5110200000015",
           "name": "VALE TRANSPORTE",
           "realizado": 0.25498,
@@ -1308,7 +1308,7 @@
         },
         {
           "category": "CUSTEIO TRANSITÓRIO",
-          "dfs": "Custostos das mercadorias vendidas e dos serviços prestados",
+          "dfs": "Custos das mercadorias vendidas e dos serviços prestados",
           "code": "5110200000017",
           "name": "HORA EXTRA",
           "realizado": -1.5033599999999998,
@@ -1318,7 +1318,7 @@
         },
         {
           "category": "CUSTEIO TRANSITÓRIO",
-          "dfs": "Custostos das mercadorias vendidas e dos serviços prestados",
+          "dfs": "Custos das mercadorias vendidas e dos serviços prestados",
           "code": "5110200000018",
           "name": "INSALUBRIDADE",
           "realizado": -0.95099,
@@ -1328,7 +1328,7 @@
         },
         {
           "category": "CUSTEIO TRANSITÓRIO",
-          "dfs": "Custostos das mercadorias vendidas e dos serviços prestados",
+          "dfs": "Custos das mercadorias vendidas e dos serviços prestados",
           "code": "5110200000019",
           "name": "QUINQUÊNIO",
           "realizado": -1.47546,
@@ -1338,7 +1338,7 @@
         },
         {
           "category": "CUSTEIO TRANSITÓRIO",
-          "dfs": "Custostos das mercadorias vendidas e dos serviços prestados",
+          "dfs": "Custos das mercadorias vendidas e dos serviços prestados",
           "code": "5110400000002",
           "name": "DEPRECIAÇÃO",
           "realizado": -10.64752,
@@ -1620,7 +1620,7 @@
         },
         {
           "category": "DESPESAS E CUSTOS",
-          "dfs": "Custostos das mercadorias vendidas e dos serviços prestados",
+          "dfs": "Custos das mercadorias vendidas e dos serviços prestados",
           "code": "4120100000002",
           "name": "CUSTOS DAS MERCAD. VENDIDAS",
           "realizado": -259174.7096,
@@ -1630,7 +1630,7 @@
         },
         {
           "category": "DESPESAS E CUSTOS",
-          "dfs": "Custostos das mercadorias vendidas e dos serviços prestados",
+          "dfs": "Custos das mercadorias vendidas e dos serviços prestados",
           "code": "4120100000003",
           "name": "CUSTOS DOS PRODUTOS VENDIDOS",
           "realizado": -655.6799599999999,
@@ -2500,7 +2500,7 @@
         },
         {
           "category": "CUSTEIO TRANSITÓRIO",
-          "dfs": "Custostos das mercadorias vendidas e dos serviços prestados",
+          "dfs": "Custos das mercadorias vendidas e dos serviços prestados",
           "code": "5110200000001",
           "name": "SALÁRIOS E ORDENADOS",
           "realizado": -27.48248,
@@ -2510,7 +2510,7 @@
         },
         {
           "category": "CUSTEIO TRANSITÓRIO",
-          "dfs": "Custostos das mercadorias vendidas e dos serviços prestados",
+          "dfs": "Custos das mercadorias vendidas e dos serviços prestados",
           "code": "5110200000002",
           "name": "13º SALÁRIO",
           "realizado": -2.80478,
@@ -2520,7 +2520,7 @@
         },
         {
           "category": "CUSTEIO TRANSITÓRIO",
-          "dfs": "Custostos das mercadorias vendidas e dos serviços prestados",
+          "dfs": "Custos das mercadorias vendidas e dos serviços prestados",
           "code": "5110200000003",
           "name": "FÉRIAS E INDENIZAÇÕES",
           "realizado": -1.5612599999999999,
@@ -2530,7 +2530,7 @@
         },
         {
           "category": "CUSTEIO TRANSITÓRIO",
-          "dfs": "Custostos das mercadorias vendidas e dos serviços prestados",
+          "dfs": "Custos das mercadorias vendidas e dos serviços prestados",
           "code": "5110200000007",
           "name": "CONTRIBUIÇÕES DE PREVIDÊNCIA",
           "realizado": -10.184640000000002,
@@ -2540,7 +2540,7 @@
         },
         {
           "category": "CUSTEIO TRANSITÓRIO",
-          "dfs": "Custostos das mercadorias vendidas e dos serviços prestados",
+          "dfs": "Custos das mercadorias vendidas e dos serviços prestados",
           "code": "5110200000008",
           "name": "FGTS",
           "realizado": -3.04338,
@@ -2550,7 +2550,7 @@
         },
         {
           "category": "CUSTEIO TRANSITÓRIO",
-          "dfs": "Custostos das mercadorias vendidas e dos serviços prestados",
+          "dfs": "Custos das mercadorias vendidas e dos serviços prestados",
           "code": "5110200000012",
           "name": "SEGURO ACIDENTE DE TRABALHO",
           "realizado": -0.5231999999999998,
@@ -2560,7 +2560,7 @@
         },
         {
           "category": "CUSTEIO TRANSITÓRIO",
-          "dfs": "Custostos das mercadorias vendidas e dos serviços prestados",
+          "dfs": "Custos das mercadorias vendidas e dos serviços prestados",
           "code": "5110200000015",
           "name": "VALE TRANSPORTE",
           "realizado": 0.26529,
@@ -2570,7 +2570,7 @@
         },
         {
           "category": "CUSTEIO TRANSITÓRIO",
-          "dfs": "Custostos das mercadorias vendidas e dos serviços prestados",
+          "dfs": "Custos das mercadorias vendidas e dos serviços prestados",
           "code": "5110200000017",
           "name": "HORA EXTRA",
           "realizado": -2.24636,
@@ -2580,7 +2580,7 @@
         },
         {
           "category": "CUSTEIO TRANSITÓRIO",
-          "dfs": "Custostos das mercadorias vendidas e dos serviços prestados",
+          "dfs": "Custos das mercadorias vendidas e dos serviços prestados",
           "code": "5110200000018",
           "name": "INSALUBRIDADE",
           "realizado": -0.9725999999999999,
@@ -2590,7 +2590,7 @@
         },
         {
           "category": "CUSTEIO TRANSITÓRIO",
-          "dfs": "Custostos das mercadorias vendidas e dos serviços prestados",
+          "dfs": "Custos das mercadorias vendidas e dos serviços prestados",
           "code": "5110200000019",
           "name": "QUINQUÊNIO",
           "realizado": -1.4544200000000003,
@@ -2600,7 +2600,7 @@
         },
         {
           "category": "CUSTEIO TRANSITÓRIO",
-          "dfs": "Custostos das mercadorias vendidas e dos serviços prestados",
+          "dfs": "Custos das mercadorias vendidas e dos serviços prestados",
           "code": "5110400000002",
           "name": "DEPRECIAÇÃO",
           "realizado": -10.64752,
@@ -2882,7 +2882,7 @@
         },
         {
           "category": "DESPESAS E CUSTOS",
-          "dfs": "Custostos das mercadorias vendidas e dos serviços prestados",
+          "dfs": "Custos das mercadorias vendidas e dos serviços prestados",
           "code": "4120100000002",
           "name": "CUSTOS DAS MERCAD. VENDIDAS",
           "realizado": -292773.0805000001,
@@ -2892,7 +2892,7 @@
         },
         {
           "category": "DESPESAS E CUSTOS",
-          "dfs": "Custostos das mercadorias vendidas e dos serviços prestados",
+          "dfs": "Custos das mercadorias vendidas e dos serviços prestados",
           "code": "4120100000003",
           "name": "CUSTOS DOS PRODUTOS VENDIDOS",
           "realizado": -635.76962,
@@ -3752,7 +3752,7 @@
         },
         {
           "category": "CUSTEIO TRANSITÓRIO",
-          "dfs": "Custostos das mercadorias vendidas e dos serviços prestados",
+          "dfs": "Custos das mercadorias vendidas e dos serviços prestados",
           "code": "5110200000001",
           "name": "SALÁRIOS E ORDENADOS",
           "realizado": -27.584900000000008,
@@ -3762,7 +3762,7 @@
         },
         {
           "category": "CUSTEIO TRANSITÓRIO",
-          "dfs": "Custostos das mercadorias vendidas e dos serviços prestados",
+          "dfs": "Custos das mercadorias vendidas e dos serviços prestados",
           "code": "5110200000003",
           "name": "FÉRIAS E INDENIZAÇÕES",
           "realizado": -1.76682,
@@ -3772,7 +3772,7 @@
         },
         {
           "category": "CUSTEIO TRANSITÓRIO",
-          "dfs": "Custostos das mercadorias vendidas e dos serviços prestados",
+          "dfs": "Custos das mercadorias vendidas e dos serviços prestados",
           "code": "5110200000007",
           "name": "CONTRIBUIÇÕES DE PREVIDÊNCIA",
           "realizado": -9.32048,
@@ -3782,7 +3782,7 @@
         },
         {
           "category": "CUSTEIO TRANSITÓRIO",
-          "dfs": "Custostos das mercadorias vendidas e dos serviços prestados",
+          "dfs": "Custos das mercadorias vendidas e dos serviços prestados",
           "code": "5110200000008",
           "name": "FGTS",
           "realizado": -2.83124,
@@ -3792,7 +3792,7 @@
         },
         {
           "category": "CUSTEIO TRANSITÓRIO",
-          "dfs": "Custostos das mercadorias vendidas e dos serviços prestados",
+          "dfs": "Custos das mercadorias vendidas e dos serviços prestados",
           "code": "5110200000012",
           "name": "SEGURO ACIDENTE DE TRABALHO",
           "realizado": -0.5152800000000003,
@@ -3802,7 +3802,7 @@
         },
         {
           "category": "CUSTEIO TRANSITÓRIO",
-          "dfs": "Custostos das mercadorias vendidas e dos serviços prestados",
+          "dfs": "Custos das mercadorias vendidas e dos serviços prestados",
           "code": "5110200000015",
           "name": "VALE TRANSPORTE",
           "realizado": 0.27303,
@@ -3812,7 +3812,7 @@
         },
         {
           "category": "CUSTEIO TRANSITÓRIO",
-          "dfs": "Custostos das mercadorias vendidas e dos serviços prestados",
+          "dfs": "Custos das mercadorias vendidas e dos serviços prestados",
           "code": "5110200000017",
           "name": "HORA EXTRA",
           "realizado": -1.68607,
@@ -3822,7 +3822,7 @@
         },
         {
           "category": "CUSTEIO TRANSITÓRIO",
-          "dfs": "Custostos das mercadorias vendidas e dos serviços prestados",
+          "dfs": "Custos das mercadorias vendidas e dos serviços prestados",
           "code": "5110200000018",
           "name": "INSALUBRIDADE",
           "realizado": -0.9726000000000004,
@@ -3832,7 +3832,7 @@
         },
         {
           "category": "CUSTEIO TRANSITÓRIO",
-          "dfs": "Custostos das mercadorias vendidas e dos serviços prestados",
+          "dfs": "Custos das mercadorias vendidas e dos serviços prestados",
           "code": "5110200000019",
           "name": "QUINQUÊNIO",
           "realizado": -1.5745,
@@ -4114,7 +4114,7 @@
         },
         {
           "category": "DESPESAS E CUSTOS",
-          "dfs": "Custostos das mercadorias vendidas e dos serviços prestados",
+          "dfs": "Custos das mercadorias vendidas e dos serviços prestados",
           "code": "4120100000002",
           "name": "CUSTOS DAS MERCAD. VENDIDAS",
           "realizado": -296324.21555000014,
@@ -4124,7 +4124,7 @@
         },
         {
           "category": "DESPESAS E CUSTOS",
-          "dfs": "Custostos das mercadorias vendidas e dos serviços prestados",
+          "dfs": "Custos das mercadorias vendidas e dos serviços prestados",
           "code": "4120100000003",
           "name": "CUSTOS DOS PRODUTOS VENDIDOS",
           "realizado": -725.8633300000001,
@@ -4973,8 +4973,8 @@
           "pct": -0.9059961785750029
         },
         {
-          "category": "DESPESAS E CUSTOS",
-          "dfs": "Custostos das mercadorias vendidas e dos serviços prestados",
+          "category": "CUSTEIO TRANSITÓRIO",
+          "dfs": "Custos das mercadorias vendidas e dos serviços prestados",
           "code": "5110200000001",
           "name": "SALÁRIOS E ORDENADOS",
           "realizado": -25.92619999999999,
@@ -4983,8 +4983,8 @@
           "pct": 0
         },
         {
-          "category": "DESPESAS E CUSTOS",
-          "dfs": "Custostos das mercadorias vendidas e dos serviços prestados",
+          "category": "CUSTEIO TRANSITÓRIO",
+          "dfs": "Custos das mercadorias vendidas e dos serviços prestados",
           "code": "5110200000002",
           "name": "13º SALÁRIO",
           "realizado": -2.9313200000000004,
@@ -4993,8 +4993,8 @@
           "pct": 0
         },
         {
-          "category": "DESPESAS E CUSTOS",
-          "dfs": "Custostos das mercadorias vendidas e dos serviços prestados",
+          "category": "CUSTEIO TRANSITÓRIO",
+          "dfs": "Custos das mercadorias vendidas e dos serviços prestados",
           "code": "5110200000003",
           "name": "FÉRIAS E INDENIZAÇÕES",
           "realizado": -5.36128,
@@ -5003,8 +5003,8 @@
           "pct": 0
         },
         {
-          "category": "DESPESAS E CUSTOS",
-          "dfs": "Custostos das mercadorias vendidas e dos serviços prestados",
+          "category": "CUSTEIO TRANSITÓRIO",
+          "dfs": "Custos das mercadorias vendidas e dos serviços prestados",
           "code": "5110200000007",
           "name": "CONTRIBUIÇÕES DE PREVIDÊNCIA",
           "realizado": -9.621830000000003,
@@ -5013,8 +5013,8 @@
           "pct": 0
         },
         {
-          "category": "DESPESAS E CUSTOS",
-          "dfs": "Custostos das mercadorias vendidas e dos serviços prestados",
+          "category": "CUSTEIO TRANSITÓRIO",
+          "dfs": "Custos das mercadorias vendidas e dos serviços prestados",
           "code": "5110200000008",
           "name": "FGTS",
           "realizado": -3.1491499999999997,
@@ -5023,8 +5023,8 @@
           "pct": 0
         },
         {
-          "category": "DESPESAS E CUSTOS",
-          "dfs": "Custostos das mercadorias vendidas e dos serviços prestados",
+          "category": "CUSTEIO TRANSITÓRIO",
+          "dfs": "Custos das mercadorias vendidas e dos serviços prestados",
           "code": "5110200000012",
           "name": "SEGURO ACIDENTE DE TRABALHO",
           "realizado": -0.48953000000000013,
@@ -5033,8 +5033,8 @@
           "pct": 0
         },
         {
-          "category": "DESPESAS E CUSTOS",
-          "dfs": "Custostos das mercadorias vendidas e dos serviços prestados",
+          "category": "CUSTEIO TRANSITÓRIO",
+          "dfs": "Custos das mercadorias vendidas e dos serviços prestados",
           "code": "5110200000015",
           "name": "VALE TRANSPORTE",
           "realizado": 0.27303,
@@ -5043,8 +5043,8 @@
           "pct": 0
         },
         {
-          "category": "DESPESAS E CUSTOS",
-          "dfs": "Custostos das mercadorias vendidas e dos serviços prestados",
+          "category": "CUSTEIO TRANSITÓRIO",
+          "dfs": "Custos das mercadorias vendidas e dos serviços prestados",
           "code": "5110200000017",
           "name": "HORA EXTRA",
           "realizado": -0.9286499999999993,
@@ -5053,8 +5053,8 @@
           "pct": 0
         },
         {
-          "category": "DESPESAS E CUSTOS",
-          "dfs": "Custostos das mercadorias vendidas e dos serviços prestados",
+          "category": "CUSTEIO TRANSITÓRIO",
+          "dfs": "Custos das mercadorias vendidas e dos serviços prestados",
           "code": "5110200000018",
           "name": "INSALUBRIDADE",
           "realizado": -0.9725999999999999,
@@ -5063,8 +5063,8 @@
           "pct": 0
         },
         {
-          "category": "DESPESAS E CUSTOS",
-          "dfs": "Custostos das mercadorias vendidas e dos serviços prestados",
+          "category": "CUSTEIO TRANSITÓRIO",
+          "dfs": "Custos das mercadorias vendidas e dos serviços prestados",
           "code": "5110200000019",
           "name": "QUINQUÊNIO",
           "realizado": -1.50916,
