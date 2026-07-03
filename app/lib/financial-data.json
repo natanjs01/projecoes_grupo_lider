@@ -69,6 +69,29 @@
           "variacao": -9441.074859535322,
           "pct": -0.5617680115780531
         }
+      ],
+      "abril": [
+        {
+          "label": "RECEITAS",
+          "realizado": 496575.13316,
+          "orcado": 517282.83544430573,
+          "variacao": -20707.702284305706,
+          "pct": -0.04003168260265083
+        },
+        {
+          "label": "DESPESAS E CUSTOS",
+          "realizado": -488140.53098,
+          "orcado": -500476.8324947706,
+          "variacao": 12336.301514770603,
+          "pct": -0.02464909604961485
+        },
+        {
+          "label": "LUCRO LÍQUIDO",
+          "realizado": 8434.602180000045,
+          "orcado": 16806.00294953515,
+          "variacao": -8371.400769535103,
+          "pct": -0.4981196775147927
+        }
       ]
     },
     "items": {
@@ -3815,6 +3838,1238 @@
           "realizado": -1.5745,
           "orcado": 0,
           "variacao": -1.5745,
+          "pct": 0
+        }
+      ],
+      "abril": [
+        {
+          "category": "RECEITAS",
+          "dfs": "Receita operacional líquida",
+          "code": "3110100000001",
+          "name": "MERCADORIAS",
+          "realizado": 487571.10383000004,
+          "orcado": 485327.7688310172,
+          "variacao": 2243.334998982842,
+          "pct": 0.00462230917547999
+        },
+        {
+          "category": "RECEITAS",
+          "dfs": "Receita operacional líquida",
+          "code": "3110100000010",
+          "name": "VENDA DE MERCADORIAS",
+          "realizado": 34.79759999999999,
+          "orcado": 488.66714232588043,
+          "variacao": -453.86954232588045,
+          "pct": -0.9287907923696774
+        },
+        {
+          "category": "RECEITAS",
+          "dfs": "Receita operacional líquida",
+          "code": "3110100000011",
+          "name": "VENDA DE RECICLADO",
+          "realizado": 180.90713000000002,
+          "orcado": 183.61898929807558,
+          "variacao": -2.7118592980755523,
+          "pct": -0.014768947963618783
+        },
+        {
+          "category": "RECEITAS",
+          "dfs": "Receita operacional líquida",
+          "code": "3110100000023",
+          "name": "VENDA DE PEIXE",
+          "realizado": 0,
+          "orcado": 0.5923069555674847,
+          "variacao": -0.5923069555674847,
+          "pct": -1
+        },
+        {
+          "category": "RECEITAS",
+          "dfs": "Receita operacional líquida",
+          "code": "3110200000001",
+          "name": "TRIBUTADAS",
+          "realizado": 1143.2399999999996,
+          "orcado": 1183.1517591075115,
+          "variacao": -39.9117591075119,
+          "pct": -0.033733423291039684
+        },
+        {
+          "category": "RECEITAS",
+          "dfs": "Receita operacional líquida",
+          "code": "3110300000001",
+          "name": "RECEITAS DE SERVIÇOS PRESTADOS",
+          "realizado": 1193.9632700000002,
+          "orcado": 1121.008631019542,
+          "variacao": 72.95463898045818,
+          "pct": 0.06507946233572434
+        },
+        {
+          "category": "RECEITAS",
+          "dfs": "Receita operacional líquida",
+          "code": "3110300000003",
+          "name": "RECEITAS PET",
+          "realizado": 646.51709,
+          "orcado": 578.6581590060604,
+          "variacao": 67.85893099393968,
+          "pct": 0.1172694620093121
+        },
+        {
+          "category": "RECEITAS",
+          "dfs": "Receita operacional líquida",
+          "code": "3110300000004",
+          "name": "RECEITAS FARMA",
+          "realizado": 195.8991499999999,
+          "orcado": 159.53012856866476,
+          "variacao": 36.36902143133514,
+          "pct": 0.22797587990209153
+        },
+        {
+          "category": "RECEITAS",
+          "dfs": "Receitas financeiras",
+          "code": "3120100000002",
+          "name": "RENDAS DE APLICAÇÃO",
+          "realizado": 0.02300000000000002,
+          "orcado": 0.041279048734125426,
+          "variacao": -0.018279048734125405,
+          "pct": -0.4428166175015099
+        },
+        {
+          "category": "RECEITAS",
+          "dfs": "Receitas financeiras",
+          "code": "3120100000004",
+          "name": "DESCONTOS OBTIDOS",
+          "realizado": 921.7535700000003,
+          "orcado": 1214.449116174067,
+          "variacao": -292.69554617406675,
+          "pct": -0.24101095902326358
+        },
+        {
+          "category": "RECEITAS",
+          "dfs": "Receitas financeiras",
+          "code": "3120100000005",
+          "name": "JUROS ATIVOS",
+          "realizado": 6.428690000000003,
+          "orcado": 72.60223179856625,
+          "variacao": -66.17354179856625,
+          "pct": -0.9114532729815207
+        },
+        {
+          "category": "RECEITAS",
+          "dfs": "Receita operacional líquida",
+          "code": "3120200000001",
+          "name": "RECEITAS DE ALUGUÉIS",
+          "realizado": 590.8961400000003,
+          "orcado": 586.0431580510085,
+          "variacao": 4.852981948991783,
+          "pct": 0.008280929283657612
+        },
+        {
+          "category": "RECEITAS",
+          "dfs": "Outras receitas (despesas), líquido",
+          "code": "3120200000003",
+          "name": "RECUPERAÇÃO DE DESPESAS",
+          "realizado": 0,
+          "orcado": 35.4557011322769,
+          "variacao": -35.4557011322769,
+          "pct": -1
+        },
+        {
+          "category": "RECEITAS",
+          "dfs": "Outras receitas (despesas), líquido",
+          "code": "3120200000004",
+          "name": "BONIFICAÇÃO",
+          "realizado": 1498.8331100000003,
+          "orcado": 1078.588809507116,
+          "variacao": 420.24430049288435,
+          "pct": 0.38962419857195063
+        },
+        {
+          "category": "RECEITAS",
+          "dfs": "Outras receitas (despesas), líquido",
+          "code": "3120200000008",
+          "name": "RECEITAS EVENTUAIS",
+          "realizado": 0,
+          "orcado": 153.04297395318795,
+          "variacao": -153.04297395318795,
+          "pct": -1
+        },
+        {
+          "category": "RECEITAS",
+          "dfs": "Outras receitas (despesas), líquido",
+          "code": "3120200000010",
+          "name": "OUTRAS RECEITAS",
+          "realizado": 1180.90026,
+          "orcado": 1564.562625456187,
+          "variacao": -383.6623654561872,
+          "pct": -0.2452202035340841
+        },
+        {
+          "category": "RECEITAS",
+          "dfs": "Receita operacional líquida",
+          "code": "3120200000013",
+          "name": "RECEITA DE ESTACIONAMENTO",
+          "realizado": 4.112139999999998,
+          "orcado": 3.4543333187167766,
+          "variacao": 0.6578066812832217,
+          "pct": 0.19042941736948107
+        },
+        {
+          "category": "RECEITAS",
+          "dfs": "Outras receitas (despesas), líquido",
+          "code": "3120200000014",
+          "name": "RECEITA DE AUDITORIA VERBAS PROMOCIONAL",
+          "realizado": 1405.75818,
+          "orcado": 307.3250510874787,
+          "variacao": 1098.4331289125214,
+          "pct": 3.5741737454388556
+        },
+        {
+          "category": "RECEITAS",
+          "dfs": "Outras receitas (despesas), líquido",
+          "code": "3210200000001",
+          "name": "VENDAS ATIVO PERMANENTE",
+          "realizado": 0,
+          "orcado": 45.41704628449007,
+          "variacao": -45.41704628449007,
+          "pct": -1
+        },
+        {
+          "category": "DESPESAS E CUSTOS",
+          "dfs": "Receita operacional líquida",
+          "code": "4110100000003",
+          "name": "ICMS S/ VENDAS",
+          "realizado": -30560.613579999987,
+          "orcado": -32211.85176294703,
+          "variacao": 1651.2381829470432,
+          "pct": -0.051261821117854704
+        },
+        {
+          "category": "DESPESAS E CUSTOS",
+          "dfs": "Receita operacional líquida",
+          "code": "4110200000001",
+          "name": "DEVOLUÇÕES DE VENDAS",
+          "realizado": -3565.2010300000015,
+          "orcado": -4178.742530122895,
+          "variacao": 613.5415001228935,
+          "pct": -0.14682443239805193
+        },
+        {
+          "category": "DESPESAS E CUSTOS",
+          "dfs": "Receita operacional líquida",
+          "code": "4110200000002",
+          "name": "CANCELAMENTO DE VENDAS",
+          "realizado": 0,
+          "orcado": -0.6769137734063315,
+          "variacao": 0.6769137734063315,
+          "pct": -1
+        },
+        {
+          "category": "DESPESAS E CUSTOS",
+          "dfs": "Receita operacional líquida",
+          "code": "4110200000003",
+          "name": "PIS S/ FATURAMENTO",
+          "realizado": -0.5741500000000013,
+          "orcado": -8.062981509332865,
+          "variacao": 7.488831509332863,
+          "pct": -0.9287918495986348
+        },
+        {
+          "category": "DESPESAS E CUSTOS",
+          "dfs": "Receita operacional líquida",
+          "code": "4110200000004",
+          "name": "COFINS S/ FATURAMENTO",
+          "realizado": -2.64461,
+          "orcado": -37.138681805100745,
+          "variacao": 34.494071805100745,
+          "pct": -0.9287909567205808
+        },
+        {
+          "category": "DESPESAS E CUSTOS",
+          "dfs": "Receita operacional líquida",
+          "code": "4110200000009",
+          "name": "DESCONTOS COMERCIAIS",
+          "realizado": -28567.247060000005,
+          "orcado": -26903.234083140887,
+          "variacao": -1664.0129768591178,
+          "pct": 0.06185178226962252
+        },
+        {
+          "category": "DESPESAS E CUSTOS",
+          "dfs": "Receita operacional líquida",
+          "code": "4110300000001",
+          "name": "PIS S/ FATURAMENTO",
+          "realizado": -3480.4357599999985,
+          "orcado": -3520.4603778493392,
+          "variacao": 40.02461784934076,
+          "pct": -0.011369143110138319
+        },
+        {
+          "category": "DESPESAS E CUSTOS",
+          "dfs": "Receita operacional líquida",
+          "code": "4110300000002",
+          "name": "COFINS S/ FATURAMENTO",
+          "realizado": -16024.821100000001,
+          "orcado": -16214.756391527906,
+          "variacao": 189.93529152790506,
+          "pct": -0.01171373081048229
+        },
+        {
+          "category": "DESPESAS E CUSTOS",
+          "dfs": "Custostos das mercadorias vendidas e dos serviços prestados",
+          "code": "4120100000002",
+          "name": "CUSTOS DAS MERCAD. VENDIDAS",
+          "realizado": -296324.21555000014,
+          "orcado": -290467.0967740474,
+          "variacao": -5857.118775952724,
+          "pct": 0.020164482796855097
+        },
+        {
+          "category": "DESPESAS E CUSTOS",
+          "dfs": "Custostos das mercadorias vendidas e dos serviços prestados",
+          "code": "4120100000003",
+          "name": "CUSTOS DOS PRODUTOS VENDIDOS",
+          "realizado": -725.8633300000001,
+          "orcado": 0,
+          "variacao": -725.8633300000001,
+          "pct": 0
+        },
+        {
+          "category": "DESPESAS E CUSTOS",
+          "dfs": "Despesas Comerciais",
+          "code": "4210100000001",
+          "name": "COMISSÕES",
+          "realizado": -588.3705900000001,
+          "orcado": -368.28353390296155,
+          "variacao": -220.08705609703856,
+          "pct": 0.5976022163266983
+        },
+        {
+          "category": "DESPESAS E CUSTOS",
+          "dfs": "Despesas comerciais",
+          "code": "4210100000002",
+          "name": "PROPAGANDA E PUBLICIDADE",
+          "realizado": -620.57178,
+          "orcado": -1198.1043387231118,
+          "variacao": 577.5325587231118,
+          "pct": -0.4820386172197834
+        },
+        {
+          "category": "DESPESAS E CUSTOS",
+          "dfs": "Despesas comerciais",
+          "code": "4210100000005",
+          "name": "SERVIÇOS DE TERCEIROS - PF",
+          "realizado": 0,
+          "orcado": -78.45394823321432,
+          "variacao": 78.45394823321432,
+          "pct": -1
+        },
+        {
+          "category": "DESPESAS E CUSTOS",
+          "dfs": "Despesas comerciais",
+          "code": "4210100000007",
+          "name": "FRETES E ENTREGAS",
+          "realizado": -47.738389999999995,
+          "orcado": -36.229850666267865,
+          "variacao": -11.50853933373213,
+          "pct": 0.3176535128378893
+        },
+        {
+          "category": "DESPESAS E CUSTOS",
+          "dfs": "Despesas comerciais",
+          "code": "4210100000008",
+          "name": "ASSINATURAS E CONTRIBUIÇÕES",
+          "realizado": -61.104329999999976,
+          "orcado": -19.643522654648955,
+          "variacao": -41.46080734535102,
+          "pct": 2.1106604998639926
+        },
+        {
+          "category": "DESPESAS E CUSTOS",
+          "dfs": "Despesas gerais e administrativas",
+          "code": "4220100000002",
+          "name": "SALÁRIOS E ORDENADOS",
+          "realizado": -33524.37124000001,
+          "orcado": -29475.35598828448,
+          "variacao": -4049.0152517155293,
+          "pct": 0.1373695114428774
+        },
+        {
+          "category": "DESPESAS E CUSTOS",
+          "dfs": "Despesas gerais e administrativas",
+          "code": "4220100000003",
+          "name": "13º SALÁRIO",
+          "realizado": -3432.541879999999,
+          "orcado": -3066.0070057475805,
+          "variacao": -366.5348742524184,
+          "pct": 0.11954795718512935
+        },
+        {
+          "category": "DESPESAS E CUSTOS",
+          "dfs": "Despesas gerais e administrativas",
+          "code": "4220100000004",
+          "name": "FÉRIAS E INDENIZAÇÕES",
+          "realizado": 0,
+          "orcado": -4.85312656046754,
+          "variacao": 4.85312656046754,
+          "pct": -1
+        },
+        {
+          "category": "DESPESAS E CUSTOS",
+          "dfs": "Despesas gerais e administrativas",
+          "code": "4220100000005",
+          "name": "SEGURO ACIDENTE DE TRABALHO",
+          "realizado": -908.4726700000002,
+          "orcado": -896.148223490779,
+          "variacao": -12.324446509221275,
+          "pct": 0.01375268754226135
+        },
+        {
+          "category": "DESPESAS E CUSTOS",
+          "dfs": "Despesas gerais e administrativas",
+          "code": "4220100000007",
+          "name": "GRATIFICAÇÃO",
+          "realizado": -71.85434999999995,
+          "orcado": -54.96987864017923,
+          "variacao": -16.884471359820722,
+          "pct": 0.3071586071772646
+        },
+        {
+          "category": "DESPESAS E CUSTOS",
+          "dfs": "Despesas gerais e administrativas",
+          "code": "4220100000009",
+          "name": "CONTRIB. DE PREVIDÊNCIA",
+          "realizado": -11423.918909999997,
+          "orcado": -10746.446681455018,
+          "variacao": -677.4722285449789,
+          "pct": 0.06304151024301666
+        },
+        {
+          "category": "DESPESAS E CUSTOS",
+          "dfs": "Despesas gerais e administrativas",
+          "code": "4220100000010",
+          "name": "FUND. GARANT. TEMPO DE SERVIÇO",
+          "realizado": -4137.9277600000005,
+          "orcado": -4157.551240173413,
+          "variacao": 19.623480173412645,
+          "pct": -0.004719961111674511
+        },
+        {
+          "category": "DESPESAS E CUSTOS",
+          "dfs": "Despesas gerais e administrativas",
+          "code": "4220100000011",
+          "name": "CONTRIBUIÇÃO SINDICAL",
+          "realizado": -21.098719999999993,
+          "orcado": -2.491999323980818,
+          "variacao": -18.606720676019176,
+          "pct": 7.466583356168839
+        },
+        {
+          "category": "DESPESAS E CUSTOS",
+          "dfs": "Despesas gerais e administrativas",
+          "code": "4220100000013",
+          "name": "DESPESAS C/ UNIFORMES",
+          "realizado": -115.9253,
+          "orcado": -54.774429215475124,
+          "variacao": -61.15087078452487,
+          "pct": 1.1164127433252786
+        },
+        {
+          "category": "DESPESAS E CUSTOS",
+          "dfs": "Despesas gerais e administrativas",
+          "code": "4220100000015",
+          "name": "VALE TRANSPORTE",
+          "realizado": -547.5034299999999,
+          "orcado": -453.4903053252716,
+          "variacao": -94.01312467472826,
+          "pct": 0.20731010910430855
+        },
+        {
+          "category": "DESPESAS E CUSTOS",
+          "dfs": "Despesas gerais e administrativas",
+          "code": "4220100000024",
+          "name": "DESPESAS C/ EMPREGADOS",
+          "realizado": -381.3260099999997,
+          "orcado": -216.21858764768078,
+          "variacao": -165.10742235231893,
+          "pct": 0.7636134531659907
+        },
+        {
+          "category": "DESPESAS E CUSTOS",
+          "dfs": "Despesas gerais e administrativas",
+          "code": "4220100000025",
+          "name": "HORAS EXTRAS",
+          "realizado": -422.4981499999999,
+          "orcado": -692.1322074937639,
+          "variacao": 269.634057493764,
+          "pct": -0.38957016387103094
+        },
+        {
+          "category": "DESPESAS E CUSTOS",
+          "dfs": "Despesas gerais e administrativas",
+          "code": "4220100000026",
+          "name": "ADICIONAL NOTURNO",
+          "realizado": -336.30600000000015,
+          "orcado": -297.82893191143097,
+          "variacao": -38.47706808856918,
+          "pct": 0.12919184124130553
+        },
+        {
+          "category": "DESPESAS E CUSTOS",
+          "dfs": "Despesas gerais e administrativas",
+          "code": "4220100000027",
+          "name": "QUINQUÊNIOS, DECÊNIOS E ANUÊNIOS",
+          "realizado": -1383.1148500000004,
+          "orcado": -1186.2881506947524,
+          "variacao": -196.82669930524798,
+          "pct": 0.16591811963221242
+        },
+        {
+          "category": "DESPESAS E CUSTOS",
+          "dfs": "Despesas gerais e administrativas",
+          "code": "4220100000028",
+          "name": "ADICIONAL INSALUBRIDADE",
+          "realizado": -346.8506899999999,
+          "orcado": -268.8233102961165,
+          "variacao": -78.02737970388335,
+          "pct": 0.2902552595529531
+        },
+        {
+          "category": "DESPESAS E CUSTOS",
+          "dfs": "Despesas gerais e administrativas",
+          "code": "4220100000029",
+          "name": "PRÊMIOS/ ASSID.",
+          "realizado": -193.93825000000004,
+          "orcado": -235.9549438902971,
+          "variacao": 42.01669389029706,
+          "pct": -0.1780708350397267
+        },
+        {
+          "category": "DESPESAS E CUSTOS",
+          "dfs": "Despesas gerais e administrativas",
+          "code": "4220100000030",
+          "name": "AVISO PRÉVIO",
+          "realizado": -156.93805000000003,
+          "orcado": -365.1874222571792,
+          "variacao": 208.24937225717917,
+          "pct": -0.5702534084279657
+        },
+        {
+          "category": "DESPESAS E CUSTOS",
+          "dfs": "Despesas gerais e administrativas",
+          "code": "4220100000031",
+          "name": "ADICIONAL PERICULOSIDADE",
+          "realizado": -225.64861,
+          "orcado": -189.03312424407977,
+          "variacao": -36.61548575592022,
+          "pct": 0.1936987811122577
+        },
+        {
+          "category": "DESPESAS E CUSTOS",
+          "dfs": "Despesas gerais e administrativas",
+          "code": "4220100000034",
+          "name": "FÉRIAS",
+          "realizado": -4371.709790000005,
+          "orcado": -4130.132456126063,
+          "variacao": -241.57733387394273,
+          "pct": 0.05849142526061618
+        },
+        {
+          "category": "DESPESAS E CUSTOS",
+          "dfs": "Despesas gerais e administrativas",
+          "code": "4220100000035",
+          "name": "INDENIZAÇÕES",
+          "realizado": -413.1862900000002,
+          "orcado": -669.1939196504932,
+          "variacao": 256.00762965049296,
+          "pct": -0.3825612010703874
+        },
+        {
+          "category": "DESPESAS E CUSTOS",
+          "dfs": "Despesas gerais e administrativas",
+          "code": "4220100000039",
+          "name": "DESPESAS C/ REFEITORIO",
+          "realizado": -75.07299999999996,
+          "orcado": -92.02541384099472,
+          "variacao": 16.95241384099475,
+          "pct": -0.18421448090726142
+        },
+        {
+          "category": "DESPESAS E CUSTOS",
+          "dfs": "Despesas gerais e administrativas",
+          "code": "4220100000040",
+          "name": "PROCESSO TRABALHISTA",
+          "realizado": -262.52099,
+          "orcado": -37.98689497822405,
+          "variacao": -224.53409502177593,
+          "pct": 5.910830436404183
+        },
+        {
+          "category": "DESPESAS E CUSTOS",
+          "dfs": "Despesas gerais e administrativas",
+          "code": "4220100000041",
+          "name": "TICKET ALIMENTAÇÃO",
+          "realizado": -6113.581359999998,
+          "orcado": -5106.80315267084,
+          "variacao": -1006.7782073291582,
+          "pct": 0.1971445104169752
+        },
+        {
+          "category": "DESPESAS E CUSTOS",
+          "dfs": "Despesas gerais e administrativas",
+          "code": "4220100000042",
+          "name": "ADICIONAL RESPONSÁVEL TÉCNICO",
+          "realizado": -20.680709999999998,
+          "orcado": -13.379303085028324,
+          "variacao": -7.301406914971674,
+          "pct": 0.5457240088343672
+        },
+        {
+          "category": "DESPESAS E CUSTOS",
+          "dfs": "Despesas gerais e administrativas",
+          "code": "4220100000045",
+          "name": "INDENIZ.COMPENSATÓRIAS DE DOMINGO 2019",
+          "realizado": 0,
+          "orcado": -15.170865393454974,
+          "variacao": 15.170865393454974,
+          "pct": -1
+        },
+        {
+          "category": "DESPESAS E CUSTOS",
+          "dfs": "Despesas gerais e administrativas",
+          "code": "4220100000046",
+          "name": "INDENIZ.COMPENSATÓRIA DE DOMINGO 2020",
+          "realizado": 0,
+          "orcado": -18.469343982266253,
+          "variacao": 18.469343982266253,
+          "pct": -1
+        },
+        {
+          "category": "DESPESAS E CUSTOS",
+          "dfs": "Despesas gerais e administrativas",
+          "code": "4220100000047",
+          "name": "INDENIZ.COMPENSATÓRIA DE DOMINGO 2021",
+          "realizado": 0,
+          "orcado": -23.01926404975428,
+          "variacao": 23.01926404975428,
+          "pct": -1
+        },
+        {
+          "category": "DESPESAS E CUSTOS",
+          "dfs": "Despesas gerais e administrativas",
+          "code": "4220100000048",
+          "name": "INDENIZ.COMPENSATÓRIA DE DOMINGO 2022",
+          "realizado": 0,
+          "orcado": -25.66110718866646,
+          "variacao": 25.66110718866646,
+          "pct": -1
+        },
+        {
+          "category": "DESPESAS E CUSTOS",
+          "dfs": "Despesas gerais e administrativas",
+          "code": "4220100000049",
+          "name": "INDENIZ.COMPENSATÓRIA DE DOMINGO 2023",
+          "realizado": 0,
+          "orcado": -28.99280582366561,
+          "variacao": 28.99280582366561,
+          "pct": -1
+        },
+        {
+          "category": "DESPESAS E CUSTOS",
+          "dfs": "Despesas gerais e administrativas",
+          "code": "4220100000050",
+          "name": "INDENIZ.COMPENSATÓRIA DE DOMINGO 2024",
+          "realizado": 0,
+          "orcado": -0.39517876605982416,
+          "variacao": 0.39517876605982416,
+          "pct": -1
+        },
+        {
+          "category": "DESPESAS E CUSTOS",
+          "dfs": "Despesas gerais e administrativas",
+          "code": "4220200000001",
+          "name": "SERVIÇO DE TERCEIROS - PJ",
+          "realizado": -4327.864429999994,
+          "orcado": -4499.93915726178,
+          "variacao": 172.07472726178548,
+          "pct": -0.03823934529961361
+        },
+        {
+          "category": "DESPESAS E CUSTOS",
+          "dfs": "Despesas gerais e administrativas",
+          "code": "4220200000002",
+          "name": "SERVIÇO DE TERCEIROS - PF",
+          "realizado": -8,
+          "orcado": -14.00300053156223,
+          "variacao": 6.003000531562231,
+          "pct": -0.4286938730046961
+        },
+        {
+          "category": "DESPESAS E CUSTOS",
+          "dfs": "Despesas gerais e administrativas",
+          "code": "4220200000003",
+          "name": "ALUGUEL",
+          "realizado": -2554.3357900000015,
+          "orcado": -2649.4062588028137,
+          "variacao": 95.07046880281223,
+          "pct": -0.03588368846300367
+        },
+        {
+          "category": "DESPESAS E CUSTOS",
+          "dfs": "Despesas gerais e administrativas",
+          "code": "4220200000004",
+          "name": "TELEX E COMUNICAÇÃO",
+          "realizado": -123.82421,
+          "orcado": -141.54445522721974,
+          "variacao": 17.72024522721975,
+          "pct": -0.12519208328417836
+        },
+        {
+          "category": "DESPESAS E CUSTOS",
+          "dfs": "Despesas gerais e administrativas",
+          "code": "4220200000006",
+          "name": "ÁGUA, LUZ E TELEFONE",
+          "realizado": -5860.029029999998,
+          "orcado": -3996.400866913107,
+          "variacao": -1863.6281630868907,
+          "pct": 0.4663266336758632
+        },
+        {
+          "category": "DESPESAS E CUSTOS",
+          "dfs": "Despesas gerais e administrativas",
+          "code": "4220200000008",
+          "name": "DEPRECIAÇÃO",
+          "realizado": -3720.6691699999988,
+          "orcado": -1794.3136549862957,
+          "variacao": -1926.355515013703,
+          "pct": 1.0735890626816949
+        },
+        {
+          "category": "DESPESAS E CUSTOS",
+          "dfs": "Despesas gerais e administrativas",
+          "code": "4220200000010",
+          "name": "ASSIST. MÉDICA E ODONTOLÓGICA",
+          "realizado": -740.0842999999994,
+          "orcado": -743.3712133434134,
+          "variacao": 3.2869133434139712,
+          "pct": -0.004421631191004331
+        },
+        {
+          "category": "DESPESAS E CUSTOS",
+          "dfs": "Despesas gerais e administrativas",
+          "code": "4220200000011",
+          "name": "DESPESAS LEGAIS JUDICIAIS",
+          "realizado": -617.6465800000001,
+          "orcado": -374.18570615286245,
+          "variacao": -243.46087384713763,
+          "pct": 0.6506418333031645
+        },
+        {
+          "category": "DESPESAS E CUSTOS",
+          "dfs": "Despesas gerais e administrativas",
+          "code": "4220200000012",
+          "name": "DESPESAS C/ MANUTENÇÃO DE VEÍCULOS",
+          "realizado": -700.1727300000002,
+          "orcado": -696.4116174525785,
+          "variacao": -3.7611125474217033,
+          "pct": 0.0054007033386082376
+        },
+        {
+          "category": "DESPESAS E CUSTOS",
+          "dfs": "Despesas gerais e administrativas",
+          "code": "4220200000015",
+          "name": "BRINDES E DOACOES",
+          "realizado": -3.9063600000000003,
+          "orcado": -20.864885432839177,
+          "variacao": 16.958525432839178,
+          "pct": -0.8127782674592695
+        },
+        {
+          "category": "DESPESAS E CUSTOS",
+          "dfs": "Despesas gerais e administrativas",
+          "code": "4220200000016",
+          "name": "VIAGENS E ESTADIAS",
+          "realizado": -97.44114,
+          "orcado": -56.12921343003225,
+          "variacao": -41.31192656996775,
+          "pct": 0.7360147068774631
+        },
+        {
+          "category": "DESPESAS E CUSTOS",
+          "dfs": "Despesas gerais e administrativas",
+          "code": "4220200000017",
+          "name": "MATERIAL DE REPOSIÇÃO",
+          "realizado": -645.34924,
+          "orcado": -717.6472308735664,
+          "variacao": 72.29799087356639,
+          "pct": -0.10074307788460442
+        },
+        {
+          "category": "DESPESAS E CUSTOS",
+          "dfs": "Despesas gerais e administrativas",
+          "code": "4220200000018",
+          "name": "MATERIAL DE CONSUMO",
+          "realizado": -7267.42207,
+          "orcado": -4001.864509725026,
+          "variacao": -3265.5575602749736,
+          "pct": 0.8160090258776289
+        },
+        {
+          "category": "DESPESAS E CUSTOS",
+          "dfs": "Despesas gerais e administrativas",
+          "code": "4220200000019",
+          "name": "SEGURO P/ INCÊNDIO",
+          "realizado": -166.9634,
+          "orcado": -320.69205569350896,
+          "variacao": 153.72865569350895,
+          "pct": -0.47936533806883613
+        },
+        {
+          "category": "DESPESAS E CUSTOS",
+          "dfs": "Despesas gerais e administrativas",
+          "code": "4220200000020",
+          "name": "DESPESAS DIVERSAS",
+          "realizado": -745.2179499999996,
+          "orcado": -439.83792147248573,
+          "variacao": -305.3800285275139,
+          "pct": 0.6943012723986263
+        },
+        {
+          "category": "DESPESAS E CUSTOS",
+          "dfs": "Despesas gerais e administrativas",
+          "code": "4220200000024",
+          "name": "DESPESAS CONDOMINIAIS",
+          "realizado": -396.64241000000015,
+          "orcado": -415.83863053517103,
+          "variacao": 19.19622053517088,
+          "pct": -0.046162667740767514
+        },
+        {
+          "category": "DESPESAS E CUSTOS",
+          "dfs": "Despesas gerais e administrativas",
+          "code": "4220200000026",
+          "name": "MATERIAL DE EXPEDIENTE",
+          "realizado": -651.6869499999998,
+          "orcado": -379.04961538805,
+          "variacao": -272.6373346119498,
+          "pct": 0.7192655619313552
+        },
+        {
+          "category": "DESPESAS E CUSTOS",
+          "dfs": "Despesas gerais e administrativas",
+          "code": "4220200000027",
+          "name": "SEGURO DE VIDA",
+          "realizado": -2.4371400000000016,
+          "orcado": -2.4528686967173114,
+          "variacao": 0.01572869671730981,
+          "pct": -0.006412367991144253
+        },
+        {
+          "category": "DESPESAS E CUSTOS",
+          "dfs": "Despesas gerais e administrativas",
+          "code": "4220200000031",
+          "name": "EVENTOS E RECEPÇÕES",
+          "realizado": -25,
+          "orcado": -52.61295674006118,
+          "variacao": 27.61295674006118,
+          "pct": -0.5248318750927715
+        },
+        {
+          "category": "DESPESAS E CUSTOS",
+          "dfs": "Despesas gerais e administrativas",
+          "code": "4220200000034",
+          "name": "DESPESA COM CARTÓRIO",
+          "realizado": -0.6374700000000004,
+          "orcado": -6.338291118960549,
+          "variacao": 5.700821118960548,
+          "pct": -0.8994255725974697
+        },
+        {
+          "category": "DESPESAS E CUSTOS",
+          "dfs": "Despesas gerais e administrativas",
+          "code": "4220200000035",
+          "name": "DESPESAS DE PROVISÃO P/ DEV. DUVIDOSO",
+          "realizado": 0,
+          "orcado": -226.43540180104264,
+          "variacao": 226.43540180104264,
+          "pct": -1
+        },
+        {
+          "category": "DESPESAS E CUSTOS",
+          "dfs": "Despesas gerais e administrativas",
+          "code": "4220200000039",
+          "name": "COMBUSTÍVEIS",
+          "realizado": -126.0020999999999,
+          "orcado": -140.83635805859825,
+          "variacao": 14.834258058598351,
+          "pct": -0.10532974768082409
+        },
+        {
+          "category": "DESPESAS E CUSTOS",
+          "dfs": "Despesas gerais e administrativas",
+          "code": "4220200000040",
+          "name": "TAXA DE SERVIÇOS S/CARTÃO",
+          "realizado": -4570.257720000002,
+          "orcado": -4591.617420675332,
+          "variacao": 21.359700675329805,
+          "pct": -0.004651890329353319
+        },
+        {
+          "category": "DESPESAS E CUSTOS",
+          "dfs": "Despesas gerais e administrativas",
+          "code": "4220200000042",
+          "name": "PERDAS E DANOS",
+          "realizado": -2554.3854199999996,
+          "orcado": -1792.5787095202693,
+          "variacao": -761.8067104797303,
+          "pct": 0.4249781091529339
+        },
+        {
+          "category": "DESPESAS E CUSTOS",
+          "dfs": "Despesas gerais e administrativas",
+          "code": "4220200000046",
+          "name": "PREMIO PROTEÇÃO LIDERZAN",
+          "realizado": -1.5,
+          "orcado": -1.1354261571122517,
+          "variacao": -0.3645738428877483,
+          "pct": 0.3210898750254046
+        },
+        {
+          "category": "DESPESAS E CUSTOS",
+          "dfs": "Despesas gerais e administrativas",
+          "code": "4220200000048",
+          "name": "INDENIZAÇOES A CONCILIAR",
+          "realizado": -801.3067800000002,
+          "orcado": -3.5841339352143695,
+          "variacao": -797.7226460647859,
+          "pct": 222.57054576758543
+        },
+        {
+          "category": "DESPESAS E CUSTOS",
+          "dfs": "Despesas gerais e administrativas",
+          "code": "4220200000050",
+          "name": "DESPESA ACORDO EXTRA JUDICIAL",
+          "realizado": -10.05543,
+          "orcado": -9.531933708044622,
+          "variacao": -0.523496291955377,
+          "pct": 0.05492026151142493
+        },
+        {
+          "category": "DESPESAS E CUSTOS",
+          "dfs": "Despesas gerais e administrativas",
+          "code": "4220200000060",
+          "name": "RESTITUIÇÕES DIVERSAS",
+          "realizado": -35.765800000000006,
+          "orcado": -42.59747783290254,
+          "variacao": 6.831677832902535,
+          "pct": -0.16037751952594967
+        },
+        {
+          "category": "DESPESAS E CUSTOS",
+          "dfs": "Despesas financeiras",
+          "code": "4230100000001",
+          "name": "JUROS DISPENDIDOS",
+          "realizado": -4.290130000000005,
+          "orcado": -20.109055789629103,
+          "variacao": 15.818925789629098,
+          "pct": -0.7866568154725313
+        },
+        {
+          "category": "DESPESAS E CUSTOS",
+          "dfs": "Despesas financeiras",
+          "code": "4230100000003",
+          "name": "ENCARGOS BANCÁRIOS",
+          "realizado": -0.01361,
+          "orcado": -24.380662720655007,
+          "variacao": 24.367052720655007,
+          "pct": -0.9994417707116522
+        },
+        {
+          "category": "DESPESAS E CUSTOS",
+          "dfs": "Despesas financeiras",
+          "code": "4230100000004",
+          "name": "VARIAÇÃO MONETÁRIA PASSIVA",
+          "realizado": -22.230659999999993,
+          "orcado": -13.398371804940943,
+          "variacao": -8.83228819505905,
+          "pct": 0.6592060829213554
+        },
+        {
+          "category": "DESPESAS E CUSTOS",
+          "dfs": "Despesas financeiras",
+          "code": "4230100000008",
+          "name": "JUROS S/ EMPRÉSTIMOS",
+          "realizado": -1043.4604600000002,
+          "orcado": -1574.6121601820612,
+          "variacao": 531.151700182061,
+          "pct": -0.3373222394780996
+        },
+        {
+          "category": "DESPESAS E CUSTOS",
+          "dfs": "Despesas financeiras",
+          "code": "4230100000012",
+          "name": "DESCONTOS CONCEDIDOS",
+          "realizado": 0,
+          "orcado": -0.013729404880518815,
+          "variacao": 0.013729404880518815,
+          "pct": -1
+        },
+        {
+          "category": "DESPESAS E CUSTOS",
+          "dfs": "Despesas financeiras",
+          "code": "4230100000013",
+          "name": "DESPESAS BANCARIAS",
+          "realizado": -62.749990000000025,
+          "orcado": -43.5078986911009,
+          "variacao": -19.242091308899127,
+          "pct": 0.44226662026394076
+        },
+        {
+          "category": "DESPESAS E CUSTOS",
+          "dfs": "Outras receitas (despesas), líquido",
+          "code": "4230200000005",
+          "name": "AJUSTE ADM CARTAO",
+          "realizado": -104.98889999999993,
+          "orcado": -63.74386652917712,
+          "variacao": -41.24503347082281,
+          "pct": 0.6470431700584708
+        },
+        {
+          "category": "DESPESAS E CUSTOS",
+          "dfs": "Despesas tributárias",
+          "code": "4240100000001",
+          "name": "IMPOSTO DE LOCALIZAÇÃO",
+          "realizado": -1.3780399999999986,
+          "orcado": -23.52425618739152,
+          "variacao": 22.14621618739152,
+          "pct": -0.941420464518721
+        },
+        {
+          "category": "DESPESAS E CUSTOS",
+          "dfs": "Despesas tributárias",
+          "code": "4240100000002",
+          "name": "IMPOSTO PREDIAL",
+          "realizado": -581.4867300000001,
+          "orcado": -427.90092199040197,
+          "variacao": -153.5858080095981,
+          "pct": 0.35892843440296
+        },
+        {
+          "category": "DESPESAS E CUSTOS",
+          "dfs": "Despesas tributárias",
+          "code": "4240100000005",
+          "name": "IMPOSTO SINDICAL PATRONAL",
+          "realizado": 0,
+          "orcado": -2.5955799898765446,
+          "variacao": 2.5955799898765446,
+          "pct": -1
+        },
+        {
+          "category": "DESPESAS E CUSTOS",
+          "dfs": "Despesas tributárias",
+          "code": "4240100000008",
+          "name": "IMPOSTO E TAXAS ESTADUAIS",
+          "realizado": -33.520730000000015,
+          "orcado": -30.9102748292018,
+          "variacao": -2.6104551707982147,
+          "pct": 0.08445266776897256
+        },
+        {
+          "category": "DESPESAS E CUSTOS",
+          "dfs": "Receita operacional líquida",
+          "code": "4240100000013",
+          "name": "ICM",
+          "realizado": 0,
+          "orcado": -0.5208916597819194,
+          "variacao": 0.5208916597819194,
+          "pct": -1
+        },
+        {
+          "category": "DESPESAS E CUSTOS",
+          "dfs": "Despesas financeiras",
+          "code": "4240100000017",
+          "name": "MULTAS, JUROS E CORREÇÃO MONETÁRIA",
+          "realizado": -30.359689999999993,
+          "orcado": -22.791334397693504,
+          "variacao": -7.5683556023064895,
+          "pct": 0.3320716317107089
+        },
+        {
+          "category": "DESPESAS E CUSTOS",
+          "dfs": "Despesas tributárias",
+          "code": "4240100000018",
+          "name": "IMPOSTO S/ SERVIÇOS",
+          "realizado": 0,
+          "orcado": -4.639318476760566,
+          "variacao": 4.639318476760566,
+          "pct": -1
+        },
+        {
+          "category": "DESPESAS E CUSTOS",
+          "dfs": "Despesas gerais e administrativas",
+          "code": "4240100000021",
+          "name": "DESPESAS JUDICIAIS - AI",
+          "realizado": 0,
+          "orcado": -14.31083811233492,
+          "variacao": 14.31083811233492,
+          "pct": -1
+        },
+        {
+          "category": "DESPESAS E CUSTOS",
+          "dfs": "Despesas tributárias",
+          "code": "4240100000022",
+          "name": "IOF",
+          "realizado": 0,
+          "orcado": -0.03593161206233306,
+          "variacao": 0.03593161206233306,
+          "pct": -1
+        },
+        {
+          "category": "DESPESAS E CUSTOS",
+          "dfs": "Despesas financeiras",
+          "code": "4240200000001",
+          "name": "MULTAS, JUROS E CORREÇÃO MONETÁRIA",
+          "realizado": 0,
+          "orcado": -744.1606524419303,
+          "variacao": 744.1606524419303,
+          "pct": -1
+        },
+        {
+          "category": "DESPESAS E CUSTOS",
+          "dfs": "Imposto de renda e contribuição social",
+          "code": "4240200000005",
+          "name": "IMPOSTO DE RENDA",
+          "realizado": 0,
+          "orcado": -6264.039494296007,
+          "variacao": 6264.039494296007,
+          "pct": -1
+        },
+        {
+          "category": "DESPESAS E CUSTOS",
+          "dfs": "Imposto de renda e contribuição social",
+          "code": "4240200000006",
+          "name": "CSLL",
+          "realizado": 0,
+          "orcado": -2254.334217946563,
+          "variacao": 2254.334217946563,
+          "pct": -1
+        },
+        {
+          "category": "DESPESAS E CUSTOS",
+          "dfs": "Outras receitas (despesas), líquido",
+          "code": "4310100000005",
+          "name": "APURAÇÃO BAIXA IMOBILIZADO",
+          "realizado": 9,
+          "orcado": -109.2918989393773,
+          "variacao": 118.2918989393773,
+          "pct": -1.0823482809553173
+        },
+        {
+          "category": "DESPESAS E CUSTOS",
+          "dfs": "Outras receitas (despesas), líquido",
+          "code": "4310200000002",
+          "name": "PERDAS EVENTUAIS",
+          "realizado": -3.443460000000016,
+          "orcado": -36.63106401208864,
+          "variacao": 33.18760401208863,
+          "pct": -0.9059961785750029
+        },
+        {
+          "category": "DESPESAS E CUSTOS",
+          "dfs": "Custostos das mercadorias vendidas e dos serviços prestados",
+          "code": "5110200000001",
+          "name": "SALÁRIOS E ORDENADOS",
+          "realizado": -25.92619999999999,
+          "orcado": 0,
+          "variacao": -25.92619999999999,
+          "pct": 0
+        },
+        {
+          "category": "DESPESAS E CUSTOS",
+          "dfs": "Custostos das mercadorias vendidas e dos serviços prestados",
+          "code": "5110200000002",
+          "name": "13º SALÁRIO",
+          "realizado": -2.9313200000000004,
+          "orcado": 0,
+          "variacao": -2.9313200000000004,
+          "pct": 0
+        },
+        {
+          "category": "DESPESAS E CUSTOS",
+          "dfs": "Custostos das mercadorias vendidas e dos serviços prestados",
+          "code": "5110200000003",
+          "name": "FÉRIAS E INDENIZAÇÕES",
+          "realizado": -5.36128,
+          "orcado": 0,
+          "variacao": -5.36128,
+          "pct": 0
+        },
+        {
+          "category": "DESPESAS E CUSTOS",
+          "dfs": "Custostos das mercadorias vendidas e dos serviços prestados",
+          "code": "5110200000007",
+          "name": "CONTRIBUIÇÕES DE PREVIDÊNCIA",
+          "realizado": -9.621830000000003,
+          "orcado": 0,
+          "variacao": -9.621830000000003,
+          "pct": 0
+        },
+        {
+          "category": "DESPESAS E CUSTOS",
+          "dfs": "Custostos das mercadorias vendidas e dos serviços prestados",
+          "code": "5110200000008",
+          "name": "FGTS",
+          "realizado": -3.1491499999999997,
+          "orcado": 0,
+          "variacao": -3.1491499999999997,
+          "pct": 0
+        },
+        {
+          "category": "DESPESAS E CUSTOS",
+          "dfs": "Custostos das mercadorias vendidas e dos serviços prestados",
+          "code": "5110200000012",
+          "name": "SEGURO ACIDENTE DE TRABALHO",
+          "realizado": -0.48953000000000013,
+          "orcado": 0,
+          "variacao": -0.48953000000000013,
+          "pct": 0
+        },
+        {
+          "category": "DESPESAS E CUSTOS",
+          "dfs": "Custostos das mercadorias vendidas e dos serviços prestados",
+          "code": "5110200000015",
+          "name": "VALE TRANSPORTE",
+          "realizado": 0.27303,
+          "orcado": 0,
+          "variacao": 0.27303,
+          "pct": 0
+        },
+        {
+          "category": "DESPESAS E CUSTOS",
+          "dfs": "Custostos das mercadorias vendidas e dos serviços prestados",
+          "code": "5110200000017",
+          "name": "HORA EXTRA",
+          "realizado": -0.9286499999999993,
+          "orcado": 0,
+          "variacao": -0.9286499999999993,
+          "pct": 0
+        },
+        {
+          "category": "DESPESAS E CUSTOS",
+          "dfs": "Custostos das mercadorias vendidas e dos serviços prestados",
+          "code": "5110200000018",
+          "name": "INSALUBRIDADE",
+          "realizado": -0.9725999999999999,
+          "orcado": 0,
+          "variacao": -0.9725999999999999,
+          "pct": 0
+        },
+        {
+          "category": "DESPESAS E CUSTOS",
+          "dfs": "Custostos das mercadorias vendidas e dos serviços prestados",
+          "code": "5110200000019",
+          "name": "QUINQUÊNIO",
+          "realizado": -1.50916,
+          "orcado": 0,
+          "variacao": -1.50916,
           "pct": 0
         }
       ]
@@ -11625,254 +12880,6 @@
       "2025"
     ],
     "periodos": {
-      "2026": {
-        "anoAtual": "abr/26",
-        "anoAnterior": "dez/25",
-        "ativo": [
-          {
-            "label": "ATIVO",
-            "valor": 0,
-            "anterior": 0,
-            "pct": 0,
-            "header": true,
-            "total": false
-          },
-          {
-            "label": "CIRCULANTE",
-            "valor": 0,
-            "anterior": 0,
-            "pct": 0,
-            "header": true,
-            "total": false
-          },
-          {
-            "label": "Caixa e equivalentes de caixa",
-            "valor": 91,
-            "anterior": 111,
-            "pct": -0.18018018018018017,
-            "header": false,
-            "total": false
-          },
-          {
-            "label": "Contas a receber",
-            "valor": 230,
-            "anterior": 266,
-            "pct": -0.13533834586466165,
-            "header": false,
-            "total": false
-          },
-          {
-            "label": "Estoques",
-            "valor": 607,
-            "anterior": 650,
-            "pct": -0.06615384615384617,
-            "header": false,
-            "total": false
-          },
-          {
-            "label": "Outros",
-            "valor": 64,
-            "anterior": 39,
-            "pct": 0.6410256410256411,
-            "header": false,
-            "total": false
-          },
-          {
-            "label": "TOTAL  ATIVO  CIRCULANTE",
-            "valor": 992,
-            "anterior": 1066,
-            "pct": -0.06941838649155723,
-            "header": false,
-            "total": true
-          },
-          {
-            "label": "NÃO CIRCULANTE",
-            "valor": 0,
-            "anterior": 0,
-            "pct": 0,
-            "header": true,
-            "total": false
-          },
-          {
-            "label": "Partes relacionadas NC",
-            "valor": 77,
-            "anterior": 78,
-            "pct": -0.01282051282051282,
-            "header": false,
-            "total": false
-          },
-          {
-            "label": "Ativo biológico",
-            "valor": 10,
-            "anterior": 10,
-            "pct": 0,
-            "header": false,
-            "total": false
-          },
-          {
-            "label": "Imobilizado",
-            "valor": 378,
-            "anterior": 385,
-            "pct": -0.01818181818181818,
-            "header": false,
-            "total": false
-          },
-          {
-            "label": "TOTAL DO ATIVO NÃO CIRCULANTE",
-            "valor": 465,
-            "anterior": 473,
-            "pct": -0.016913319238900634,
-            "header": false,
-            "total": true
-          },
-          {
-            "label": "TOTAL DO ATIVO",
-            "valor": 1457,
-            "anterior": 1539,
-            "pct": -0.05328137881798696,
-            "header": false,
-            "total": true
-          }
-        ],
-        "passivo": [
-          {
-            "label": "PASSIVO",
-            "valor": 0,
-            "anterior": 0,
-            "pct": 0,
-            "header": true,
-            "total": false
-          },
-          {
-            "label": "CIRCULANTE",
-            "valor": 0,
-            "anterior": 0,
-            "pct": 0,
-            "header": true,
-            "total": false
-          },
-          {
-            "label": "Fornecedores",
-            "valor": 507,
-            "anterior": 613,
-            "pct": -0.17290552584670228,
-            "header": false,
-            "total": false
-          },
-          {
-            "label": "Fornecedores partes relacionadas",
-            "valor": 0,
-            "anterior": 0,
-            "pct": 0,
-            "header": false,
-            "total": false
-          },
-          {
-            "label": "Empréstimos e financiamentos",
-            "valor": 42,
-            "anterior": 29,
-            "pct": 0.4482758620689655,
-            "header": false,
-            "total": false
-          },
-          {
-            "label": "Outros",
-            "valor": 349,
-            "anterior": 317,
-            "pct": 0.10094637223974763,
-            "header": false,
-            "total": false
-          },
-          {
-            "label": "TOTAL PASSIVO CIRCULANTE",
-            "valor": 898,
-            "anterior": 959,
-            "pct": -0.06360792349726776,
-            "header": false,
-            "total": true
-          },
-          {
-            "label": "NÃO CIRCULANTE",
-            "valor": 0,
-            "anterior": 0,
-            "pct": 0,
-            "header": true,
-            "total": false
-          },
-          {
-            "label": "Empréstimos e financiamentos NC",
-            "valor": 56,
-            "anterior": 80,
-            "pct": -0.3,
-            "header": false,
-            "total": false
-          },
-          {
-            "label": "Provisões para perdas cíveis, fiscais e trabalhistas",
-            "valor": 35,
-            "anterior": 34,
-            "pct": 0.029411764705882353,
-            "header": false,
-            "total": false
-          },
-          {
-            "label": "Outros",
-            "valor": 5.8,
-            "anterior": 6.3,
-            "pct": -0.07936507936507936,
-            "header": false,
-            "total": false
-          },
-          {
-            "label": "TOTAL  DO PASSIVO NÃO CIRCULANTE",
-            "valor": 97,
-            "anterior": 120,
-            "pct": -0.19166666666666668,
-            "header": false,
-            "total": true
-          },
-          {
-            "label": "Patrimônio líquido",
-            "valor": 0,
-            "anterior": 0,
-            "pct": 0,
-            "header": true,
-            "total": false
-          },
-          {
-            "label": "Capital social",
-            "valor": 100,
-            "anterior": 100,
-            "pct": 0,
-            "header": false,
-            "total": false
-          },
-          {
-            "label": "Lucros a acumulados",
-            "valor": 362,
-            "anterior": 359,
-            "pct": 0.008356545961002785,
-            "header": false,
-            "total": false
-          },
-          {
-            "label": "TOTAL DO PATRIMÔNIO LÍQUIDO",
-            "valor": 462,
-            "anterior": 459,
-            "pct": 0.006535947712418301,
-            "header": false,
-            "total": true
-          },
-          {
-            "label": "TOTAL DO PASSIVO E PATRIMÔNIO LÍQUIDO",
-            "valor": 1457,
-            "anterior": 1539,
-            "pct": -0.05328137881798696,
-            "header": false,
-            "total": true
-          }
-        ]
-      },
       "2025": {
         "anoAtual": "dez/25",
         "anoAnterior": "dez/24",
@@ -12116,6 +13123,254 @@
             "valor": 1672.696,
             "anterior": 1501.00573841,
             "pct": 0.1143834811530231,
+            "header": false,
+            "total": true
+          }
+        ]
+      },
+      "2026": {
+        "anoAtual": "abr/26",
+        "anoAnterior": "dez/25",
+        "ativo": [
+          {
+            "label": "ATIVO",
+            "valor": 0,
+            "anterior": 0,
+            "pct": 0,
+            "header": true,
+            "total": false
+          },
+          {
+            "label": "CIRCULANTE",
+            "valor": 0,
+            "anterior": 0,
+            "pct": 0,
+            "header": true,
+            "total": false
+          },
+          {
+            "label": "Caixa e equivalentes de caixa",
+            "valor": 91,
+            "anterior": 111,
+            "pct": -0.18018018018018017,
+            "header": false,
+            "total": false
+          },
+          {
+            "label": "Contas a receber",
+            "valor": 230,
+            "anterior": 266,
+            "pct": -0.13533834586466165,
+            "header": false,
+            "total": false
+          },
+          {
+            "label": "Estoques",
+            "valor": 607,
+            "anterior": 650,
+            "pct": -0.06615384615384617,
+            "header": false,
+            "total": false
+          },
+          {
+            "label": "Outros",
+            "valor": 64,
+            "anterior": 39,
+            "pct": 0.6410256410256411,
+            "header": false,
+            "total": false
+          },
+          {
+            "label": "TOTAL  ATIVO  CIRCULANTE",
+            "valor": 992,
+            "anterior": 1066,
+            "pct": -0.06941838649155722,
+            "header": false,
+            "total": true
+          },
+          {
+            "label": "NÃO CIRCULANTE",
+            "valor": 0,
+            "anterior": 0,
+            "pct": 0,
+            "header": true,
+            "total": false
+          },
+          {
+            "label": "Partes relacionadas NC",
+            "valor": 77,
+            "anterior": 78,
+            "pct": -0.01282051282051282,
+            "header": false,
+            "total": false
+          },
+          {
+            "label": "Ativo biológico",
+            "valor": 10,
+            "anterior": 10,
+            "pct": 0,
+            "header": false,
+            "total": false
+          },
+          {
+            "label": "Imobilizado",
+            "valor": 378,
+            "anterior": 385,
+            "pct": -0.01818181818181818,
+            "header": false,
+            "total": false
+          },
+          {
+            "label": "TOTAL DO ATIVO NÃO CIRCULANTE",
+            "valor": 465,
+            "anterior": 473,
+            "pct": -0.016913319238900635,
+            "header": false,
+            "total": true
+          },
+          {
+            "label": "TOTAL DO ATIVO",
+            "valor": 1457,
+            "anterior": 1539,
+            "pct": -0.05328137881798696,
+            "header": false,
+            "total": true
+          }
+        ],
+        "passivo": [
+          {
+            "label": "PASSIVO",
+            "valor": 0,
+            "anterior": 0,
+            "pct": 0,
+            "header": true,
+            "total": false
+          },
+          {
+            "label": "CIRCULANTE",
+            "valor": 0,
+            "anterior": 0,
+            "pct": 0,
+            "header": true,
+            "total": false
+          },
+          {
+            "label": "Fornecedores",
+            "valor": 507,
+            "anterior": 613,
+            "pct": -0.17290552584670227,
+            "header": false,
+            "total": false
+          },
+          {
+            "label": "Fornecedores partes relacionadas",
+            "valor": 0,
+            "anterior": 0,
+            "pct": 0,
+            "header": false,
+            "total": false
+          },
+          {
+            "label": "Empréstimos e financiamentos",
+            "valor": 42,
+            "anterior": 29,
+            "pct": 0.4482758620689655,
+            "header": false,
+            "total": false
+          },
+          {
+            "label": "Outros",
+            "valor": 349,
+            "anterior": 317,
+            "pct": 0.10094637223974763,
+            "header": false,
+            "total": false
+          },
+          {
+            "label": "TOTAL PASSIVO CIRCULANTE",
+            "valor": 898,
+            "anterior": 959,
+            "pct": -0.06360792349726777,
+            "header": false,
+            "total": true
+          },
+          {
+            "label": "NÃO CIRCULANTE",
+            "valor": 0,
+            "anterior": 0,
+            "pct": 0,
+            "header": true,
+            "total": false
+          },
+          {
+            "label": "Empréstimos e financiamentos NC",
+            "valor": 56,
+            "anterior": 80,
+            "pct": -0.3,
+            "header": false,
+            "total": false
+          },
+          {
+            "label": "Provisões para perdas cíveis, fiscais e trabalhistas",
+            "valor": 35,
+            "anterior": 34,
+            "pct": 0.029411764705882353,
+            "header": false,
+            "total": false
+          },
+          {
+            "label": "Outros",
+            "valor": 5.8,
+            "anterior": 6.3,
+            "pct": -0.07936507936507936,
+            "header": false,
+            "total": false
+          },
+          {
+            "label": "TOTAL  DO PASSIVO NÃO CIRCULANTE",
+            "valor": 97,
+            "anterior": 120,
+            "pct": -0.19166666666666668,
+            "header": false,
+            "total": true
+          },
+          {
+            "label": "Patrimônio líquido",
+            "valor": 0,
+            "anterior": 0,
+            "pct": 0,
+            "header": true,
+            "total": false
+          },
+          {
+            "label": "Capital social",
+            "valor": 100,
+            "anterior": 100,
+            "pct": 0,
+            "header": false,
+            "total": false
+          },
+          {
+            "label": "Lucros a acumulados",
+            "valor": 362,
+            "anterior": 359,
+            "pct": 0.008356545961002784,
+            "header": false,
+            "total": false
+          },
+          {
+            "label": "TOTAL DO PATRIMÔNIO LÍQUIDO",
+            "valor": 462,
+            "anterior": 459,
+            "pct": 0.006535947712418301,
+            "header": false,
+            "total": true
+          },
+          {
+            "label": "TOTAL DO PASSIVO E PATRIMÔNIO LÍQUIDO",
+            "valor": 1457,
+            "anterior": 1539,
+            "pct": -0.05328137881798696,
             "header": false,
             "total": true
           }
@@ -12492,35 +13747,149 @@
     "data": "31/12/2025",
     "fonte": "Informações fornecidas pelo Setor Pessoal em 14/05/2026.",
     "setores": [
-      { "setor": "Supermercado",   "qtd": 10714 },
-      { "setor": "Magazan",        "qtd": 3841  },
-      { "setor": "Administrativo", "qtd": 890   },
-      { "setor": "Home Center",    "qtd": 647   },
-      { "setor": "Farmácia",       "qtd": 614   },
-      { "setor": "Pet Shop",       "qtd": 266   },
-      { "setor": "Obra",           "qtd": 254   },
-      { "setor": "Café",           "qtd": 56    },
-      { "setor": "Ótica",          "qtd": 51    },
-      { "setor": "Nutri Líder",    "qtd": 10    }
+      {
+        "setor": "Supermercado",
+        "qtd": 10714
+      },
+      {
+        "setor": "Magazan",
+        "qtd": 3841
+      },
+      {
+        "setor": "Administrativo",
+        "qtd": 890
+      },
+      {
+        "setor": "Home Center",
+        "qtd": 647
+      },
+      {
+        "setor": "Farmácia",
+        "qtd": 614
+      },
+      {
+        "setor": "Pet Shop",
+        "qtd": 266
+      },
+      {
+        "setor": "Obra",
+        "qtd": 254
+      },
+      {
+        "setor": "Café",
+        "qtd": 56
+      },
+      {
+        "setor": "Ótica",
+        "qtd": 51
+      },
+      {
+        "setor": "Nutri Líder",
+        "qtd": 10
+      }
     ]
   },
   "dre2025": {
     "periodo": "Abril/2026",
     "rows": [
-      { "label": "Receita operacional líquida",                                       "v2025": 1577,   "v2024": 1492,   "pct": 6,    "bold": false },
-      { "label": "Custos das mercadorias vendidas e dos serviços prestados",           "v2025": -1130,  "v2024": -1065,  "pct": 6,    "bold": false },
-      { "label": "LUCRO OPERACIONAL BRUTO",                                          "v2025": 446,    "v2024": 427,    "pct": 5,    "bold": true  },
-      { "label": "Despesas gerais e administrativas",                                 "v2025": -422,   "v2024": -415,   "pct": 2,    "bold": false },
-      { "label": "Despesas comerciais",                                               "v2025": -3,     "v2024": -7,     "pct": -50,  "bold": false },
-      { "label": "Despesas tributárias",                                             "v2025": -3,     "v2024": -1,     "pct": 111,  "bold": false },
-      { "label": "Outras receitas (despesas), líquido",                              "v2025": 11,     "v2024": 13,     "pct": -17,  "bold": false },
-      { "label": "TOTAL RECEITAS E DESPESAS OPERACIONAIS",                           "v2025": -417,   "v2024": -410,   "pct": 7,    "bold": true  },
-      { "label": "Receitas financeiras",                                              "v2025": 4,      "v2024": 9,      "pct": -59,  "bold": false },
-      { "label": "Despesas financeiras",                                              "v2025": -6,     "v2024": -10,    "pct": -36,  "bold": false },
-      { "label": "RESULTADO FINANCEIRO",                                             "v2025": -2,     "v2024": 0,      "pct": -89,  "bold": true  },
-      { "label": "RESULTADO ANTES DOS IMPOSTOS",                                     "v2025": 27,     "v2024": 17,     "pct": -8,   "bold": true  },
-      { "label": "Imposto de renda e contribuição social",                            "v2025": -7,     "v2024": -8,     "pct": -16,  "bold": false },
-      { "label": "LUCRO (PREJUÍZO) LÍQUIDO",                                        "v2025": 20,     "v2024": 8,      "pct": -14,  "bold": true  }
+      {
+        "label": "Receita operacional líquida",
+        "v2025": 1577,
+        "v2024": 1492,
+        "pct": 6,
+        "bold": false
+      },
+      {
+        "label": "Custos das mercadorias vendidas e dos serviços prestados",
+        "v2025": -1130,
+        "v2024": -1065,
+        "pct": 6,
+        "bold": false
+      },
+      {
+        "label": "LUCRO OPERACIONAL BRUTO",
+        "v2025": 446,
+        "v2024": 427,
+        "pct": 5,
+        "bold": true
+      },
+      {
+        "label": "Despesas gerais e administrativas",
+        "v2025": -422,
+        "v2024": -415,
+        "pct": 2,
+        "bold": false
+      },
+      {
+        "label": "Despesas comerciais",
+        "v2025": -3,
+        "v2024": -7,
+        "pct": -50,
+        "bold": false
+      },
+      {
+        "label": "Despesas tributárias",
+        "v2025": -3,
+        "v2024": -1,
+        "pct": 111,
+        "bold": false
+      },
+      {
+        "label": "Outras receitas (despesas), líquido",
+        "v2025": 11,
+        "v2024": 13,
+        "pct": -17,
+        "bold": false
+      },
+      {
+        "label": "TOTAL RECEITAS E DESPESAS OPERACIONAIS",
+        "v2025": -417,
+        "v2024": -410,
+        "pct": 7,
+        "bold": true
+      },
+      {
+        "label": "Receitas financeiras",
+        "v2025": 4,
+        "v2024": 9,
+        "pct": -59,
+        "bold": false
+      },
+      {
+        "label": "Despesas financeiras",
+        "v2025": -6,
+        "v2024": -10,
+        "pct": -36,
+        "bold": false
+      },
+      {
+        "label": "RESULTADO FINANCEIRO",
+        "v2025": -2,
+        "v2024": 0,
+        "pct": -89,
+        "bold": true
+      },
+      {
+        "label": "RESULTADO ANTES DOS IMPOSTOS",
+        "v2025": 27,
+        "v2024": 17,
+        "pct": -8,
+        "bold": true
+      },
+      {
+        "label": "Imposto de renda e contribuição social",
+        "v2025": -7,
+        "v2024": -8,
+        "pct": -16,
+        "bold": false
+      },
+      {
+        "label": "LUCRO (PREJUÍZO) LÍQUIDO",
+        "v2025": 20,
+        "v2024": 8,
+        "pct": -14,
+        "bold": true
+      }
     ]
   }
 }

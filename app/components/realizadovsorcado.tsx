@@ -7,12 +7,13 @@ import { formatBRL, formatPct } from '../lib/format';
 
 const { orcamento } = financialData ?? {};
 
-type MesKey = 'janeiro' | 'fevereiro' | 'marco';
+type MesKey = 'janeiro' | 'fevereiro' | 'marco' | 'abril';
 
 const MESES: { key: MesKey; label: string }[] = [
   { key: 'janeiro',   label: 'Jan/2026' },
   { key: 'fevereiro', label: 'Fev/2026' },
   { key: 'marco',     label: 'Mar/2026' },
+  { key: 'abril',     label: 'Abr/2026' },
 ];
 
 export default function OrcamentoTab() {
